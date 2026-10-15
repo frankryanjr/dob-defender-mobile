@@ -11,7 +11,7 @@
 
 ## Version naming
 
-Alpha1 is the baseline. Alpha2.x identifies approved numbered milestones. Alpha2.63 is the current supplied build.
+Alpha2.17 is the first retained build and repository baseline. Alpha2.x identifies numbered milestones. Alpha2.63 is the current supplied build. Earlier prototype versions are not required.
 
 ## Local play
 
