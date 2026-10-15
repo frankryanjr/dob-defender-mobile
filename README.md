@@ -38,6 +38,10 @@ Survive each night until dawn, protect the observatory dome, conserve laser ener
 
 Work from the newest approved HTML. Preserve the approved Dobsonian telescope artwork, relative-swipe steering and tap-to-fire controls. Prioritise Android screen sizes. Keep older milestones and update handover/changelog with every release. Do not describe syntax checks as device playtesting.
 
+## Version history
+
+**Alpha2.17 is the first build retained for this repository.** Earlier prototype files are not required for the project baseline. Alpha2.63 remains the current release.
+
 ## Copyright
 
 Copyright © 2026 Frank Ryan Jr. All rights reserved. No open-source licence has been selected. See [LICENSING.md](LICENSING.md).
