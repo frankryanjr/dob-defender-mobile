@@ -1,0 +1,28 @@
+name: JavaScript syntax check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check inline JavaScript syntax
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const vm = require('vm');
+          for (const file of ['index.html', 'game/index.html']) {
+            const html = fs.readFileSync(file, 'utf8');
+            const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+              .filter(m => !/\bsrc\s*=/.test(m[1]));
+            if (!scripts.length) throw new Error('No inline JavaScript found in ' + file);
+            for (const script of scripts) new vm.Script(script[2], { filename: file });
+            console.log('Syntax OK:', file);
+          }
+          NODE
