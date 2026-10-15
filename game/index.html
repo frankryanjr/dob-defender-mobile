@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.65</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.66</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -36,7 +36,7 @@
 
 Save the cows!
 
-Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">DEFEND!</button><div id="versionFooter">Alpha2.65</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
+Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">DEFEND!</button><div id="versionFooter">Alpha2.66</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
 <style>
 #ddLeaderboardPanel{position:absolute;z-index:60;inset:0;background:rgba(3,12,24,.95);color:#f1f7ff;overflow:auto;padding:22px 16px 36px;box-sizing:border-box;text-align:center;font:15px system-ui}
 #ddLeaderboardPanel[hidden]{display:none!important}
@@ -61,7 +61,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
-// Alpha2.65 online leaderboard. Local identity is browser-scoped; no passwords or email.
+// Alpha2.66 online leaderboard. Local identity is browser-scoped; no passwords or email.
 const DD_API="https://kdmxkvgoxmyvzkyssvua.supabase.co/functions/v1/dob-leaderboard";
 const ddPanel=$('ddLeaderboardPanel'),ddMessage=$('ddLeaderboardMessage');
 let ddPlayer=null;
@@ -109,7 +109,7 @@ $('ddRename').addEventListener('click',async()=>{
 });
 async function ddSubmitScore(finalScore,finalNight){
  if(!ddPlayer)return;
- try{const data=await ddCall('score',{id:ddPlayer.id,secret:ddPlayer.secret,score:finalScore,night:finalNight});ddStore(data.player);ddRefresh()}
+ try{const data=await ddCall('score',{id:ddPlayer.id,secret:ddPlayer.secret,score:finalScore,night:finalNight,version:"Alpha2.66"});ddStore(data.player);ddRefresh()}
  catch(e){ddSetMessage('Score not submitted: '+e.message)}
 }
 $('play').addEventListener('click',e=>{if(!ddPlayer){e.preventDefault();e.stopImmediatePropagation();ddOpen(true)}},true);
