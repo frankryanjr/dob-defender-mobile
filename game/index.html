@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.63</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.64</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -36,10 +36,84 @@
 
 Save the cows!
 
-Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">DEFEND!</button><div id="versionFooter">Alpha2.63</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
+Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">DEFEND!</button><div id="versionFooter">Alpha2.64</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
+<style>
+#ddLeaderboardPanel{position:absolute;z-index:60;inset:0;background:rgba(3,12,24,.95);color:#f1f7ff;overflow:auto;padding:22px 16px 36px;box-sizing:border-box;text-align:center;font:15px system-ui}
+#ddLeaderboardPanel[hidden]{display:none!important}
+#ddLeaderboardPanel h2{font-size:23px;margin:10px 0 12px}
+#ddLeaderboardPanel input{background:#142538;color:white;border:1px solid #7794a5;border-radius:9px;padding:12px;font-size:16px;width:min(90%,310px);box-sizing:border-box}
+#ddLeaderboardPanel button,#ddLeaderboardOpen{background:#276b78;color:white;border:1px solid #a1d6d8;border-radius:9px;padding:10px 15px;margin:8px 4px;font:700 14px system-ui;cursor:pointer}
+#ddLeaderboardPanel table{width:100%;border-collapse:collapse;margin:12px auto;max-width:480px;font-size:13px}
+#ddLeaderboardPanel th,#ddLeaderboardPanel td{border-bottom:1px solid #34495a;padding:8px 3px}
+#ddLeaderboardPanel .ddError{color:#ffcb9b;min-height:20px}
+#ddLeaderboardOpen{position:absolute;z-index:12;right:10px;top:53px;padding:7px 9px;font-size:12px}
+</style><button id="ddLeaderboardOpen" type="button">LEADERBOARD</button>
+<section id="ddLeaderboardPanel" hidden aria-label="Dob Defender leaderboard">
+<h2>DOB DEFENDER LEADERBOARD</h2>
+<div id="ddPlayerStatus"></div>
+<div id="ddRegisterForm" hidden><p>Choose a nickname (3–18 characters). Your name will be remembered on this browser.</p><input id="ddNickname" maxlength="18" autocomplete="off" placeholder="Player nickname"><div><button type="button" id="ddRegister">REGISTER & PLAY</button></div></div>
+<div id="ddRenameForm" hidden><p>Change nickname (your score stays with you)</p><input id="ddNewNickname" maxlength="18" placeholder="New nickname"><button type="button" id="ddRename">SAVE NAME</button></div>
+<div id="ddLeaderboardMessage" class="ddError" role="status"></div>
+<div id="ddLeaderboardTable"></div>
+<button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
+</section>
 <script>(()=>{'use strict';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
+
+// Alpha2.64 online leaderboard. Local identity is browser-scoped; no passwords or email.
+const DD_API="https://kdmxkvgoxmyvzkyssvua.supabase.co/functions/v1/dob-leaderboard";
+const ddPanel=$('ddLeaderboardPanel'),ddMessage=$('ddLeaderboardMessage');
+let ddPlayer=null;
+try{const saved=JSON.parse(localStorage.getItem('dobdefender.player.v1')||'null');if(saved&&saved.id&&saved.secret)ddPlayer=saved;}catch(_){}
+const ddSetMessage=(m)=>{ddMessage.textContent=m||''};
+async function ddCall(action,fields={}){
+ const res=await fetch(DD_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...fields})});
+ const data=await res.json();if(!res.ok)throw Error(data.error||'Leaderboard unavailable');return data;
+}
+function ddStore(p,secret){ddPlayer={id:p.player_id,secret:secret||ddPlayer.secret,nickname:p.nickname,best_score:p.best_score,best_night:p.best_night};try{localStorage.setItem('dobdefender.player.v1',JSON.stringify(ddPlayer))}catch(_){}}
+async function ddRefresh(){
+ ddSetMessage('Loading global scores…');
+ try{
+  const res=await fetch(DD_API);if(!res.ok)throw Error('Leaderboard unavailable');
+  const data=await res.json(),table=$('ddLeaderboardTable');table.replaceChildren();
+  const scores=Array.isArray(data.scores)?data.scores:[];
+  const heading=document.createElement('p');heading.textContent=scores.length?'GLOBAL TOP 50':'No scores yet. Be the first!';table.append(heading);
+  if(scores.length){const t=document.createElement('table'),head=document.createElement('tr');for(const label of ['#','PLAYER','SCORE','NIGHT']){const th=document.createElement('th');th.textContent=label;head.append(th)}t.append(head);
+   scores.forEach((x,i)=>{const tr=document.createElement('tr');[i+1,x.nickname,Number(x.best_score).toLocaleString('en-IE'),x.best_night].forEach(v=>{const td=document.createElement('td');td.textContent=String(v);tr.append(td)});t.append(tr)});table.append(t)}
+  ddSetMessage('');
+ }catch(e){ddSetMessage('Unable to load scores. Check your connection.')}
+}
+function ddOpen(registration=false){
+ ddPanel.hidden=false;ddSetMessage('');
+ $('ddRegisterForm').hidden=!!ddPlayer;
+ $('ddChangeName').hidden=!ddPlayer;
+ $('ddRenameForm').hidden=true;
+ $('ddPlayerStatus').textContent=ddPlayer?'PLAYER: '+ddPlayer.nickname+' | BEST: '+Number(ddPlayer.best_score||0).toLocaleString('en-IE'):'Register a player to submit scores';
+ $('ddLeaderboardClose').hidden=registration;
+ ddRefresh();
+}
+$('ddLeaderboardOpen').addEventListener('click',()=>ddOpen());
+$('ddLeaderboardClose').addEventListener('click',()=>{ddPanel.hidden=true});
+$('ddChangeName').addEventListener('click',()=>{$('ddRenameForm').hidden=false;$('ddNewNickname').value=ddPlayer?.nickname||''});
+$('ddRegister').addEventListener('click',async()=>{
+ const btn=$('ddRegister');btn.disabled=true;ddSetMessage('Registering…');
+ try{
+  const secret=Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
+  const data=await ddCall('register',{nickname:$('ddNickname').value.trim(),secret});
+  ddStore(data.player,secret);ddPanel.hidden=true;resetGame();
+ }catch(e){ddSetMessage(e.message)}finally{btn.disabled=false}
+});
+$('ddRename').addEventListener('click',async()=>{
+ try{const data=await ddCall('rename',{id:ddPlayer.id,secret:ddPlayer.secret,nickname:$('ddNewNickname').value.trim()});ddStore(data.player);ddOpen()}catch(e){ddSetMessage(e.message)}
+});
+async function ddSubmitScore(finalScore,finalNight){
+ if(!ddPlayer)return;
+ try{const data=await ddCall('score',{id:ddPlayer.id,secret:ddPlayer.secret,score:finalScore,night:finalNight});ddStore(data.player);ddRefresh()}
+ catch(e){ddSetMessage('Score not submitted: '+e.message)}
+}
+$('play').addEventListener('click',e=>{if(!ddPlayer){e.preventDefault();e.stopImmediatePropagation();ddOpen(true)}},true);
+
 const PI=Math.PI,TAU=2*PI,rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // Locked Alpha1 telescope geometry and firing origin.
 const BR=40,CR=43,BASE_BOTTOM=57,BASE_TOP=13,BASE_HALF=49;
@@ -744,7 +818,7 @@ function hit(e,b){b.t=0;if(e.type==='aircraft'){energy=Math.max(0,energy-10);flo
  if(e.type==='ufo'&&e.abduct)rescue(e);
  if(e.type==='sat'&&satTrain&&e.trainId===satTrain.id){satTrain.alive.delete(e.satIndex);if(satTrain.alive.size===0&&!satTrain.rewarded){satTrain.rewarded=true;changeScore(100,e.x,e.y,'STARLINK CLEARED')}}
 }
-function endGame(){if(mode==='gameover')return;score=Math.max(0,score-nightCowDeaths*25);mode='gameover';gameOverReason='OBSERVATORY DESTROYED';hud();showOverlay('GAME OVER',gameOverReason,'PLAY AGAIN',resetGame);$('finalScore').textContent=score.toLocaleString('en-IE');$('finalDome').textContent=Math.round(shield)+'%';$('finalCow').textContent=totalCows.toLocaleString('en-IE');$('heading').hidden=true;$('message').hidden=true;$('finalResults').hidden=false}
+function endGame(){if(mode==='gameover')return;score=Math.max(0,score-nightCowDeaths*25);ddSubmitScore(score,night);mode='gameover';gameOverReason='OBSERVATORY DESTROYED';hud();showOverlay('GAME OVER',gameOverReason,'PLAY AGAIN',resetGame);$('finalScore').textContent=score.toLocaleString('en-IE');$('finalDome').textContent=Math.round(shield)+'%';$('finalCow').textContent=totalCows.toLocaleString('en-IE');$('heading').hidden=true;$('message').hidden=true;$('finalResults').hidden=false}
 function updateDestroyed(dt){
  phaseTime+=dt;
  flash=Math.max(0,flash-dt);
