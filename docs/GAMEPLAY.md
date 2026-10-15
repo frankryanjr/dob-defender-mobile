@@ -1,6 +1,10 @@
 # Dob Defender — gameplay reference
 
-**Current release:** Alpha2.63. **First retained build:** Alpha2.17.
+**Current release:** Alpha2.64. **First retained build:** Alpha2.17.
+
+## Player profiles and leaderboard
+
+Players register a unique nickname once per browser. A locally stored player identity supports nickname changes and automatic submission of the best score on Game Over. The global leaderboard shows up to 50 top scores and night reached. Clearing browser data loses the locally stored identity; internet access is required for registration and score submission.
 
 ## Objective
 
