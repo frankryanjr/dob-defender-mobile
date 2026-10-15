@@ -15,7 +15,7 @@
 
 ## Earlier alpha milestones
 
-- Alpha1 is the original preserved baseline.
+- Alpha2.17 is the first retained build and repository baseline. Earlier prototypes are not required.
 - Historical builds and detailed change history are maintained in the handover where available.
 
 ## Repository initialization — 15 October 2026
