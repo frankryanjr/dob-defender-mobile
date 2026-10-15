@@ -1,3 +1,10 @@
+# Alpha2.65 — 15 October 2026
+
+- Fixed incomplete Alpha2.64 HTML upload: restored final game event listener, initialization and closing script tags.
+- This repairs inert DEFEND and LEADERBOARD controls caused by JavaScript not executing.
+- Full JavaScript syntax compilation verified; Android runtime and Supabase end-to-end behaviour still require device testing.
+- Gameplay, artwork and controls otherwise unchanged.
+
 ## Alpha2.64 — 15 October 2026
 
 - Added nickname-only registration, remembered on the browser.
