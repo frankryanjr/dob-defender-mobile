@@ -1,6 +1,6 @@
 # Dob Defender — gameplay reference
 
-**Current release:** Alpha2.63.
+**Current release:** Alpha2.63. **First retained build:** Alpha2.17.
 
 ## Objective
 
