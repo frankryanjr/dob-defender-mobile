@@ -1,3 +1,11 @@
+## Alpha2.64 — 15 October 2026
+
+- Added nickname-only registration, remembered on the browser.
+- Added global top-50 high-score table with best score per player and night reached.
+- Added nickname changes that preserve the player ID and best score.
+- Added Supabase database and server-side score submission, rate limiting and nickname uniqueness.
+- Browser-side scores cannot be fully verified against tampering. Android gameplay testing pending.
+
 # Changelog
 
 ## Alpha2.63 — 14 October 2026
