@@ -1,3 +1,10 @@
+# Alpha2.67 — 15 October 2026
+
+- Global leaderboard now ranks individual game submissions rather than only each player's personal best.
+- Same player may appear multiple times, with score, night and game version shown for each result.
+- Existing history retained; Supabase Edge Function upgraded to version 3.
+- Full game HTML JavaScript syntax compilation checked. Browser end-to-end testing remains pending.
+
 # Alpha2.65 — 15 October 2026
 
 - Fixed incomplete Alpha2.64 HTML upload: restored final game event listener, initialization and closing script tags.
