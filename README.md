@@ -1,47 +1,57 @@
 # Dob Defender
 
-**Dob Defender** is a mobile-browser astronomy arcade game. Defend your observatory from meteorites, asteroids and comets. Save the cows. Don't shoot the planes.
+Mobile-browser astronomy arcade game. Defend the observatory against meteorites, asteroids and comets, save cows, avoid shooting aircraft.
 
-**Latest version:** Alpha2.63
+**Current production gameplay:** Alpha2.67. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Live game:** https://frankryanjr.github.io/dob-defender-mobile/?v=startscreen-v1-20261016
 
-## Play
+## REQUIRED: New-chat onboarding (read before any development)
 
-- **[Open game HTML](index.html)** (download and open in a browser, or enable GitHub Pages for direct play)
-- [Current versioned game](releases/Dob_Defender_Alpha2-63.html)
+This repository is the durable source of truth across ChatGPT Project chats. At the start of **every new Dob Defender development chat**, the assistant must:
 
-This is a standalone HTML/CSS/JavaScript game. No compilation, package manager or build step is required. It is designed primarily for Android mobile browsers.
+1. Fetch this README from GitHub (do not rely on an old pasted copy or chat memory).
+2. Read [docs/HANDOVER.md](docs/HANDOVER.md), [docs/GAMEPLAY.md](docs/GAMEPLAY.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), and [docs/Start_Screen_v1_Handover.md](docs/Start_Screen_v1_Handover.md).
+3. Inspect [index.html](index.html) and the latest numbered release in [releases/](releases/) before editing. Determine the actual newest working baseline; **some historical documentation still mentions Alpha2.63 or earlier and is outdated**. Prefer the deployed implementation and newest verified changelog entry, and flag discrepancies instead of silently assuming.
+4. Briefly report: current version, approved locked features, current task, known unresolved issues, and testing status. Ask for clarification only when needed to protect approved designs.
+5. Make minimal changes to the latest working game, never an unnecessary rebuild.
 
-## Controls
+**If GitHub access is unavailable:** disclose it and request the current README/HTML/handover rather than inventing a project state.
 
-- Swipe left/right on the centred aiming slider to rotate the telescope.
-- Tap the aiming slider or sky to fire one laser shot.
-- Use the pause control to pause.
-- Use DEV for diagnostics, night jumps and Yale star catalogue import.
+## Locked designs and mechanics
 
-## Gameplay
+- Preserve approved Dobsonian telescope artwork: brown UTA and mirror box, four silver trusses, silver circular altitude bearing in fixed narrow brown U-shaped cradle, side-mounted green pointer.
+- Preserve Android thumb-friendly controls, relative-swipe aiming slider, tap-to-fire, laser geometry, collisions, scoring, dome/lives, pause/restart, cows/UFOs, aircraft and leaderboard unless explicitly instructed otherwise.
+- Approved Start Screen v1 artwork is stored at [assets/Dob_Defender_Start_Artwork_v1.jpg](assets/Dob_Defender_Start_Artwork_v1.jpg). Do not redraw, recolour, crop or stretch without approval. START pulse is a separate HTML animation.
 
-Survive each night until dawn, protect the observatory dome, conserve laser energy, save cows from UFOs and avoid friendly aircraft. Real-sky star fields, astronomical events and additional threats are documented in [Gameplay](docs/GAMEPLAY.md).
+## Release and handover contract
 
-## Repository
+After **each approved saved milestone**:
+1. Preserve older numbered HTML releases; publish a complete playable game, not a patch or replacement function. Supply downloadable complete HTML and Markdown handover to the user.
+2. Update README current version and status, [docs/HANDOVER.md](docs/HANDOVER.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), and any affected gameplay/development docs. Record changes, design decisions, known issues, next work and actual test results.
+3. Run available syntax checks; inspect aiming maths, laser position, collisions, scoring, lives/dome, restarting and Android layout. Never confuse syntax validation with real browser/device playtesting.
+4. Confirm GitHub Pages deployment for the intended commit. Share a **new versioned Pages URL** (e.g. `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.68`) for every new release, retaining the canonical URL. Query strings help with document caching but do not guarantee all assets refresh.
+5. State the production commit and what was verified; never claim deployment or testing that was not confirmed.
 
-| Path | Description |
-| --- | --- |
-| [index.html](index.html) | Playable current build, Alpha2.63 |
-| [game/index.html](game/index.html) | Same standalone build |
-| [releases/](releases/) | Preserved versioned HTML files |
-| [docs/GAMEPLAY.md](docs/GAMEPLAY.md) | Gameplay and controls |
-| [docs/HANDOVER.md](docs/HANDOVER.md) | Development handover |
-| [docs/CHANGELOG.md](docs/CHANGELOG.md) | Release history |
-| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Testing and release process |
+## Repository map
 
-## Development principles
+- [index.html](index.html) — current production game (Alpha2.67 gameplay with Start Screen v1)
+- [game/index.html](game/index.html) — historical mirror; **check whether synchronized** before using
+- [releases/](releases/) — archived numbered builds; check most recent
+- [docs/HANDOVER.md](docs/HANDOVER.md) — accumulated project history, some older headings
+- [docs/GAMEPLAY.md](docs/GAMEPLAY.md) — gameplay mechanics
+- [docs/CHANGELOG.md](docs/CHANGELOG.md) — milestone changes
+- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) — validation and release workflow
+- [docs/Start_Screen_v1_Handover.md](docs/Start_Screen_v1_Handover.md) — approved title screen and caching rule
+- [assets/](assets/) — approved image assets
 
-Work from the newest approved HTML. Preserve the approved Dobsonian telescope artwork, relative-swipe steering and tap-to-fire controls. Prioritise Android screen sizes. Keep older milestones and update handover/changelog with every release. Do not describe syntax checks as device playtesting.
+## Known housekeeping issues
 
-## Version history
+- README and development docs previously still identified Alpha2.63; this README is updated for Alpha2.67 plus Start Screen v1. Other docs may retain historical/stale version statements.
+- The current Start Screen v1 integration was syntax-checked and GitHub Pages deployment succeeded; full Android end-to-end testing has not been independently confirmed.
+- A prior Android screenshot showed an older title screen at the canonical Pages URL while a commit-pinned CDN link worked; a versioned URL is the recommended share link. Do not assume the caching issue is fully diagnosed.
+- Confirm whether `game/index.html` and archived release files match production before treating them as current.
 
-**Alpha2.17 is the first build retained for this repository.** Earlier prototype files are not required for the project baseline. Alpha2.63 remains the current release.
+## Recommended model effort
 
-## Copyright
+GPT-6 Instant: copy, labels, colours and docs. GPT-6 Medium: ordinary gameplay and controls. GPT-6 High: telescope geometry, bearings, difficult bugs or refactors. Extra High only for exceptional complexity. Model selection is controlled by the user.
 
-Copyright © 2026 Frank Ryan Jr. All rights reserved. No open-source licence has been selected. See [LICENSING.md](LICENSING.md).
+Copyright © 2026 Frank Ryan Jr. All rights reserved. See [LICENSING.md](LICENSING.md).
