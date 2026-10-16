@@ -24,6 +24,11 @@
 #devCard h2{margin:0;font-size:21px}#devCard label{font-size:14px;display:grid;gap:6px}#devNight{width:100%;font-size:18px;padding:9px;border-radius:8px;background:#091829;color:white;border:1px solid #78909f}
 #devCard button{min-height:41px;background:#24465c;border:1px solid #7eaac0;color:#f4fbff;border-radius:9px;font-size:14px;font-weight:700}
 #devCard button:active,.quickBtn:active{filter:brightness(1.35)}
+
+/* Alpha2.67 test: gentle START text pulse; gameplay unchanged */
+#play{animation:ddStartPulse 1.5s ease-in-out infinite;transform-origin:center}
+@keyframes ddStartPulse{0%,100%{filter:brightness(1);transform:scale(1)}50%{filter:brightness(1.18);transform:scale(1.055)}}
+@media(prefers-reduced-motion:reduce){#play{animation:none}}
 </style></head><body>
 <div id="game"><canvas id="sky" aria-label="Dob Defender game playfield"></canvas>
 <div id="hud"><span>SCORE <b id="score">00000</b></span><span>NIGHT <b id="level">1</b></span></div>
@@ -36,7 +41,7 @@
 
 Save the cows!
 
-Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">DEFEND!</button><div id="versionFooter">Alpha2.67</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
+Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label="Final game results"><h2>GAME OVER</h2><p class="final-subtitle">OBSERVATORY DESTROYED</p><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="finalScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="finalDome">0%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="finalCow">0</b><span class="stat-foot">saved total</span></div></div></div><button id="play">START</button><div id="versionFooter">Alpha2.67</div></div><div id="popup" role="dialog" aria-modal="true" hidden></div></div>
 <style>
 #ddLeaderboardPanel{position:absolute;z-index:60;inset:0;background:rgba(3,12,24,.95);color:#f1f7ff;overflow:auto;padding:22px 16px 36px;box-sizing:border-box;text-align:center;font:15px system-ui}
 #ddLeaderboardPanel[hidden]{display:none!important}
