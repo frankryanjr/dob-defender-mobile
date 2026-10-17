@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dob Defender Alpha2.68 TEST</title><style>html,body{margin:0;width:100%;height:100%;background:#03091a;color:white;font:14px system-ui}iframe{width:100%;height:100%;border:0}#error{padding:24px}</style></head><body><div id="error">Loading Alpha2.68 Laser Sight candidate…</div><script>
 (async()=>{
 try{
-const response=await fetch('../index.html?alpha268='+Date.now(),{cache:'no-store'});
+const response=await fetch('https://raw.githubusercontent.com/frankryanjr/dob-defender-mobile/main/index.html?alpha268='+Date.now(),{cache:'no-store'});
 if(!response.ok)throw Error('Game source unavailable: '+response.status);
 let html=await response.text();
 function patch(a,b){if(!html.includes(a))throw Error('Candidate incompatible with production: '+a.slice(0,65));html=html.replace(a,b)}
@@ -14,7 +14,7 @@ patch("for(let e of enemies){if(e.hp<=0)continue;if(e.type==='ufo'){updateUfo(e,
 patch("function drawEnemy(e){g.save();g.translate(e.x,e.y);","function drawEnemy(e){g.save();g.translate(e.x,e.y);if(e.type==='rocketJunk'){g.rotate(e.rot);g.shadowColor='#ff8b36';g.shadowBlur=12;g.fillStyle='#b2b9bd';g.strokeStyle='#fa8749';g.lineWidth=2;g.beginPath();g.moveTo(-17,-8);g.lineTo(9,-10);g.lineTo(16,-4);g.lineTo(15,8);g.lineTo(-14,10);g.closePath();g.fill();g.stroke();g.shadowBlur=0;g.strokeStyle='#4c5159';g.beginPath();g.moveTo(-4,-9);g.lineTo(1,-2);g.lineTo(-5,4);g.lineTo(5,10);g.moveTo(8,-8);g.lineTo(4,1);g.stroke();g.fillStyle='#ff9c3d';g.fillRect(-17,-5,4,10);g.restore();return;}");
 patch("drawDome();if(!scopeBroken)telescope();","drawDome();if(!scopeBroken)telescope();if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),distance=Math.max(W,H)*2;g.save();g.strokeStyle='rgba(108,255,153,.78)';g.lineWidth=1;g.shadowColor='#47ff8a';g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}");
 html=html.replaceAll('Alpha2.67','Alpha2.68 TEST');
-html=html.replace('<head>','<head><base href="'+new URL('../',location.href).href+'">');
+html=html.replace('<head>','<head><base href="'+'https://frankryanjr.github.io/dob-defender-mobile/'+'">');
 const frame=document.createElement('iframe');frame.title='Dob Defender Alpha2.68 test';frame.allow='fullscreen';frame.srcdoc=html;document.body.replaceChildren(frame);
 }catch(err){document.getElementById('error').textContent='Test build could not load: '+err.message;console.error(err)}
 })();
