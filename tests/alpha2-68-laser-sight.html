@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dob Defender Alpha2.68 TEST</title><style>html,body{margin:0;width:100%;height:100%;background:#03091a;color:white;font:14px system-ui}iframe{width:100%;height:100%;border:0}#error{padding:24px}</style></head><body><div id="error">Loading Alpha2.68 Laser Sight candidate…</div><script>
+(async()=>{
+try{
+const response=await fetch('../index.html?alpha268='+Date.now(),{cache:'no-store'});
+if(!response.ok)throw Error('Game source unavailable: '+response.status);
+let html=await response.text();
+function patch(a,b){if(!html.includes(a))throw Error('Candidate incompatible with production: '+a.slice(0,65));html=html.replace(a,b)}
+patch('let paused=false,devWasPaused=false,nightThreeSplitterAssigned=false;','let paused=false,devWasPaused=false,nightThreeSplitterAssigned=false;\nlet laserSightTime=0,junkSpawnAt=Infinity,junkSpawned=false;');
+patch("function startNight(){mode='dusk';","function startNight(){laserSightTime=0;junkSpawned=false;junkSpawnAt=Math.random()<1/3?rnd(6,12):Infinity;mode='dusk';");
+patch('function updateNight(dt){nightTime+=dt;',"function updateNight(dt){nightTime+=dt;laserSightTime=Math.max(0,laserSightTime-dt);if(!junkSpawned&&nightTime>=junkSpawnAt){junkSpawned=true;spawnRocketJunk()}");
+patch('function burst(x,y,color,n=15)',"function spawnRocketJunk(){const left=Math.random()<.5,side=left?1:-1;enemies.push({type:'rocketJunk',x:left?-25:W+25,y:rnd(48,95),vx:side*rnd(90,120),vy:rnd(170,210),r:13,hp:1,phase:0,mandatory:false,rot:rnd(0,TAU)});}\nfunction burst(x,y,color,n=15)");
+patch('function hit(e,b){b.t=0;',"function hit(e,b){b.t=0;if(e.type==='rocketJunk'){e.hp=0;hitCount++;nightHits++;laserSightTime=20;burst(e.x,e.y,'#a3ffc4',24);floatText('LASER SIGHT 20s',e.x,e.y-24,'#a3ffc4');return;}");
+patch("for(let e of enemies){if(e.hp<=0)continue;if(e.type==='ufo'){updateUfo(e,dt)}else{e.x+=e.vx*dt;e.y+=e.vy*dt;e.phase+=dt*2}}","for(let e of enemies){if(e.hp<=0)continue;if(e.type==='ufo'){updateUfo(e,dt)}else{e.x+=e.vx*dt;e.y+=e.vy*dt;e.phase+=dt*2;if(e.type==='rocketJunk'){e.rot+=dt*5;if(Math.random()<dt*22)particles.push({x:e.x+rnd(-6,6),y:e.y+rnd(-5,5),vx:rnd(-30,30),vy:rnd(-40,30),t:rnd(.18,.5),color:Math.random()<.5?'#ffb35c':'#d2d5db'});if(e.y>=floor()-48){e.hp=0;burst(e.x,e.y,'#ffb76a',26)}}}}");
+patch("function drawEnemy(e){g.save();g.translate(e.x,e.y);","function drawEnemy(e){g.save();g.translate(e.x,e.y);if(e.type==='rocketJunk'){g.rotate(e.rot);g.shadowColor='#ff8b36';g.shadowBlur=12;g.fillStyle='#b2b9bd';g.strokeStyle='#fa8749';g.lineWidth=2;g.beginPath();g.moveTo(-17,-8);g.lineTo(9,-10);g.lineTo(16,-4);g.lineTo(15,8);g.lineTo(-14,10);g.closePath();g.fill();g.stroke();g.shadowBlur=0;g.strokeStyle='#4c5159';g.beginPath();g.moveTo(-4,-9);g.lineTo(1,-2);g.lineTo(-5,4);g.lineTo(5,10);g.moveTo(8,-8);g.lineTo(4,1);g.stroke();g.fillStyle='#ff9c3d';g.fillRect(-17,-5,4,10);g.restore();return;}");
+patch("drawDome();if(!scopeBroken)telescope();","drawDome();if(!scopeBroken)telescope();if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),distance=Math.max(W,H)*2;g.save();g.strokeStyle='rgba(108,255,153,.78)';g.lineWidth=1;g.shadowColor='#47ff8a';g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}");
+html=html.replaceAll('Alpha2.67','Alpha2.68 TEST');
+html=html.replace('<head>','<head><base href="'+new URL('../',location.href).href+'">');
+const frame=document.createElement('iframe');frame.title='Dob Defender Alpha2.68 test';frame.allow='fullscreen';frame.srcdoc=html;document.body.replaceChildren(frame);
+}catch(err){document.getElementById('error').textContent='Test build could not load: '+err.message;console.error(err)}
+})();
+</script></body></html>
