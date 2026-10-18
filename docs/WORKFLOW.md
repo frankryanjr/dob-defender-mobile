@@ -11,6 +11,18 @@ When told "Go to GitHub and read the instructions", immediately:
 4. State the current approved version, source file, locked designs, pending candidate changes, known issues and testing status. If sources conflict, identify the conflict before editing. If GitHub is inaccessible, disclose it and stop rather than silently using an old copy.
 5. Follow this workflow as the primary authority. Historical handover sections are history, not current instructions.
 
+## 1A. Starting a development session — broad requests are intentional
+
+Phrases such as **"Let's make some developments"**, **"Let's work on the game"**, **"Let's improve Dob Defender"**, or equivalent requests mean the user wants to enter **development mode**, not that a specific feature has already been selected.
+
+Development can involve **any aspect of Dob Defender**: sound effects, music, gameplay mechanics, difficulty balancing, aiming and mobile controls, scoring, leaderboards and online integration, telescope or other artwork, animation, menus, user experience, bug fixes, performance, or entirely new features. Do not artificially limit the scope to the last feature discussed.
+
+1. Complete the mandatory GitHub onboarding in §1 first, even when the user's first message is simply a broad development invitation. Establish the current approved production baseline and any pending work from the repository, not conversation memory.
+2. Briefly state the approved baseline and ask **what the user wants to develop**, offering a few relevant directions only when useful. Do not invent a requested change or start editing without enough direction.
+3. Discuss and plan the chosen change, implement it in the current approved game, and preserve **all unaffected approved** artwork and gameplay. Explicitly requested updates to previously locked elements may be explored in test builds, but do not silently alter other approved elements.
+4. Deliver complete standalone downloadable HTML candidates, iterate through user testing, and distinguish test candidates from approved releases.
+5. **Entering development mode is never production approval.** Publishing requires separate, explicit authorization for the exact tested candidate under Stage B. The user can switch between different development areas in the same chat without re-onboarding unless repository state must be refreshed.
+
 ## 2. Non-negotiable two-stage delivery
 
 ### STAGE A — DEVELOPMENT / USER TESTING (DEFAULT)
