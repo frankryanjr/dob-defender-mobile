@@ -1,3 +1,15 @@
+# Alpha2.69 production handover — 18 October 2026
+
+**Approved source:** `releases/Dob_Defender_Alpha2.69.html` is the exact user-approved Alpha2.69 Test 18 file, preserved permanently. **Production source:** `main:index.html`, copied from that archive with only visible/internal version identifiers changed from TEST 18 to Alpha2.69. **Prior production:** Alpha2.68, retained for rollback.
+
+**Approved changes:** animated night-end and final Game Over tallies; saved/lost cow adjustments; persistent final Game Over with VIEW LEADERBOARD and PLAY AGAIN; background leaderboard submission without redirect; obsolete night overlay removal; dev power-up guarantee; HUD and dome feedback fixes; ground-impact shake; varied shrinking space junk and atmospheric burn-up.
+
+**Locked and preserved:** Start Screen v1 artwork, approved Dobsonian telescope drawing and mobile thumb controls; underlying shooting, collisions, cows, aircraft and leaderboard mechanics except changes explicitly documented for Alpha2.69.
+
+**Release process learning:** local generated HTML can be transferred through the Files reader to GitHub file-write operations. Reconstruct full content, compare exact length/checksum to local approved file, archive permanently first, then use the archive as the production source. No user download/reupload is required.
+
+**Testing:** file integrity verified; code-level validation does not establish Android gameplay testing. Verify GitHub Pages separately and request user Android confirmation. Continue to track any issues observed on device.
+
 > **CURRENT PROCESS AUTHORITY:** [WORKFLOW.md](WORKFLOW.md) governs all new-chat onboarding, standalone HTML testing, explicit user approval, and production publishing. Historical instructions and version labels below are reference only when they conflict with WORKFLOW.md. Approved production: Alpha2.68 at branch `main`, root `index.html`. Alpha2.69 is unapproved. Do not commit or publish tests by default.
 
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
