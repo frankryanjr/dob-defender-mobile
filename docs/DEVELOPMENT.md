@@ -1,3 +1,16 @@
+# Alpha2.69 release implementation and verification — 18 October 2026
+
+- Approved candidate: Alpha2.69 Test 18.
+- Permanent exact approved archive: `releases/Dob_Defender_Alpha2.69.html`.
+- Archive commit: `d7b69f3c8143c5e94fb5d6918caf9042393d4fea`.
+- Production update commit: `40042730939fe76aea5465f04f916983cfa1d955`.
+- Production `index.html` derived from archive, with only three test-version labels changed; no gameplay modifications.
+- Transfer verification: 343,607 JavaScript string characters; FNV-1a checksum `d4d94208`, matching the local approved HTML. This checksum is a transfer-integrity check, not a security hash.
+- Previous production Alpha2.68 remains archived.
+- Testing status: static inspection and file-integrity validation performed. Android gameplay not independently tested by assistant; GitHub Pages live deployment verification pending independent fetch.
+- Deployment URL to verify: `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.69`.
+- Mandatory process: read `docs/WORKFLOW.md`; approved archive is source of truth, document every release change, and verify deployment before claiming success.
+
 > **CURRENT PROCESS AUTHORITY:** [WORKFLOW.md](WORKFLOW.md) governs all new-chat onboarding, standalone HTML testing, explicit user approval, and production publishing. Historical instructions and version labels below are reference only when they conflict with WORKFLOW.md. Approved production: Alpha2.68 at branch `main`, root `index.html`. Alpha2.69 is unapproved. Do not commit or publish tests by default.
 
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
