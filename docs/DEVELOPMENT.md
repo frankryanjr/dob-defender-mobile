@@ -1,5 +1,7 @@
 # Alpha2.69 release implementation and verification — 18 October 2026
 
+**User verification (18 October 2026):** User confirmed Alpha2.69 production game worked on their device after successful GitHub Pages deployment. This is user-reported Android/device validation, not an assistant-run device test.
+
 - Approved candidate: Alpha2.69 Test 18.
 - Permanent exact approved archive: `releases/Dob_Defender_Alpha2.69.html`.
 - Archive commit: `d7b69f3c8143c5e94fb5d6918caf9042393d4fea`.
