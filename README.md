@@ -1,8 +1,20 @@
+# Alpha2.68 — Integrated damage and night scoring (18 October 2026)
+
+- Production game: root `index.html`; archived release: `releases/Dob_Defender_Alpha2.68.html`.
+- Embedded approved Start Screen v1 JPEG as a data URI for standalone Android HTML use; retained approved telescope and thumb controls.
+- Laser Sight rocket-junk pickup, 20-second guide, expiry fade/flicker/retraction, energy-coloured guide and shots.
+- Direct dome damage: meteor 20%, asteroid 35%, comet 30%, asteroid partial 15%, split fragment 20%; ground structural damage: 5%, 9%, 8%, 4%, 5% respectively. Dome-only shake and colour-linked outline; no cracks; 1.2-second outline retraction at zero integrity.
+- Independent HUD resource warning pulses (25%/10%/0%) and gain/loss flashes. Resource percentages are not score points during play.
+- Comet +5, meteor +10, asteroid staged +15/25, split meteor fragments +20 total; compact numeric hit popups.
+- Night Complete animated energy/dome/cow/bonus tally and Continue control. Saved cow +25 and lost cow -25 in tally; existing +50 rescue reward remains.
+- **Testing:** JavaScript syntax compiled; embedded JPEG decoded (1023 × 1536); full browser execution was blocked by environment, Android/device testing outstanding. GitHub Pages deployment not yet independently verified.
+- **Known limitations:** online leaderboard and sky-data functions require connectivity; local HTML gameplay itself uses embedded Start Screen art. Full scoring, collision and animation device tests are pending.
+
 # Dob Defender
 
 Mobile-browser astronomy arcade game. Defend the observatory against meteorites, asteroids and comets, save cows, avoid shooting aircraft.
 
-**Current production gameplay:** Alpha2.67. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Live game:** https://frankryanjr.github.io/dob-defender-mobile/?v=startscreen-v1-20261016
+**Current production gameplay:** Alpha2.68. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Live game:** https://frankryanjr.github.io/dob-defender-mobile/?v=startscreen-v1-20261016
 
 ## REQUIRED: New-chat onboarding (read before any development)
 
@@ -33,7 +45,7 @@ After **each approved saved milestone**:
 
 ## Repository map
 
-- [index.html](index.html) — current production game (Alpha2.67 gameplay with Start Screen v1)
+- [index.html](index.html) — current production game (Alpha2.68 gameplay with Start Screen v1)
 - [game/index.html](game/index.html) — historical mirror; **check whether synchronized** before using
 - [releases/](releases/) — archived numbered builds; check most recent
 - [docs/HANDOVER.md](docs/HANDOVER.md) — accumulated project history, some older headings
@@ -45,7 +57,7 @@ After **each approved saved milestone**:
 
 ## Known housekeeping issues
 
-- README and development docs previously still identified Alpha2.63; this README is updated for Alpha2.67 plus Start Screen v1. Other docs may retain historical/stale version statements.
+- README and development docs previously still identified Alpha2.63; this README is updated for Alpha2.68 plus Start Screen v1. Other docs may retain historical/stale version statements.
 - The current Start Screen v1 integration was syntax-checked and GitHub Pages deployment succeeded; full Android end-to-end testing has not been independently confirmed.
 - A prior Android screenshot showed an older title screen at the canonical Pages URL while a commit-pinned CDN link worked; a versioned URL is the recommended share link. Do not assume the caching issue is fully diagnosed.
 - Confirm whether `game/index.html` and archived release files match production before treating them as current.
