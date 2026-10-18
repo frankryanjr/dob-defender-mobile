@@ -34,6 +34,18 @@ When told "Go to GitHub and read the instructions", immediately:
 7. User opens the production URL on Android and confirms. Record that confirmation as **user device testing**, not assistant testing.
 8. Also supply the complete downloadable release HTML and updated Markdown handover.
 
+## 2A. Approved HTML transfer to GitHub (fallback when direct transfer fails)
+
+This procedure applies **only after explicit production approval**. A GitHub upload used for transfer is a staging artifact, **not** permission to publish an unapproved test build.
+
+1. First attempt to transfer the **exact approved standalone HTML** using the available GitHub connection. Do not claim a transfer limitation until the available supported methods have been checked.
+2. If the connection cannot read the complete local candidate or transfer its bytes, ask the user to upload the **exact approved HTML file** through GitHub's web interface to a clearly identified temporary staging path (for example, `staging/Dob_Defender_AlphaX.Y_Approved.html`). **Do not ask the user to replace `index.html` or alter production themselves.** This user-authorized staging upload is an exception to Stage A's default no-test-commits rule, solely for an already approved release.
+3. Fetch the staged file through the GitHub connector. Verify its completeness, expected candidate/version and, whenever both copies are accessible, an exact byte-for-byte hash comparison with the locally approved candidate. If the transfer mechanism changes line endings or encoding, investigate and reconcile explicitly; never silently substitute a different build. If the original candidate cannot be accessed for comparison, disclose that limitation and obtain confirmation before proceeding.
+4. Only after verifying the staged candidate, make the **minimal agreed release-label changes** (if any), run syntax checks, and archive it under `releases/`. Confirm the archived content matches the intended production content. Never reconstruct an approved candidate from memory, a prior test or the older production baseline.
+5. Update `main:index.html` from the verified release content, update release documentation, and verify the actual GitHub Pages deployment as required by Stage B.
+6. Keep the staging artifact clearly marked as non-production. Remove it only after production verification and with appropriate authorization, or document why it remains. Do not confuse the staging URL with the live game.
+7. If any step fails, **stop and report the blocker**. Do not replace the working production version or announce success prematurely.
+
 ## 3. Version, cache and approval safeguards
 
 - Approved production as of 18 October 2026: **Alpha2.68** in `main` branch root `index.html`; archived as `releases/Dob_Defender_Alpha2.68.html`.
