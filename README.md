@@ -1,3 +1,12 @@
+## Current production — Alpha2.69 (18 October 2026)
+
+- Approved source: [releases/Dob_Defender_Alpha2.69.html](releases/Dob_Defender_Alpha2.69.html), an exact archive of the user-approved Alpha2.69 Test 18.
+- Production: [index.html](index.html), copied from the approved archive with only TEST 18 / internal test-version labels replaced by Alpha2.69.
+- Features: night-end scoring tally for laser energy, dome integrity, cows saved and cows lost; final Game Over tally; persistent final score screen with VIEW LEADERBOARD and PLAY AGAIN; background score submission without automatic leaderboard redirect; space-junk variants and atmospheric burn-up; HUD, dome and impact feedback improvements.
+- Source transfer: complete approved HTML reconstructed from conversation file reads and verified by length and checksum before archival; no user download/reupload required.
+- Syntax/device status: Test 18 generated and statically inspected; no independent Android device test was performed by the assistant. GitHub Pages verification must be recorded separately.
+- Previous approved release: Alpha2.68, retained in `releases/`.
+
 # START HERE — MANDATORY FOR EVERY NEW CHAT
 
 **FIRST ACTION:** Read [docs/WORKFLOW.md](docs/WORKFLOW.md) in full. This is the **single authoritative, locked development/test/approval/production procedure**. Follow it before modifying game code, creating test artifacts, publishing to GitHub or sharing links. A new chat may contain only "Go to GitHub and read the instructions"; that instruction means **read this README, then WORKFLOW.md, then all required project sources**. Do not rely on previous-chat memory or old uploaded files.
