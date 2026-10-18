@@ -1,5 +1,7 @@
 # Alpha2.69 production handover — 18 October 2026
 
+**User verification (18 October 2026):** User confirmed Alpha2.69 production game worked on their device after successful GitHub Pages deployment. This is user-reported Android/device validation, not an assistant-run device test.
+
 **Approved source:** `releases/Dob_Defender_Alpha2.69.html` is the exact user-approved Alpha2.69 Test 18 file, preserved permanently. **Production source:** `main:index.html`, copied from that archive with only visible/internal version identifiers changed from TEST 18 to Alpha2.69. **Prior production:** Alpha2.68, retained for rollback.
 
 **Approved changes:** animated night-end and final Game Over tallies; saved/lost cow adjustments; persistent final Game Over with VIEW LEADERBOARD and PLAY AGAIN; background leaderboard submission without redirect; obsolete night overlay removal; dev power-up guarantee; HUD and dome feedback fixes; ground-impact shake; varied shrinking space junk and atmospheric burn-up.
