@@ -1,3 +1,29 @@
+# Alpha2.69 — Night-end flow, final scores and space junk (18 October 2026)
+
+**Approved candidate:** Alpha2.69 Test 18. **Permanent approved HTML:** `releases/Dob_Defender_Alpha2.69.html`. **Production:** `main:index.html`; production differs from the approved archive only by version-label text. Previous approved version Alpha2.68 remains archived.
+
+### Added
+- Night-end animated tally of remaining laser energy, dome integrity, cows saved (+25 each) and cows lost (-25 each); scores roll into one overall total.
+- Final Game Over tally before the final score screen.
+- Persistent Game Over screen with separate VIEW LEADERBOARD and PLAY AGAIN buttons.
+- DEV option to guarantee at least one power-up junk item per night.
+- Additional tumbling space-junk types from night 3: rocket stage, Sputnik, damaged ISS and Apollo capsule, cycling and decreasing in size.
+- Atmospheric burn-up effect with leading-edge glow, translucency, fragmentation and fading trail.
+
+### Changed and fixed
+- Registered scores submit in the background without automatically opening the leaderboard.
+- Leaderboard offers PLAY AGAIN; player rank shown when available from returned standings.
+- Removed redundant old Night Defended overlay during the new tally flow.
+- Removed the extra survival/performance bonus tally row and redundant score explanations.
+- Energy HUD low-power warning is intended to respond to genuinely low energy rather than every shot.
+- Dome destruction outline retracts from the top towards ground; ground impact shake separated from dawn.
+- Preserve dawn cow waking, standing and walking, and approved laser-sight timing, colour and expiry behaviour.
+
+### Validation and limitations
+- Exact approved HTML transferred to GitHub and checked against local length/checksum.
+- JavaScript and gameplay behaviour still require end-to-end Android confirmation; online leaderboard requires connectivity.
+- Release deployment and subsequent Android confirmation are separate checks, not implied by committing HTML.
+
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
 
 - Production game: root `index.html`; archived release: `releases/Dob_Defender_Alpha2.68.html`.
