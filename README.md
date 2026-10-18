@@ -9,6 +9,8 @@
 
 # START HERE — MANDATORY FOR EVERY NEW CHAT
 
+**Development session shorthand:** Requests like “Let's make some developments” mean begin development mode for any part of the game (sound, gameplay, leaderboards, artwork, controls, animations, bugs or new features). Complete GitHub onboarding, then ask which change to work on. Create complete downloadable HTML tests; do not publish without separate explicit approval. See §1A of [docs/WORKFLOW.md](docs/WORKFLOW.md).
+
 **FIRST ACTION:** Read [docs/WORKFLOW.md](docs/WORKFLOW.md) in full. This is the **single authoritative, locked development/test/approval/production procedure**. Follow it before modifying game code, creating test artifacts, publishing to GitHub or sharing links. A new chat may contain only "Go to GitHub and read the instructions"; that instruction means **read this README, then WORKFLOW.md, then all required project sources**. Do not rely on previous-chat memory or old uploaded files.
 
 **Non-negotiable:** Development builds are complete downloadable standalone HTML attachments for the user to test locally. **Only after explicit approval** may an approved release be committed to production and linked via GitHub Pages. Never send a GitHub source-file link or unverified Pages test link as the test deliverable.
@@ -33,7 +35,7 @@
 
 Mobile-browser astronomy arcade game. Defend the observatory against meteorites, asteroids and comets, save cows, avoid shooting aircraft.
 
-**Current production gameplay:** Alpha2.68. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Production game:** https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.68 (deployment must be verified before making new release claims)
+**Current production gameplay:** Alpha2.69. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Production game:** https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.69 (deployment must be verified before making new release claims)
 
 ## REQUIRED: New-chat onboarding (read before any development)
 
@@ -59,7 +61,7 @@ After **each approved saved milestone**:
 1. Preserve older numbered HTML releases; publish a complete playable game, not a patch or replacement function. Supply downloadable complete HTML and Markdown handover to the user.
 2. Update README current version and status, [docs/HANDOVER.md](docs/HANDOVER.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), and any affected gameplay/development docs. Record changes, design decisions, known issues, next work and actual test results.
 3. Run available syntax checks; inspect aiming maths, laser position, collisions, scoring, lives/dome, restarting and Android layout. Never confuse syntax validation with real browser/device playtesting.
-4. Confirm GitHub Pages deployment for the intended commit. Share a **new versioned Pages URL** (e.g. `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.68`) for every new release, retaining the canonical URL. Query strings help with document caching but do not guarantee all assets refresh.
+4. Confirm GitHub Pages deployment for the intended commit. Share a **new versioned Pages URL** (e.g. `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.69`) for every new release, retaining the canonical URL. Query strings help with document caching but do not guarantee all assets refresh.
 5. State the production commit and what was verified; never claim deployment or testing that was not confirmed.
 
 ## Repository map
