@@ -27,7 +27,7 @@ Development can involve **any aspect of Dob Defender**: sound effects, music, ga
 
 ### STAGE A — DEVELOPMENT / USER TESTING (DEFAULT)
 
-1. Start from the current **approved** production HTML, not a cached file, an old attachment, an earlier numbered release, or an unapproved test branch.
+1. **Every development change must start from the current approved production source: branch `main`, repository-root `index.html`.** This is the live production code, not the archived release HTML. Determine which version `index.html` represents from the current production declaration in `README.md`, then verify its approval and release history against the latest production entries in `docs/CHANGELOG.md` and `docs/PROJECT_HISTORY.md` (including the approved test identifier and archived release path). Inspect the actual `index.html` before editing and reconcile any mismatch; never guess the version from filenames or use a cached file, old attachment, earlier numbered archive, historical mirror or unapproved candidate as the development baseline.
 2. Make the smallest requested changes. Preserve approved telescope artwork, Start Screen v1 artwork, thumb aiming, laser origin, collisions, scoring, cows, aircraft, leaderboard and all unaffected mechanics.
 3. Produce a **complete self-contained playable HTML** with a unique candidate version/test identifier, plus a downloadable sandbox attachment **directly in ChatGPT**. Never provide only a patch, function, source-file URL, Google Doc or GitHub Pages test URL as the deliverable. Embedded artwork must work offline; explicitly disclose optional online services.
 4. Perform available static/syntax checks and inspect affected gameplay. Report separately: syntax checked, code inspected, browser tested, Android device tested by user, and anything not tested. Do not claim testing not performed.
@@ -73,8 +73,8 @@ For **every approved production version**, record all verified changes and addit
 
 ## 3. Version, cache and approval safeguards
 
-- Approved production as of 18 October 2026: **Alpha2.68** in `main` branch root `index.html`; archived as `releases/Dob_Defender_Alpha2.68.html`.
-- **Alpha2.69** is an **unapproved candidate** addressing four reported issues (energy bar flashes red when firing, dome retracts in wrong direction, developer power-up forcing missing, ground impact shake missing). Prior experimental GitHub files `tests/alpha2-69-four-fixes.html` and `alpha2-69-play.html` were prematurely committed; they are **not** approved production and must not be treated as release authority.
+- **Production source of truth:** `main:index.html`. The version must be discoverable in `README.md` and traceable through the corresponding approved release entry in `docs/CHANGELOG.md` and the production record in `docs/PROJECT_HISTORY.md`. Verify all three against the actual source before starting development; if they disagree, stop and resolve the discrepancy.
+- **Current recorded production (18 October 2026): Alpha2.69**, approved from Test 18 and archived as `releases/Dob_Defender_Alpha2.69.html`. The preceding approved Alpha2.68 is retained for history/rollback, **not** as a development baseline. Earlier Alpha2.69 experimental test URLs were not production authority.
 - For each new test build, generate a fresh standalone HTML from the correct baseline, with a distinct visible version/test identifier. Do not reuse a previously generated cached artifact. Confirm the actual output file exists before linking it.
 - For production, verify the commit and Pages content/version. If the website shows an older version, diagnose deployment, HTML cache, service worker and asset cache. Never claim the query parameter guarantees freshness.
 - Do not change the workflow, locked artwork, or release approval requirement without explicit user authorization.
