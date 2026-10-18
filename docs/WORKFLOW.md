@@ -46,6 +46,18 @@ This procedure applies **only after explicit production approval**. The exact us
 6. Temporary staging is a **last resort only** when the permanent archive cannot safely receive the approved file directly. If used, verify and transfer it to the permanent archive before changing production.
 7. If verification or deployment fails, report the blocker and preserve the last working production version; never announce a release as successful prematurely.
 
+## 2B. Mandatory version documentation and traceability
+
+For **every approved production version**, record all verified changes and additions, not merely a version-number increment:
+
+1. Maintain a dedicated version entry in `docs/CHANGELOG.md` with the release date, approved test-build identifier, added features, changed mechanics/UI, bug fixes, removals, scoring/leaderboard behaviour, and any known limitations. Distinguish observed/tested behaviour from intended behaviour.
+2. Update `docs/GAMEPLAY.md` for the actual current gameplay rules, controls, scoring formulas, resource/damage behaviour, power-ups, night progression and end-of-game flow that changed.
+3. Update `docs/HANDOVER.md` with the exact approved HTML archive path, production source, preserved locked designs, relevant implementation decisions, outstanding defects, test status and next steps.
+4. Update `README.md` to identify the current production version and its archive; update `docs/DEVELOPMENT.md` with validation, release/deployment steps and results. Keep historical entries rather than overwriting the release history.
+5. Record the production commit SHA, GitHub Pages verification result and any subsequent user Android confirmation. Never label syntax inspection as device testing.
+6. Ensure documentation describes **the code actually released**. Compare the approved archive with production and document any permitted version-label-only differences. Do not invent undocumented changes from memory.
+7. Publish documentation alongside the release, then verify the final GitHub state. If a required update fails, disclose the incomplete release documentation explicitly and finish it before declaring the release complete.
+
 ## 3. Version, cache and approval safeguards
 
 - Approved production as of 18 October 2026: **Alpha2.68** in `main` branch root `index.html`; archived as `releases/Dob_Defender_Alpha2.68.html`.
