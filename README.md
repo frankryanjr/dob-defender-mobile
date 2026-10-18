@@ -1,3 +1,13 @@
+# START HERE — MANDATORY FOR EVERY NEW CHAT
+
+**FIRST ACTION:** Read [docs/WORKFLOW.md](docs/WORKFLOW.md) in full. This is the **single authoritative, locked development/test/approval/production procedure**. Follow it before modifying game code, creating test artifacts, publishing to GitHub or sharing links. A new chat may contain only "Go to GitHub and read the instructions"; that instruction means **read this README, then WORKFLOW.md, then all required project sources**. Do not rely on previous-chat memory or old uploaded files.
+
+**Non-negotiable:** Development builds are complete downloadable standalone HTML attachments for the user to test locally. **Only after explicit approval** may an approved release be committed to production and linked via GitHub Pages. Never send a GitHub source-file link or unverified Pages test link as the test deliverable.
+
+**Current approved production:** Alpha2.68 at branch `main`, root `index.html`. **Alpha2.69 is unapproved**. Existing experimental Alpha2.69 GitHub test files are not production authority.
+
+---
+
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
 
 - Production game: root `index.html`; archived release: `releases/Dob_Defender_Alpha2.68.html`.
@@ -14,13 +24,13 @@
 
 Mobile-browser astronomy arcade game. Defend the observatory against meteorites, asteroids and comets, save cows, avoid shooting aircraft.
 
-**Current production gameplay:** Alpha2.68. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Live game:** https://frankryanjr.github.io/dob-defender-mobile/?v=startscreen-v1-20261016
+**Current production gameplay:** Alpha2.68. **Approved title artwork:** Start Screen v1 (16 October 2026). **Production entry point:** [index.html](index.html). **Production game:** https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.68 (deployment must be verified before making new release claims)
 
 ## REQUIRED: New-chat onboarding (read before any development)
 
 This repository is the durable source of truth across ChatGPT Project chats. At the start of **every new Dob Defender development chat**, the assistant must:
 
-1. Fetch this README from GitHub (do not rely on an old pasted copy or chat memory).
+1. Fetch this README from GitHub (do not rely on an old pasted copy or chat memory), then **read [docs/WORKFLOW.md](docs/WORKFLOW.md) in full as the highest-priority process authority**.
 2. Read [docs/HANDOVER.md](docs/HANDOVER.md), [docs/GAMEPLAY.md](docs/GAMEPLAY.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), and [docs/Start_Screen_v1_Handover.md](docs/Start_Screen_v1_Handover.md).
 3. Inspect [index.html](index.html) and the latest numbered release in [releases/](releases/) before editing. Determine the actual newest working baseline; **some historical documentation still mentions Alpha2.63 or earlier and is outdated**. Prefer the deployed implementation and newest verified changelog entry, and flag discrepancies instead of silently assuming.
 4. Briefly report: current version, approved locked features, current task, known unresolved issues, and testing status. Ask for clarification only when needed to protect approved designs.
@@ -44,6 +54,8 @@ After **each approved saved milestone**:
 5. State the production commit and what was verified; never claim deployment or testing that was not confirmed.
 
 ## Repository map
+
+- [docs/WORKFLOW.md](docs/WORKFLOW.md) — **authoritative locked process; read first**
 
 - [index.html](index.html) — current production game (Alpha2.68 gameplay with Start Screen v1)
 - [game/index.html](game/index.html) — historical mirror; **check whether synchronized** before using
