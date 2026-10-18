@@ -1,3 +1,17 @@
+# Alpha2.69 — Current gameplay changes (18 October 2026)
+
+Alpha2.69 preserves Alpha2.68 telescope artwork, thumb aiming, shooting, damage rules, aircraft, cow rescue, power-ups and approved Start Screen v1 except for the changes recorded below.
+
+**Night scoring:** After each completed night, an animated tally awards points based on remaining laser energy and dome integrity and applies +25 for each cow saved and -25 for each cow lost. The existing +50 reward for saving a cow during play remains. The tally contributes to one running overall score; no separate survival/performance bonus row.
+
+**Game Over:** A final tally runs before the final score screen. The Game Over screen remains visible until the player chooses VIEW LEADERBOARD or PLAY AGAIN. Registered players' scores submit in the background without navigating away. Leaderboard includes PLAY AGAIN and can show rank when the returned standings support it.
+
+**Space junk:** From night 3, alternating tumbling rocket-stage, Sputnik, damaged ISS and Apollo capsule objects appear, scaling smaller across later nights. Mid-screen atmospheric burn-up uses glowing leading edges, fragmentation and fading trails.
+
+**Feedback:** Laser energy low warning is intended only at low energy. Dome outline retracts downward when destroyed. Ground impacts produce a ground shake without the violent dawn shake. Developer mode includes an option to force at least one power-up per night.
+
+**Preserved:** Dawn cows stand and resume movement; Laser Sight guide lasts approximately 20 seconds, matches energy colour and fades/retracts on expiry. Refer to Alpha2.68 history below for underlying mechanics.
+
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
 
 - Production game: root `index.html`; archived release: `releases/Dob_Defender_Alpha2.68.html`.
