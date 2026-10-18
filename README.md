@@ -15,7 +15,7 @@
 
 **Non-negotiable:** Development builds are complete downloadable standalone HTML attachments for the user to test locally. **Only after explicit approval** may an approved release be committed to production and linked via GitHub Pages. Never send a GitHub source-file link or unverified Pages test link as the test deliverable.
 
-**Current approved production:** Alpha2.68 at branch `main`, root `index.html`. **Alpha2.69 is unapproved**. Existing experimental Alpha2.69 GitHub test files are not production authority.
+**Current approved production:** Alpha2.69 at branch `main`, root `index.html`. The approved Alpha2.69 Test 18 is permanently archived under `releases/`. Historical candidate files are not production authority.
 
 ---
 
@@ -42,7 +42,7 @@ Mobile-browser astronomy arcade game. Defend the observatory against meteorites,
 This repository is the durable source of truth across ChatGPT Project chats. At the start of **every new Dob Defender development chat**, the assistant must:
 
 1. Fetch this README from GitHub (do not rely on an old pasted copy or chat memory), then **read [docs/WORKFLOW.md](docs/WORKFLOW.md) in full as the highest-priority process authority**.
-2. Read [docs/HANDOVER.md](docs/HANDOVER.md), [docs/GAMEPLAY.md](docs/GAMEPLAY.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), and [docs/Start_Screen_v1_Handover.md](docs/Start_Screen_v1_Handover.md).
+2. Read [docs/PROJECT_HISTORY.md](docs/PROJECT_HISTORY.md), [docs/HANDOVER.md](docs/HANDOVER.md), [docs/GAMEPLAY.md](docs/GAMEPLAY.md), [docs/CHANGELOG.md](docs/CHANGELOG.md), [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), and [docs/Start_Screen_v1_Handover.md](docs/Start_Screen_v1_Handover.md).
 3. Inspect [index.html](index.html) and the latest numbered release in [releases/](releases/) before editing. Determine the actual newest working baseline; **some historical documentation still mentions Alpha2.63 or earlier and is outdated**. Prefer the deployed implementation and newest verified changelog entry, and flag discrepancies instead of silently assuming.
 4. Briefly report: current version, approved locked features, current task, known unresolved issues, and testing status. Ask for clarification only when needed to protect approved designs.
 5. Make minimal changes to the latest working game, never an unnecessary rebuild.
@@ -68,10 +68,11 @@ After **each approved saved milestone**:
 
 - [docs/WORKFLOW.md](docs/WORKFLOW.md) — **authoritative locked process; read first**
 
-- [index.html](index.html) — current production game (Alpha2.68 gameplay with Start Screen v1)
+- [index.html](index.html) — current production game (Alpha2.69)
 - [game/index.html](game/index.html) — historical mirror; **check whether synchronized** before using
 - [releases/](releases/) — archived numbered builds; check most recent
-- [docs/HANDOVER.md](docs/HANDOVER.md) — accumulated project history, some older headings
+- [docs/PROJECT_HISTORY.md](docs/PROJECT_HISTORY.md) — consolidated chronological development and production tracker
+- [docs/HANDOVER.md](docs/HANDOVER.md) — accumulated detailed project history, some older headings
 - [docs/GAMEPLAY.md](docs/GAMEPLAY.md) — gameplay mechanics
 - [docs/CHANGELOG.md](docs/CHANGELOG.md) — milestone changes
 - [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) — validation and release workflow
@@ -81,7 +82,7 @@ After **each approved saved milestone**:
 ## Known housekeeping issues
 
 - README and development docs previously still identified Alpha2.63; this README is updated for Alpha2.68 plus Start Screen v1. Other docs may retain historical/stale version statements.
-- The current Start Screen v1 integration was syntax-checked and GitHub Pages deployment succeeded; full Android end-to-end testing has not been independently confirmed.
+- Alpha2.69 production deployment succeeded and the user confirmed the game worked on their device; independent assistant-run Android end-to-end testing has not been performed.
 - A prior Android screenshot showed an older title screen at the canonical Pages URL while a commit-pinned CDN link worked; a versioned URL is the recommended share link. Do not assume the caching issue is fully diagnosed.
 - Confirm whether `game/index.html` and archived release files match production before treating them as current.
 
