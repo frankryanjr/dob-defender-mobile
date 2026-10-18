@@ -1,3 +1,5 @@
+> **CURRENT PROCESS AUTHORITY:** [WORKFLOW.md](WORKFLOW.md) governs all new-chat onboarding, standalone HTML testing, explicit user approval, and production publishing. Historical instructions and version labels below are reference only when they conflict with WORKFLOW.md. Approved production: Alpha2.68 at branch `main`, root `index.html`. Alpha2.69 is unapproved. Do not commit or publish tests by default.
+
 # Alpha2.68 — Integrated damage and night scoring (18 October 2026)
 
 - Production game: root `index.html`; archived release: `releases/Dob_Defender_Alpha2.68.html`.
