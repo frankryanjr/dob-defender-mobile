@@ -1,3 +1,10 @@
+## 19 October 2026 — Alpha2.70 approved production
+
+- User tested and approved **Alpha2.70 Test 8**, resolving dome destruction after multiple failed animation candidates.
+- Fixed frozen floating score popups at dawn; removed gameplay leaderboard button and moon; placed cows in front of dome walls; erased fixed dome outline from apex down to ground on destruction.
+- Approved test archived unchanged as `releases/Dob_Defender_Alpha2.70.html`; production `index.html` exact match (blob `b464c01399c78370c2ecaccba7862cc439069bed`).
+- Production HTML commit: `7421e3f23ae138cde4a9cb585b5adc3d2f5ad634`. Deployment and live-device confirmation for production URL require separate records.
+
 # Dob Defender — Project History and Production Tracker
 
 **Updated:** 19 October 2026  
