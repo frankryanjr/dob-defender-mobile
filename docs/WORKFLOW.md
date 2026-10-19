@@ -24,6 +24,19 @@ Development can involve **any aspect of Dob Defender**: sound effects, music, ga
 5. **Entering development mode is never production approval.** Publishing requires separate, explicit authorization for the exact tested candidate under Stage B. The user can switch between different development areas in the same chat without re-onboarding unless repository state must be refreshed.
 
 
+## PROVEN LOSSLESS GITHUB → GOOGLE DRIVE → LOCAL TRANSFER (19 OCT 2026)
+
+**Verified end-to-end without any user-uploaded production HTML.** Use this when GitHub connector can read the source but the local Python/container cannot download it directly.
+
+1. Fetch the complete current `main:index.html` with GitHub `fetch_file`, capturing `result.content` and `result.sha`.
+2. Within a single `functions.exec` call, encode the fetched UTF-8 text into **Base64** using JavaScript (a small pure-JS UTF-8/Base64 encoder works when `btoa` and `TextEncoder` are unavailable). Do not use plain Google Docs text insertion for raw HTML: Google Docs added 30 extra newlines to the 343,575-character Alpha2.69 source.
+3. Create a temporary native Google Doc with `mcp__Google_Drive__create_file`. Insert Base64 text using `mcp__Google_Drive__batch_update_document` in manageable chunks (verified: 15,000 Base64 characters per `insertText` request, six requests per call, with `endOfSegmentLocation:{}`). Newlines introduced by Google Docs are harmless to Base64.
+4. Export the temporary Doc with `mcp__Google_Drive__fetch({url:"https://docs.google.com/document/d/<id>/edit",download_raw_file:true,raw_export_mime_type:"text/plain",include_base64:false})`. This **automatically mounts the exported .txt file into `/mnt/data`**; the tool message supplies the exact mounted path.
+5. In the local Python/container environment, read the exported text with `encoding="utf-8-sig"`, remove whitespace from the Base64, decode with `base64.b64decode(...,validate=True)`, and write the decoded bytes as `/mnt/data/Dob_Defender_<version>_GitHub_Verified.html`.
+6. Run `git hash-object` on the resulting HTML and **require an exact match to the current GitHub `result.sha`**. Also check `</html>`. Do not use the file for development or link it if the hash differs. Then make the Stage A test changes and deliver the full HTML as usual.
+
+**Successful reference:** Alpha2.69 source: 343,575 characters, 343,608 UTF-8 bytes, Base64 length 458,144, Git blob SHA `1a5e85ba0d1f9d74565249a657d40c39bd670f11`; exact SHA match after Drive transfer. These are **historical verification values only**, not expected values for later production. No user HTML upload was used in this successful transfer. Do not confuse a previously uploaded local file with this verified method.
+
 ## VERIFIED GITHUB-TO-LOCAL TEST BUILD PROCEDURE — MANDATORY
 
 **This procedure exists because a previous assistant incorrectly claimed it could not turn GitHub source into a downloadable local HTML test. Do not repeat that claim without attempting the actual tools.**
