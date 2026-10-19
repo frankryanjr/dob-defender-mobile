@@ -1,3 +1,12 @@
+## Alpha2.70 current gameplay amendments (19 October 2026)
+
+- In-play leaderboard shortcut at top-right is removed. Leaderboard remains accessible from final results.
+- Moon is no longer drawn in the night sky.
+- Cows render in front of dome walls.
+- Floating hit-score numbers fade during the transition to dawn and are cleared at the tally.
+- At zero dome integrity, the stationary dome outline progressively vanishes from the central apex along both curved halves and then the vertical walls down to the ground. The arch does not translate, rotate or shrink.
+- User confirmed the corrected dome behaviour in Alpha2.70 Test 8 on Android.
+
 # Alpha2.69 — Current gameplay changes (18 October 2026)
 
 Alpha2.69 preserves Alpha2.68 telescope artwork, thumb aiming, shooting, damage rules, aircraft, cow rescue, power-ups and approved Start Screen v1 except for the changes recorded below.
