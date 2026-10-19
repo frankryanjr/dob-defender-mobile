@@ -1,3 +1,6 @@
+
+**Required GitHub-to-local procedure:** See **VERIFIED GITHUB-TO-LOCAL TEST BUILD PROCEDURE** in `docs/WORKFLOW.md`. Retrieve and hash-check current `main:index.html`, use the container-backed Python environment to create a complete `/mnt/data/` HTML test, and give the user a direct download link. Do **not** ask the user to download the GitHub HTML and re-upload it. A prior failed raw-HTTP download is not proof that the workflow is impossible. Never publish a test before approval.
+
 ## Current production — Alpha2.69 (18 October 2026)
 
 - Approved source: [releases/Dob_Defender_Alpha2.69.html](releases/Dob_Defender_Alpha2.69.html), an exact archive of the user-approved Alpha2.69 Test 18.
