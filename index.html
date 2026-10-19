@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.72</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.73</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -11,7 +11,7 @@
 #versionFooter{position:absolute;bottom:calc(91px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#b8cbd6;font-size:12px;font-weight:700;letter-spacing:1px;pointer-events:none}#popup{position:absolute;inset:0;background:rgba(3,10,23,.75);z-index:11;display:flex;justify-content:center;align-items:center;flex-direction:column;padding:16px}
 
 
-.tutorialCard{width:min(90vw,340px);text-align:center;border-radius:20px;padding:25px 18px;background:linear-gradient(160deg,#122c46,#071524);border:2px solid #65b6d9;box-shadow:0 18px 45px #000c}.tutorialIcon{color:#9eecc3;letter-spacing:5px;font-size:20px}.tutorialCard h2{font-size:22px;color:#8effb2}.tutorialCard p{font-weight:700;line-height:1.6;font-size:16px}.tutorialCard button{margin-top:16px;background:#69e78b}
+.tutorialCard{width:min(90vw,340px);text-align:center;border-radius:20px;padding:25px 18px;background:linear-gradient(160deg,#122c46,#071524);border:2px solid #65b6d9;box-shadow:0 18px 45px #000c}.tutorialIcon{color:#9eecc3;letter-spacing:5px;font-size:20px}.tutorialCard h2{font-size:22px;color:#8effb2}.tutorialCard p{font-weight:700;line-height:1.6;font-size:16px}.tutorialCard button{margin-top:16px;background:#69e78b}#aircraftOK{display:block;width:100%;min-height:44px;margin-top:20px;padding:13px;border:0;border-radius:12px;background:#82e6a1;color:#10291b;font:800 17px system-ui,-apple-system,Arial,sans-serif;box-shadow:none;appearance:none;-webkit-appearance:none}
 #notice{position:absolute;z-index:4;top:calc(max(9px,env(safe-area-inset-top)) + 70px);width:100%;pointer-events:none;text-align:center;color:#9affb6;font-weight:800;font-size:13px;letter-spacing:1px;text-shadow:0 0 7px #256b43;opacity:0}
 #notice.twice{animation:issflash 2s ease-in-out forwards}@keyframes issflash{0%,22%,50%,72%,100%{opacity:0}5%,17%,55%,67%{opacity:1}}
 #results,#finalResults{width:min(90vw,360px);padding:20px 15px 21px;border-radius:16px;background:rgba(9,27,47,.91);border:1px solid #7ca6b0;text-align:center;box-shadow:0 7px 25px #0007}#results{position:absolute;z-index:8;top:22%;left:50%;transform:translateX(-50%);pointer-events:none}#results h2,#finalResults h2{margin:0;font-size:clamp(18px,5.3vw,24px);line-height:1.2;color:#ffdb98;letter-spacing:.5px;white-space:nowrap}#results .stats,#finalResults .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:17px}#results .stat,#finalResults .stat{display:flex;align-items:center;flex-direction:column;gap:6px;min-width:0}#results .stat-label,#finalResults .stat-label{font-size:11px;color:#dbe4ee;letter-spacing:1px;font-weight:800}#results .stat-value,#finalResults .stat-value{font-size:clamp(17px,5vw,23px);color:#b2ffcf;font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap}#results .stat-foot,#finalResults .stat-foot{font-size:10px;color:#bdd5e0;margin-top:-4px}#finalResults .final-subtitle{margin:6px 0 0;color:#d4e1ef;font-size:11px;line-height:1.3;letter-spacing:1px;font-weight:700}
@@ -60,7 +60,7 @@
 #ddTally .bonus-detail{font-size:11px;color:#a7c6d6;margin-top:5px;line-height:1.45}
 #ddTally .status{display:none}
 #ddTally .status{min-height:20px;text-align:center;color:#a8c2ce;font-size:12px;margin:12px 0}#ddTally button{width:100%;background:#82e6a1;color:#10291b;font-weight:800;border:0;border-radius:12px;padding:13px}#ddTally button:disabled{opacity:.4}
-.ddFly{position:fixed;z-index:100;pointer-events:none;font:800 24px system-ui;transition:transform 1.65s cubic-bezier(.22,.8,.2,1),opacity 1.65s}
+.ddFly{position:fixed;z-index:100;pointer-events:none;font:800 24px system-ui;transition:transform .28s cubic-bezier(.22,.8,.2,1),opacity .28s}
 @keyframes ddCriticalPulse{0%,100%{opacity:1}50%{opacity:.34}}</style></head><body>
 <div id="game"><canvas id="sky" aria-label="Dob Defender game playfield"></canvas>
 <div id="hud"><span>SCORE <b id="score">00000</b></span><span>NIGHT <b id="level">1</b></span></div>
@@ -103,7 +103,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.72';
+const DD_GAME_VERSION='Alpha2.73';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -759,7 +759,7 @@ const domeRadius=()=>Math.min(W*.38,Math.max(88,H*.195));
 const domeGeom=()=>{let r=domeRadius(),cx=W/2,gy=floor(),side=r*.58,wallTop=gy-r*.50,rise=r*.34;return{r,cx,gy,side,left:cx-side,right:cx+side,wallTop,rise,top:wallTop-rise}};
 const domeY=x=>{let d=domeGeom(),u=(x-d.cx)/d.side;return d.wallTop-d.rise*Math.sqrt(Math.max(0,1-u*u))};
 const maxDanger=()=>night<3?2:night<5?3:night<8?4:night<12?5:night<17?6:7;
-const speedFactor=()=>Math.min(1.6,1.22+.052*(night-1));
+const speedFactor=()=>Math.min(1.6,1.22+.052*(night-1))*(1+Math.min(.08,.02*(night-1)));
 // Test 3: leaderboard uses its own scrolling region. Re-anchor gameplay to the
 // visual viewport on return, rather than trusting an old page scroll offset.
 let ddViewportRefresh=0;
@@ -813,7 +813,7 @@ track.addEventListener('pointerup',e=>{if(e.pointerId!==drag)return;e.preventDef
 for(const name of ['pointercancel','lostpointercapture'])track.addEventListener(name,e=>{if(e.pointerId===drag)drag=null});
 // Single tap means one shot. No continuous fire on hold.
 canvas.addEventListener('pointerdown',e=>{if(mode!=='night')return;e.preventDefault();shoot()});
-const shotEnergyCost=()=>night>=13?2.5:night>=8?2.25:2;
+const shotEnergyCost=()=>night>=13?2:night>=11?1.85:night>=6?1.65:2;
 function shoot(){const cost=shotEnergyCost();if(paused||mode!=='night'||energy<cost)return;energy-=cost;shotCount++;nightShots++;flash=.09;let p=tip();shots.push({x:p.x,y:p.y,px:p.x,py:p.y,vx:Math.cos(angle)*710,vy:Math.sin(angle)*710,t:1.7});hud()}
 function spawnRocketJunk(){
  const left=Math.random()<.5,side=left?1:-1;
@@ -828,21 +828,21 @@ function panicCows(){for(const c of cows){if(c.dead||c.state==='splat')continue;
 function destroyScope(e){if(mode==='destroyed'||mode==='gameover')return;if(e&&e.hp>0)e.hp=0;shots=[];enemies=[];activeUfo=null;panicCows();shatterScope();mode='destroyed';phaseTime=0;floatText('TELESCOPE DESTROYED',W/2,floor()-120,'#ffd39a');hud()}
 function floatText(text,x,y,color='#f6f7fe'){activeWarnings.push({text,x,y,color,t:1.5})}
 function popupTutorial(which){if(mode!=='night')return;mode='tutorial';hud();popup.hidden=false;popup.innerHTML='';
- if(which==='aircraft'){const card=document.createElement('div');card.className='tutorialCard';card.innerHTML='<h2 style="color:#ff888d">AIRCRAFT SAFETY WARNING</h2><p>POINTING LASERS AT AIRCRAFT IS DANGEROUS AND A CRIME.</p><p style="color:#ff888d">DON&#39;T DO IT!</p><p style="color:#ff888d">-10 ENERGY</p><button id="aircraftOK">OK</button>';popup.appendChild(card);$('aircraftOK').addEventListener('click',closeTutorial)}
+ if(which==='aircraft'){const card=document.createElement('div');card.className='tutorialCard';card.innerHTML='<h2 style="color:#ff888d">AIRCRAFT SAFETY WARNING</h2><p>POINTING LASERS AT AIRCRAFT IS DANGEROUS AND A CRIME.</p><p style="color:#ff888d">DON&#39;T DO IT!</p><p style="color:#ff888d">-10 ENERGY</p><button id="aircraftOK">CONTINUE</button>';popup.appendChild(card);$('aircraftOK').addEventListener('click',closeTutorial)}
  else{const card=document.createElement('div');card.className='tutorialCard';card.innerHTML='<div class="tutorialIcon">✦ ISS ✦</div><h2>ISS PASS ALERT</h2><p>SHOOT THE ISS TO RECHARGE YOUR LASER</p><button id="tutorialOK">OK</button>';popup.appendChild(card);$('tutorialOK').addEventListener('click',closeTutorial)}
 }
 function closeTutorial(){popup.hidden=true;popup.innerHTML='';mode='night';hud();last=0}
 function showOverlay(title,msg,buttonText,callback){$('ddGameOverActions').hidden=true;overlay.hidden=false;$('finalResults').hidden=true;$('heading').hidden=false;$('message').hidden=false;$('heading').textContent=title;$('message').textContent=msg;$('play').textContent=buttonText;$('play').onclick=callback}
 function resetGame(){ddRefreshGameplayViewport();ddFinalLeaderboard=false;$('ddGameOverActions').hidden=true;paused=false;syncPause();$('devPanel').hidden=true;night=1;score=0;shotCount=0;hitCount=0;totalCows=0;totalCowDeaths=0;introISS=false;introAircraft=false;angle=wanted=-PI/2;showAim();startNight()}
-function startNight(){junkAfterglows=[];laserSightTime=0;ddDomeShake=0;ddGroundShake=0;ddDomeRetract=0;ddEnergyFlash=0;ddShieldFlash=0;junkSpawned=false;junkSpawnAt=devForcePowerups?rnd(4,7):(night>=3&&Math.random()<1/3?rnd(5,11):Infinity);mode='dusk';nightTime=0;phaseTime=0;drawTime=0;energy=100;shield=100;hadImpact=false;nightShots=0;nightHits=0;nightCows=0;nightCowDeaths=0;issUsed=false;issDecided=false;issSoon=false;missedISS=false;activeUfo=null;satTrain=null;plannedReturn=null;earlyUfoCount=0;shots=[];enemies=[];particles=[];cows=[];activeWarnings=[];domeFlash=0;flash=0;scopeBroken=false;balloon=0;nextCowAt=rnd(3.5,9);nightThreeSplitterAssigned=false;stars=buildSkyForNight();buildSchedule();overlay.hidden=true;results.hidden=true;popup.hidden=true;hud();last=0;if(!frame)frame=requestAnimationFrame(loop)}
+function startNight(){junkAfterglows=[];laserSightTime=0;ddDomeShake=0;ddGroundShake=0;ddDomeRetract=0;ddEnergyFlash=0;ddShieldFlash=0;junkSpawned=false;junkSpawnAt=devForcePowerups?rnd(4,7):(night===3||night>3&&Math.random()<.70?rnd(5,11):Infinity);mode='dusk';nightTime=0;phaseTime=0;drawTime=0;energy=100;shield=100;hadImpact=false;nightShots=0;nightHits=0;nightCows=0;nightCowDeaths=0;issUsed=false;issDecided=false;issSoon=false;missedISS=false;activeUfo=null;satTrain=null;plannedReturn=null;earlyUfoCount=0;shots=[];enemies=[];particles=[];cows=[];activeWarnings=[];domeFlash=0;flash=0;scopeBroken=false;balloon=0;nextCowAt=rnd(3.5,9);nightThreeSplitterAssigned=false;stars=buildSkyForNight();buildSchedule();overlay.hidden=true;results.hidden=true;popup.hidden=true;hud();last=0;if(!frame)frame=requestAnimationFrame(loop)}
 const cowClearance=()=>Math.max(66,Math.min(90,W*.18));
 function cowSafeX(x){const gap=cowClearance();return x<W/2?clamp(x,24,Math.max(24,W/2-gap)):clamp(x,Math.min(W-24,W/2+gap),W-24)}
 function makeCow(x){return{id:Math.random(),x,y:floor()-2,state:'enter',dir:x<0?1:-1,phase:rnd(0,TAU),timer:rnd(1.5,4),lift:0,selected:false,fallY:0,fallV:0}}
 function spawnCow(force=false){if(cows.length>=3)return null;let left=force?true:Math.random()<.5,x=left?-25:W+25,cow=makeCow(x);cow.dir=left?1:-1;cow.entryTarget=force?cowSafeX(W*.24):(left?rnd(28,Math.max(29,W/2-cowClearance())):rnd(Math.min(W-29,W/2+cowClearance()),W-28));cows.push(cow);return cow}
 function needIntroCow(){if(cows.some(eligibleCow))return cows.filter(eligibleCow)[0];const cow=cows.find(c=>c.state==='enter'&&!c.selected);if(cow){cow.entryTarget=cowSafeX(cow.dir>0?W*.24:W*.76);return null}spawnCow(true);return null}
-function buildSchedule(){const counts=[14,17,19,22,24,26,27,28,29,30];let count=night<=4?counts[night-1]:Math.min(52,24+Math.round((night-5)*1.85));let kinds=[],required=0;let giantBudget=Math.max(0,Math.ceil(count*1.50)-count);let giantPending=0;
+function buildSchedule(){const counts=[14,19,23,27,30,32,34,36];let count=night<=8?counts[night-1]:Math.min(52,36+Math.round((night-8)*1.85));let kinds=[],required=0;let giantBudget=Math.max(0,Math.ceil(count*1.50)-count);let giantPending=0;
  for(let i=0;i<count;i++){let pool=night===1?['meteor','meteor','asteroid','comet']:night===2?['meteor','meteor','asteroid','comet']:['meteor','meteor','asteroid','comet'];let type=night===3&&i===0?'meteor':pool[Math.floor(rnd(0,pool.length))];if(type==='asteroid'&&required+2+(count-i-1)>Math.ceil(count*1.50))type='meteor';let giant=type==='asteroid'&&night>=2&&giantBudget>0&&required+3+(count-i-1)<=Math.ceil(count*1.50)&&Math.random()<(night>=6?.24:.14);if(giant){giantBudget--;giantPending++}kinds.push({type,giant});required+=(type==='asteroid'?2:1)+(giant?1:0)}
- remainingToSpawn=kinds.length;pendingMandatory=kinds.length;events=[];let t=2.1,index=0;let maxGroup=maxDanger();while(index<kinds.length){let group=1;if(maxGroup>=2&&Math.random()<(night>=5?.58:.32))group=2;if(maxGroup>=3&&Math.random()<(night>=8?.43:.22))group=3;if(maxGroup>=4&&Math.random()<(night>=12?.34:.14))group=4;if(maxGroup>=5&&Math.random()<.22)group=5;if(maxGroup>=6&&Math.random()<.15)group=6;group=Math.min(group,kinds.length-index);for(let k=0;k<group;k++)events.push({t:t+k*.25,type:'threat',kind:kinds[index].type,giant:kinds[index++].giant,slot:k,group});let minGap=Math.max(1.45,2.45-(night-1)*.08);t+=rnd(minGap,minGap+1.35);if(Math.random()<.08)t+=rnd(1.0,2.0)}
+ remainingToSpawn=kinds.length;pendingMandatory=kinds.length;events=[];let t=2.1,index=0;let maxGroup=maxDanger();while(index<kinds.length){let group=1;if(maxGroup>=2&&Math.random()<(night>=5?.60:night>=3?.45:.32))group=2;if(maxGroup>=3&&Math.random()<(night>=8?.43:night>=5?.25:.22))group=3;if(maxGroup>=4&&Math.random()<(night>=12?.34:.14))group=4;if(maxGroup>=5&&Math.random()<.22)group=5;if(maxGroup>=6&&Math.random()<.15)group=6;group=Math.min(group,kinds.length-index);for(let k=0;k<group;k++)events.push({t:t+k*.25,type:'threat',kind:kinds[index].type,giant:kinds[index++].giant,slot:k,group});let minGap=Math.max(1.45,2.45-(night-1)*.08);t+=rnd(minGap,minGap+1.35);if(Math.random()<.08)t+=rnd(1.0,2.0)}
  // Pace actual encounters instead of adding an idle timer after the last threat.
  // Intro nights are shorter; nights 3-4 retain their existing spacing;
  // night 5 begins a gradual increase, capped to keep late play manageable.
@@ -988,7 +988,7 @@ function wakeCowsForDawn(){
 function ddStartTally(d){
  const q=id=>document.getElementById(id),box=q('ddTally'),total=q('ddTotal'),sleep=ms=>new Promise(r=>setTimeout(r,ms));
  box.classList.add('open');q('ddNightTitle').textContent=d.final?'FINAL NIGHT '+d.night+' TALLY':'NIGHT '+d.night+' DEFENDED!';q('ddContinue').disabled=true;q('ddContinue').textContent='TALLYING…';
- total.textContent=d.base.toLocaleString('en-IE');q('ddEnergyLabel').textContent='LASER '+d.energy+'%';q('ddDomeLabel').textContent='DOME '+d.dome+'%';q('ddSavedLabel').textContent='COWS SAVED · '+d.saved;q('ddLostLabel').textContent='COWS LOST · '+d.lost;
+ total.style.color='#f4f7fb';total.textContent=d.base.toLocaleString('en-IE');q('ddEnergyLabel').textContent='LASER '+d.energy+'%';q('ddDomeLabel').textContent='DOME '+d.dome+'%';q('ddSavedLabel').textContent='COWS SAVED · '+d.saved;q('ddLostLabel').textContent='COWS LOST · '+d.lost;
  q('ddEnergyPoints').textContent='+'+d.energy;
  q('ddDomePoints').textContent='+'+d.dome;
  q('ddSavedPoints').textContent='+'+(d.saved*25);
@@ -1003,16 +1003,16 @@ function ddStartTally(d){
   if(!points)return;const a=q(id).getBoundingClientRect(),b=total.getBoundingClientRect(),el=document.createElement('div');
   el.className='ddFly';el.style.color=color;el.textContent=(points>0?'+':'−')+Math.abs(points);el.style.left=(a.left+a.width/2-16)+'px';el.style.top=(a.top+a.height/2-12)+'px';document.body.appendChild(el);
   await sleep(35);el.style.transform='translate('+(b.left+b.width/2-a.left-a.width/2)+'px,'+(b.top+b.height/2-a.top-a.height/2)+'px) scale(.6)';el.style.opacity='0';
-  await sleep(1700);el.remove();const from=sum,to=Math.max(0,sum+points),started=performance.now(),duration=1550;
+  await sleep(280);el.remove();total.style.color=points<0?'#ff929b':'#f4f7fb';const from=sum,to=Math.max(0,sum+points),started=performance.now(),duration=620;
   await new Promise(resolve=>{function tick(now){const t=Math.min(1,(now-started)/duration),ease=1-Math.pow(1-t,3);score=Math.round(from+(to-from)*ease);total.textContent=score.toLocaleString('en-IE');hud();if(t<1)requestAnimationFrame(tick);else resolve()}requestAnimationFrame(tick)});
-  sum=to;score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.classList.add('pop');await sleep(320);total.classList.remove('pop');await sleep(340);
+  sum=to;score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.classList.add('pop');await sleep(90);total.classList.remove('pop');total.style.color='#f4f7fb';
  }
  async function run(){
-  await sleep(250);q('ddStatus').textContent='Counting laser energy';q('ddEnergyFill').style.transition='width 1s';q('ddEnergyFill').style.width=d.energy+'%';await sleep(1050);q('ddEnergyPoints').textContent='+'+d.energy;await sleep(280);await fly('ddEnergyPoints',d.energy,'#85f0a3');
-  q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width 1s';q('ddDomeFill').style.width=d.dome+'%';await sleep(1050);q('ddDomePoints').textContent='+'+d.dome;await sleep(280);await fly('ddDomePoints',d.dome,'#71dcef');
-  q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');await sleep(600)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(450);await fly('ddSavedPoints',d.saved*25,'#86eea4');
-  if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');await sleep(600)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(450);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
-  score=sum;hud();total.textContent=sum.toLocaleString('en-IE');q('ddStatus').textContent='';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE';
+  await sleep(80);q('ddStatus').textContent='Counting laser energy';q('ddEnergyFill').style.transition='width .3s';q('ddEnergyFill').style.width=d.energy+'%';await sleep(320);q('ddEnergyPoints').textContent='+'+d.energy;await sleep(40);await fly('ddEnergyPoints',d.energy,'#85f0a3');
+  q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width .3s';q('ddDomeFill').style.width=d.dome+'%';await sleep(320);q('ddDomePoints').textContent='+'+d.dome;await sleep(40);await fly('ddDomePoints',d.dome,'#71dcef');
+  q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');await sleep(140)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(80);await fly('ddSavedPoints',d.saved*25,'#86eea4');
+  if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');await sleep(140)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(80);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
+  score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.style.color='#f4f7fb';q('ddStatus').textContent='';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE';
  }
  run().catch(err=>{console.error('Night tally error',err);q('ddStatus').textContent='Tally error';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE'});
  q('ddContinue').onclick=()=>{if(q('ddContinue').disabled)return;box.classList.remove('open');if(d.final)ddFinishGameOver();else{night++;startNight()}};
