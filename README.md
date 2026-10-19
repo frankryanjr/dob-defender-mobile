@@ -1,3 +1,13 @@
+## Current production — Alpha2.70 (19 October 2026)
+
+- Approved source: [releases/Dob_Defender_Alpha2.70.html](releases/Dob_Defender_Alpha2.70.html), exact user-tested **Alpha2.70 Test 8**.
+- Production: [index.html](index.html), byte-identical to approved archive (Git blob SHA `b464c01399c78370c2ecaccba7862cc439069bed`).
+- Changes: floating hit-score popups fade correctly across dawn; gameplay top-right leaderboard button removed (end-game leaderboard retained); moon removed; cows rendered in front of dome walls; dome destruction erases stationary arch from apex down curved sides and vertical walls to ground without movement.
+- Android: user explicitly confirmed Test 8 success, specifically corrected dome destruction. Other changes retained from earlier tests; independent assistant Android testing not performed.
+- Release commit for production HTML: `7421e3f23ae138cde4a9cb585b5adc3d2f5ad634`. Deployment verification is recorded separately.
+- Production URL: https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.70
+- Note: approved file retains internal Test 8 label and historical HTML document title "Test 6"; no gameplay or label changes were made to the approved artifact.
+
 
 **Required GitHub-to-local procedure:** See **VERIFIED GITHUB-TO-LOCAL TEST BUILD PROCEDURE** in `docs/WORKFLOW.md`. Retrieve and hash-check current `main:index.html`, use the container-backed Python environment to create a complete `/mnt/data/` HTML test, and give the user a direct download link. Do **not** ask the user to download the GitHub HTML and re-upload it. A prior failed raw-HTTP download is not proof that the workflow is impossible. Never publish a test before approval.
 
