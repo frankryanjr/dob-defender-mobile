@@ -1,3 +1,13 @@
+## Alpha2.70 production record — 19 October 2026
+
+- Approved candidate: Alpha2.70 Test 8, user-confirmed successful Android visual test for dome destruction.
+- Archived exact candidate at `releases/Dob_Defender_Alpha2.70.html`, Git blob SHA `b464c01399c78370c2ecaccba7862cc439069bed`.
+- Updated production `main:index.html` from verified archive without modifying game content; production HTML commit `7421e3f23ae138cde4a9cb585b5adc3d2f5ad634`.
+- Changes: score-popup fade at dawn, moon removal, in-play leaderboard removal, cows-over-dome layering, stationary apex-to-ground dome destruction erasure.
+- Approved HTML retains original Test 8 visible label and stale document title Test 6 to preserve exact tested bytes.
+- GitHub commit is not proof of Pages deployment; verify Actions and live URL separately. User has not yet confirmed production URL on Android.
+- Historical instructions below that recommend starting from a numbered archive or automatically publishing are superseded by `docs/WORKFLOW.md`.
+
 # Alpha2.69 release implementation and verification — 18 October 2026
 
 **User verification (18 October 2026):** User confirmed Alpha2.69 production game worked on their device after successful GitHub Pages deployment. This is user-reported Android/device validation, not an assistant-run device test.
