@@ -1,0 +1,27 @@
+name: HTML artifact transfer experiment
+on:
+  push:
+    branches:
+      - experiment/html-artifact-transfer-20261019
+    paths:
+      - .github/workflows/html-artifact-transfer-experiment.yml
+  workflow_dispatch:
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify approved production source
+        shell: bash
+        run: |
+          test -s index.html
+          grep -qi '</html>' index.html
+          git hash-object index.html
+          cp index.html Dob_Defender_Production_Transfer_Test.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dob-defender-production-transfer-test
+          path: Dob_Defender_Production_Transfer_Test.html
+          retention-days: 1
