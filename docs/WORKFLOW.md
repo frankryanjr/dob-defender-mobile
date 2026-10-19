@@ -23,6 +23,19 @@ Development can involve **any aspect of Dob Defender**: sound effects, music, ga
 4. Deliver complete standalone downloadable HTML candidates, iterate through user testing, and distinguish test candidates from approved releases.
 5. **Entering development mode is never production approval.** Publishing requires separate, explicit authorization for the exact tested candidate under Stage B. The user can switch between different development areas in the same chat without re-onboarding unless repository state must be refreshed.
 
+
+## VERIFIED GITHUB-TO-LOCAL TEST BUILD PROCEDURE — MANDATORY
+
+**This procedure exists because a previous assistant incorrectly claimed it could not turn GitHub source into a downloadable local HTML test. Do not repeat that claim without attempting the actual tools.**
+
+1. Fetch `main:index.html` with the GitHub connector `fetch_file` and retrieve its **full** `result.content` as UTF-8 text, plus `result.sha`. Check that it is complete (including closing `</html>`), and verify the downloaded text against the Git blob SHA when possible. Read README, this workflow and release records first.
+2. **Create the local HTML file directly using a container-backed Python execution tool** (for example `python_user_visible.exec` or `python.exec`, or the container tool). In the successful Alpha2.69 Test 19 session, `/mnt/data/index.html` was available in that runtime, its 343,575-character content was validated with `git hash-object` against the GitHub blob SHA `1a5e85ba0d1f9d74565249a657d40c39bd670f11`, and Python wrote `/mnt/data/Dob_Defender_Alpha2.69_Test19.html`. **These exact hashes and lengths are historical examples, not expected values for later versions.**
+3. **Before declaring a transfer blocker**, inspect `/mnt/data` in the Python/container runtime for an already-mounted copy of the *current* fetched source, then check its Git blob SHA against the current GitHub `index.html`. If the source is not mounted, use available supported file-transfer/mount mechanisms to bring the fetched GitHub content into the Python/container environment. Do not use an old HTML attachment, archived release or mirror as a substitute. If transfer truly fails, report the specific attempted methods and errors; never say it is impossible merely because one HTTP raw-GitHub request fails.
+4. Make minimal edits to that **verified production source**; write a uniquely named **complete standalone test HTML** to `/mnt/data`, run available JavaScript syntax checks, confirm the output file exists and provide the `sandbox:/mnt/data/...` download link. The user must not be asked to download production from GitHub and upload it back into ChatGPT.
+5. This is **Stage A only**. Do not commit the test or change production until explicit user approval. After approval, use §2A direct transfer to the numbered release archive, verify the archive, then publish and document according to Stage B.
+
+**Operational lesson:** A failed connector-to-container transfer attempt does not establish that the workflow is impossible. Check runtime-mounted files and verify hashes before asking the user to do manual transfers.
+
 ## 2. Non-negotiable two-stage delivery
 
 ### STAGE A — DEVELOPMENT / USER TESTING (DEFAULT)
