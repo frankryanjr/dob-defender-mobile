@@ -1,3 +1,14 @@
+## Alpha2.70 — 19 October 2026 (approved Test 8)
+
+- Fixed floating hit-score popups freezing at dawn by allowing fade progression through night-end and clearing remaining popups at tally.
+- Removed the gameplay HUD leaderboard button; final-results leaderboard access remains.
+- Removed the moon from the sky.
+- Changed rendering order so cows appear in front of the dome walls.
+- Corrected zero-integrity dome animation: stationary outline is erased from apex down curved sides and then vertical walls to ground, with no whole-dome translation, rotation or shrinking. Iterated Tests 4–7; user confirmed Test 8 succeeded on Android.
+- Archived exact approved Test 8 HTML at `releases/Dob_Defender_Alpha2.70.html`; root `index.html` has identical Git blob SHA `b464c01399c78370c2ecaccba7862cc439069bed`.
+- Production HTML commit `7421e3f23ae138cde4a9cb585b5adc3d2f5ad634`; independent Android test by assistant not performed. Deployment verification recorded separately.
+- Approved file intentionally retains Test 8 visible label and an older HTML title "Test 6"; no untested label changes applied.
+
 # Alpha2.69 — Night-end flow, final scores and space junk (18 October 2026)
 
 **Approved candidate:** Alpha2.69 Test 18. **Permanent approved HTML:** `releases/Dob_Defender_Alpha2.69.html`. **Production:** `main:index.html`; production differs from the approved archive only by version-label text. Previous approved version Alpha2.68 remains archived.
