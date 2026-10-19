@@ -1,3 +1,12 @@
+## Alpha2.70 — 19 October 2026 — approved Test 8
+
+- Source of truth: branch `main` root `index.html`. Immutable approved archive: `releases/Dob_Defender_Alpha2.70.html`. Both verified identical Git blob `b464c01399c78370c2ecaccba7862cc439069bed`.
+- User approved Test 8 after confirming the stationary dome erasure animation works on Android. Earlier Tests 4–6 wrongly moved or shrank the dome; Test 7 lacked vertical walls; Test 8 restores the walls and erases the fixed arch from apex to ground.
+- Other retained changes: hit score popups no longer freeze at dawn; moon removed; top-right in-play leaderboard button removed; cows drawn over dome walls.
+- Production HTML commit `7421e3f23ae138cde4a9cb585b5adc3d2f5ad634`. Test 8 archive intentionally retains its original internal labels, including an older HTML title.
+- Preserve approved telescope, title art, controls, collisions, leaderboard access on final results and all unaffected mechanics.
+- User Android testing: Test 8 dome animation passed. No assistant-run Android end-to-end test. Check GitHub Pages deployment and ask user to verify the new production URL.
+
 # Alpha2.69 production handover — 18 October 2026
 
 **User verification (18 October 2026):** User confirmed Alpha2.69 production game worked on their device after successful GitHub Pages deployment. This is user-reported Android/device validation, not an assistant-run device test.
