@@ -1,3 +1,13 @@
+## Alpha2.74 — 23 October 2026 — approved Sound Test 5
+
+- **Approved candidate:** `Dob_Defender_Alpha2.73_Sound_Test_5.html`; user explicitly requested production.
+- **Added:** Three self-contained edited WAV sound effects: laser firing, comet destruction, ground impact.
+- **Removed:** Meteor destruction and asteroid destruction sound effects (visual/gameplay effects retained).
+- **Preserved:** Alpha2.73 gameplay, approved telescope/start-screen artwork, controls, scoring, aircraft warnings, leaderboard and night progression.
+- **Archive:** `releases/Dob_Defender_Alpha2.74.html` (exact approved candidate, blob `e008527ad54663e5b0e063b19653e93450e5f297`).
+- **Production:** `main:index.html` (commit `585712ed4981752f68dd88cab4f2997389647654`, blob `e59a59f3a30881d8466a71f0e336eb4a6a459654`). Only version/title labels changed to `Alpha2.74`.
+- **Validation:** User approved candidate; independent assistant Android and live Pages checks pending.
+
 ## Alpha2.73 — 19 October 2026 — approved Test 6
 
 - **User production approval:** “Push to prod” for Alpha2.73 Test 6 after Android screenshot feedback and the final full-width CONTINUE button change. Android visual testing of the prior warning layout was demonstrated; independent device confirmation of Test 6 and live production remains pending.
