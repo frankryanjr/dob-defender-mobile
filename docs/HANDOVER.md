@@ -1,3 +1,12 @@
+## Alpha2.74 — 23 October 2026 — sound release handover
+
+- **Approved test:** `Dob_Defender_Alpha2.73_Sound_Test_5.html`, explicitly approved by user for production.
+- **Immutable archive:** `releases/Dob_Defender_Alpha2.74.html`, SHA `e008527ad54663e5b0e063b19653e93450e5f297`.
+- **Production:** `main:index.html`, commit `585712ed4981752f68dd88cab4f2997389647654`, blob `e59a59f3a30881d8466a71f0e336eb4a6a459654`.
+- **Audio:** Embedded edited recordings: laser fire, comet destroyed, ground impact. No meteor-destroyed or asteroid-destroyed audio. Preserve approved Alpha2.73 gameplay, telescope, controls, art, leaderboard, scoring and collisions.
+- **Only differences from exact tested archive:** title and `DD_GAME_VERSION` set to clean `Alpha2.74`.
+- **Testing:** User approved test candidate; independent assistant Android test not performed. Live deployment and production Android verification to be recorded separately.
+
 ## Alpha2.73 — 19 October 2026 — approved Test 6
 
 - **User production approval:** “Push to prod” for Alpha2.73 Test 6 after Android screenshot feedback and the final full-width CONTINUE button change. Android visual testing of the prior warning layout was demonstrated; independent device confirmation of Test 6 and live production remains pending.
