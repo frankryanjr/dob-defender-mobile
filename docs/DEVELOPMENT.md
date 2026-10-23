@@ -1,3 +1,11 @@
+## Alpha2.74 release — 23 October 2026
+
+- User approved `Dob_Defender_Alpha2.73_Sound_Test_5.html` for production.
+- Verified exact approved candidate length 1,171,886 Unicode characters and FNV-1a text checksum `f5fb4b44` before archival. Git archive blob `e008527ad54663e5b0e063b19653e93450e5f297` matches local `git hash-object`.
+- Published production from approved candidate with exactly two label changes (HTML title and `DD_GAME_VERSION`), commit `585712ed4981752f68dd88cab4f2997389647654`.
+- Audio: laser fire, comet destroyed and ground impact present; meteor and asteroid destruction audio removed.
+- GitHub Pages deployment verification and user Android production confirmation tracked separately; neither implied by a successful commit.
+
 ## Alpha2.73 — 19 October 2026 — approved Test 6
 
 - **User production approval:** “Push to prod” for Alpha2.73 Test 6 after Android screenshot feedback and the final full-width CONTINUE button change. Android visual testing of the prior warning layout was demonstrated; independent device confirmation of Test 6 and live production remains pending.
