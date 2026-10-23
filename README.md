@@ -1,3 +1,13 @@
+## Alpha2.74 — 23 October 2026 — approved Sound Test 5
+
+- **User approval:** “Ok push to prod as it is now” for complete standalone `Dob_Defender_Alpha2.73_Sound_Test_5.html`.
+- **Exact approved archive:** `releases/Dob_Defender_Alpha2.74.html`, Git blob `e008527ad54663e5b0e063b19653e93450e5f297`. Production: `main:index.html`, initial release commit `585712ed4981752f68dd88cab4f2997389647654`, blob `e59a59f3a30881d8466a71f0e336eb4a6a459654`.
+- **Sound:** Embedded edited Freesound recordings for laser firing, comet destruction and ground impact. Meteor-destroyed and asteroid-destroyed sounds are removed; corresponding gameplay and visual effects remain unchanged.
+- **Preserved:** Approved Alpha2.73 gameplay, artwork, controls, scoring and leaderboard.
+- **Production-label-only differences:** document title and `DD_GAME_VERSION` changed from `Alpha2.73 Sound Test 5` to `Alpha2.74`. Archived tested candidate remains unchanged.
+- **Testing:** User approved Sound Test 5; assistant did not independently perform Android device testing. GitHub Pages and CI deployment verification recorded separately.
+- **Production link:** https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.74
+
 ## Alpha2.73 — 19 October 2026 — approved Test 6
 
 - **User production approval:** “Push to prod” for Alpha2.73 Test 6 after Android screenshot feedback and the final full-width CONTINUE button change. Android visual testing of the prior warning layout was demonstrated; independent device confirmation of Test 6 and live production remains pending.
