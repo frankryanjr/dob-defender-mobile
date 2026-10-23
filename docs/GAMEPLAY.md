@@ -1,3 +1,11 @@
+## Alpha2.74 audio behaviour — 23 October 2026
+
+- Laser firing plays an embedded edited WAV effect.
+- Comet destruction plays an embedded edited WAV effect.
+- Ground impacts play an embedded edited WAV effect.
+- Meteor destruction and asteroid destruction have **no destruction sound**. Existing destruction visuals, collisions, scoring and damage remain unchanged.
+- Embedded audio works without separate sound downloads; optional online game features may still require connectivity.
+
 ## Alpha2.73 — 19 October 2026 — approved Test 6
 
 - **User production approval:** “Push to prod” for Alpha2.73 Test 6 after Android screenshot feedback and the final full-width CONTINUE button change. Android visual testing of the prior warning layout was demonstrated; independent device confirmation of Test 6 and live production remains pending.
