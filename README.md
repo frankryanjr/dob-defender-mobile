@@ -1,3 +1,13 @@
+### Alpha2.75 process lessons — preserve accumulated guidance
+
+This README incorporates lessons from multiple earlier releases; **do not replace, shorten or discard historical instructions** when adding a new lesson. `docs/WORKFLOW.md` remains the authoritative, locked development and release procedure.
+
+- For Android testing, provide the complete standalone HTML as required by the workflow. If the user explicitly authorizes GitHub-hosted tests, also provide a versioned `tests/` Pages URL for Chrome/Incognito testing; a Pages link does not replace the downloadable HTML.
+- Large HTML transfers must be verified against the approved source's **Git blob SHA**. A successful write or plausible file length is insufficient.
+- Before touching production `main:index.html`, fetch the permanent release archive back from GitHub and verify its blob SHA exactly matches the approved test. On any mismatch, **stop, correct, and re-verify**.
+- Verify deployment separately from GitHub commit success; record user Android confirmation separately from automated checks.
+- Alpha2.75's first archive transfer was incomplete and was corrected before production. See `docs/PROJECT_HISTORY.md` and `docs/WORKFLOW.md` for the recovery procedure.
+
 ## Alpha2.75 — 24 October 2026 — approved Test 5
 
 - **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
