@@ -1,3 +1,12 @@
+## Alpha2.75 — 24 October 2026 — approved Test 5
+
+- **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
+- **Immutable approved archive:** `releases/Dob_Defender_Alpha2.75.html` (blob `51a1a99c514b932270a4afd76d13c5192bd24ed8`), identical to tested `tests/Dob_Defender_Alpha2.75_Test_5.html`.
+- **Production:** `main:index.html`, release commit `de1fd741b9096dffef6fa59448df96aa9ccf749c`, blob `c101c9609bef5b606dc2c61957a3aca587c96e78`. Differences from approved archive are **only** the HTML document title and `DD_GAME_VERSION`, removing “Test 5”.
+- **Changes:** New-player callsign gate with generated callsign or 3–18-character custom entry, DEFEND! starts Night 1; returning players with saved identity bypass registration. One looping background track `DobDefGame2.mp3`, 20% volume, first-interaction fallback for autoplay restrictions, pause/resume integration. Existing approved telescope, title artwork, gameplay, controls, scoring, sounds and leaderboard preserved.
+- **Testing:** JavaScript syntax checked for candidate; user confirmed Test 5 working in Chrome Incognito. Independent Android end-to-end and production live-page verification pending.
+- **Production URL:** https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.75
+
 ## Alpha2.74 — 23 October 2026 — approved Sound Test 5
 
 - **User approval:** “Ok push to prod as it is now” for complete standalone `Dob_Defender_Alpha2.73_Sound_Test_5.html`.
