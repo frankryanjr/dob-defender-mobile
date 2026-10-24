@@ -1,3 +1,20 @@
+## Proven large-file GitHub-to-local transfer — 24 October 2026
+
+**Use this procedure when GitHub `fetch_file` returns empty or truncated content for a large standalone game HTML.** This was successfully used to recover the complete approved Alpha2.75 production baseline for the Alpha2.76 Sound Test 1. It supplements the mandatory rules in [docs/WORKFLOW.md](docs/WORKFLOW.md); that file remains authoritative.
+
+1. Complete GitHub onboarding. Fetch `main:index.html` metadata/SHA and the approved release record. If `fetch_file` gives no complete HTML, use the GitHub connector's `fetch_blob` with the exact production blob SHA. Alpha2.75's `fetch_blob` returned complete source where `fetch_file` did not.
+2. Convert the **entire** returned UTF-8 source to bytes, then Base64 in the connector-capable execution environment. Do not encode JavaScript UTF-16 code units as bytes or omit non-ASCII characters.
+3. Transfer the Base64 in **ordered, numbered segments** to temporary Google Docs using `batch_update_document` / `insertText`. Approximately 12,000 Base64 characters per insertion worked in this session. Multiple insertions may be grouped where supported, but large batches can fail. When a document reaches its practical size limit, create a second document and continue at the exact next offset; do not restart, skip or overlap segments.
+4. Export each temporary Google Doc as **plain text** through the Google Drive connector, making the exports available in the local/container runtime. Concatenate exported Base64 payloads in original order, removing only exporter-added document formatting/newlines, **not** payload characters. Check the expected Base64 length and segment boundaries before decoding.
+5. Base64-decode into a local `.html` file under `/mnt/data`. Require a complete HTML ending, then run `git hash-object <local-file>` and compare the resulting **Git blob SHA exactly** with the production source blob SHA. **Stop if it differs.** Preserve this verified source unchanged and develop in a separately named working copy.
+6. Deliver a complete standalone downloadable HTML test, run applicable syntax checks and follow the workflow's approval gate. **A documentation-only update does not authorize publishing a game test or changing production.** Clean up temporary transfer documents where possible.
+
+**Verified example (historical, not future expected values):** Alpha2.75 production `main:index.html` Git blob `c101c9609bef5b606dc2c61957a3aca587c96e78`; UTF-8 source **1,178,955 bytes**; Base64 **1,571,940 characters**; two temporary Google Docs; reconstructed local file's Git blob SHA matched **exactly**. The approved archive and production HTML are not interchangeable: always use the verified current `main:index.html` as the next development baseline.
+
+**Failure handling:** A successful connector response or matching length alone is not proof. If any document insert fails, identify the last confirmed successful offset and resume without duplication; if export introduces unexpected characters or SHA mismatches, rebuild/retransfer and verify rather than editing an untrusted file. Never fall back to an old uploaded game file.
+
+---
+
 ### Alpha2.75 process lessons — preserve accumulated guidance
 
 This README incorporates lessons from multiple earlier releases; **do not replace, shorten or discard historical instructions** when adding a new lesson. `docs/WORKFLOW.md` remains the authoritative, locked development and release procedure.
