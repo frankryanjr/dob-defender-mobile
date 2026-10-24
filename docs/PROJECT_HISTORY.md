@@ -1,3 +1,11 @@
+## 24 October 2026 — Alpha2.75 release-process incident and recovery
+
+- Chrome Incognito testing was used after downloadable HTML proved inconvenient on Android; the user explicitly authorized uploading test builds to GitHub `tests/`. This is an exception to the default standalone-HTML test delivery, not a new default permission to publish tests.
+- GitHub access from the container was blocked by DNS resolution, so the connected GitHub API handled repository transfers. The approximately 1.18 MB game required integrity checks.
+- During production preparation, the first `releases/Dob_Defender_Alpha2.75.html` write contained incomplete content (311 characters). The archive was corrected using the full approved `tests/Dob_Defender_Alpha2.75_Test_5.html` blob, and the archive SHA was verified as `51a1a99c514b932270a4afd76d13c5192bd24ed8` before updating `main:index.html`.
+- Production was created from that verified archive with only title/version-label substitutions; user subsequently confirmed the production URL worked. No gameplay changes were made during promotion.
+- Learning: a successful GitHub write does not prove file integrity, and a commit does not prove GitHub Pages deployment. Both must be checked independently. `docs/WORKFLOW.md` now states the hard archive verification gate explicitly.
+
 ## Alpha2.75 — 24 October 2026 — approved Test 5
 
 - **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
