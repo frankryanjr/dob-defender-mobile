@@ -1,3 +1,7 @@
+## Alpha2.75 — Callsign and music
+
+First-time players choose a generated or custom 3–18-character callsign; DEFEND! registers and starts Night 1. Returning players with saved identity use the normal start screen. The game uses one continuous looping background music track, `DobDefGame2.mp3`, at 20% volume; autoplay is attempted on load, with a first-tap fallback, and pause/resume follows the game. Gameplay and scoring otherwise remain Alpha2.74.
+
 ## Alpha2.74 audio behaviour — 23 October 2026
 
 - Laser firing plays an embedded edited WAV effect.
