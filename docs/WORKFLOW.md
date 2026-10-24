@@ -2,6 +2,16 @@
 
 **Status: LOCKED.** This document is the highest-priority project operating procedure. It governs all new development chats. Read it before any code changes or file delivery. Repository: https://github.com/frankryanjr/dob-defender-mobile
 
+## Alpha2.75 lessons — mandatory transfer and Android test safeguards (24 October 2026)
+
+These additions supplement, rather than replace, the established two-stage workflow and its accumulated lessons.
+
+1. **Android delivery:** Always provide the complete downloadable standalone HTML in ChatGPT. If the user explicitly authorizes a repository-hosted test, upload the exact candidate under `tests/`, confirm its Git blob SHA matches the local approved candidate, and give its GitHub Pages URL for Chrome Incognito testing. Do not infer that Pages is live from the commit alone; obtain browser confirmation or independent live retrieval. Keep production untouched throughout testing.
+2. **Large-file transfer:** Treat the transfer as untrusted until verified. A successful API response, filename, or plausible text length is not enough. Compare the fetched Git blob SHA of the destination with the approved candidate's SHA; where possible verify local `git hash-object` as well. If source content is unexpectedly empty, truncated, or differs, stop rather than committing or publishing it.
+3. **Hard archive gate before production:** Archive the exact approved candidate, fetch it back, and require the archive Git blob SHA to match the approved test Git blob SHA **exactly**. On mismatch, do not update `main:index.html`; repair the archive and repeat verification. This is a release-blocking requirement.
+4. **Production integrity:** Generate production solely from the verified archive, changing only documented version labels. Check the diff for only those substitutions and fetch production back to verify its resulting SHA. Record the production commit separately from Pages deployment status and user device testing.
+5. **Failure precedent:** During Alpha2.75, an initial archive transfer wrote incomplete content. It was detected, replaced with the exact approved Test 5 file, and its blob SHA verified before the production update. This illustrates why the archive gate is mandatory.
+
 ## 1. Mandatory new-chat startup
 
 When told "Go to GitHub and read the instructions", immediately:
