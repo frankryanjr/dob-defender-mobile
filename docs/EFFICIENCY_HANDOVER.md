@@ -1,3 +1,11 @@
+## Browser test script committed — 25 October 2026
+
+Added `tools/browser_smoke.py` (commit `e32d3a26bc744e977950a9d2680bc81ea6909655`): SHA-gated headless Chromium mobile smoke tests for splash/callsign, mocked registration, Night 1, aim drag, fire energy and pause/resume. Tested equivalent local script on exact Alpha2.76 production source, passing all assertions, with deliberate SHA-tamper rejection. The repository version has **not yet been independently rerun after checkout**; do not claim this gate passed.
+
+Run `python3 tools/browser_smoke.py VERIFIED_PRODUCTION.html --sha 68da879b0120364df1128848e115200deec636b6` with Python Playwright and Chromium installed. Mocked leaderboard does not establish live network service health. No Android or collisions/scoring/audio/pixel-image tests verified.
+
+**First unverified task:** checkout/retrieve committed test script and run it against SHA-verified current production; add regression coverage for collisions/scoring and audiovisual states while retaining test limitations. No game or production release changes.
+
 ## Browser regression checkpoint, 25 October 2026
 
 Exact Alpha2.76 production SHA verified. With mocked registration, Chromium mobile smoke passed start screen, callsign gate, registration, Night 1, slider drag (50% to 74.4444%), shot (laser energy 100% to 98%), and pause/resume. Firing during pause did not consume energy. No captured JavaScript page exceptions. Tampering with a temporary HTML copy correctly caused the test harness to reject an invalid source SHA.
