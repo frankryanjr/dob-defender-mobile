@@ -42,3 +42,11 @@ Additional issues will be appended as reported.
 - **Fairness/interaction with Issue 4:** proposed 3 unique cows in Night 1 and 4 per subsequent night, with at most 3 simultaneously visible. The scheduled UFO should have an eligible cow to target, should not retry indefinitely or count the same cow twice, and should provide the established rescue opportunity before escape.
 - **Historical behaviour to replace if approved:** harmless flybys on early nights and an originally guaranteed Night 3 abduction, with probabilistic earlier attempts and later caps. Audit the current Alpha2.77 runtime scheduling before altering the event logic.
 - **Status:** Design proposal recorded; no game changes and no production approval. First verification is current production cow/UFO spawn and encounter scheduler audit before a gameplay test candidate.
+
+## 6. User refinement — four cows from Night 1 and simultaneous UFO threats (25 Oct 2026)
+
+- **Supersedes the earlier 3-cow Night 1 proposal:** fixed **4 unique cows from Night 1 onward** for equivalent scoring opportunity each night; up to 4 cows may need simultaneous presence/eligibility, so reassess the older 3-on-screen limit rather than silently enforcing it.
+- **Night 1:** guarantee one abduction attempt for immediate engagement.
+- **Later stages:** permit **two UFOs to attempt abductions simultaneously**, provided each targets a **different cow**. Do not permit both UFOs to reserve or abduct the same animal.
+- Scale difficulty with night progression; exact threshold for two concurrent UFOs and counts per night require gameplay balancing. Respect the distinct cow outcomes, fair rescue window, and once-per-cow tally rules from Issues 1–5.
+- **State:** accepted direction for next gameplay test design, **not implemented**, not a release approval. Inspect live Alpha2.77 spawn limit and UFO target reservation/scheduling before editing; preserve other approved behavior.
