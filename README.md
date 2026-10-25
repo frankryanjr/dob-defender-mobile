@@ -184,3 +184,7 @@ After **each approved saved milestone**:
 GPT-6 Instant: copy, labels, colours and docs. GPT-6 Medium: ordinary gameplay and controls. GPT-6 High: telescope geometry, bearings, difficult bugs or refactors. Extra High only for exceptional complexity. Model selection is controlled by the user.
 
 Copyright © 2026 Frank Ryan Jr. All rights reserved. See [LICENSING.md](LICENSING.md).
+
+## Alpha2.76 production release — 25 October 2026
+
+Current approved production: **Alpha2.76**, approved from **Alpha2.76 Sound Test 25**. Production source: `main:index.html`; exact approved test archive: `releases/Dob_Defender_Alpha2.76.html` (Git blob `52352378f7fe288c52351d73b0fd4c74abc3b1aa`). Production is the archive with version-label-only changes (Git blob `68da879b0120364df1128848e115200deec636b6`). Adds and refines standalone embedded sound effects for meteors, comets, asteroids, aircraft, UFOs, warnings, 3-2-1-GO countdown and three-note morning chime; adds the compact amber-red SAFETY WARNING popup and clears transient lasers/debris at dawn. Gameplay and approved artwork preserved. Production commit: `521e842f65284b4663cbb7430ce80b3fd9dc229b`. Deployment and Android verification are tracked separately.
