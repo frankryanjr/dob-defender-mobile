@@ -997,7 +997,8 @@ function ddStopAbductionSound(){
  try{const now=ddAudioContext.currentTime;ddAbductionGain.gain.cancelScheduledValues(now);ddAbductionGain.gain.setTargetAtTime(0,now,.018);ddAbductionSource.stop(now+.12)}catch(e){}
  ddAbductionSource=null;ddAbductionGain=null;
 }
-function ddStartAbductionSound(){ if(ddAbductionSource)return;
+function ddStartAbductionSound(){
+ if(ddAbductionSource)return;
  if(!ddAudioContext||!ddSoundBuffers.DD_UFO_Abducting_Cow){void ddPrepareSounds();return}
  try{const source=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain();source.buffer=ddSoundBuffers.DD_UFO_Abducting_Cow;gain.gain.value=1.0;source.connect(gain);gain.connect(ddAudioContext.destination);source.onended=()=>{if(ddAbductionSource===source){ddAbductionSource=null;ddAbductionGain=null}};source.start();ddAbductionSource=source;ddAbductionGain=gain}catch(e){console.warn('Abduction sound:',e)}
 }
