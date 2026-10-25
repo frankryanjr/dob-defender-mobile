@@ -1,3 +1,11 @@
+## Latest automated test checkpoint — 25 October 2026
+
+Committed `tools/browser_regression_extended.py` (commit `c03b5a23f948ed4b0fbae4d53ddf80058747435c`). Local extended Chromium scoring, collision, dome-damage and rendering checks passed again using verified Alpha2.76 source SHA `68da879b0120364df1128848e115200deec636b6`. Tampered SHA test rejected. Test collision inputs were synthetic and registration mocked.
+
+**Important:** Independent execution of the exact committed extended script is still unverified because local DNS could not resolve the GitHub raw-file host. External music loading/decode/playback also remains unverified; browser audio `readyState=0`. No production game files changed.
+
+**First unverified task:** independently rerun the checked-in script against verified production source, then verify external audio and live registration in an access-permitted browser. Device-only testing requires user participation later. No production release without approval.
+
 ## Dome impact browser checkpoint — 25 October 2026
 
 Against SHA-verified production Alpha2.76, temporary in-memory Chromium instrumentation exercised impact handling. A synthetic mandatory meteor changed hp from 1 to 0 and reduced shield by 20. Swept projectile collision, regular/armored asteroid scoring, poster image decode and canvas painting passed. Zero page exceptions. Music element stays at readyState 0, so sound playback remains unverified. No game HTML was edited or published.
