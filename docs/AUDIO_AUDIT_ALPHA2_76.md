@@ -1,3 +1,5 @@
+**Potential size reduction (unverified cleanup):** The 15 candidate keys contain approximately **1,349,658 characters of encoded audio data**, about **1.35 MB** of the 3.78 MB standalone HTML. This is a static upper-bound estimate, not a validated removable payload; removal requires runtime trace, integrity checks and gameplay testing.
+
 # Alpha2.76 production audio reference audit — 25 October 2026
 
 **Scope:** Read-only static audit of the *exact* production GitHub blob `68da879b0120364df1128848e115200deec636b6` (`main:index.html`). This is source-code evidence, not a report of completed audio playback or a deletion approval. No game code was modified.
