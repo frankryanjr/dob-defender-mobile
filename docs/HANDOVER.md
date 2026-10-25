@@ -1,3 +1,10 @@
+## Alpha2.79 Counter & Audio Test 5 — local unapproved checkpoint (25 October 2026)
+
+- Built local standalone `/mnt/data/Dob_Defender_Alpha2.79_Counter_Audio_Test_5.html` from local Cow Splat Test 4, Git blob SHA `1df2949cfc0a9c0f6e22f29e881c86a764086856`, 3,781,988 bytes. **No production changes**; production remains Alpha2.78 `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`.
+- User requested louder music during night tally and correction of start-screen worldwide counter label overflow. Scoped changes: tally music volume .06 -> .09 (normal .20 on Continue unchanged); smaller label font, remove letter spacing, constrain width/overflow inside badge. START centered and version footer preserved. Four cow, dual UFO, cow splat and score logic from Test 4 preserved.
+- Four inline JavaScript blocks passed Node syntax; HTML closing tag and file Git blob SHA checked. Visual layout and Android/music listening not yet tested.
+- **First unverified step:** user tests Test 5 on Android for label fit at actual device width and tally music level; verify no night-end tally, four cow, dual-UFO or cow splat regressions. Adjust test candidate if needed. Explicit approval required before production release.
+
 ## Alpha2.79 Cow Splat Test 4 — local unapproved checkpoint (25 October 2026)
 
 - User Android screenshot of Test 3 on Night 7 showed persistent red ovals at cow death positions. Exact Test 3 source `drawCow` uses `Math.min(1,c.timer/.45)` and continues drawing after the timer falls below zero. Invalid negative canvas alpha is ignored, leaving prior draw alpha and an indefinitely rendered mark. Cow state remains splat to preserve tally census; no code removal is needed.
