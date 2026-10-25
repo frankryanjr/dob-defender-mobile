@@ -1,3 +1,7 @@
+## Alpha2.78 production checkpoint — 25 October 2026
+
+User-approved integrated Tally Audio Test 2 promoted to production after SHA hard gate. Exact immutable GitHub archive `releases/Dob_Defender_Alpha2.78.html` SHA `168c505247fa450a64824d6a9c706b3d82aef3ef` matched local user-tested file; label-only production `main:index.html` SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`, commit `7db1c86f8c0df0850cf88e367876585f8342e0d2`. Pending: independent GitHub Actions / Pages live served version and Android production confirmation; no gameplay scoring changes made. First unverified task: confirm Pages deployment and live-served version, then return to `docs/OPEN_FIXES.md` cow scoring/difficulty work under a new test candidate.
+
 ## Alpha2.77 release verification — 25 Oct 2026
 
 Latest GitHub Actions on final documentation commit `e660845f3b048f5db4bad946dffc31c6967c9d3f`: `pages build and deployment` run `40184435539` **completed success**; `JavaScript syntax check` run `40184435367` **completed success**. Final committed production `index.html` Git blob `ae484817ab23bb3895dca9806f957c2688827b1e`, original release commit `6d732ec905915f0e997c442317a335c7f6759f1c`. Independent HTTP retrieval of live Pages URL failed in current browsing environment; do not state live HTML inspected. **First unverified task:** actual device open `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.77` and confirm clean version/audio; if discrepancies inspect Pages cache and fetch externally.
