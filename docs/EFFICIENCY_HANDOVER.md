@@ -1,3 +1,11 @@
+## Continued regression testing — 25 October 2026
+
+- Continued without requiring routine user confirmation, as instructed. Verified baseline unchanged (`index.html` Git SHA `68da879b0120364df1128848e115200deec636b6`).
+- Headless Chromium test-only **in-memory** exposure of private `hit` function (never saved as game source) passed deterministic hit/scoring cases: meteor +10, comet +5, satellite +5, ordinary asteroid +10, all with `hp=0` and bullet `t=0`. Armoured asteroid with hp 3 yielded +5/hp 2; with hp 2 yielded +5/hp 1. Test harness was fixed to avoid JavaScript `Array.map` supplying the index as second `hp` argument; rerun passed.
+- One start-poster image fully decoded in Chromium (`complete`, `naturalWidth>0`), zero broken HTML images, canvas 390x844 fully painted, zero captured JS exceptions. Audio element is present, configured 20% volume/looping, but external music source remained `readyState=0` in restricted sandbox: music decode/playback **not** verified.
+- **Limitations:** private `hit` calls exercise damage/score handler, not real bullet/enemy collision geometry or spawn timing. Pixel fill and image decode do not prove artistic correctness. External MP3 and actual mobile audio unverified. All mocked registration results exclude live Supabase.
+- **First unverified task:** implement repeatable safe in-memory instrumentation tests for *actual swept collision path* and impact/dome damage; verify available asset and sound decode/network paths; commit revised test harness and independently execute committed version. Browser/Android/audio and live leaderboard limitations must remain explicit. No game release or production edits.
+
 ## Scoring and media regression checkpoint — 25 October 2026
 
 - SHA-verified production input: `main:index.html` 3,775,528 bytes, Git SHA `68da879b0120364df1128848e115200deec636b6`. Reused exact verified local HTML; production file was never edited.
