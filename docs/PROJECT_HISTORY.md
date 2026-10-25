@@ -127,3 +127,7 @@
 - [WORKFLOW.md](WORKFLOW.md) — mandatory development and release procedure
 - [GitHub commit history](https://github.com/frankryanjr/dob-defender-mobile/commits/main/) — repository-level change audit
 - [Archived releases](../releases/) — retained numbered game files
+
+## 25 October 2026 — Alpha2.76 release
+
+User explicitly approved production release of **Sound Test 25**. Archive: `releases/Dob_Defender_Alpha2.76.html`, exact candidate blob SHA `52352378f7fe288c52351d73b0fd4c74abc3b1aa`. Initial archive transfer had a missing newline at a range boundary; it was repaired and verified against the candidate SHA **before** production was changed. Production root `index.html` blob `68da879b0120364df1128848e115200deec636b6`, commit `521e842f65284b4663cbb7430ce80b3fd9dc229b`. Only release labels/comment status differ. Changes: comprehensive game audio additions and tuning, airplane propeller and cabin chime, amber-red SAFETY WARNING modal, four-stage countdown 3/2/1/GO, gentle three-note dawn chime, and cleanup of lingering projectiles/debris on dawn. Gameplay and locked artwork retained. JavaScript syntax checked; independent live deployment and Android confirmation pending verification.
