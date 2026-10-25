@@ -1,3 +1,12 @@
+## Alpha2.77 — 25 October 2026 — Production audio mix
+
+- **Approved:** User confirmed Audio Mix Test 3 sounded good and explicitly requested production publication.
+- **Immutable approved archive:** `releases/Dob_Defender_Alpha2.77.html`, exact Test 3 HTML Git blob `0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9` (3,776,589 bytes).
+- **Production:** `main:index.html` Git blob `ae484817ab23bb3895dca9806f957c2688827b1e`, released in commit `6d732ec905915f0e997c442317a335c7f6759f1c`.
+- **Changes:** User-approved 31-clip Audio Mix Test 1 balance with Test 3 refinements: `DD_Meteor_Hit` audition/mix gain **0.60** and `DD_Slew_Light` **0.32**, external background music remains **0.20**. 46 embedded audio clips retained; 15 potential-unused sound assets intentionally **not removed**. No changes requested to gameplay, telescope artwork, scoring, leaderboard or enemy mechanics.
+- **Release-label-only promotion:** HTML `<title>` changed to `Dob Defender Alpha2.77`; `DD_GAME_VERSION` to `Alpha2.77`; two code comments changed from Test 3/Alpha2.76 to Alpha2.77. All other HTML content identical to archived approved Test 3.
+- **Validation:** Local three-inline-JavaScript-block Node syntax checks passed; exact archive Git blob SHA verified against locally approved file; production GitHub returned blob matches locally prepared label-only candidate. User confirmed Test 3 audio on their phone before approving production. GitHub Actions/Pages/live-served production verification pending independent checks; user confirmation of Alpha2.77 production itself pending.
+
 ## Alpha2.75 — 24 October 2026 — approved Test 5
 
 - **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
