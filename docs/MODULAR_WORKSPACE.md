@@ -27,8 +27,16 @@ python3 tools/modular_workspace.py build /tmp/dd-workspace /tmp/dd-rebuilt.html
 git hash-object /tmp/dd-rebuilt.html
 ```
 
-## Status
+## Current production verification — 25 October 2026
+
+The checked-in splitting tool **has now been verified end to end against current production** Alpha2.76 `main:index.html` (SHA `68da879b0120364df1128848e115200deec636b6`): 3,775,528 bytes, 8 blocks, 46 media assets; `split`, `check`, and `build` passed with a byte-exact rebuilt Git blob SHA.
+
+Static validation: `python3 tools/validate_workspace.py /path/to/workspace --source-markers`. Three embedded JavaScript blocks passed Node syntax checking; all 46 data URI assets decoded. Four negative tests using deliberately corrupted copies failed as expected. The markers are **only source keyword presence checks**, not behavioural regression coverage.
+
+No browser/Android gameplay regression suite has yet been verified. This workspace is still internal; production release and test approval requirements remain unchanged.
+
+## Earlier prototype status (historical)
 
 The earlier Alpha2.76 Sound Test 25 proof of concept reconstructed 3,775,585 bytes with archive SHA `52352378f7fe288c52351d73b0fd4c74abc3b1aa`, separating 46 embedded media assets and reducing the largest JavaScript working section to about 122 KB. This was a **prototype using the approved archive**, not a production-source migration.
 
-This checked-in tool has been added as a reusable implementation. Full end-to-end verification against the current production `index.html` and any deployment automation remains outstanding. Do not claim production modularisation is complete until those gates pass.
+This checked-in tool has been added as a reusable implementation. Production-source split/check/build is now verified as noted above; browser regression and deployment automation remain outstanding. Do not claim production modularisation is complete until those gates pass.
