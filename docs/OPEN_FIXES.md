@@ -21,3 +21,10 @@ Additional issues will be appended as reported.
 - **Verification needed:** Determine which impactor/cow collision paths exist in Alpha2.77 and whether they currently cause cow death, visual effects, lost-cow counter updates or no interaction. Avoid adding a new collision/death mechanic without explicit design approval; if impactors already kill cows, ensure those outcomes are counted exactly once.
 - **Acceptance tests:** For an impactor death, increment the current-night cows-lost count once and display the expected penalty at tally. Prevent double-counting from repeated collision frames or later state changes. Preserve existing cow rescue and UFO scoring behavior.
 - **Status:** Logged; no game code changed.
+
+## 3. Proposed cow tally redesign: night survival
+
+- **Proposed in discussion, not yet implemented or approved for release.** Define `Cows Saved` at dawn as all cows alive at the end of the night, including any cow previously rescued from a UFO. Define `Cows Lost` as all cows killed or successfully abducted during the night (subject to verifying actual impactor collision behavior).
+- Award +25 per surviving cow, -25 per lost cow in night-end tally. Retain existing immediate +50 and dome repair for successful UFO rescues. A cow must not count in both night-end columns and must be counted once per night; avoid rewarding a rescued cow twice in the tally.
+- Before changing code, audit how cows spawn, depart, persist, are rescued or die in the current Alpha2.77 baseline. In particular, distinguish surviving cows that depart normally from genuinely lost cows; establish coherent per-night starting/entrant population and end-state reconciliation.
+- This changes prior meaning of 'saved' from UFO rescues to all surviving cows. Requires user sign-off for gameplay and test candidate before production.
