@@ -1,3 +1,12 @@
+## Extended browser regression checkpoint — 25 October 2026
+
+- User instructed assistant to continue through all independent testing without pausing for approval after routine milestones. Keep automatically committing GitHub checkpoints.
+- Confirmed current exact production 3,775,528-byte HTML SHA `68da879b0120364df1128848e115200deec636b6` with local `git hash-object`. Re-ran local `dd_browser_regression.py`: start screen, mocked registration, Night 1, slider aim (50% to 74.4444%), fire energy (100% to 98%) and pause/resume all passed without page errors. The script checked into `tools/browser_smoke.py` was not independently rerun from checkout.
+- Additional real Chromium render/audio-state probe: canvas `390x844` and all `329,160` pixels with nonzero alpha, document contains one audio element, game music `volume=0.2`, `loop=true`, `paused=false` following user clicks. **However `readyState=0`, so playback, decoded audio, and actual audible output are NOT verified.** No captured JS page errors.
+- Attempted deterministic collision/scoring assertions by calling `hit()` from Playwright, but `hit` and the `score` variable are script-private and unavailable on `window`; test was not valid and no collision/scoring pass is claimed. To test them, use controlled nonproduction in-memory instrumentation of exact SHA-verified source or genuine simulated gameplay, preserving original source as untouched control. Do not promote instrumented source as a game artifact.
+- **First unverified task:** implement and run isolated deterministic collision/scoring cases through safe temporary in-memory test instrumentation, then audio asset/decode and pixel-level rendering checks. Extend and rerun committed browser test harness, documenting mocks and actual capabilities. Do not ask user for routine testing decisions; involve them only when real Android testing or explicit release approval is essential.
+- Production Alpha2.76, tests and release archive unchanged. Internal test work only.
+
 ## Browser test script committed — 25 October 2026
 
 Added `tools/browser_smoke.py` (commit `e32d3a26bc744e977950a9d2680bc81ea6909655`): SHA-gated headless Chromium mobile smoke tests for splash/callsign, mocked registration, Night 1, aim drag, fire energy and pause/resume. Tested equivalent local script on exact Alpha2.76 production source, passing all assertions, with deliberate SHA-tamper rejection. The repository version has **not yet been independently rerun after checkout**; do not claim this gate passed.
