@@ -34,8 +34,8 @@ def validate(root, markers=False):
         raw = (root / path).read_bytes()
         combined.extend(raw)
         if path.suffix == '.js':
-            script = re.sub(rb'^<script\\b[^>]*>', b'', raw, count=1, flags=re.I)
-            script = re.sub(rb'</script\\s*>\\s*$', b'', script, count=1, flags=re.I)
+            script = re.sub(rb'^<script\b[^>]*>', b'', raw, count=1, flags=re.I)
+            script = re.sub(rb'</script\s*>\s*$', b'', script, count=1, flags=re.I)
             result = subprocess.run(['node', '--check', '--input-type=commonjs'],
                                     input=script, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if result.returncode:
