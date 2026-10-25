@@ -146,3 +146,16 @@
 
 - Established versioned source layout, README, documentation and preserved Alpha2.63.
 - Repository setup is not a gameplay release.
+
+## Alpha2.76 — 25 October 2026 (production)
+
+**Approved candidate:** Alpha2.76 Sound Test 25. **Archive:** `releases/Dob_Defender_Alpha2.76.html`, SHA `52352378f7fe288c52351d73b0fd4c74abc3b1aa`. **Production:** root `index.html`, SHA `68da879b0120364df1128848e115200deec636b6`; commit `521e842f65284b4663cbb7430ce80b3fd9dc229b`.
+
+- Added and balanced embedded sound effects for laser depletion/recharge, telescope slewing, UFO arrival/abduction/destruction, meteor and split fragments, comets, multi-hit asteroids, satellites, Starlink, ISS, junk, aircraft and interface events.
+- Aircraft now has audible moving propeller sound, impact sound and mellow cabin-style warning chime.
+- Night transition uses rising 3, 2, 1, GO countdown tones, with longer high GO tone; first-night audio initialization addressed.
+- Dawn uses a gentle three-note chime without an additional night-complete effect.
+- Aircraft warning modal displays a compact amber-red SAFETY WARNING sign, delayed 0.5 seconds, blinking then steady; removed redundant title.
+- Dawn now clears remaining shots, debris, trails and effects to prevent frozen visual artifacts.
+- Preserved gameplay scoring, collisions, controls, cows, telescope artwork, start screen and leaderboard logic. No intentional scoring changes.
+- Static JavaScript syntax checked; live deployment and Android release playback confirmation tracked separately.
