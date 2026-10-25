@@ -1,3 +1,7 @@
+## CONTEXT-EFFICIENT STARTUP — 25 October 2026
+
+**Prevent rapid conversation-context exhaustion.** Complete mandatory GitHub onboarding and read the entire authoritative `docs/WORKFLOW.md`, but keep fetched content inside tool execution and return only concise status, SHA metadata, conflicts and relevant excerpts to the conversation. Do not print full README, WORKFLOW, histories, or large source blobs in tool results. Fetch other mandatory project documents for inspection without echoing their full bodies; use targeted ranges for subsequent questions. The entire current production game must be verified before code changes, but avoid loading its multi-megabyte contents into conversation output. Perform source transfers, hashing, modular splitting, builds and validation internally. See `docs/EFFICIENCY_HANDOVER.md` for details. These are context-handling optimisations, **not exemptions** from reading required sources, SHA gates, user testing or production approval.
+
 ## CURRENT DEVELOPMENT HANDOVER — EFFICIENCY INITIATIVE
 
 **Read [docs/EFFICIENCY_HANDOVER.md](docs/EFFICIENCY_HANDOVER.md) after the mandatory README/WORKFLOW onboarding** when continuing modular development, automated checks or release-efficiency work. It records verified state, completed work, pending tasks, known traps and the minimum-user-involvement rule. Resume at the first unverified step; do not ask the user to download internal development artifacts.
