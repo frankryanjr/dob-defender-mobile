@@ -1,3 +1,9 @@
+## Browser regression checkpoint, 25 October 2026
+
+Exact Alpha2.76 production SHA verified. With mocked registration, Chromium mobile smoke passed start screen, callsign gate, registration, Night 1, slider drag (50% to 74.4444%), shot (laser energy 100% to 98%), and pause/resume. Firing during pause did not consume energy. No captured JavaScript page exceptions. Tampering with a temporary HTML copy correctly caused the test harness to reject an invalid source SHA.
+
+**First unverified task:** Commit the verified local Playwright test script under tools/, rerun from committed version and expand collision, scoring, audio and rendering coverage. These tests do not verify live Supabase registration or actual Android hardware. No game HTML or release changed.
+
 ## Verified browser interaction milestone — 25 October 2026
 
 - Current production Git SHA `68da879b0120364df1128848e115200deec636b6` matched the exact local 3,775,528-byte HTML. No game code edited.
