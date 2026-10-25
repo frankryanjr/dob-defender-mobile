@@ -1,3 +1,15 @@
+## New-chat restart checkpoint — 25 October 2026
+
+**Purpose:** This is a durable restart marker requested by the user to prevent loss of progress if conversation length is reached. GitHub documentation overrides conversational recollection.
+
+**Verified completed:** Production `main:index.html` SHA `68da879b0120364df1128848e115200deec636b6`, 3,775,528 bytes; latest approved Alpha2.76 archive SHA `52352378f7fe288c52351d73b0fd4c74abc3b1aa` (not byte-identical to production). Exact production was previously reconstructed losslessly; the checked-in modular tool `split/check/build` matched production SHA; 8 blocks, 46 media. Checked-in validator passed 3 embedded JS blocks, 46 media, placeholder checks and updated `aim` source-marker mode. Four targeted negative cases rejected. **No runtime browser or Android regression coverage is established.**
+
+**First unverified task:** design and run reproducible browser-based smoke tests against a verified *current* production-derived standalone HTML for start screen, aiming/firing, collisions/scoring, audio and asset rendering, if available in the execution environment. Record what runs versus what remains untested; add runnable tests to GitHub only after verifying them. Independently improve large-file transfer efficiency if possible without relaxing byte-length/Git-SHA gates. Do not reuse older local uploads or silently use archive as baseline.
+
+**Mandatory restart sequence:** (1) Read root `README.md` and `docs/WORKFLOW.md` **in full**. (2) Inspect GitHub handover, gameplay, changelog, development and project history plus this efficiency handover and modular workspace instructions. (3) Recheck production/archive Git SHAs. (4) Before moving large files, read the proven lossless transfer sections of `docs/archive/WORKFLOW_FULL_2026-10-25.md`; use bounded, verified chunks and keep Base64 outside chat output. (5) Resume from first unverified test, not already passed modular/static checks. Keep tool output brief. If tests cannot execute, document exact limitation and next action.
+
+**Release guardrails:** Developer tooling/documentation only is authorised for this initiative. Do not alter or publish production game HTML, `tests/`, or `releases/` without the required specific authorisation and approval gates. User handles only genuine gameplay testing, decisions and explicit production approval; assistant handles internal transfers, scripts and checks.
+
 ## Verified production-source automation — 25 October 2026
 
 - **Exact current production fetched directly from GitHub blob** `68da879b0120364df1128848e115200deec636b6`, using the documented four-part Base64 Google Docs export; local reconstruction verified at **3,775,528 bytes**, SHA matching `main:index.html`. Part 2 export contained 180,000 duplicated Base64 characters from an interrupted upload; removing only the duplicated leading segment produced the exact Git blob SHA. No older upload/archive was used.
