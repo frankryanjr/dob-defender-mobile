@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.77</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.78</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -142,7 +142,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.77';
+const DD_GAME_VERSION='Alpha2.78';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -975,9 +975,9 @@ function ddPlaySound(id){
  }catch(err){console.warn('Sound playback:',err)}
 }
 
-// Alpha2.77 — embedded sound effects retained from Alpha2.76.
+// Alpha2.78 — embedded sound effects retained from Alpha2.76.
 let ddUfoHum=null,ddUfoHumGain=null,ddAbductionActive=false,ddEnergyEmptyNotified=false,ddLastEmptyClick=0;
-// Alpha2.77 production audio mix — user-approved Audio Mix Test 3 gains; no embedded assets removed.
+// Alpha2.78 production audio mix — user-approved Audio Mix Test 3 gains; no embedded assets removed.
 const ddAudioMixTest2Gains = {"Aircraft_Laser_Hit":0.73,"Aircraft_Seatbelt":1.26,"Asteroid_Tone_High":0.83,"Asteroid_Tone_Low":1.03,"Asteroid_Tone_Mid":1.03,"Cow_Lost":1.02,"Cow_Rescued":0.56,"Dome_Damaged":0.76,"Dome_Destroyed_Shield_Depletion":0.75,"Game_Over":0.9,"ISS_Recharge":0.89,"Junk_Burn":1.54,"Laser_Energy_Depleted":0.34,"Laser_Restored":0.45,"Meteor_Fragment_Hit":0.64,"Meteor_Hit":0.60,"Meteor_New":0.85,"Meteor_Split":0.66,"Morning_Soft":0,"Powerup_Collected":0.5,"Propeller_Plane":1.26,"Satellite_Hit":0.71,"Slew_Light":0.32,"Telescope_Destroyed":1.78,"Train_Complete":0.5,"UFO_Abducting_Cow":1.84,"UFO_Appears":0.78,"UFO_Hit":0.56,"UI_Click":0.7,"WPN_001":0.38,"IMP_005":0.31};
 function ddTestSfx(name,volume=.43){
  try{
@@ -1258,9 +1258,34 @@ function wakeCowsForDawn(){
 }
 
 
+// Alpha2.78 tally-audio production release: exact synthesized timbres from approved Tally Audio Mock 1.
+// Unlike gameplay effects, these are lightweight Web Audio oscillators, not embedded clips.
+function ddTallyAudio(kind,extra){
+ try{
+  const ctx=ddAudioContext;
+  if(!ctx||ctx.state!=='running')return;
+  const master=ctx.createGain();master.gain.value=1.75;master.connect(ctx.destination);
+  function voice(freq,duration,shape='sine',amp=.09,when=0,finish=null){
+   const t=ctx.currentTime+Math.max(0,when),osc=ctx.createOscillator(),v=ctx.createGain();
+   osc.type=shape;osc.frequency.setValueAtTime(freq,t);
+   if(finish)osc.frequency.exponentialRampToValueAtTime(Math.max(30,finish),t+duration);
+   v.gain.setValueAtTime(.0001,t);v.gain.exponentialRampToValueAtTime(Math.max(.0002,amp),t+.012);
+   v.gain.exponentialRampToValueAtTime(.0001,t+duration);
+   osc.connect(v).connect(master);osc.start(t);osc.stop(t+duration+.02);
+  }
+  if(kind==='rise'){voice(260,.3,'sine',.12,0,640);voice(520,.3,'triangle',.027,0,1030)}
+  else if(kind==='clicks'){
+   const n=Math.min(19,Math.max(12,Math.ceil(Math.abs(extra||0)/3)));
+   for(let i=0;i<n;i++){voice(640+(i%4)*95,.027,'square',.035,i*.033);voice(1080,.018,'sine',.016,i*.033)}
+  }else if(kind==='happy'){voice(740,.2,'sine',.14);voice(1110,.28,'sine',.09,.09);voice(1480,.2,'triangle',.025,.17)}
+  else if(kind==='dud'){voice(340,.19,'triangle',.12,0,165);voice(160,.12,'sine',.095,.09,105)}
+  else if(kind==='deplete'){voice(610,.55,'sawtooth',.065,0,105);voice(330,.58,'sine',.10,.04,83)}
+ }catch(err){console.warn('Optional tally audio',err)}
+}
+
 function ddStartTally(d){
  const q=id=>document.getElementById(id),box=q('ddTally'),total=q('ddTotal'),sleep=ms=>new Promise(r=>setTimeout(r,ms));
- box.classList.add('open');q('ddNightTitle').textContent=d.final?'FINAL NIGHT '+d.night+' TALLY':'NIGHT '+d.night+' DEFENDED!';q('ddContinue').disabled=true;q('ddContinue').textContent='TALLYING…';
+ box.classList.add('open');const tallyMusic=document.getElementById('ddGameplayMusic');if(tallyMusic)tallyMusic.volume=.06;q('ddNightTitle').textContent=d.final?'FINAL NIGHT '+d.night+' TALLY':'NIGHT '+d.night+' DEFENDED!';q('ddContinue').disabled=true;q('ddContinue').textContent='TALLYING…';
  total.style.color='#f4f7fb';total.textContent=d.base.toLocaleString('en-IE');q('ddEnergyLabel').textContent='LASER '+d.energy+'%';q('ddDomeLabel').textContent='DOME '+d.dome+'%';q('ddSavedLabel').textContent='COWS SAVED · '+d.saved;q('ddLostLabel').textContent='COWS LOST · '+d.lost;
  q('ddEnergyPoints').textContent='+'+d.energy;
  q('ddDomePoints').textContent='+'+d.dome;
@@ -1276,19 +1301,19 @@ function ddStartTally(d){
   if(!points)return;const a=q(id).getBoundingClientRect(),b=total.getBoundingClientRect(),el=document.createElement('div');
   el.className='ddFly';el.style.color=color;el.textContent=(points>0?'+':'−')+Math.abs(points);el.style.left=(a.left+a.width/2-16)+'px';el.style.top=(a.top+a.height/2-12)+'px';document.body.appendChild(el);
   await sleep(35);el.style.transform='translate('+(b.left+b.width/2-a.left-a.width/2)+'px,'+(b.top+b.height/2-a.top-a.height/2)+'px) scale(.6)';el.style.opacity='0';
-  await sleep(280);el.remove();total.style.color=points<0?'#ff929b':'#f4f7fb';const from=sum,to=Math.max(0,sum+points),started=performance.now(),duration=620;
+  await sleep(280);el.remove();total.style.color=points<0?'#ff929b':'#f4f7fb';ddTallyAudio(points<0?'deplete':'clicks',points);if(points<0)ddTallyAudio('clicks',points);const from=sum,to=Math.max(0,sum+points),started=performance.now(),duration=620;
   await new Promise(resolve=>{function tick(now){const t=Math.min(1,(now-started)/duration),ease=1-Math.pow(1-t,3);score=Math.round(from+(to-from)*ease);total.textContent=score.toLocaleString('en-IE');hud();if(t<1)requestAnimationFrame(tick);else resolve()}requestAnimationFrame(tick)});
   sum=to;score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.classList.add('pop');await sleep(90);total.classList.remove('pop');total.style.color='#f4f7fb';
  }
  async function run(){
-  await sleep(80);q('ddStatus').textContent='Counting laser energy';q('ddEnergyFill').style.transition='width .3s';q('ddEnergyFill').style.width=d.energy+'%';await sleep(320);q('ddEnergyPoints').textContent='+'+d.energy;await sleep(40);await fly('ddEnergyPoints',d.energy,'#85f0a3');
-  q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width .3s';q('ddDomeFill').style.width=d.dome+'%';await sleep(320);q('ddDomePoints').textContent='+'+d.dome;await sleep(40);await fly('ddDomePoints',d.dome,'#71dcef');
-  q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');await sleep(140)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(80);await fly('ddSavedPoints',d.saved*25,'#86eea4');
-  if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');await sleep(140)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(80);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
+  await sleep(80);q('ddStatus').textContent='Counting laser energy';q('ddEnergyFill').style.transition='width .3s';q('ddEnergyFill').style.width=d.energy+'%';ddTallyAudio('rise');await sleep(320);q('ddEnergyPoints').textContent='+'+d.energy;await sleep(40);await fly('ddEnergyPoints',d.energy,'#85f0a3');
+  q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width .3s';q('ddDomeFill').style.width=d.dome+'%';ddTallyAudio('rise');await sleep(320);q('ddDomePoints').textContent='+'+d.dome;await sleep(40);await fly('ddDomePoints',d.dome,'#71dcef');
+  q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');ddTallyAudio('happy');await sleep(140)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(80);await fly('ddSavedPoints',d.saved*25,'#86eea4');
+  if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');ddTallyAudio('dud');await sleep(140)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(80);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
   score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.style.color='#f4f7fb';q('ddStatus').textContent='';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE';
  }
  run().catch(err=>{console.error('Night tally error',err);q('ddStatus').textContent='Tally error';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE'});
- q('ddContinue').onclick=()=>{if(q('ddContinue').disabled)return;box.classList.remove('open');if(d.final)ddFinishGameOver();else{night++;startNight()}};
+ q('ddContinue').onclick=()=>{if(q('ddContinue').disabled)return;box.classList.remove('open');if(tallyMusic)tallyMusic.volume=.20;if(d.final)ddFinishGameOver();else{night++;startNight()}};
 }
 
 
