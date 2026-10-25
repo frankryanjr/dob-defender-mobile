@@ -1,3 +1,18 @@
+## Priority 0 — Conversation context efficiency (25 October 2026)
+
+**Problem:** A new development chat can reach its conversation-context limit within one or two messages. This is distinct from saved Memory capacity. The exact platform error has not been independently diagnosed; the following reduces avoidable context use without claiming to eliminate platform limits.
+
+**Mandatory operating rules:**
+1. Complete full README and WORKFLOW onboarding and retrieve all other mandatory sources. Keep their full text within connector/tool execution; emit only concise metadata, current state, conflicts and task-relevant excerpts. Never print full documents into the assistant conversation solely to prove they were read.
+2. Do not retrieve or echo multi-megabyte HTML content unless the next task requires its bytes. First obtain source/archive blob SHAs and release metadata. For source transfer, process complete bytes internally, in bounded chunks if necessary, without displaying source or Base64 payloads.
+3. Read the efficiency handover early, then retrieve relevant sections of large histories rather than repeatedly printing whole histories. Mandatory initial inspection is not waived.
+4. Use verified modular CSS/JS components for development after exact production-source verification. Do not substitute the approved archive for current production.
+5. Return concise test/check summaries: exact source SHA, rebuild SHA, checks passed/failed, and unverified checks. Never echo large tool outputs, complete media data URIs or internal ZIP contents.
+6. Keep scripts, temporary transfer artifacts and modular files internal. Provide only complete standalone playable HTML when the user needs to test, and a production URL only after the existing explicit-approval and deployment gates.
+7. If context pressure recurs, record progress and exact first-unverified step in GitHub, then continue in a fresh chat rather than losing verified state. Do not claim that context limits are fully controllable.
+
+**Status:** Documentation/process change only; not a game release. The current production-source modular tool validation and automated regression checks remain outstanding.
+
 # Dob Defender — Efficiency Work Handover (25 October 2026)
 
 **Purpose:** Authoritative status and continuation instructions for the efficiency / modular-development initiative, so a fresh chat can resume without relying on conversation memory. **This is a development handover, not a change to the game or a production release.**
