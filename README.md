@@ -1,3 +1,7 @@
+## CURRENT DEVELOPMENT HANDOVER — EFFICIENCY INITIATIVE
+
+**Read [docs/EFFICIENCY_HANDOVER.md](docs/EFFICIENCY_HANDOVER.md) after the mandatory README/WORKFLOW onboarding** when continuing modular development, automated checks or release-efficiency work. It records verified state, completed work, pending tasks, known traps and the minimum-user-involvement rule. Resume at the first unverified step; do not ask the user to download internal development artifacts.
+
 ## FOUNDING RULE — ASSISTANT HANDLES DEVELOPMENT; USER ONLY ACTS WHEN NEEDED
 
 **Mandatory for every new chat:** Read the complete [authoritative workflow](docs/WORKFLOW.md), especially **“FOUNDING PRINCIPLE — MINIMUM USER INVOLVEMENT.”** The user should only download/open/test something when they personally need it. The assistant must handle modular source, scripts, transfer files, ZIPs, internal build artifacts, release mechanics and troubleshooting without making the user a file courier. Before offering a download or link, ask whether the user actually needs the artifact. If not, keep it internal and proceed. Never waste time fixing delivery of an internal-only artifact. Actual gameplay testing still requires a complete standalone playable HTML, and production still requires explicit user approval.
