@@ -1,3 +1,7 @@
+## Current release: Alpha2.77 — 25 October 2026
+
+User approved Audio Mix Test 3 and explicitly directed production push. Exact approved test archive `releases/Dob_Defender_Alpha2.77.html` Git blob `0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9`, 3,776,589 bytes. Promoted by four label/comment-only replacements: HTML title, DD_GAME_VERSION and two comments, yielding production `main:index.html` blob `ae484817ab23bb3895dca9806f957c2688827b1e`, commit `6d732ec905915f0e997c442317a335c7f6759f1c`. All three inline JS scripts Node syntax checked. 31 active sound audition levels approved with meteor hit 0.60 and slew 0.32; 46 embedded clips retained, candidate removal list of 15 remains unacted on. No changes to approved game artwork/scoring/leaderboard. Confirm GitHub Actions and live Pages independently; obtain user production Android confirmation after deployment. Full details in CHANGELOG.
+
 ## Alpha2.75 — 24 October 2026 — approved Test 5
 
 - **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
