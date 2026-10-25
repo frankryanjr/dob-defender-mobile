@@ -1,3 +1,10 @@
+## Fresh Alpha2.79 Worldwide Counter Test 1 — 25 October 2026 (NOT RELEASED)
+
+- User explicitly abandoned earlier Alpha2.79 cow/UFO and worldwide Test 4 candidates. Restarted from **exact current production Alpha2.78** main:index.html Git blob SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`, 3,778,502 bytes, reconstructed using 13 bounded Base64 Google Docs segments, repaired and verified with local `git hash-object` before editing.
+- Created complete local Android-test HTML `Dob_Defender_Alpha2.79_Worldwide_Counter_Test_1.html`, 3,780,528 bytes, Git blob SHA `5099a6ccebf03713f9dd09eeb5a0fa7b8018ba70`. **Not published to GitHub or production.** Preserves centered START, adds no-globe left counter of equal height with blue rounded clipped border, dark fill, stacked label and cyan number; existing bottom version preserved. Four inline JS blocks pass Node syntax checks. Browser rendering and Android testing NOT performed.
+- Counter reads public leaderboard GET `scores`, sums `best_night` for returned player-best records, appending `+` at 50-record cap; offline shows dash. **Limitation:** this is not a verified all-time global sum of every completed night or submission. Backend authoritative aggregate will be required for a guaranteed true worldwide all-time figure. Production and backend unchanged.
+- **First unverified next task:** user Android tests Test 1 appearance/START/version and loading behaviour, then design/read-only verify an authoritative backend total across all actual defended nights before representing the number as an exact all-time worldwide total. Obtain approval before any production release.
+
 ## Alpha2.79 Cow/UFO — Worldwide Nights Defended Test 4 checkpoint (25 October 2026)
 
 - Exact starting production remains Alpha2.78 `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; the local production source was previously reconstructed and Git-blob verified byte-for-byte. Test 4 carries forward the Alpha2.79 cow/UFO test changes and updates the start-screen badge.
