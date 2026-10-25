@@ -1,3 +1,9 @@
+## Sound mixer development checkpoint — 25 October 2026
+
+Built local standalone `Dob_Defender_Alpha2.76_Sound_Mixer.html` for user testing. It attempts to retrieve current GitHub production, enforces Git blob SHA `68da879b0120364df1128848e115200deec636b6` before extracting any embedded audio, permits selecting current HTML if browser fetch fails, exposes real embedded dictionary entries and the known external music URL, and offers aircraft flyby mixing, A/B audition and JSON export. It does not generate substitute sounds. File HTML/JS syntax checked locally. No claim of full real-asset playback verification: current environment cannot download 3.8 MB production source via direct network. Displayed preliminary gain defaults are reference values, not a verified inventory of every live playback gain. Actual audio extraction and Android playback remain a user-test gate.
+
+**First unverified task:** user opens mixer and loads exact current production audio (remote fetch or local matching file); verify actual extracted sound count and playback. Then audit precise source audio mapping/gains and refine settings against game. This is an internal testing utility, not a game production release. Production unaffected.
+
 ## Alpha2.76 exact-audio sound mixer candidate — 25 October 2026
 
 - Inspected exact production `main:index.html` Git blob `68da879b0120364df1128848e115200deec636b6` using GitHub `fetch_blob`, not the historical planning manifest. The real `ddSoundData` table contains 46 embedded audio data URIs. Actual aircraft audio includes `DD_Propeller_Plane`, `DD_Aircraft_Seatbelt`, and `DD_Aircraft_Laser_Hit`; engine loop uses 1.10 playback speed, flyover envelope and peak gain 1.20; cabin chime .42 and aircraft hit .52. `DD_Aircraft_Warning` and `DD_Aircraft_Flyby` are assets, not proof of active event usage.
