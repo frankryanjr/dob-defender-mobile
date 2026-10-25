@@ -1,3 +1,7 @@
+## Audio Mix Test 3 — local candidate
+
+Built standalone Test 3 from Test 2; only two audio gains changed: `Meteor_Hit` 0.64 -> 0.60 and `Slew_Light` 0.40 -> 0.32. All other gains and gameplay retained, labels advanced. Three inline JS blocks passed Node syntax check; 3,776,589-byte test file created. Android playback unverified. Production unchanged. First unverified step: user's Android audition of Test 3; verify candidate integrity and follow locked release approval gates before any production promotion.
+
 ## Audio Mix Test 2 — pending user test (25 Oct 2026)
 
 User provided a 46-clip SHA-matched production soundboard export; 31 referenced clips received audition gains. Complete standalone local Test 1 and Test 2 candidates were built (not published). Test 2 restores `DD_Meteor_Hit` from 0 to 0.64 and lowers `DD_Slew_Light` from 1.12 to 0.40; other proposed mix settings unchanged. Local Test 2 exists at 3,776,589 bytes; source SHA/version, gameplay behaviour and audible Android mix must be rechecked before any promotion. Earlier three-block JS syntax check reportedly passed; independent device validation outstanding. 15 candidate-unused clips retained. Production Alpha2.76 unchanged. **First unverified task:** test complete Test 2 on Android and confirm desired mix, then verify exact candidate and release gates prior to any production push. Do not publish absent explicit approval.
