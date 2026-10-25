@@ -1,3 +1,11 @@
+## Automated-check tooling continuation — 25 October 2026
+
+- Added `tools/validate_workspace.py` (read-only Python 3 + Node.js validator) to GitHub. It checks JavaScript syntax after removing enclosing script tags, strict Base64 decoding/nonempty assets, unique block/media tokens, and optional weak gameplay source markers.
+- A locally developed validator prototype passed a clean synthetic workspace and rejected deliberately broken JavaScript, a malformed media URI and duplicate block tokens. **The checked-in version has not yet been executed against the current production modular workspace**, and it must be tested independently before claiming full validation.
+- Run `python3 tools/modular_workspace.py check WORKSPACE` followed by `python3 tools/validate_workspace.py WORKSPACE --source-markers`. The first command remains the byte-for-byte integrity gate; the second performs read-only static checks.
+- **First unverified task:** obtain or reconstruct the already SHA-verified current production workspace and run both checked-in scripts against it, plus negative tests on the checked-in validator. Strengthen static source-presence checks into meaningful regression tests where feasible; browser/Android behaviour remains unverified.
+- No production HTML, release archive or gameplay was changed. No test build or production publication authorised.
+
 ## Verified continuation — 25 October 2026
 
 - Full mandatory README / WORKFLOW / specification / handover / history onboarding completed.
