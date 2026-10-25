@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.76</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.77</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -142,7 +142,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.76';
+const DD_GAME_VERSION='Alpha2.77';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -970,20 +970,22 @@ function ddPlaySound(id){
   if(ddAudioContext.state==='suspended')void ddAudioContext.resume();
   const buffer=ddSoundBuffers[id];if(!buffer)return;
   const src=ddAudioContext.createBufferSource();src.buffer=buffer;
-  const gain=ddAudioContext.createGain();gain.gain.value=id==='WPN_001'?.38:id==='IMP_005'?.55:.5;
+  const gain=ddAudioContext.createGain();gain.gain.value=Object.prototype.hasOwnProperty.call(ddAudioMixTest2Gains,id)?ddAudioMixTest2Gains[id]:.5;
   src.connect(gain);gain.connect(ddAudioContext.destination);src.start();
  }catch(err){console.warn('Sound playback:',err)}
 }
 
-// Alpha2.76 — embedded sound effects for production Alpha2.76.
+// Alpha2.77 — embedded sound effects retained from Alpha2.76.
 let ddUfoHum=null,ddUfoHumGain=null,ddAbductionActive=false,ddEnergyEmptyNotified=false,ddLastEmptyClick=0;
+// Alpha2.77 production audio mix — user-approved Audio Mix Test 3 gains; no embedded assets removed.
+const ddAudioMixTest2Gains = {"Aircraft_Laser_Hit":0.73,"Aircraft_Seatbelt":1.26,"Asteroid_Tone_High":0.83,"Asteroid_Tone_Low":1.03,"Asteroid_Tone_Mid":1.03,"Cow_Lost":1.02,"Cow_Rescued":0.56,"Dome_Damaged":0.76,"Dome_Destroyed_Shield_Depletion":0.75,"Game_Over":0.9,"ISS_Recharge":0.89,"Junk_Burn":1.54,"Laser_Energy_Depleted":0.34,"Laser_Restored":0.45,"Meteor_Fragment_Hit":0.64,"Meteor_Hit":0.60,"Meteor_New":0.85,"Meteor_Split":0.66,"Morning_Soft":0,"Powerup_Collected":0.5,"Propeller_Plane":1.26,"Satellite_Hit":0.71,"Slew_Light":0.32,"Telescope_Destroyed":1.78,"Train_Complete":0.5,"UFO_Abducting_Cow":1.84,"UFO_Appears":0.78,"UFO_Hit":0.56,"UI_Click":0.7,"WPN_001":0.38,"IMP_005":0.31};
 function ddTestSfx(name,volume=.43){
  try{
   if(!ddAudioContext||!ddSoundBuffers['DD_'+name]){void ddPrepareSounds().then(()=>ddTestSfx(name,volume));return}
   if(ddAudioContext.state==='suspended')void ddAudioContext.resume();
   const buffer=ddSoundBuffers['DD_'+name];if(!buffer)return;
   const source=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain();
-  source.buffer=buffer;gain.gain.value=volume;source.connect(gain);gain.connect(ddAudioContext.destination);source.start();
+  source.buffer=buffer;gain.gain.value=Object.prototype.hasOwnProperty.call(ddAudioMixTest2Gains,name)?ddAudioMixTest2Gains[name]:volume;source.connect(gain);gain.connect(ddAudioContext.destination);source.start();
  }catch(e){console.warn('Test sound:',name,e)}
 }
 // Exactly three note onsets, no chord layers, echoes or overlapping tails.
@@ -1000,7 +1002,7 @@ function ddStopAbductionSound(){
 function ddStartAbductionSound(){
  if(ddAbductionSource)return;
  if(!ddAudioContext||!ddSoundBuffers.DD_UFO_Abducting_Cow){void ddPrepareSounds();return}
- try{const source=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain();source.buffer=ddSoundBuffers.DD_UFO_Abducting_Cow;gain.gain.value=1.0;source.connect(gain);gain.connect(ddAudioContext.destination);source.onended=()=>{if(ddAbductionSource===source){ddAbductionSource=null;ddAbductionGain=null}};source.start();ddAbductionSource=source;ddAbductionGain=gain}catch(e){console.warn('Abduction sound:',e)}
+ try{const source=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain();source.buffer=ddSoundBuffers.DD_UFO_Abducting_Cow;gain.gain.value=ddAudioMixTest2Gains.UFO_Abducting_Cow;source.connect(gain);gain.connect(ddAudioContext.destination);source.onended=()=>{if(ddAbductionSource===source){ddAbductionSource=null;ddAbductionGain=null}};source.start();ddAbductionSource=source;ddAbductionGain=gain}catch(e){console.warn('Abduction sound:',e)}
 }
 let ddSlewSource=null,ddSlewGain=null,ddSlewLastMove=0;
 function ddUpdateSlewSound(){
@@ -1008,7 +1010,7 @@ function ddUpdateSlewSound(){
  if(!ddAudioContext||!ddSoundBuffers.DD_Slew_Light)return;
  try{
   if(active&&!ddSlewSource){const src=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain();src.buffer=ddSoundBuffers.DD_Slew_Light;src.loop=true;gain.gain.value=0;src.connect(gain);gain.connect(ddAudioContext.destination);src.start();ddSlewSource=src;ddSlewGain=gain}
-  if(ddSlewSource){const now=ddAudioContext.currentTime;ddSlewGain.gain.setTargetAtTime(active?.16:0,now,.045);if(!active){const src=ddSlewSource;src.stop(now+.18);ddSlewSource=null;ddSlewGain=null}}
+  if(ddSlewSource){const now=ddAudioContext.currentTime;ddSlewGain.gain.setTargetAtTime(active?ddAudioMixTest2Gains.Slew_Light:0,now,.045);if(!active){const src=ddSlewSource;src.stop(now+.18);ddSlewSource=null;ddSlewGain=null}}
  }catch(e){console.warn('Slewing audio:',e);ddSlewSource=null;ddSlewGain=null}
 }
 let ddLastSoundAt={};
@@ -1020,7 +1022,7 @@ function ddSetUfoHum(on){
    if(!ddAudioContext||!ddSoundBuffers.DD_UFO_Appears){void ddPrepareSounds();return;}
    const source=ddAudioContext.createBufferSource(),gain=ddAudioContext.createGain(),now=ddAudioContext.currentTime;
    source.buffer=ddSoundBuffers.DD_UFO_Appears;source.loop=true;
-   gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(.78,now+.55);
+   gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(ddAudioMixTest2Gains.UFO_Appears,now+.55);
    source.connect(gain);gain.connect(ddAudioContext.destination);source.start();ddUfoHum=source;ddUfoHumGain=gain;
   }else if(ddUfoHum){
    const source=ddUfoHum,gain=ddUfoHumGain,now=ddAudioContext.currentTime;
@@ -1048,7 +1050,7 @@ function ddSyncAircraftAudio(){
   }
   const progress=Math.max(0,Math.min(1,(aircraft.x+38)/(W+76)));
   const envelope=(.38+.62*Math.pow(Math.sin(Math.PI*progress),1.2));
-  ddAircraftGain.gain.setTargetAtTime(1.20*envelope,ddAudioContext.currentTime,.11);
+  ddAircraftGain.gain.setTargetAtTime(ddAudioMixTest2Gains.Propeller_Plane*envelope,ddAudioContext.currentTime,.11);
  }catch(err){console.warn('Aircraft flyby audio:',err);ddAircraftAudio=null;ddAircraftGain=null}
 }
 
