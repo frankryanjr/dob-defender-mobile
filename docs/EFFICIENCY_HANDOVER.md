@@ -1,3 +1,9 @@
+## Proposed audio-mixing workflow — 25 October 2026
+
+User reports that while background music is playing, some game sounds/alerts (example: passing aircraft) are faint or inaudible. Agreed direction: a small **development-only sound mixer/soundboard** using the *actual* approved game audio and current playback rules, so volume balancing and overlapping scenarios can be tested on Android without rebuilding/transferring 3.8 MB for every slider change. It should offer per-sound controls, music bed, realistic simultaneous-event scenarios, A/B baseline vs proposed mix, and exportable settings/diff for later integration. Audit the real Alpha2.76 audio code and assets before naming sound categories or assuming that particular sounds exist; determine whether quiet sounds are missing triggers, source levels, masking, or loading issues. Avoid substituting generated approximations for production sounds.
+
+**First unverified task when audio work is authorised:** inspect actual current production audio triggers, levels and asset sources from SHA-verified GitHub baseline; implement standalone small sound-mixer test artifact using real assets/settings, without changing game HTML or publishing a test build to GitHub without authorisation. The user can approve volume levels after personally testing on Android; only then prepare complete standalone game candidate and follow locked release process. This is a scoped game-development tool idea, not an authorisation to publish a game release. Continue automatic checkpoints.
+
 ## MVP sufficiency decision — 25 October 2026
 
 - **User accepted the existing development/testing infrastructure as sufficient for an MVP.** Stop extending the testing framework solely to maximise coverage; resume gameplay/product development and seek player feedback as the next phase.
