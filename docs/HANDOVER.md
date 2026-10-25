@@ -1,3 +1,9 @@
+## Alpha2.79 Leaderboard Button Test 7 — fixed JS scope, unapproved (25 October 2026)
+
+- User reports worldwide counter in Test 6 did not open leaderboard. Confirmed root cause in exact Test 6 source: start screen's independent IIFE attempted direct access to `ddOpen` / `ddFinalLeaderboard`, both lexically scoped inside main-game IIFE, so `typeof ddOpen` was `undefined` and click did nothing.
+- Generated complete standalone local `/mnt/data/Dob_Defender_Alpha2.79_Leaderboard_Button_Test_7.html` (3,782,528 bytes; Git blob `131654b11232190f6470032f01180994bd969b1b`) from exact local Test 6. Minimal fix exports `window.ddOpenFromStartScreen` from game closure, resets final leaderboard flag and invokes existing `ddOpen(false)`; start-screen listener calls this bridge. Label version advanced to Test 7. No other gameplay changes; production remains Alpha2.78.
+- Four inline JS scripts passed `node --check`, full HTML closing tag and Git hash verified. **First unverified next step:** user tests Android counter tap → leaderboard loads → BACK TO GAME returns to splash → START still starts game. No production approval.
+
 ## Alpha2.79 Leaderboard Button Test 6 — local unapproved checkpoint (25 October 2026)
 
 - User requested the NIGHTS DEFENDED WORLDWIDE start-screen counter open the existing leaderboard. Local complete HTML `/mnt/data/Dob_Defender_Alpha2.79_Leaderboard_Button_Test_6.html`, 3,782,432 bytes, Git blob `bf5813cc58e4e8390f2ea716c5b693dc4d7402fe`, derived directly from local Counter & Audio Test 5. No production code changed; production Alpha2.78 remains `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`.
