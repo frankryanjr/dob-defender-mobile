@@ -1,3 +1,7 @@
+## 25 October 2026 — Alpha2.77 production release
+
+Approved Audio Mix Test 3 user Android audition; explicit push-to-production authorization. Immutable exact approved test archived `releases/Dob_Defender_Alpha2.77.html` (`0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9`), production `main:index.html` (`ae484817ab23bb3895dca9806f957c2688827b1e`, commit `6d732ec905915f0e997c442317a335c7f6759f1c`). Only version-title/comment substitutions during promotion, no additional sound/gameplay changes. 46 sound assets retained and 15 possible dead clips deferred. GitHub Pages deployment and production device confirmation to verify separately.
+
 ## 25 October 2026 — Alpha2.76 release-status and historical-solution incident
 
 - After the user explicitly approved Alpha2.76 Sound Test 25 for production, the assistant incorrectly reported that the approximately 3.7 MB local HTML could not be transferred to GitHub, despite successful documented connector-based transfer and recovery methods in `README.md` and `docs/WORKFLOW.md`. It did not adequately investigate historical solutions before declaring a blocker.
