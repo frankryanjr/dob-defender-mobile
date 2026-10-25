@@ -1,3 +1,7 @@
+## Alpha2.78 Actions verification — 25 October 2026
+
+On final release documentation commit `a2330b26ba6fada79d73e6decbdaaaaf1e4c00f7`, GitHub Pages workflow `40190630853` finished **success** and syntax workflow `40190631136` finished **success**. Repository `main:index.html` remains production SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`. Live Pages HTTP content could not be fetched independently in current environment, so exact live-served HTML is **not** confirmed; Android production playback still awaits user confirmation. First unverified task: open production on Android and verify tally volume and music restoration; otherwise inspect live HTTP/caching. Cow gameplay changes remain open.
+
 ## Alpha2.78 production checkpoint — 25 October 2026
 
 User-approved integrated Tally Audio Test 2 promoted to production after SHA hard gate. Exact immutable GitHub archive `releases/Dob_Defender_Alpha2.78.html` SHA `168c505247fa450a64824d6a9c706b3d82aef3ef` matched local user-tested file; label-only production `main:index.html` SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`, commit `7db1c86f8c0df0850cf88e367876585f8342e0d2`. Pending: independent GitHub Actions / Pages live served version and Android production confirmation; no gameplay scoring changes made. First unverified task: confirm Pages deployment and live-served version, then return to `docs/OPEN_FIXES.md` cow scoring/difficulty work under a new test candidate.
