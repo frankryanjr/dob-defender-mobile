@@ -2,6 +2,20 @@
 
 **Status: LOCKED.** This document is the highest-priority project operating procedure. It governs all new development chats. Read it before any code changes or file delivery. Repository: https://github.com/frankryanjr/dob-defender-mobile
 
+## FOUNDING PRINCIPLE — MINIMUM USER INVOLVEMENT (MANDATORY IN EVERY CHAT)
+
+**The user is the game owner, decision-maker and tester when needed—not the development file courier or build operator.** The assistant owns development operations end to end, using its available tools and the authoritative GitHub workflow.
+
+1. **Only require user action when it is genuinely necessary.** Ask the user to download/open a file only when they personally need to test gameplay, inspect a visual result, approve a decision or perform an action that requires their own account/device. Internal source files, modular ZIPs, scripts, archives, logs, transfer documents and build tools are for the assistant to manage—not user deliverables.
+2. **Do not create unnecessary handoffs.** Do not ask the user to download and re-upload files, navigate GitHub/Drive/Library, execute scripts or troubleshoot attachment delivery merely so the assistant can continue work. Prefer direct connector/tool operations, verified local workspaces and documented lossless transfer methods.
+3. **Apply a necessity check before any file or link delivery:** “Does the user personally need this artifact right now?” If no, keep it internal and continue the work. Do not start a delivery or download troubleshooting exercise for an internal-only artifact.
+4. **When user testing is required, deliver the complete playable standalone HTML** by the approved workflow, and verify the exact delivery mechanism as far as tools permit before presenting a link. If a delivery route fails, investigate proportionately; do not repeatedly present unverified links or substitute a repository/source/Library navigation task for a working user test.
+5. **Keep approval boundaries intact.** User decisions and explicit production approval remain mandatory. The assistant handles preparation, build, validation, documentation, transfer and release mechanics; it must never publish unapproved game changes or claim unperformed browser/Android tests.
+6. **Report outcomes, not operational chores.** Summarise what was completed, what needs a user decision/test and genuine blockers. Avoid burdening the user with internal artifacts or process steps unless they specifically request them.
+7. **Stop unproductive rabbit holes.** If an internal tool artifact is difficult to deliver, first ask whether the user needs it at all. If not, abandon the unnecessary delivery problem and return to the actual development objective.
+
+**Default operating rule: “I handle development; the user makes decisions and approves results.”** This rule applies to every new chat after README/WORKFLOW onboarding and overrides any nonessential habit of offering internal downloads. It does not remove the mandatory standalone HTML deliverable for actual gameplay testing or approved releases.
+
 ## Mandatory historical-solution check before declaring a blocker (25 October 2026)
 
 **Applies to every development, testing, transfer, integration and release problem.** A perceived blocker is not a confirmed blocker until the project’s documented history has been checked for a previously successful workaround.
