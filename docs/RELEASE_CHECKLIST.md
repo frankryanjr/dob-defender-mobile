@@ -39,4 +39,4 @@ Use together with [WORKFLOW.md](WORKFLOW.md). This is a tracking aid; WORKFLOW r
 - Production: `main:index.html`; blob `68da879b0120364df1128848e115200deec636b6`.
 - Production commit: `521e842f65284b4663cbb7430ce80b3fd9dc229b`.
 - Deployment/live-page/Android checks: track separately; do not infer from commit.
-- Temporary Google Drive audit: 19 title-matching transfer/troubleshooting documents, reported aggregate sizes 5,497,612 bytes; deletion not yet performed.
+- Temporary Google Drive audit: 19 title-matching transfer/troubleshooting documents, reported aggregate sizes 5,497,612 bytes; 17 obsolete temporary documents permanently deleted after checking GitHub archive/production presence; one additional temporary transfer document could not be deleted because the action was blocked by safety checks; troubleshooting log retained. Google Drive storage quota was not available from the connector.
