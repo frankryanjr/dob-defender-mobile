@@ -1,3 +1,10 @@
+## Alpha2.79 Cow/UFO Test 1 — reconstructed candidate checkpoint (25 October 2026)
+
+- Verified production `main:index.html` Alpha2.78 Git blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; losslessly reconstructed 3,778,502 bytes with matching `git hash-object` from 13 temporary Drive transport parts. Root production was **not modified**.
+- The historical Test 1 candidate (`6b9a7f91b47521b54bef783438dd5a0d440360e2`, 3,779,420 bytes) was not found in attached/container/Library files. Rebuilt from exact production instead: locally created complete `Dob_Defender_Alpha2.79_Cow_UFO_Test_1_Rebuilt.html`, 3,779,351 bytes, Git blob `09000256f99a480c89b764ffc48cd4348a6fef40`. **Different SHA from historical candidate: not an exact recovery.**
+- Rebuild intent: four cows per night from Night 1, +25 surviving/-25 lost once per cow, retain immediate +50 rescue and +10 dome; guarantee a Night 1 abduction; later concurrent two-UFO different-cow targeting from Night 6. Preserved existing artwork and unrelated source. All 3 inline JavaScript scripts passed `node --check`. Chromium local file navigation blocked `ERR_BLOCKED_BY_ADMINISTRATOR`; no browser game simulation or user Android validation passed.
+- **First unverified next task:** deliver and test rebuilt standalone HTML on Android; confirm four visible cows, Night 1 abduction, later separate-target dual UFOs, lost cow tally and score, rescue/dome bonus, end screen and regression. Fix based on feedback and repeat checks. Never publish test or production without relevant explicit permission and release gates.
+
 ## NEW-CHAT RESTART — Alpha2.79 cow/UFO test (25 October 2026)
 
 - **Current production:** Alpha2.78, `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; approved archive `releases/Dob_Defender_Alpha2.78.html` blob `168c505247fa450a64824d6a9c706b3d82aef3ef`. User confirmed production live. No Alpha2.79 deployment authorised.
