@@ -1,3 +1,7 @@
+## Alpha2.77 production promotion — 25 October 2026
+
+Approval: user reported Audio Mix Test 3 sounds good and said `Push to prod`. Local exact candidate `Dob_Defender_Alpha2.76_Audio_Mix_Test_3.html` SHA `0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9`; archived unmodified to `releases/Dob_Defender_Alpha2.77.html` and re-fetched GitHub blob SHA matched. Production from verified archive with title/version and two comment-label replacements only; `main:index.html` SHA `ae484817ab23bb3895dca9806f957c2688827b1e` verified after update, release commit `6d732ec905915f0e997c442317a335c7f6759f1c`. All three inline JavaScript blocks passed `node --check`; archive is 3,776,589 bytes, promoted file 3,776,590 bytes. Outstanding: Actions/deployment live verification and user Android production confirmation.
+
 ## Alpha2.75 — 24 October 2026 — approved Test 5
 
 - **Approval:** User confirmed “All working. Push to prod” for Alpha2.75 Test 5, including Chrome Incognito playback and music.
