@@ -1,3 +1,10 @@
+## Alpha2.79 Cow/UFO — Worldwide Nights Defended Test 4 checkpoint (25 October 2026)
+
+- Exact starting production remains Alpha2.78 `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; the local production source was previously reconstructed and Git-blob verified byte-for-byte. Test 4 carries forward the Alpha2.79 cow/UFO test changes and updates the start-screen badge.
+- Complete standalone candidate `Dob_Defender_Alpha2.79_Cow_UFO_Nights_Defended_Test_4.html`: 3,780,736 bytes, Git blob SHA `1adeb31800f6a3d5f2ecb1e333821981f0da686c`. Badge reads “NIGHTS DEFENDED” with a globe, left of START, and sums the returned records’ final-night values. Current database has 27 accepted submissions totaling 157 nights. The current public endpoint returns at most 50 records; once capped, the badge appends “+” to show the sum is a lower bound until a server-side aggregate endpoint is added. Test submissions are rejected by the production version-format rule and do not affect the total.
+- All three inline JavaScript blocks pass `node --check`; complete HTML closing tag verified. Browser rendering and Android visual/gameplay testing remain unverified. No production game code or backend function changed.
+- **First unverified next task:** user tests Test 4 on Android, checking the badge fits left of START and the number shows total defended nights; also recheck cow/UFO mechanics. If approved, prepare the separate production release and any required aggregate-endpoint change under the release workflow. No release is authorized yet.
+
 ## Alpha2.79 Cow/UFO Test 1 — reconstructed candidate checkpoint (25 October 2026)
 
 - Verified production `main:index.html` Alpha2.78 Git blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; losslessly reconstructed 3,778,502 bytes with matching `git hash-object` from 13 temporary Drive transport parts. Root production was **not modified**.
