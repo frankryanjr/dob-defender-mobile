@@ -1,3 +1,7 @@
+## Alpha2.77 production push — 25 October 2026
+
+User approved sound levels of Audio Mix Test 3 and explicitly requested production. Immutable archived exact candidate `releases/Dob_Defender_Alpha2.77.html` verified Git blob `0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9`; production `main:index.html` Git blob `ae484817ab23bb3895dca9806f957c2688827b1e` from commit `6d732ec905915f0e997c442317a335c7f6759f1c`. Promotion changed only HTML title/version and two comments. All three inline JS blocks passed Node syntax checks. Candidate-unused 15 clips preserved. **First unverified next task:** check GitHub Actions and Pages live-served production version and collect user Android production confirmation; do not conflate successful GitHub update with deployed page.
+
 ## Audio Mix Test 3 — local candidate
 
 Built standalone Test 3 from Test 2; only two audio gains changed: `Meteor_Hit` 0.64 -> 0.60 and `Slew_Light` 0.40 -> 0.32. All other gains and gameplay retained, labels advanced. Three inline JS blocks passed Node syntax check; 3,776,589-byte test file created. Android playback unverified. Production unchanged. First unverified step: user's Android audition of Test 3; verify candidate integrity and follow locked release approval gates before any production promotion.
