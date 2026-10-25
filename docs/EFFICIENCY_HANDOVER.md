@@ -1,3 +1,13 @@
+## Verified continuation — 25 October 2026
+
+- Full mandatory README / WORKFLOW / specification / handover / history onboarding completed.
+- Reconfirmed current production `main:index.html` Git blob SHA `68da879b0120364df1128848e115200deec636b6`; approved Alpha2.76 archive remains different: `52352378f7fe288c52351d73b0fd4c74abc3b1aa`.
+- Obtained **exact GitHub production HTML** through `fetch_blob` and a four-part lossless Base64 Google Docs transfer after direct container DNS failed and single-Doc insertion hit a size limit. Reconstructed **3,775,528 bytes**, closing HTML tag present; local `git hash-object` **matched** `68da879b0120364df1128848e115200deec636b6`.
+- Ran the checked-in `tools/modular_workspace.py` source exported through Google Docs (export introduced whitespace only): `split`, `check`, `build` all passed using verified current production. **8 blocks, 46 media assets, byte-exact 3,775,528-byte rebuild and same Git blob SHA.**
+- Created and ran local read-only static smoke checks: three embedded JavaScript blocks passed Node.js `--check`; all 46 data URI assets decoded successfully; 14 gameplay/control/audio source markers present. These markers are **presence checks**, not behavioural regression tests.
+- No gameplay, production, archive or test build was published. No user testing requested. Local workspace and check script are internal and are **not yet committed** to GitHub.
+- **First remaining unverified task:** add reproducible, maintained syntax/asset/regression checks to the repository, strengthen them beyond marker presence where feasible, and validate with deliberate negative tests. Browser gameplay, Android controls/rendering/music and external leaderboard remain untested. Keep production release approval gates intact.
+
 ## Priority 0 — Conversation context efficiency (25 October 2026)
 
 **Problem:** A new development chat can reach its conversation-context limit within one or two messages. This is distinct from saved Memory capacity. The exact platform error has not been independently diagnosed; the following reduces avoidable context use without claiming to eliminate platform limits.
