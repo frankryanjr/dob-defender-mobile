@@ -1,3 +1,12 @@
+## Alpha2.78 — 25 October 2026 — Tally audio production release
+
+- **Approved:** User auditioned full Tally Audio Test 2 on Android, confirmed it was perfect and explicitly requested production.
+- **Exact approved archive:** `releases/Dob_Defender_Alpha2.78.html` blob `168c505247fa450a64824d6a9c706b3d82aef3ef`, 3,778,569 bytes; GitHub SHA matched exact local candidate before promotion.
+- **Production:** `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`, commit `7db1c86f8c0df0850cf88e367876585f8342e0d2`, release-label-only transformation from approved archive.
+- **Audio:** Rising tones for laser/dome fill, fast score-add clicks, cheerful saved-cow ping, low lost-cow dud, descending depletion for deductions. Tally-effects gain 1.75 (from initial mock 0.55); music ducks to 0.06 from its normal 0.20 while tally runs, then restores on Continue.
+- **Preserved:** Cow scoring mechanics and all other approved gameplay/artwork, 46 embedded production sounds. Upcoming cow scoring/difficulty changes are still unimplemented.
+- **Checks:** Three inline JavaScript blocks passed Node syntax for Test 2; exact candidate/archive SHA and production SHA verified. Actions/Pages served version and Android production confirmation require independent checks.
+
 ## Alpha2.77 — 25 October 2026 — Production audio mix
 
 - **Approved:** User confirmed Audio Mix Test 3 sounded good and explicitly requested production publication.
