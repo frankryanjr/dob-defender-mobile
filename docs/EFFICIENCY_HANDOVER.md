@@ -1,3 +1,11 @@
+## Verified browser interaction milestone — 25 October 2026
+
+- Current production Git SHA `68da879b0120364df1128848e115200deec636b6` matched the exact local 3,775,528-byte HTML. No game code edited.
+- Diagnosis: callsign DEFEND! submits to live Supabase leaderboard registration; its registration must succeed before the gate closes and `resetGame()` starts. A controlled Playwright request mock (not a live backend test) returned the documented `{player:{player_id,nickname,best_score,best_night}}` shape; clicking DEFEND! then hid the gate and began Night 1.
+- Headless Chromium mobile 390x844 test passed: real start-poster click, callsign gate display, real DEFEND! click, intercepted registration request, game transition, natural 6.5-second opening/countdown, real pointer drag of slider (knob 50% -> 74.4444%), real canvas click firing one shot (laser 100% -> 98%), zero captured JavaScript exceptions. A local reusable Python/Playwright test was executed successfully with production-SHA assertion; this local script has **not yet been committed** to GitHub.
+- No live Supabase registration, real Android touch, full scoring/collision, enemy spawns, music output or graphics pixel-reference regression was verified. The mock tests only the UI/API contract with the fake reply, not network availability or actual backend success.
+- **First unverified task:** commit verified reusable Playwright smoke script to repository (after reviewing it for no unsafe effects), run a deliberate negative test to prove its SHA check fails on tampering, and extend coverage to pause/resume and visual/collision/scoring where feasible. Continue automatic milestone checkpoints. No production, archive, or public test build publication.
+
 ## Browser interaction checkpoint — 25 October 2026
 
 - Reconfirmed exact current GitHub production `main:index.html` blob `68da879b0120364df1128848e115200deec636b6` against the local 3,775,528-byte HTML using `git hash-object`. No historical uploaded HTML or archive substituted.
