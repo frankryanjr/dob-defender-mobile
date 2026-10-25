@@ -1,3 +1,9 @@
+## Browser checkpoint — 25 October 2026
+
+Verified production SHA `68da879b0120364df1128848e115200deec636b6`. Headless Chromium now loads the full current production HTML with Playwright `page.set_content(html, wait_until='commit')`; mobile 390x844 viewport. Observed title Alpha2.76, start screen, DEFEND button, initial score 00000, Night 1, one canvas and zero captured JS errors. A genuine click on `#play` timed out awaiting stable element, so no interaction, gameplay, collisions, audio or rendering regression is verified.
+
+**First unverified task:** inspect start-button layout/stability and obtain actual user-like click, then automate and commit reproducible browser tests. Keep production unchanged and separate browser checks from Android validation.
+
 ## Browser smoke-test milestone checkpoint — 25 October 2026
 
 - Re-read mandatory GitHub README/WORKFLOW and inspected handover, gameplay, changelog, development, history and efficiency documentation. Confirmed current `main:index.html` Git blob `68da879b0120364df1128848e115200deec636b6`, approved Alpha2.76 archive `52352378f7fe288c52351d73b0fd4c74abc3b1aa`.
