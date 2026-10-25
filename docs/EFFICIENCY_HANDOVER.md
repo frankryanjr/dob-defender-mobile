@@ -1,3 +1,11 @@
+## MVP sufficiency decision — 25 October 2026
+
+- **User accepted the existing development/testing infrastructure as sufficient for an MVP.** Stop extending the testing framework solely to maximise coverage; resume gameplay/product development and seek player feedback as the next phase.
+- Existing modular rebuild, SHA integrity and browser regression scripts remain available and should be run for relevant changes. Automatic milestone GitHub documentation remains mandatory.
+- **Not verified / retained as limitations:** independent rerun of committed extended browser regression script; external music playback/decode; live leaderboard registration; genuine Android interaction/audio/rendering. Do not present these as passed, and revisit when relevant to a candidate's testing or release decision.
+- **First next action:** request or use the user's next gameplay/product priority; do not independently alter approved game behaviour. Current approved production baseline remains Alpha2.76, `main:index.html` SHA `68da879b0120364df1128848e115200deec636b6`. MVP label is a process/product direction decision, **not production release approval**.
+- No game HTML, production deployment or release archive changes authorised by this decision.
+
 ## Latest automated test checkpoint — 25 October 2026
 
 Committed `tools/browser_regression_extended.py` (commit `c03b5a23f948ed4b0fbae4d53ddf80058747435c`). Local extended Chromium scoring, collision, dome-damage and rendering checks passed again using verified Alpha2.76 source SHA `68da879b0120364df1128848e115200deec636b6`. Tampered SHA test rejected. Test collision inputs were synthetic and registration mocked.
