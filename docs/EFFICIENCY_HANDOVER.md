@@ -1,3 +1,12 @@
+## Scoring and media regression checkpoint — 25 October 2026
+
+- SHA-verified production input: `main:index.html` 3,775,528 bytes, Git SHA `68da879b0120364df1128848e115200deec636b6`. Reused exact verified local HTML; production file was never edited.
+- Headless Chromium mobile 390×844 with simulated leaderboard registration again passed startup, countdown and Night 1, zero captured JS page errors.
+- **Deterministic scoring/collision handler tests PASSED:** inserted a short test-only exposure of the script-private `hit(e,b)` function **into an in-memory copy**, after confirming baseline SHA, without writing/publishing modified game HTML. On isolated synthetic target objects: meteor +10, comet +5, satellite +5, asteroid +10. All four resulted in `hp=0` and projectile `t=0`. This verifies the handler contract for these cases, **not natural enemy spawning, physical collision detection or actual user aiming accuracy**.
+- Chromium canvas painted nontransparent pixels over a 390×844 canvas (329,160 nonzero alpha values); demonstrates rendering activity only, not pixel-reference correctness. Music element `volume=0.2`, `loop=true`, `paused=false`, but `readyState=0`; source is **external** `https://frankryanjr.github.io/dob-defender-mobile/audio/DobDefGame2.mp3`. Therefore neither music asset loading nor audible playback was established within the sandbox; offline playback is not guaranteed by this result.
+- **First unverified task:** expand deterministic hit logic to multi-hit asteroid, impacts/structural damage and simulated physical collision path; verify embedded artwork decode and audio-source accessibility in an environment permitting that URL; commit and independently rerun extended browser regression script once stable. Real Android audiovisual/controls and live leaderboard still require device/network checks. Do not ask user for internal tooling decisions.
+- Game code, test builds, releases and production unchanged.
+
 ## Extended browser regression checkpoint — 25 October 2026
 
 - User instructed assistant to continue through all independent testing without pausing for approval after routine milestones. Keep automatically committing GitHub checkpoints.
