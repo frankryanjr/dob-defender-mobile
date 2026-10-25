@@ -1,3 +1,12 @@
+## Swept collision regression checkpoint — 25 October 2026
+
+- Verified current exact production SHA `68da879b0120364df1128848e115200deec636b6`. Used only a temporary in-memory instrumentation hook inside its game closure; original HTML and production files untouched.
+- Chromium 390×844 test: injected a synthetic meteor and moving projectile into actual `enemies`/`shots` arrays, advanced real `updateNight(0.016)` logic. Swept collision **passed**: meteor hp became 0, bullet lifetime 0, score +10. This directly exercises segment collision selection plus hit/scoring but is controlled/artificial, **not a live random encounter or Android touch test**.
+- Same run passed direct handler tests for meteor +10, comet +5, satellite +5, asteroid +10, armored asteroid stage hp3→2 +5 and hp2→1 +5; HTML poster image fully decoded (one of one, no broken DOM images), canvas all 329,160 pixels alpha-nonzero, zero captured page exceptions. Music element configured looping at 20% and unpaused; `readyState=0` means external MP3 playback **unverified**.
+- A test harness failure initially arose when JS `Array.map` supplied an unwanted numeric index as the optional hp parameter; corrected test lambda and reran successfully. A later Python string quoting typo was likewise corrected before the successful swept collision run. Neither was a production game error.
+- **First unverified task:** extend collision tests to dome/ground impacts and score/energy invariants, test downloadable audio with suitable network support, and commit independently runnable extended automated tests. Android visual/audio gameplay and live Supabase remain outside verified scope. Keep working autonomously and checkpoint each milestone; involve user only for necessary personal device testing or release approval.
+- No production or release changes.
+
 ## Continued regression testing — 25 October 2026
 
 - Continued without requiring routine user confirmation, as instructed. Verified baseline unchanged (`index.html` Git SHA `68da879b0120364df1128848e115200deec636b6`).
