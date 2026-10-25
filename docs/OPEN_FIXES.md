@@ -50,3 +50,9 @@ Additional issues will be appended as reported.
 - **Later stages:** permit **two UFOs to attempt abductions simultaneously**, provided each targets a **different cow**. Do not permit both UFOs to reserve or abduct the same animal.
 - Scale difficulty with night progression; exact threshold for two concurrent UFOs and counts per night require gameplay balancing. Respect the distinct cow outcomes, fair rescue window, and once-per-cow tally rules from Issues 1–5.
 - **State:** accepted direction for next gameplay test design, **not implemented**, not a release approval. Inspect live Alpha2.77 spawn limit and UFO target reservation/scheduling before editing; preserve other approved behavior.
+
+## 7. Night-end tally sound design mock — 25 October 2026
+
+- User requested a soft ascending tone while laser/dome bars fill; fast click increments while earned points animate into the total; one bright positive ping for each green saved-cow marker; one dull negative cue for each red lost-cow marker; descending/depletion tone on score deductions.
+- Built separate standalone **`Dob_Defender_Tally_Audio_Mock_1.html`** (8266 bytes) with a representative animated tally, synthesized Web Audio prototype (not original production audio), full sequence play, individual audition buttons, overall-effects-volume and animation-speed controls. Node syntax check passed. Example tally 1250 +65 +80 +75 -25 =1445. **User audition remains unverified.**
+- This is a design mock only: no approved game assets/code altered, no game deployment or release approval. Next step: user listens on Android and comments on tempo/pitch/levels, then integrate approved sounds into exact verified Alpha2.77 source as full playable test candidate under WORKFLOW.
