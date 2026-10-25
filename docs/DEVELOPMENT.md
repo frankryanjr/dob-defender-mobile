@@ -114,3 +114,7 @@ To host with GitHub Pages, configure repository **Settings → Pages**, deploy f
 ## Validation status
 
 GitHub upload confirms file persistence, **not** Android runtime testing. No browser gameplay test was performed during repository initialization.
+
+## Alpha2.76 release validation — 25 October 2026
+
+User explicitly requested production publication of **Alpha2.76 Sound Test 25**. Local candidate Git blob `52352378f7fe288c52351d73b0fd4c74abc3b1aa`. Direct GitHub archive transfer initially mismatched because a line-range boundary newline was omitted; repaired transfer and re-fetched GitHub archive SHA matched exactly **before** updating production. Archive path `releases/Dob_Defender_Alpha2.76.html`. Production derived solely from verified archive by replacing three `Alpha2.76 Sound Test 25` labels with `Alpha2.76` and changing the release-status code comment. Local production blob SHA `68da879b0120364df1128848e115200deec636b6`, verified against GitHub update result; release commit `521e842f65284b4663cbb7430ce80b3fd9dc229b`. All three inline JavaScript blocks passed `node --check`. Browser/Pages deployment and user Android production confirmation are separate pending checks. No other gameplay changes made during promotion.
