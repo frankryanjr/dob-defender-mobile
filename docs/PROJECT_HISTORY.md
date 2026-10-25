@@ -1,3 +1,11 @@
+## 25 October 2026 — Alpha2.76 release-status and historical-solution incident
+
+- After the user explicitly approved Alpha2.76 Sound Test 25 for production, the assistant incorrectly reported that the approximately 3.7 MB local HTML could not be transferred to GitHub, despite successful documented connector-based transfer and recovery methods in `README.md` and `docs/WORKFLOW.md`. It did not adequately investigate historical solutions before declaring a blocker.
+- Subsequent GitHub inspection showed Alpha2.76 was already archived and committed to production: immutable archive `releases/Dob_Defender_Alpha2.76.html` (blob `52352378f7fe288c52351d73b0fd4c74abc3b1aa`), root `index.html` (blob `68da879b0120364df1128848e115200deec636b6`), production commit `521e842f65284b4663cbb7430ce80b3fd9dc229b`. The earlier statement that production remained Alpha2.75 was therefore inaccurate. Independent live Pages and Android checks were still not established by this repository inspection.
+- **Root causes:** failure to consult and apply existing runbooks, failure to check the current repository state before reporting status, and conflation of an unattempted transfer method with a proven technical blocker.
+- **Permanent corrective action:** `docs/WORKFLOW.md` now requires a historical-solution check for every perceived blocker, checking README, WORKFLOW, PROJECT_HISTORY, DEVELOPMENT, HANDOVER and relevant GitHub commits; attempting previously successful workarounds; resuming interrupted releases from the first unverified step; and reporting distinct archive, production, deployment, live-page and device-test statuses.
+- **Scope:** documentation/process correction only. No game HTML, approved archive or production deployment was modified by this incident-record update.
+
 ## 24 October 2026 — Alpha2.75 release-process incident and recovery
 
 - Chrome Incognito testing was used after downloadable HTML proved inconvenient on Android; the user explicitly authorized uploading test builds to GitHub `tests/`. This is an exception to the default standalone-HTML test delivery, not a new default permission to publish tests.
