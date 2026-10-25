@@ -34,3 +34,11 @@ Additional issues will be appended as reported.
 - User is considering fixing cow opportunities at **3 on Night 1 and 4 on each later night** for leaderboard fairness, with arrival positions/timing and behaviour still random.
 - Proposed tally remains +25 per surviving cow and -25 per lost cow; potential cow-tally swing per night is +75 to -75 on Night 1 and +100 to -100 thereafter, ignoring the existing separate +50 actual UFO rescue reward.
 - **Needs code/design verification:** current game historically supports up to 3 concurrent cows. Four per night could mean 4 unique cows total rather than 4 concurrent, preserving rendering and UFO rules; inspect actual spawn logic before design changes. Ensure entrants/departures, repeated rescues and later UFO attempts don't generate more scoring opportunities than intended. No code changes or release approval.
+
+## 5. UFO engagement from Night 1 — proposed revised progression
+
+- **User preference (25 October 2026):** Guarantee **one actual cow-abduction attempt on Night 1** to engage players immediately; scale abduction pressure as night difficulty increases instead of waiting for the historic Night 3 guaranteed attempt.
+- **Proposed initial pacing to test:** Night 1 = 1 guaranteed attempt; Night 2 = 1; Nights 3–5 = 1–2; Nights 6–8 = 2–3; Night 9 onward = 3 or more only after careful playtesting. This is a **suggested curve, not approved exact per-night counts**; adjust alongside meteor/asteroid density, flight timing and fair rescue windows.
+- **Fairness/interaction with Issue 4:** proposed 3 unique cows in Night 1 and 4 per subsequent night, with at most 3 simultaneously visible. The scheduled UFO should have an eligible cow to target, should not retry indefinitely or count the same cow twice, and should provide the established rescue opportunity before escape.
+- **Historical behaviour to replace if approved:** harmless flybys on early nights and an originally guaranteed Night 3 abduction, with probabilistic earlier attempts and later caps. Audit the current Alpha2.77 runtime scheduling before altering the event logic.
+- **Status:** Design proposal recorded; no game changes and no production approval. First verification is current production cow/UFO spawn and encounter scheduler audit before a gameplay test candidate.
