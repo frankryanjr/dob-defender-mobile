@@ -24,7 +24,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 
 | Document | Purpose |
 | --- | --- |
-| [WORKFLOW](docs/WORKFLOW.md) | **Mandatory full read**; authoritative procedures and release gates |
+| [WORKFLOW](docs/WORKFLOW.md) | **Mandatory full read** of concise locked policy; detailed procedures linked on demand |
 | [EFFICIENCY_HANDOVER](docs/EFFICIENCY_HANDOVER.md) | Current task, completed work, unresolved steps and context-saving rules |
 | [MODULAR_WORKSPACE](docs/MODULAR_WORKSPACE.md) | Modular source design and validation |
 | [HANDOVER](docs/HANDOVER.md) | Current game handover; consult as required by workflow |
@@ -33,6 +33,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 | [DEVELOPMENT](docs/DEVELOPMENT.md) | Development details |
 | [PROJECT_HISTORY](docs/PROJECT_HISTORY.md) | Historical decisions and prior work |
 | [Start screen handover](docs/Start_Screen_v1_Handover.md) | **Historical, task-specific reference**; not a standing current-work priority |
+| [Archived full WORKFLOW](docs/archive/WORKFLOW_FULL_2026-10-25.md) | Detailed historical procedures; read relevant sections before operations, not at every startup |
 | [Archived full README](docs/archive/README_FULL_2026-10-25.md) | Previous 29.5k-character README preserved intact, including old release summaries, transfer procedures and legacy notes |
 
 Older release headings in the archived README, including “Current production — Alpha2.69/Alpha2.70,” are **historical statements**, not current status. Consult them only for relevant history.
