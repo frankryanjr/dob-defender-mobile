@@ -1,3 +1,9 @@
+## Dome impact browser checkpoint — 25 October 2026
+
+Against SHA-verified production Alpha2.76, temporary in-memory Chromium instrumentation exercised impact handling. A synthetic mandatory meteor changed hp from 1 to 0 and reduced shield by 20. Swept projectile collision, regular/armored asteroid scoring, poster image decode and canvas painting passed. Zero page exceptions. Music element stays at readyState 0, so sound playback remains unverified. No game HTML was edited or published.
+
+**First unverified task:** commit the repeatable extended browser smoke tests and rerun the checked-in script; extend negative damage checks and test external audio asset in an environment that permits networking. Android and live leaderboard testing remain separate.
+
 ## Swept collision regression checkpoint — 25 October 2026
 
 - Verified current exact production SHA `68da879b0120364df1128848e115200deec636b6`. Used only a temporary in-memory instrumentation hook inside its game closure; original HTML and production files untouched.
