@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dob Defender modular prototype ZIP</title>
+<style>body{font:16px system-ui;background:#111923;color:#fff;max-width:650px;margin:8vh auto;padding:20px}button{font-size:18px;padding:15px;border:0;border-radius:8px;background:#b5f5c5;color:#071b12;font-weight:bold}p{line-height:1.5}#status{white-space:pre-wrap}</style>
+<h1>Dob Defender modular build prototype</h1>
+<p>Downloads a ZIP containing the modular source, extracted media and a verified standalone-HTML reconstruction script. It is generated from the approved Alpha2.76 release archive, not production.</p>
+<button id="download">Download prototype ZIP</button><p id="status"></p>
+<script>
+const EXPECTED='52352378f7fe288c52351d73b0fd4c74abc3b1aa';
+const encoder=new TextEncoder(), decoder=new TextDecoder();
+const status=document.getElementById('status');
+function utf8(s){return encoder.encode(s)}
+function le16(a,n){a.push(n&255,(n>>>8)&255)}
+function le32(a,n){a.push(n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255)}
+const crcTable=Array.from({length:256},(_,i)=>{let c=i;for(let j=0;j<8;j++)c=(c&1)?(0xedb88320^(c>>>1)):(c>>>1);return c>>>0});
+function crc32(a){let c=0xffffffff;for(const b of a)c=crcTable[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0}
+function zip(files){
+ const output=[],central=[];let offset=0;
+ for(const [name,bytes] of files){
+  const fn=utf8(name),crc=crc32(bytes),local=[];
+  le32(local,0x04034b50);le16(local,20);le16(local,0x0800);le16(local,0);le16(local,0);le16(local,0);
+  le32(local,crc);le32(local,bytes.length);le32(local,bytes.length);le16(local,fn.length);le16(local,0);
+  output.push(new Uint8Array(local),fn,bytes);
+  const cd=[];le32(cd,0x02014b50);le16(cd,20);le16(cd,20);le16(cd,0x0800);le16(cd,0);le16(cd,0);le16(cd,0);
+  le32(cd,crc);le32(cd,bytes.length);le32(cd,bytes.length);le16(cd,fn.length);le16(cd,0);le16(cd,0);
+  le16(cd,0);le16(cd,0);le32(cd,0);le32(cd,offset);central.push(new Uint8Array(cd),fn);
+  offset+=local.length+fn.length+bytes.length;
+ }
+ let centralSize=0;for(const p of central)centralSize+=p.length;
+ const end=[];le32(end,0x06054b50);le16(end,0);le16(end,0);le16(end,files.length);le16(end,files.length);
+ le32(end,centralSize);le32(end,offset);le16(end,0);
+ return new Blob([...output,...central,new Uint8Array(end)],{type:'application/zip'});
+}
+async function gitHash(bytes){
+ const head=utf8('blob '+bytes.length+'\0'),whole=new Uint8Array(head.length+bytes.length);
+ whole.set(head);whole.set(bytes,head.length);
+ const digest=await crypto.subtle.digest('SHA-1',whole);
+ return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+const buildPy=`#!/usr/bin/env python3
+from pathlib import Path
+import json,subprocess
+root=Path(__file__).resolve().parent
+m=json.loads((root/'manifest.json').read_text())
+data=(root/'template.html').read_bytes()
+for item in m['parts']:
+    token=item['token'].encode()
+    assert data.count(token)==1
+    data=data.replace(token,(root/item['file']).read_bytes())
+for item in m['media']:
+    token=item['token'].encode()
+    assert data.count(token)==1
+    data=data.replace(token,(root/item['file']).read_bytes())
+assert len(data)==m['bytes']
+sha=subprocess.check_output(['git','hash-object','--stdin'],input=data).decode().strip()
+assert sha==m['git_blob_sha'],f'Hash mismatch: {sha}'
+(root/'rebuilt_test.html').write_bytes(data)
+print('Verified',len(data),'bytes',sha)
+`;
+document.getElementById('download').onclick=async()=>{
+ const button=document.getElementById('download');button.disabled=true;
+ try{
+  status.textContent='Fetching approved Alpha2.76 archive…';
+  const url='../releases/Dob_Defender_Alpha2.76.html';
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw Error('Archive HTTP '+response.status);
+  const original=new Uint8Array(await response.arrayBuffer());
+  const sha=await gitHash(original);
+  if(sha!==EXPECTED)throw Error('Archive SHA mismatch; refusing to build ZIP. Got '+sha);
+  const source=decoder.decode(original);
+  const files=[],parts=[],media=[];
+  let template='',last=0;
+  const pattern=/<style\b[^>]*>[\s\S]*?<\/style\s*>|<script\b[^>]*>[\s\S]*?<\/script\s*>/gi;
+  let match,index=0;
+  while((match=pattern.exec(source))){
+   const token='@@DOB_PART_'+String(++index).padStart(2,'0')+'@@';
+   const kind=/^<style/i.test(match[0])?'css':'js';
+   const file='part_'+String(index).padStart(2,'0')+'.'+kind;
+   template+=source.slice(last,match.index)+token;
+   let body=match[0];
+   if(kind==='js'){
+    const assetPattern=/data:(?:audio|image)\/[a-zA-Z0-9.+-]+(?:;[a-zA-Z0-9=+-]+)*;base64,[A-Za-z0-9+/=]+/g;
+    body=body.replace(assetPattern,value=>{
+      const n=media.length+1,assetToken='@@DOB_MEDIA_'+String(n).padStart(2,'0')+'@@',assetFile='media_'+String(n).padStart(2,'0')+'.txt';
+      media.push({token:assetToken,file:assetFile,bytes:utf8(value).length});
+      files.push([assetFile,utf8(value)]);return assetToken;
+    });
+   }
+   parts.push({token,file,bytes:utf8(match[0]).length});
+   files.push([file,utf8(body)]);
+   last=pattern.lastIndex;
+  }
+  template+=source.slice(last);
+  const manifest={source:'Approved Alpha2.76 Sound Test 25',bytes:original.length,git_blob_sha:EXPECTED,parts,media};
+  files.push(['template.html',utf8(template)],['manifest.json',utf8(JSON.stringify(manifest,null,2))],['build.py',utf8(buildPy)]);
+  status.textContent='Creating ZIP with '+parts.length+' code/style blocks and '+media.length+' media assets…';
+  const blob=zip(files),href=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=href;link.download='Dob_Defender_Modular_Build_Prototype.zip';document.body.appendChild(link);link.click();link.remove();
+  status.textContent='Download prepared ('+(blob.size/1048576).toFixed(2)+' MiB). Archive SHA verified: '+sha+'.';
+  setTimeout(()=>URL.revokeObjectURL(href),60000);
+ }catch(err){status.textContent='Error: '+err.message}
+ finally{button.disabled=false}
+};
+</script></html>
