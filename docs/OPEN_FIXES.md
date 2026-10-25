@@ -28,3 +28,9 @@ Additional issues will be appended as reported.
 - Award +25 per surviving cow, -25 per lost cow in night-end tally. Retain existing immediate +50 and dome repair for successful UFO rescues. A cow must not count in both night-end columns and must be counted once per night; avoid rewarding a rescued cow twice in the tally.
 - Before changing code, audit how cows spawn, depart, persist, are rescued or die in the current Alpha2.77 baseline. In particular, distinguish surviving cows that depart normally from genuinely lost cows; establish coherent per-night starting/entrant population and end-state reconciliation.
 - This changes prior meaning of 'saved' from UFO rescues to all surviving cows. Requires user sign-off for gameplay and test candidate before production.
+
+## 4. Cow population balancing proposal
+
+- User is considering fixing cow opportunities at **3 on Night 1 and 4 on each later night** for leaderboard fairness, with arrival positions/timing and behaviour still random.
+- Proposed tally remains +25 per surviving cow and -25 per lost cow; potential cow-tally swing per night is +75 to -75 on Night 1 and +100 to -100 thereafter, ignoring the existing separate +50 actual UFO rescue reward.
+- **Needs code/design verification:** current game historically supports up to 3 concurrent cows. Four per night could mean 4 unique cows total rather than 4 concurrent, preserving rendering and UFO rules; inspect actual spawn logic before design changes. Ensure entrants/departures, repeated rescues and later UFO attempts don't generate more scoring opportunities than intended. No code changes or release approval.
