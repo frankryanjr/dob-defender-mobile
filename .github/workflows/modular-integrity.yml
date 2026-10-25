@@ -1,0 +1,61 @@
+name: Modular workspace integrity
+
+on:
+  push:
+    paths:
+      - 'tools/modular_workspace.py'
+      - '.github/workflows/modular-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout authoritative repository
+        uses: actions/checkout@v4
+      - name: Prepare Python and Node
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check production baseline and modular round trip
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s index.html
+          BASELINE_SHA="$(git hash-object index.html)"
+          echo "Current production baseline SHA: $BASELINE_SHA"
+          python3 tools/modular_workspace.py split index.html "$RUNNER_TEMP/dd-workspace" --expected-sha "$BASELINE_SHA"
+          python3 tools/modular_workspace.py check "$RUNNER_TEMP/dd-workspace"
+          python3 tools/modular_workspace.py build "$RUNNER_TEMP/dd-workspace" "$RUNNER_TEMP/dd-rebuilt.html"
+          cmp -s index.html "$RUNNER_TEMP/dd-rebuilt.html"
+          test "$(git hash-object "$RUNNER_TEMP/dd-rebuilt.html")" = "$BASELINE_SHA"
+          echo "PASS: production HTML rebuilt byte-for-byte"
+      - name: JavaScript syntax check for extracted script blocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          root=Path(__import__('os').environ['RUNNER_TEMP'])/'dd-workspace'/'blocks'
+          count=0
+          for path in sorted(root.glob('*.js')):
+              raw=path.read_bytes()
+              match=re.match(rb'<script\\b[^>]*>([\\s\\S]*?)</script\\s*>',raw,re.I)
+              if not match:
+                  raise SystemExit(f'Cannot parse script tag: {path}')
+              js=match.group(1)
+              # Replacing media tokens with a string keeps extracted source syntactically valid.
+              js=re.sub(rb'@@DOB_MEDIA_[0-9]{3}@@',b'data:image/png;base64,AAAA',js)
+              scratch=path.with_suffix('.syntax-check.js')
+              scratch.write_bytes(js)
+              subprocess.run(['node','--check',str(scratch)],check=True)
+              scratch.unlink()
+              count+=1
+          if not count:
+              raise SystemExit('No JavaScript blocks found')
+          print(f'PASS: syntax checked {count} JavaScript blocks')
+          PY
