@@ -1,3 +1,12 @@
+## Browser interaction checkpoint — 25 October 2026
+
+- Reconfirmed exact current GitHub production `main:index.html` blob `68da879b0120364df1128848e115200deec636b6` against the local 3,775,528-byte HTML using `git hash-object`. No historical uploaded HTML or archive substituted.
+- **Root cause of earlier click timeout:** test targeted `#play`, a lower underlying game-over button, while the actual start poster overlay uses `#ddApprovedStartButtonV1`. That poster intercepts/obscures lower controls. This was a test-selector issue, not a verified game defect.
+- Headless Chromium (Playwright mobile 390×844 touch viewport) loaded exact production via `page.set_content(html,wait_until='commit')`. **Real locator click on `#ddApprovedStartButtonV1` passed:** poster `#ddApprovedStartV1` changed from visible to hidden and new-player `#ddCallsignGate` became visible with an actionable `#ddCallsignDefend` button. No captured JS page errors during this transition.
+- A real `#ddCallsignDefend` click completed, but gate stayed visible after 600ms; **Night 1 transition not proven**. Reason for remaining gate requires inspection (generated identity/validation/backend request). No audio, controls, impacts, scoring or pixel rendering assertions completed.
+- **First unverified task:** diagnose the callsign gate after clicking DEFEND! (inspect field, validation messages, async requests and timing without changing production); verify transition to Night 1, then automate aim/fire and further gameplay checks. Commit reusable browser tests once verified, with clear browser-vs-Android limitations.
+- No production HTML, test build, archive, release, or gameplay changes. Browser probe script remains internal.
+
 ## Browser checkpoint — 25 October 2026
 
 Verified production SHA `68da879b0120364df1128848e115200deec636b6`. Headless Chromium now loads the full current production HTML with Playwright `page.set_content(html, wait_until='commit')`; mobile 390x844 viewport. Observed title Alpha2.76, start screen, DEFEND button, initial score 00000, Night 1, one canvas and zero captured JS errors. A genuine click on `#play` timed out awaiting stable element, so no interaction, gameplay, collisions, audio or rendering regression is verified.
