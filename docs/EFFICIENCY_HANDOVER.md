@@ -1,3 +1,11 @@
+## Browser smoke-test milestone checkpoint — 25 October 2026
+
+- Re-read mandatory GitHub README/WORKFLOW and inspected handover, gameplay, changelog, development, history and efficiency documentation. Confirmed current `main:index.html` Git blob `68da879b0120364df1128848e115200deec636b6`, approved Alpha2.76 archive `52352378f7fe288c52351d73b0fd4c74abc3b1aa`.
+- Existing exact production bytes were available in the internal session workspace: `/mnt/data/dd_verified_production.html` 3,775,528 bytes; local `git hash-object` matched current production. Checked-in modular `check` passed (byte-identical SHA), and checked-in static validator passed 3 JavaScript syntax checks, 46 data-URI assets, placeholders and optional source markers.
+- Browser tools detected: Playwright and Chromium. Browser smoke testing attempted against the exact production HTML in headless mobile-sized Chromium. Direct `file://` navigation and an internally hosted `http://127.0.0.1` route both returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`. A `page.set_content` fallback did not complete within the execution timeout. **No browser gameplay checks were verified or claimed; no test script committed.**
+- **First unverified task:** find an environment-supported way to run browser smoke tests on the verified production HTML (or a secure sandbox route), without publishing a test build or bypassing approval gates; then validate start screen/callsign, aiming/firing, collisions/scoring, audio and rendering. Separate actual browser results from Android testing. Avoid retrying blocked `file://` / localhost navigation unless execution policy changes.
+- No game HTML, production publication, archive or user-facing test build changed. User participation not required for internal tooling at this point.
+
 ## New-chat restart checkpoint — 25 October 2026
 
 **Purpose:** This is a durable restart marker requested by the user to prevent loss of progress if conversation length is reached. GitHub documentation overrides conversational recollection.
