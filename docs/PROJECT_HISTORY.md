@@ -1,3 +1,7 @@
+## 25 October 2026 — Alpha2.78 production audio tally
+
+User approved integrated Tally Audio Test 2; archive exact approved test `releases/Dob_Defender_Alpha2.78.html` SHA `168c505247fa450a64824d6a9c706b3d82aef3ef`, production `main:index.html` SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3` commit `7db1c86f8c0df0850cf88e367876585f8342e0d2`. Adds synthesised tally animation tones/clicks and positive/negative cow feedback, reduces background music during tally only, preserving cow scoring and gameplay. User cow-population/UFO-tally requests are recorded for later development, not included in this release.
+
 ## 25 October 2026 — Alpha2.77 production release
 
 Approved Audio Mix Test 3 user Android audition; explicit push-to-production authorization. Immutable exact approved test archived `releases/Dob_Defender_Alpha2.77.html` (`0d4fcefdaf6d9ac3208c6236c90931b40b7e95d9`), production `main:index.html` (`ae484817ab23bb3895dca9806f957c2688827b1e`, commit `6d732ec905915f0e997c442317a335c7f6759f1c`). Only version-title/comment substitutions during promotion, no additional sound/gameplay changes. 46 sound assets retained and 15 possible dead clips deferred. GitHub Pages deployment and production device confirmation to verify separately.
