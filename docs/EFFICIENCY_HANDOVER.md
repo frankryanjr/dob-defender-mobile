@@ -1,3 +1,11 @@
+## Validator correction and verification — 25 October 2026
+
+- Found a defect in committed `tools/validate_workspace.py`: over-escaped script-tag regular expressions made a valid embedded JS block fail Node syntax checking. Fixed script-tag matching in commit `ea702da0e8fd74b1fa8e7b76fbe1b0f1c925fac6` (validator blob `821b2bbe3a3be7e4b9adbb7315418716555ef38a`).
+- Tested equivalent corrected code locally using a synthetic modular workspace: valid one-block/one-asset fixture **passed**; malformed JS, malformed embedded media URI, duplicate manifest tokens all **failed as intended** (3/3 negatives).
+- Confirmed production `main:index.html` Git blob `68da879b0120364df1128848e115200deec636b6` and approved Alpha2.76 archive `52352378f7fe288c52351d73b0fd4c74abc3b1aa` remain unchanged. The previous production 3,775,528-byte lossless verification remains historical evidence; the exact production workspace is not present in this session's local files.
+- **First unverified task:** perform the documented bounded, lossless GitHub blob transfer of current production into local workspace (do not use old uploaded builds); verify SHA/length; run checked-in `modular_workspace.py split/check/build` and corrected `validate_workspace.py --source-markers` on that workspace, then build stronger behavioural regression tests. No full production-workspace validator result is claimed.
+- Tooling/doc changes only; no gameplay, production HTML, test publication or release.
+
 ## Automated-check tooling continuation — 25 October 2026
 
 - Added `tools/validate_workspace.py` (read-only Python 3 + Node.js validator) to GitHub. It checks JavaScript syntax after removing enclosing script tags, strict Base64 decoding/nonempty assets, unique block/media tokens, and optional weak gameplay source markers.
