@@ -1,3 +1,10 @@
+## Alpha2.79 player verification confirmation — 25 October 2026
+
+- User explicitly confirms that Alpha2.79 is live-deployed and has been verified on Android.
+- This is a user-reported deployment/device verification, not a fresh independent assistant HTTP, GitHub Actions, or device check. No new code or release artifacts changed.
+- Production stays Alpha2.79, `main:index.html` blob `84f89682b3459577746c7678912a9b9dbcdcf4eb`, commit `0925ddac00764ce6fa71ff061d40954e96c41f25`.
+- First unverified next task: when development resumes, retrieve and hash-check exact current production baseline per WORKFLOW before making edits; then choose the next scoped change and test it.
+
 ## Alpha2.79 production release — 25 October 2026
 
 - **User approval:** “Push it all to prod” for complete Alpha2.79 Leaderboard Button Test 7 (not independently Android-verified after scope fix).
