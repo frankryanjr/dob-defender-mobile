@@ -1,3 +1,5 @@
+**Development test checkpoint (25 October 2026):** Alpha2.79 Cow/UFO Test 1 was reconstructed locally from verified Alpha2.78 production; rebuilt standalone SHA `09000256f99a480c89b764ffc48cd4348a6fef40` (3,779,351 bytes), distinct from historical candidate SHA `6b9a7f91b47521b54bef783438dd5a0d440360e2`. Three JS syntax blocks pass, browser navigation blocked; Android testing pending. **Production remains Alpha2.78** SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`. See top of `docs/HANDOVER.md`.
+
 **Current production:** **Alpha2.78** (approved Tally Audio Test 2, 25 October 2026), `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; exact approved test archived in [`releases/Dob_Defender_Alpha2.78.html`](releases/Dob_Defender_Alpha2.78.html) SHA `168c505247fa450a64824d6a9c706b3d82aef3ef`. User confirmed tally audio sounded correct and requested production. New score-tally sounds and temporary music ducking only; open cow scoring changes not included.
 
 # Dob Defender — Project entry point
