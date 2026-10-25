@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 URI = re.compile(rb'data:(?:image|audio)/[a-zA-Z0-9.+-]+(?:;[a-zA-Z0-9=+\\-]+)*;base64,([A-Za-z0-9+/=]+)')
-MARKERS = ('laser', 'meteor', 'asteroid', 'comet', 'slider', 'pointer',
+MARKERS = ('laser', 'meteor', 'asteroid', 'comet', 'aim', 'pointer',
            'score', 'collision', 'audio', 'telescope')
 
 def validate(root, markers=False):
