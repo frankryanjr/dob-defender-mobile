@@ -40,6 +40,8 @@ Detailed archive and release procedures, including label-only production promoti
 
 Record candidate and release versions, exact source/test/archive/production SHAs, user approval, checks, label-only diff, deployment status, unresolved issues and next step. Retain historical release archives. Keep handover current.
 
+**Mandatory automatic milestone checkpoint (no user prompt required):** At every meaningful completed or blocked development milestone, **before proceeding to the next milestone**, commit a concise GitHub handover update. Include: verified work and evidence (tests, SHAs, commits as applicable), changes made, failed/untested checks, current blockers, and the **single first unverified next task** with actionable restart instructions. Update the current task-specific handover and other relevant specifications/checklists when their state changes; keep README's current-state pointer accurate. Mark incomplete work explicitly rather than implying it passed. This documentation housekeeping is authorised independently of production release approval and must not modify game code or release artifacts without the separate required gates. If GitHub writes fail, disclose the unsaved checkpoint and do not treat it as durable. A new chat must resume from the last committed verified checkpoint, not presumed conversational progress.
+
 Priority: explicit user instruction and this locked workflow; current verified GitHub production and approved artifact; current specifications/handover; older documentation and historical files. If a requirement conflicts or GitHub is unavailable, stop and explain rather than guessing.
 
 ## 6. Efficient operating rules
