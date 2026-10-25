@@ -9,6 +9,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 3. Follow the WORKFLOW onboarding instructions to inspect the current approved game, specifications, handover and development history. **Inspect required sources internally; do not reproduce their full contents in conversation output.** After initial mandatory inspection, retrieve only task-relevant sections.
 4. For current efficiency work, read **[docs/EFFICIENCY_HANDOVER.md](docs/EFFICIENCY_HANDOVER.md)** and **[docs/MODULAR_WORKSPACE.md](docs/MODULAR_WORKSPACE.md)**. Resume at the first unverified step.
 5. Give concise status updates; keep large HTML, Base64, media and internal artifacts out of conversation output.
+6. **Before requesting large game HTML**, read the documented proven lossless transfer procedure and size limits in `docs/WORKFLOW.md` and its archived transfer sections. Plan the verified chunked route first; do not attempt an oversized single-file fetch/Doc transfer and only investigate the proven method after failure.
 
 **Context warning:** The user repeatedly encountered a “maximum conversation length” warning shortly after starting chats. Reducing document/tool output is a mitigation, not a verified fix. Avoid fetching large blobs until needed; never substitute an older uploaded HTML for the current production baseline.
 
