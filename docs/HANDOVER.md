@@ -1,3 +1,9 @@
+## Alpha2.79 Cow Splat Test 4 — local unapproved checkpoint (25 October 2026)
+
+- User Android screenshot of Test 3 on Night 7 showed persistent red ovals at cow death positions. Exact Test 3 source `drawCow` uses `Math.min(1,c.timer/.45)` and continues drawing after the timer falls below zero. Invalid negative canvas alpha is ignored, leaving prior draw alpha and an indefinitely rendered mark. Cow state remains splat to preserve tally census; no code removal is needed.
+- Complete standalone `/mnt/data/Dob_Defender_Alpha2.79_Worldwide_Nights_Cow_Splat_Test_4.html`, 3,781,873 bytes, Git blob SHA `0a911c2bade99a7f0b60b61c94f432a233d1db36`, based on local unapproved Dual UFO Test 3. Minimal `drawCow` fix: return if `c.timer<=0`; clamp alpha to [0,1]. Retains cow census, four cows, dual UFO abductions from Night 6 and worldwide badge. Four inline JavaScript blocks pass `node --check`; closing HTML verified. No browser/Android test of new candidate yet.
+- **First unverified step:** Android play Test 4, confirm red ovals fade/disappear following cow deaths (including Night 7) and the end-of-night saved/lost tally remains correct. Production Alpha2.78 unchanged; explicit approval required for release.
+
 ## Alpha2.79 Worldwide Nights Dual UFO Test 3 — local unapproved checkpoint (25 October 2026)
 
 - Local candidate `/mnt/data/Dob_Defender_Alpha2.79_Worldwide_Nights_Dual_UFO_Test_3.html` (3,781,758 bytes), Git blob SHA `d21de160b6d8ffd64d21065012e60ddc0490b95a`; derived from Cow Tally Test 2, **not** published. Production still Alpha2.78 `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`.
