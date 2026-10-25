@@ -1,3 +1,13 @@
+## Alpha2.79 production release — 25 October 2026
+
+- **User approval:** “Push it all to prod” for complete Alpha2.79 Leaderboard Button Test 7 (not independently Android-verified after scope fix).
+- **Exact immutable approved test archive:** `releases/Dob_Defender_Alpha2.79.html` Git blob `131654b11232190f6470032f01180994bd969b1b` (3,782,528 bytes), release archive commit `949e06e9e164c5410dad57f81bd144d436e77eb6`; re-fetched SHA matches local approved Test 7 exactly.
+- **Production:** `main:index.html` Git blob `84f89682b3459577746c7678912a9b9dbcdcf4eb`, production commit `0925ddac00764ce6fa71ff061d40954e96c41f25`. Produced from exact GitHub archive with precisely two label substitutions: HTML `<title>` and `DD_GAME_VERSION` remove “Leaderboard Button Test 7”; no gameplay edits in promotion. Re-fetched production Git blob matches connector response.
+- **Changes since Alpha2.78:** start-screen clickable NIGHTS DEFENDED WORLDWIDE badge opens leaderboard, four starting cows, revised once-per-cow dawn saved/lost census, scheduled early UFO abductions, up to two separate-target simultaneous abductors from Night 6, cow splat fade expiry fix, 9% music during tally with 20% normal return, counter label fit; existing +50 rescue and +10 dome reward retained.
+- **Known limitation:** worldwide badge sums final-night values from public leaderboard response, not authoritative all-time aggregate; capped records can imply a lower bound.
+- **Validation:** four inline JS blocks syntax-checked on Test 7; release archive/local SHA and production label-only changes verified. GitHub Actions status, live Pages HTTP content and Android production gameplay **not independently verified**; environment live HTTP fetch returned inaccessible/cache miss. User to confirm on device. Do not imply completed deployment from successful GitHub write.
+- **First unverified next step:** verify latest GitHub Actions Pages deploy/syntax checks and independently fetch served Pages Alpha2.79 HTML; user tests on Android counter → leaderboard → back → START, four-cow abductions/scoring, Night 6 dual UFO, red splats, tally audio. Investigate discrepancies before further code changes.
+
 ## Alpha2.78 — 25 October 2026 — Tally audio production release
 
 - **Approved:** User auditioned full Tally Audio Test 2 on Android, confirmed it was perfect and explicitly requested production.
