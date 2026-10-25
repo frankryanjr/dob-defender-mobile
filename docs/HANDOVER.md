@@ -1,3 +1,10 @@
+## Alpha2.79 Test 7 production request — BLOCKED, not released (25 October 2026)
+
+- User explicitly requested "Push it all to prod" for current Alpha2.79 Leaderboard Button Test 7, without separate Android confirmation of the repaired button. Approval request recorded, **but no release performed**.
+- Local complete Test 7 exists at `/mnt/data/Dob_Defender_Alpha2.79_Leaderboard_Button_Test_7.html`; `git hash-object` independently verified `131654b11232190f6470032f01180994bd969b1b` against prior checkpoint.
+- Blocker: GitHub connector create/update requires complete source string in its runtime; local/container file bytes cannot currently be supplied to that connector through the available interface. Local network access to GitHub fails DNS; Google Drive connector upload requires a connector file URI, not a local path. No archive write, root index update, or Pages deployment attempted. Do **not** treat production as Alpha2.79 or supply a production link for it.
+- **First unverified next task:** establish supported lossless local-to-GitHub source transfer (read relevant archived workflow transfer section), write immutable `releases/Dob_Defender_Alpha2.79.html`, verify Git blob matches exact approved Test 7 SHA before any production change, derive label-only production and verify diff, update root, check Actions and served live version. Production Alpha2.78 remains authoritative until independently proven otherwise.
+
 ## Alpha2.79 Leaderboard Button Test 7 — fixed JS scope, unapproved (25 October 2026)
 
 - User reports worldwide counter in Test 6 did not open leaderboard. Confirmed root cause in exact Test 6 source: start screen's independent IIFE attempted direct access to `ddOpen` / `ddFinalLeaderboard`, both lexically scoped inside main-game IIFE, so `typeof ddOpen` was `undefined` and click did nothing.
