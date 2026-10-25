@@ -107,3 +107,7 @@ Defend your observatory from incoming meteorites, asteroids and comets. Save cow
 ## Scope
 
 This is a concise reference, not a complete reverse-engineered mechanics specification. Consult the playable HTML and historical handover for precise constants, schedules, scoring and collision behaviour. When there is a discrepancy, the latest approved HTML is authoritative.
+
+## Alpha2.76 audiovisual and dawn presentation (25 October 2026)
+
+Gameplay mechanics and scoring remain as Alpha2.75. Embedded effects now accompany collisions, meteor fragments, comets, multiple asteroid hits, satellites, ISS, Starlink, UFOs, aircraft, laser energy and aiming. The night transition displays **3, 2, 1, GO** with rising warning tones; the fourth GO tone is longest. Dawn plays one gentle three-note chime. Aircraft arrival warning shows a compact amber-red **SAFETY WARNING** sign 0.5 seconds after the popup opens, flashes then remains lit; a mellow cabin chime accompanies the warning. Plane engine is a moving propeller loop, with a separate aircraft-hit sound. At dawn, transient shots, trails, explosions and debris are cleared rather than frozen on screen. Scoring, enemy damage and approved artwork are unchanged.
