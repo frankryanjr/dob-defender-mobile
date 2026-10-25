@@ -44,7 +44,7 @@ jobs:
           count=0
           for path in sorted(root.glob('*.js')):
               raw=path.read_bytes()
-              match=re.match(rb'<script\\b[^>]*>([\\s\\S]*?)</script\\s*>',raw,re.I)
+              match=re.match(rb'<script\b[^>]*>([\s\S]*?)</script\s*>',raw,re.I)
               if not match:
                   raise SystemExit(f'Cannot parse script tag: {path}')
               js=match.group(1)
