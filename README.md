@@ -18,7 +18,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 
 - Latest known production release: **Alpha2.76** (25 October 2026).
 - Last observed production `main:index.html` blob SHA: `68da879b0120364df1128848e115200deec636b6`. **Recheck before development.**
-- Current initiative: **modular source and development/release efficiency**, not gameplay or runtime optimisation.
+- **Decision (25 October 2026):** the modular development and automated testing infrastructure is **MVP-complete / sufficient for now**. Freeze further tooling optimisation unless a concrete development need or failure requires it. **Next phase: game development and player feedback**, using the existing tests.
 - **Verified 25 October 2026:** exact production source (3,775,528 bytes, SHA `68da879b0120364df1128848e115200deec636b6`) was reconstructed and checked; modular `split/check/build` passed (8 blocks, 46 assets), and static validation and four deliberate negative cases passed. Consult the latest efficiency handover for exact evidence.
 - **Next unverified task:** build and verify browser-driven gameplay smoke tests where supported (aim/fire, start screen, collisions/scoring, audio, rendering); clearly distinguish browser automation from Android/device verification. Improve the lossless transfer route without weakening SHA checks.
 - No gameplay changes or production publication are authorised by this handover. Explicit user approval is required for production.
