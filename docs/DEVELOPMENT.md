@@ -1,3 +1,7 @@
+## Alpha2.78 production promotion — 25 October 2026
+
+User confirmed full `Dob_Defender_Alpha2.78_Tally_Audio_Test_2.html` sounds perfect and explicitly authorised production release. Local approved test SHA `168c505247fa450a64824d6a9c706b3d82aef3ef` (3,778,569 bytes). Uploaded immutable `releases/Dob_Defender_Alpha2.78.html` SHA verified against approved test before production. Production title, `DD_GAME_VERSION` and comment-label substitutions only; resulting `main:index.html` SHA `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3` (3,778,502 bytes) commit `7db1c86f8c0df0850cf88e367876585f8342e0d2`. Three inline JS syntax checks passed on Test 2. GitHub Actions/Pages live served version and Android production confirmation tracked separately. Open cow issues unaffected.
+
 ## Alpha2.77 release verification — 25 Oct 2026
 
 Latest GitHub Actions on final documentation commit `e660845f3b048f5db4bad946dffc31c6967c9d3f`: `pages build and deployment` run `40184435539` **completed success**; `JavaScript syntax check` run `40184435367` **completed success**. Final committed production `index.html` Git blob `ae484817ab23bb3895dca9806f957c2688827b1e`, original release commit `6d732ec905915f0e997c442317a335c7f6759f1c`. Independent HTTP retrieval of live Pages URL failed in current browsing environment; do not state live HTML inspected. **First unverified task:** actual device open `https://frankryanjr.github.io/dob-defender-mobile/?v=Alpha2.77` and confirm clean version/audio; if discrepancies inspect Pages cache and fetch externally.
