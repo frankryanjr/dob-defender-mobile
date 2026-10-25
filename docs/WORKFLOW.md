@@ -2,6 +2,19 @@
 
 **Status: LOCKED.** This document is the highest-priority project operating procedure. It governs all new development chats. Read it before any code changes or file delivery. Repository: https://github.com/frankryanjr/dob-defender-mobile
 
+## Mandatory historical-solution check before declaring a blocker (25 October 2026)
+
+**Applies to every development, testing, transfer, integration and release problem.** A perceived blocker is not a confirmed blocker until the project’s documented history has been checked for a previously successful workaround.
+
+1. **Stop and establish actual state.** Before claiming a task is blocked or incomplete, inspect current GitHub repository files, relevant commit history, release archives, and deployment state. For interrupted work, identify what is already complete and resume at the first unverified step; do not restart or overwrite a verified release.
+2. **Search historical solutions first.** Check `README.md`, `docs/WORKFLOW.md`, `docs/PROJECT_HISTORY.md`, `docs/DEVELOPMENT.md`, `docs/HANDOVER.md`, relevant commits and prior release records for the same or similar issue. Follow linked runbooks and recovery examples. Do not rely on memory or a single failed tool attempt.
+3. **Attempt and verify the established workaround.** Check whether it still applies, perform the documented steps, and validate with the same integrity and safety gates. In particular, a container network/DNS failure does not prove that GitHub connector transfer is unavailable; the documented connector and lossless transfer methods must be considered.
+4. **Escalate only with evidence.** If historical methods fail, try reasonable supported alternatives. Report the exact attempted methods, error or mismatch, last verified state, and next safe action. Never state that something is impossible or ask the user to repeat previously solved manual work without this investigation.
+5. **Record new learning.** Add genuinely new failure modes, successful recovery steps and verification evidence to `docs/PROJECT_HISTORY.md`, and update this workflow when a repeatable rule is needed.
+6. **Report release status precisely.** Distinguish candidate approval, archive verification, production commit, GitHub Actions/Pages deployment, independent live-page verification, and user Android testing. Do not infer one status from another.
+
+**Governing principle:** Before concluding that something cannot be done, establish whether this project has already done it successfully.
+
 ## Alpha2.75 lessons — mandatory transfer and Android test safeguards (24 October 2026)
 
 These additions supplement, rather than replace, the established two-stage workflow and its accumulated lessons.
