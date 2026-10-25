@@ -15,6 +15,18 @@
 
 **Governing principle:** Before concluding that something cannot be done, establish whether this project has already done it successfully.
 
+## Housekeeping and efficient large-file operations (25 October 2026)
+
+**This is mandatory operational guidance, not approval to change gameplay or production.**
+
+1. **Measure before transfer.** Record the current production/archive blob SHA and local candidate byte length and `git hash-object`. For large GitHub `fetch_file` responses, a returned SHA with empty/truncated content is metadata only, not transferred bytes.
+2. **Reuse verified local bytes.** Before starting a new GitHub → Drive → local transfer, inspect the runtime for an existing local copy and compare its Git blob SHA to current GitHub production. Never assume a historical copy is current. Only transfer when there is no exact verified local source.
+3. **Split only where required.** Prefer a supported lossless direct file/connector transfer. If a connector payload limit prevents this, follow the existing Base64 chunking/Google Docs bridge, preserving chunk order, byte count, and SHA. Base64 increases payload by approximately one third; use the documented proven chunk sizes and resume from the last verified segment after failure. Do not attempt an unverified giant write.
+4. **Promote only the exact approved artifact.** Before any write, check whether the numbered archive or production release already exists. If it does, verify its blob SHA and release state; resume from the first unverified step instead of duplicating writes. Archive exact approved test; fetch back and match SHA; derive production only by documented version-label changes; verify production, Actions, Pages and Android separately.
+5. **Temporary Google Drive retention.** Name bridge documents `TEMP Dob Defender <version> <purpose> <date> part N` and maintain their IDs in a transfer log. Once local reconstruction and permanent GitHub archive/source hashes have been verified, remove obsolete temporary transport documents. Retain human-readable troubleshooting/decision records and all permanent GitHub archives. Never permanently delete ambiguous, shared, unverified or still-needed documents; obtain confirmation if their status is unclear.
+6. **Efficiency and safety.** For development, edit only the necessary functions and assets in a separate working copy, validate all scripts and compare against the verified baseline. Consider modular source files plus a deterministic standalone-HTML packaging step only as a separately approved architecture change; do not silently replace the approved single-file game.
+7. **Report status explicitly.** Keep a release record with candidate path/SHA, archive path/SHA, production path/SHA and commit, Actions/Pages status, independent live-page verification, Android confirmation, transfer documents created/cleaned and remaining issues. Do not describe a commit as a verified deployment.
+
 ## Alpha2.75 lessons — mandatory transfer and Android test safeguards (24 October 2026)
 
 These additions supplement, rather than replace, the established two-stage workflow and its accumulated lessons.
