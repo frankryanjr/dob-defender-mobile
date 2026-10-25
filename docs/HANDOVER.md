@@ -1,3 +1,9 @@
+## Alpha2.79 Leaderboard Button Test 6 — local unapproved checkpoint (25 October 2026)
+
+- User requested the NIGHTS DEFENDED WORLDWIDE start-screen counter open the existing leaderboard. Local complete HTML `/mnt/data/Dob_Defender_Alpha2.79_Leaderboard_Button_Test_6.html`, 3,782,432 bytes, Git blob `bf5813cc58e4e8390f2ea716c5b693dc4d7402fe`, derived directly from local Counter & Audio Test 5. No production code changed; production Alpha2.78 remains `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`.
+- Counter changed from status-only element to keyboard-accessible button semantics and clickable tap target. Click/Enter/Space calls existing `ddOpen(false)` with `ddFinalLeaderboard=false`. Existing leaderboard panel moved above title splash by fixed positioning/z-index 10001; CLOSE retains splash, START remains independent and centered. Worldwide total and gameplay/audio unchanged.
+- Four inline JS blocks passed `node --check`, complete HTML closing element and local Git SHA verified. No browser/Android UI testing yet. **First unverified step:** Android user tests counter → leaderboard → CLOSE → START and checks viewport, registration and leaderboard scrolling; fix any behaviour before release. No production approval given.
+
 ## Alpha2.79 Counter & Audio Test 5 — local unapproved checkpoint (25 October 2026)
 
 - Built local standalone `/mnt/data/Dob_Defender_Alpha2.79_Counter_Audio_Test_5.html` from local Cow Splat Test 4, Git blob SHA `1df2949cfc0a9c0f6e22f29e881c86a764086856`, 3,781,988 bytes. **No production changes**; production remains Alpha2.78 `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`.
