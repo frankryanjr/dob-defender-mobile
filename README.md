@@ -1,4 +1,4 @@
-**Current production:** **Alpha2.77** (approved Audio Mix Test 3, 25 October 2026), `main:index.html` blob `ae484817ab23bb3895dca9806f957c2688827b1e`, immutable exact-test archive [`releases/Dob_Defender_Alpha2.77.html`](releases/Dob_Defender_Alpha2.77.html). User approved sound mix and requested release. Live deployment/Android production checks recorded in handover; 15 candidate-unused audio entries retained. No gameplay or art changes.
+**Current production:** **Alpha2.78** (approved Tally Audio Test 2, 25 October 2026), `main:index.html` blob `fc0e3c618b5b5d41395a6b5f085a09300f61c1d3`; exact approved test archived in [`releases/Dob_Defender_Alpha2.78.html`](releases/Dob_Defender_Alpha2.78.html) SHA `168c505247fa450a64824d6a9c706b3d82aef3ef`. User confirmed tally audio sounded correct and requested production. New score-tally sounds and temporary music ducking only; open cow scoring changes not included.
 
 # Dob Defender — Project entry point
 
