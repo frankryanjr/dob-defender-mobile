@@ -1,3 +1,13 @@
+## Verified production-source automation — 25 October 2026
+
+- **Exact current production fetched directly from GitHub blob** `68da879b0120364df1128848e115200deec636b6`, using the documented four-part Base64 Google Docs export; local reconstruction verified at **3,775,528 bytes**, SHA matching `main:index.html`. Part 2 export contained 180,000 duplicated Base64 characters from an interrupted upload; removing only the duplicated leading segment produced the exact Git blob SHA. No older upload/archive was used.
+- Checked-in `tools/modular_workspace.py` `split`, `check`, and `build` passed on exact source: **8 blocks, 46 embedded media assets**, SHA-identical rebuilt standalone HTML.
+- Checked-in `tools/validate_workspace.py` passed: **3 JavaScript syntax checks, 46 strict Base64 asset checks and unique placeholder checks**. Its optional static marker mode initially failed on ungrounded `slider`; actual production has no `slider` literal but contains `aim`, so adjusted marker to `aim` in commit `3e1b03596569d81071edf06f01e941944fbac68e`. Corrected `--source-markers` passed.
+- Deliberate negative checks using local copies of exact production workspace: invalid JavaScript, corrupted media URI, duplicate manifest tokens and removal of all `aim` occurrences each triggered a rejection (**4/4 targeted negatives**). A preliminary partial `aim` removal still passed because other occurrences remained; the complete removal correctly failed.
+- **Important limits:** keyword presence is not behavioural regression coverage; syntax and Base64 decoding do not prove browser/Android gameplay, audio rendering or external leaderboard correctness. No real device gameplay test took place.
+- **Next unverified task:** develop robust automated browser-driven smoke tests (aim/fire controls, start screen, collisions/scoring, audio and asset rendering) where supported, with explicit test limitations. Also streamline the cumbersome four-document GitHub-to-local transfer without bypassing the SHA gate. Keep production/release approval protections.
+- No gameplay, production HTML, test build or release archive was changed or published. Local workspace is internal.
+
 ## Validator correction and verification — 25 October 2026
 
 - Found a defect in committed `tools/validate_workspace.py`: over-escaped script-tag regular expressions made a valid embedded JS block fail Node syntax checking. Fixed script-tag matching in commit `ea702da0e8fd74b1fa8e7b76fbe1b0f1c925fac6` (validator blob `821b2bbe3a3be7e4b9adbb7315418716555ef38a`).
