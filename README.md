@@ -1,3 +1,5 @@
+**Current production:** **Alpha2.77** (approved Audio Mix Test 3, 25 October 2026), `main:index.html` blob `ae484817ab23bb3895dca9806f957c2688827b1e`, immutable exact-test archive [`releases/Dob_Defender_Alpha2.77.html`](releases/Dob_Defender_Alpha2.77.html). User approved sound mix and requested release. Live deployment/Android production checks recorded in handover; 15 candidate-unused audio entries retained. No gameplay or art changes.
+
 # Dob Defender — Project entry point
 
 Mobile browser game: Dobsonian telescope defence. **GitHub is the source of truth.** This file is intentionally short to minimise conversation-context usage.
