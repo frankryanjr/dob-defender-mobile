@@ -1,3 +1,19 @@
+## Alpha2.80 investigation — conversation-limit handover (26 October 2026)
+
+**Current objective:** Fix two user-reported Alpha2.79 issues in a **complete downloadable standalone Alpha2.80 Test 1 HTML** (no production deployment without separate approval):
+1. User played several games on itch.io but scores did not upload/update on leaderboard. Trace submission, errors/CORS/origin, server response, leaderboard refresh and account/callsign identity.
+2. A cow already abducted returns visually and floats above the ground. Trace abducted/lost state, reuse/spawn, positioning, rendering and rescue/lift/escape transitions. Lost cows must not reappear that night; rescued cows must land properly.
+
+**Verified repository context:** GitHub `main:index.html` Alpha2.79 blob SHA `84f89682b3459577746c7678912a9b9dbcdcf4eb`; exact approved archive `releases/Dob_Defender_Alpha2.79.html` blob `131654b11232190f6470032f01180994bd969b1b`. User confirmed GitHub live/Android playback, and itch.io game playable. Production on GitHub and itch.io must remain unchanged while testing.
+
+**Mandatory onboarding next chat:** Read README, entire locked docs/WORKFLOW.md, docs/HANDOVER.md, GAMEPLAY, CHANGELOG, DEVELOPMENT, PROJECT_HISTORY, EFFICIENCY_HANDOVER, MODULAR_WORKSPACE; follow source verification and archived lossless transfer guidance. The user explicitly mandated **blocker recovery**: search README/workflow/archived procedures/history for previous solved blockers and try proven workarounds BEFORE declaring a blockage or asking user to act as courier. Rule recorded in README and WORKFLOW §2A (commits `1877f7d`, `7c74b8b`).
+
+**What failed:** Connector `mcp__GitHub__fetch_file` for whole production `index.html` and bounded lines 1–30, 100–120, 1000–1020 returned SHA but zero content. Connector `mcp__GitHub__fetch` raw.githubusercontent URL returned HTTP 400 file too large/unsupported. Container direct GitHub network earlier failed DNS. Previously tried historical mounted files were older and must NOT substitute for exact main baseline. Archived WORKFLOW describes a lossless GitHub→Base64→Google Doc→local route, but requires source to retrieve.
+
+**Crucial newly discovered untried method at interruption:** GitHub connector action **`mcp__GitHub__fetch_blob`** accepting `{repository_full_name:"frankryanjr/dob-defender-mobile",blob_sha:"84f89682b3459577746c7678912a9b9dbcdcf4eb"}`. This tool surfaced immediately before conversation ended; **not yet invoked**. Try it FIRST with bounded output (report length, not full blob), then apply documented lossless transfer, and verify exact Git blob SHA locally before editing. Also check alternate connector APIs/transfer records in archived WORKFLOW. Do not repeat identical failed fetch_file attempts without a reason.
+
+**Current status:** No root cause confirmed, no Alpha2.80 game file created, no gameplay code changed. Documentation only. First unverified next step: invoke GitHub `fetch_blob` for exact production SHA, assess source availability, transfer losslessly into /mnt/data and verify byte count/sha; then isolate, fix and test both issues, deliver complete Alpha2.80 Test 1 HTML for user Android/itch-oriented testing without publishing.
+
 ## Alpha2.80 Bugfix Test 1 — 26 October 2026, LOCAL TEST ONLY
 
 - **Baseline recovered successfully using mandatory blocker-recovery rule:** GitHub `fetch_blob` on current `main:index.html` blob SHA `84f89682b3459577746c7678912a9b9dbcdcf4eb` returned complete content (where `fetch_file` did not). Lossless transfer used four smaller temporary Google Docs Base64 chunks (Google Docs failed precondition above ~1.5M characters). Local reconstruction is **3,782,476 bytes**, `git hash-object` exactly `84f89682b3459577746c7678912a9b9dbcdcf4eb`.
