@@ -1,3 +1,11 @@
+## Alpha2.80 release verification update — 26 October 2026
+
+- GitHub Actions on final documentation commit `e129b0412ee4917fe8443891b00b12a8c10eae26`: JavaScript syntax check run `40406456108` **completed success**, GitHub Pages deployment run `40406456897` **completed success**. Intermediate superseded Pages runs were cancelled during successive docs writes; final run succeeded.
+- Re-fetched GitHub main `index.html` blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b` and archive `releases/Dob_Defender_Alpha2.80.html` `1a4c399c361466c384f23767bedc11719cd37895` both match release records.
+- Locally generated full downloadable production-labelled `/mnt/data/Dob_Defender_Alpha2.80.html` from approved Test 1, changed **exactly** title and DD_GAME_VERSION, `git hash-object` verified against GitHub production SHA `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b` (3,784,184 bytes).
+- Independent live-served HTTP HTML could not be verified in available web tool (site inaccessible); do not represent Actions success as directly fetched HTML. User Android check of released Alpha2.80 still pending. Separate itch.io listing remains unchanged.
+- **First unverified next task:** user opens freshly deployed GitHub Pages game on Android and confirms runtime version/fixes; then, only with separate user instruction, upload the exact Alpha2.80 release to itch.io.
+
 ## Alpha2.80 production release — 26 October 2026
 
 - **Explicit user approval:** “Push fixes to prod” after confirming abducted-cow fix looks good and leaderboard seems fixed.
