@@ -10,6 +10,8 @@
 
 Mobile browser game: Dobsonian telescope defence. **GitHub is the source of truth.** This file is intentionally short to minimise conversation-context usage.
 
+**Mandatory blocker recovery (all chats):** If any task hits a blocker, reread current README/WORKFLOW and search the GitHub handovers, development history and relevant archived procedures for already-proven workarounds; attempt applicable documented solutions before declaring a blocker or involving the user. See WORKFLOW §2A.
+
 ## New development chat — required startup
 
 1. Read this short README.
