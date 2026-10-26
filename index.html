@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.79</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.80</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -145,7 +145,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.79';
+const DD_GAME_VERSION='Alpha2.80';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -211,10 +211,42 @@ $('ddRegister').addEventListener('click',async()=>{
 $('ddRename').addEventListener('click',async()=>{
  try{const data=await ddCall('rename',{id:ddPlayer.id,secret:ddPlayer.secret,nickname:$('ddNewNickname').value.trim()});ddStore(data.player);ddOpen()}catch(e){ddSetMessage(e.message)}
 });
+// Alpha2.80 Test 1: show score delivery status on GAME OVER, including failures
+// that were previously rendered only inside the hidden leaderboard panel.
+let ddLastScorePending=null;
+function ddScoreStatus(text,isFailure=false){
+ const host=$('finalResults');if(!host)return;
+ let status=$('ddScoreUploadStatus');if(!status){
+  status=document.createElement('div');status.id='ddScoreUploadStatus';
+  status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+  status.style.cssText='margin:12px auto 6px;max-width:300px;font:600 12px/1.45 system-ui;text-align:center;color:#d7ecff;';
+  host.appendChild(status);
+ }
+ status.replaceChildren(document.createTextNode(text));
+ status.style.color=isFailure?'#ffb7a7':'#d7ecff';
+ if(isFailure&&ddLastScorePending){
+  const retry=document.createElement('button');retry.textContent='RETRY SCORE UPLOAD';
+  retry.type='button';retry.style.cssText='display:block;margin:8px auto;padding:9px 12px;';
+  retry.onclick=()=>{const pending=ddLastScorePending;if(pending)void ddSubmitScore(pending.score,pending.night)};
+  status.appendChild(retry);
+ }
+}
 async function ddSubmitScore(finalScore,finalNight){
- if(!ddPlayer)return;
- try{const data=await ddCall('score',{id:ddPlayer.id,secret:ddPlayer.secret,score:finalScore,night:finalNight,version:DD_GAME_VERSION});ddStore(data.player);ddRefresh()}
- catch(e){ddSetMessage('Score not submitted: '+e.message)}
+ if(!ddPlayer){ddScoreStatus('Score not uploaded: player registration missing',true);return;}
+ ddLastScorePending={score:finalScore,night:finalNight};
+ ddScoreStatus('UPLOADING SCORE…');
+ try{
+  const previousBest=Number(ddPlayer.best_score)||0;
+  const data=await ddCall('score',{id:ddPlayer.id,secret:ddPlayer.secret,score:finalScore,night:finalNight,version:DD_GAME_VERSION});
+  if(data.player)ddStore(data.player);
+  ddLastScorePending=null;
+  const currentBest=Number(ddPlayer.best_score)||previousBest;
+  ddScoreStatus('SCORE UPLOADED — '+(finalScore>previousBest?'NEW PERSONAL BEST!':'Leaderboard shows your highest score only.')+' BEST: '+currentBest.toLocaleString('en-IE'));
+  void ddRefresh();
+ }catch(e){
+  const msg='Score not submitted: '+(e&&e.message||'Network error');
+  ddScoreStatus(msg,true);ddSetMessage(msg);
+ }
 }
 // New-player callsign gate; returning players keep the approved one-tap start.
 const ddGate=$('ddCallsignGate'),ddGateInput=$('ddCallsignInput'),ddGateGenerated=$('ddCallsignGenerated'),ddGateChange=$('ddCallsignChange'),ddGateEdit=$('ddCallsignEdit'),ddGateDefend=$('ddCallsignDefend'),ddGateError=$('ddCallsignError');
@@ -1674,7 +1706,7 @@ function draw(){g.save();if(mode==='night'&&ddGroundShake>0){const strength=3.5*
  g.restore();
  g.fillStyle=day>.5?'#345a64':'#1e3440';g.beginPath();g.moveTo(0,floor());for(let x=0;x<=W+10;x+=10)g.lineTo(x,floor()-15+Math.sin(x*.05)*10);g.lineTo(W,H);g.lineTo(0,H);g.fill();g.fillStyle=day>.5?'#526b46':'#2a4537';g.fillRect(0,floor(),W,H-floor());
  for(let e of enemies)if(e.hp>0)drawEnemy(e);
- drawDome();if(!scopeBroken)telescope();for(let c of cows)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
+ drawDome();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
  for(let b of shots){g.shadowColor=ddEnergyColor();g.shadowBlur=18;g.strokeStyle=ddEnergyColor();g.lineWidth=3;g.beginPath();g.moveTo(b.x,b.y);g.lineTo(b.x-b.vx*.065,b.y-b.vy*.065);g.stroke();g.shadowBlur=0}
  if(flash>0&&!scopeBroken){let q=tip();g.shadowColor=ddEnergyColor();g.shadowBlur=20;g.fillStyle='#dfffed';g.beginPath();g.arc(q.x,q.y,3,0,TAU);g.fill();g.shadowBlur=0}
  for(const a of junkAfterglows){
