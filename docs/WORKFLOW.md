@@ -19,6 +19,17 @@ The assistant handles source retrieval, transfer, builds, validation, documentat
 
 Before declaring a tooling blocker, consult documented historical solutions and attempt supported alternatives. Do not repeat failed methods without a reason.
 
+## 2A. Mandatory blocker recovery — every development chat
+
+Whenever any task encounters a blocker (including source retrieval, file transfer, tooling, testing, upload, deployment or connector errors), **before reporting that it is blocked or asking the user to perform work**:
+
+1. Reopen the current GitHub `README.md` and `docs/WORKFLOW.md` and identify their links to troubleshooting, transfer procedures, handovers and archived instructions.
+2. Search the current `docs/HANDOVER.md`, `docs/EFFICIENCY_HANDOVER.md`, `docs/DEVELOPMENT.md`, `docs/PROJECT_HISTORY.md`, relevant archived workflow sections and task-specific docs for previous occurrences of the **same failure**, successful alternatives and known size/API constraints. Use precise error messages, tool names and operations as search terms.
+3. **Try the documented proven workaround first**, with its safeguards and integrity checks, before inventing a new route. If one method fails, try materially different supported alternatives documented in the repository; do not repeat a known failure without a reason.
+4. If still blocked, record what was tried, the exact errors, why established solutions do not apply, and the next unverified action in a GitHub handover checkpoint. Only then explain the blocker. Do not ask the user to act as a file courier and never weaken source verification or release approval gates.
+
+This recovery rule applies automatically in **all future Dob Defender chats** and at every blocker, not just startup. Documentation searches do not authorise code publication or production release.
+
 ## 3. Exact baseline and development
 
 - **GitHub production is the baseline.** Obtain exact current `main:index.html` bytes and blob SHA. Large-file `fetch_file` may return metadata without content: use the verified GitHub blob → Base64 → temporary Google Doc → export → local decode route, or another demonstrably lossless method. The detailed transfer recipe and safeguards are in the [archived workflow](archive/WORKFLOW_FULL_2026-10-25.md) under “PROVEN LOSSLESS” and “VERIFIED GITHUB-TO-LOCAL”.
