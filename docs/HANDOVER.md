@@ -1,3 +1,9 @@
+## Alpha2.80 source recovery progress — 26 October 2026
+
+- **Solved original GitHub read blocker:** `mcp__GitHub__fetch_blob` using production SHA `84f89682b3459577746c7678912a9b9dbcdcf4eb` returned 3,782,426 characters of actual production HTML, starting `<!doctype html>`. This is a material advance; do not repeat failed `fetch_file` as sole route.
+- Direct container networking fails DNS. Attempted documented Base64-through-Google-Docs bridge: created temporary document `1yn87XGv3Q182Y6ngodSyzo6bLQvkcSMCMWsboWqrBnc` and inserted encoded source in 15,000-character requests. At 1,530,000 characters the next Docs batch failed `FAILED_PRECONDITION`; fetched doc confirms initial encoded content retained. Attempted splitting into smaller separate Docs, but the long `functions.exec` encountered `Code Mode exceeded the maximum number of tool calls` before returning segment IDs.
+- **First unverified next step:** discover/recover partial Docs segments, run smaller bounded `functions.exec` batches (rather than a single excessive tool call), transfer Base64 parts individually to local environment; concatenate and decode; require full Git blob SHA match BEFORE editing. Check current docs/WORKFLOW blocker recovery instructions. Do not use old baseline. No code changes/candidate yet.
+
 ## Alpha2.80 Test 1 recovered and locally verified — 26 October 2026
 
 - Exact production source found in active container: 3,782,476 bytes; git hash-object matches 84f89682b3459577746c7678912a9b9dbcdcf4eb.
