@@ -1,3 +1,10 @@
+## 8. Alpha2.79 player-reported bugs — 26 October 2026 (open)
+
+- **Issue A — leaderboard scores not uploaded/updated.** User reports several completed games without their score appearing or updating on the leaderboard. Report occurs during current itch.io use; not yet established whether also reproducible on GitHub Pages. Investigate score-submit call, persistence, API response/error, browser origin/storage and leaderboard refresh/pagination separately. Do not claim a cause until traced in the exact production source and tested.
+- **Issue B — abducted cow reappears floating above ground.** User reports a cow that has been abducted later returns to the visible screen suspended above the ground. Trace UFO escape/rescue, cow reuse, state transitions, reset/spawn, y position and rendering across night transitions; establish whether successful abduction or interrupted rescue is involved. Expected invariant: lost cows stay lost during that night; rescued cows return to the ground.
+- **Context:** GitHub main production Alpha2.79 blob `84f89682b3459577746c7678912a9b9dbcdcf4eb`, approved archive `131654b11232190f6470032f01180994bd969b1b`. User confirms itch.io game launches and plays; this does not prove online leaderboard submission functionality. No source code changed and no new candidate tested.
+- **Investigation status:** mandatory README and full WORKFLOW reread; other required documentation inspected. GitHub connector metadata confirmed current production SHA; a partial `index.html` read returned metadata only, not source bytes. Before editing, follow WORKFLOW lossless full-baseline transfer and SHA gate. First unverified step: verify exact production HTML bytes and trace leaderboard submission and cow state paths. Keep GitHub Pages and itch.io production unchanged until approved.
+
 # Dob Defender — Open fixes
 
 Current verified production: Alpha2.77. This document is an issue tracker, not a game-code change or release approval.
