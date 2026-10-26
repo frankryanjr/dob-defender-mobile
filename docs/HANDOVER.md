@@ -1,3 +1,11 @@
+## Alpha2.80 resumed verification — 26 October 2026 (this session)
+
+- Mandatory README, locked full WORKFLOW and relevant specifications/history/efficiency/modular docs inspected. Read earlier Alpha2.80 entries including existing local Bugfix Test 1 checkpoint.
+- Reverified *current* GitHub default-branch production `index.html` Git blob `84f89682b3459577746c7678912a9b9dbcdcf4eb` and Alpha2.79 approved archive `131654b11232190f6470032f01180994bd969b1b`. GitHub HEAD observed `b134452c541d92b856b6d76518e0a834fe29994e` before this documentation write.
+- Tested `mcp__GitHub__fetch_blob` with exact production SHA: success, returned 3,782,426 JS characters with valid HTML beginning/end, and confirmed score/cow routines in-source. Direct container GitHub DNS fetch failed; the prior /mnt/data Alpha2.80 Test 1 file from another session is **not mounted in this environment**. Source has not been reconstituted to a locally SHA-verified standalone file in this session.
+- Verified defect in production: escape marks cow `dead=true` but `drawCow` has no `dead` guard. Score POST only on `ddFinishGameOver`; catch discards unsuccessful submissions. Live network rejection / itch.io CORS or origin remains unverified. Existing historical local Alpha2.80 Test 1 was previously syntax and startup tested, but local artifact is not available in this session; **do not offer an unverified local link**.
+- No gameplay/release files changed or published. **First unverified next task:** recover or reconstruct the exact local Alpha2.80 Test 1 using documented lossless blob-to-local transfer, check complete file SHA against baseline and candidate evidence, then deliver the locally verified downloadable HTML; follow with Android and real endpoint testing. Do not deploy without explicit user approval.
+
 ## Alpha2.80 investigation — conversation-limit handover (26 October 2026)
 
 **Current objective:** Fix two user-reported Alpha2.79 issues in a **complete downloadable standalone Alpha2.80 Test 1 HTML** (no production deployment without separate approval):
