@@ -1,3 +1,13 @@
+## Alpha2.80 production release — 26 October 2026
+
+- **Explicit user approval:** “Push fixes to prod” after confirming abducted-cow fix looks good and leaderboard seems fixed.
+- **Immutable exact approved test archive:** `releases/Dob_Defender_Alpha2.80.html`, verified Git blob `1a4c399c361466c384f23767bedc11719cd37895`, commit `3ba750edbaf8371da3ef183e949a86d0e8d1be4e`. Original complete standalone Alpha2.80 Bugfix Test 1 is preserved unchanged, including historical test label and source comment.
+- **Production:** `main:index.html` blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`, commit `9df9a4085e18872de3d6721af8299d54644f51e7`. Derived from exact verified archive with only two substitutions: HTML title `Dob Defender Alpha2.80 Test 1`→`Dob Defender Alpha2.80`, and `DD_GAME_VERSION='Alpha2.79'`→`DD_GAME_VERSION='Alpha2.80'`. The candidate had retained the Alpha2.79 version constant; production corrects that release label. No other gameplay changes.
+- **Fixes:** dead abducted cows no longer render floating; game-over score submissions display acknowledged status / personal-best context and offer retry on network failure. Backend submission rejection on itch.io has not been independently established. Note: an unchanged leaderboard after a lower score is expected with personal-best ranking.
+- **Validation:** local Test 1 four inline JS syntax checks passed; user reported cow fix looks good and leaderboard seems fixed. GitHub archive SHA gate passed; production update GitHub reported SHA above. GitHub Actions, independently served Pages version and production Android checks tracked separately.
+- **Production only on GitHub:** itch.io upload remains separate and has not been changed by this release.
+- **Next unverified task:** verify GitHub Actions and the live-served Alpha2.80 version; user tests released GitHub build and decides separately on itch.io update. Wording improvement “Your personal best score is shown on the worldwide leaderboard” is agreed for a future test revision, **not included in this exact approved Test 1 archive**.
+
 ## Alpha2.80 Bugfix Test 1 — standalone local test ready (26 October 2026)
 
 - **Exact verified baseline recovered** from current main production Git blob `84f89682b3459577746c7678912a9b9dbcdcf4eb` via GitHub `fetch_blob` and segmented Google Docs Base64 transfer. Four segments reconstructed `/mnt/data/Dob_Defender_Alpha2.79_GitHub_Verified.html`, exactly **3,782,476 bytes**; `git hash-object` matched GitHub SHA. Previous large-transfer blockers bypassed by distributing Base64 over four Docs (1.53m + 1.26m + 1.26m + 0.993304m characters) then exported and decoded locally.
