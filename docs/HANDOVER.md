@@ -1,3 +1,11 @@
+## Alpha2.80 Test 1 recovered and locally verified — 26 October 2026
+
+- Exact production source found in active container: 3,782,476 bytes; git hash-object matches 84f89682b3459577746c7678912a9b9dbcdcf4eb.
+- Complete standalone Alpha2.80 Test 1 found: 3,783,994 bytes; Git blob f9d4c96ba19484dda7248dcf4f32398332e06b66. Four inline scripts passed node --check; HTML end tag and version checked.
+- Changes: skip rendering dead cows; persist score submissions and retry after online/leaderboard opening. Real itch.io endpoint acceptance/CORS remains unverified.
+- Complete candidate delivered for user testing. No GitHub game or itch.io production changes.
+- First unverified next task: user Android test of score submission and cow escape/rescue; if leaderboard still fails, inspect concrete HTTP response and server origin policy.
+
 ## Alpha2.80 resumed verification — 26 October 2026 (this session)
 
 - Mandatory README, locked full WORKFLOW and relevant specifications/history/efficiency/modular docs inspected. Read earlier Alpha2.80 entries including existing local Bugfix Test 1 checkpoint.
