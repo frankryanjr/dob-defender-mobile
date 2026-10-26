@@ -1,3 +1,5 @@
+**Latest development checkpoint (26 October 2026):** Alpha2.80 Bugfix Test 1 standalone local candidate built from SHA-verified Alpha2.79; fixes dead abducted cow rendering and adds retry/persistence for failed leaderboard submissions. Browser startup and JS syntax pass; Android and live leaderboard submission pending. Production unchanged. See `docs/HANDOVER.md`.
+
 **Verification update (25 October 2026):** User confirms Alpha2.79 live deployment and successful Android verification. This is user-reported verification; independent assistant-side live HTTP/Actions checks have not been rerun. Production remains Alpha2.79; see `docs/HANDOVER.md`.
 
 **Current production (25 October 2026): Alpha2.79.** Approved Test 7 archived at `releases/Dob_Defender_Alpha2.79.html` (SHA `131654b11232190f6470032f01180994bd969b1b`); `main:index.html` SHA `84f89682b3459577746c7678912a9b9dbcdcf4eb`, production commit `0925ddac00764ce6fa71ff061d40954e96c41f25`. Only title/version labels differ from the exact approved test. Actions, Pages live-served version and Android confirmation pending. See `docs/HANDOVER.md`.
