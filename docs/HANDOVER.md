@@ -1,3 +1,12 @@
+## Alpha2.79 bugs — source retrieval blocked (26 October 2026)
+
+User authorised investigation and construction of standalone Alpha2.80 Test 1 for two issues: (1) itch.io sessions don't submit/update leaderboard scores; (2) an abducted cow returns floating above ground. No fixes are claimed.
+
+- Mandatory README, full WORKFLOW and supporting docs reviewed; consulted archived WORKFLOW proven lossless transfer recipe. Current GitHub `main:index.html` blob SHA `84f89682b3459577746c7678912a9b9dbcdcf4eb` matches Alpha2.79 production release record.
+- Tried GitHub connector `fetch_file` for whole file and lines 1–30, 100–120, 1000–1020: connector returned valid metadata SHA but zero content each time. Tried connector `fetch` at raw.githubusercontent.com URL: HTTP 400 'file may be too large or unsupported'. Container Git network attempt failed DNS resolution of github.com. Inspected mounted `/mnt/data`: only historical game versions (Alpha1 and Alpha2.20) present, no exact Alpha2.79 source. The documented Drive/Base64 transfer cannot start because GitHub connector supplies no content to encode.
+- Hence exact production HTML bytes and Git hash verification gate could not be satisfied. No source changes, candidate HTML, browser tests or production deployment made. Do **not** use older attached HTML or approved archive in place of main.
+- **First unverified next task:** obtain current main's complete 3.8MB source losslessly via a supported connector file transfer or GitHub transfer mechanism; verify Git blob SHA and length, then trace score-submit and cow state transitions. Only then build and syntax-test a complete standalone Alpha2.80 Test 1 for Android, without publishing.
+
 ## Alpha2.79 player verification confirmation — 25 October 2026
 
 - User explicitly confirms that Alpha2.79 is live-deployed and has been verified on Android.
