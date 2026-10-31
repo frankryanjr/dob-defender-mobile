@@ -1,3 +1,11 @@
+## Checkpoint — boss test published (31 October 2026)
+
+- Published: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_1.html`, git blob `a35d1897ecb9713aeca9e7a0702ec7fdcbc6c65e`, 3,792,550 bytes. Same blob on `origin/dev` and `origin/main`.
+- Production `main:index.html` unchanged, blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`.
+- Actions: JavaScript syntax check and pages build succeeded for both commits.
+- NOT verified: live served content at `https://frankryanjr.github.io/dob-defender-mobile/tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_1.html` (not reachable from the build environment). Android: user reports the playtest works (earlier build). Test scores go to the live worldwide leaderboard.
+- Next action: user confirms the public test URL loads on Android; then collect balance feedback for Test 2 on `dev`.
+
 # Dob Defender — Current State
 Updated: 31 October 2026. **Status is a committed documentation checkpoint, not a new game release.**
 
