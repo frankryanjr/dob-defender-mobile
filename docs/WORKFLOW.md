@@ -47,6 +47,16 @@ Verify commit, GitHub Actions, Pages deployment and live-served version independ
 
 Detailed archive and release procedures, including label-only production promotion, traceability, cache/version safeguards and transfer methods, remain in the [archived workflow](archive/WORKFLOW_FULL_2026-10-25.md). **Read relevant sections before any release.**
 
+## 4A. Persistent development branch and test publishing (authorised 31 October 2026)
+
+- The user explicitly authorised establishing a `dev` branch and a dedicated playable GitHub Pages test site. This standing authority covers **test-only publication** of SHA-verified candidate builds at separate versioned `tests/` paths and refreshing a clearly marked development test landing page. It **does not** authorise production publication.
+- `main:index.html` and `releases/` remain production-controlled and must not be overwritten by development publishing. Publishing a `dev` branch directly as the sole GitHub Pages site is forbidden if it would displace production.
+- Before enabling automated publishing, inspect the repository's actual Pages source and existing Actions workflows. Use a non-destructive setup that retains the exact production entry point and serves development games only under `/dob-defender-mobile/tests/`. Do not claim the URL works until it is deployed and independently checked.
+- A candidate is eligible for test publishing only after complete standalone HTML is present and exact byte count, Git blob SHA, script syntax and relevant smoke tests are recorded. Commit source to `dev`, publish an exact tested copy to a versioned test path, and separately confirm served content. No silent replacement of an older versioned test.
+- Keep a stable `tests/` landing page pointing to the most recent verified test. Label all tests **UNAPPROVED / TEST BUILD** and explain leaderboard/backend differences. The test area may reside in the production Pages site's nonproduction `tests/` namespace when separately verified; this does not allow altering the production root.
+- The currently documented Mothership Boss Test 1 (`a35d1897ecb9713aeca9e7a0702ec7fdcbc6c65e`) exists only locally/in a Claude preview; it cannot be claimed as published until the exact standalone file is recovered, SHA-verified and deployed.
+- Any next test publishing operation must checkpoint its exact branch/ref, source/test blob SHA, deployed URL, independent live check, and remaining player tests in `docs/CURRENT_STATE.md` and `docs/HANDOVER.md`.
+
 ## 5. Documentation, precedence and handover
 
 Record candidate and release versions, exact source/test/archive/production SHAs, user approval, checks, label-only diff, deployment status, unresolved issues and next step. Retain historical release archives. Keep handover current.
