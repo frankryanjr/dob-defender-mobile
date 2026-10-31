@@ -44,3 +44,13 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - At each meaningful development milestone, update this compact state and the detailed [HANDOVER.md](HANDOVER.md) on GitHub with observed evidence, open checks, identifiers and **one** next step; keep the README pointer accurate.
 - The full [GAMEPLAY.md](GAMEPLAY.md), [CHANGELOG.md](CHANGELOG.md), [DEVELOPMENT.md](DEVELOPMENT.md), [PROJECT_HISTORY.md](PROJECT_HISTORY.md), [EFFICIENCY_HANDOVER.md](EFFICIENCY_HANDOVER.md) and [MODULAR_WORKSPACE.md](MODULAR_WORKSPACE.md) remain intact and authoritative for their respective scope.
 - Avoid placing large HTML, embedded media or complete historical documentation in conversation output. Do not interpret reduced context use as proof that the conversation-length issue is fixed.
+
+## Checkpoint: Mothership Boss Test 5 published under tests/ (31 October 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_5.html`, git blob `cc53d099c7f944e5eb84b2aa774a904a6f58cd0c`, 3,800,501 bytes.
+- Source committed to `dev` (`82c4f9b`); test copy published to `main:tests/` (`6c29770`) with the landing-page card on top. Test 4 tagged PREVIOUS TEST.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+- Headless Chrome checks: shooting run (900 points, no errors); out-of-laser run (scouts take cows, leave, bomb, `destroyed`); ISS radio-wave arcs visible during the ISS pass.
+- Not yet verified: independent live fetch of the GitHub Pages URL (sandbox blocks github.io); Android playtest.
+- Remaining player tests: Android feedback on Test 5 (saucer shape, glow-line shield pulse, generator hits, radio wave, scout exit and bomb).
+- Design notes to confirm: laser passes through the shield line (generators stay hittable); a hit only pulses the line; a dome destroyed earlier stays down at boss arrival.
