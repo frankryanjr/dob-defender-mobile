@@ -22,7 +22,13 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - **Not verified:** Android device boss gameplay/balance, live leaderboard, other-night regressions and audio cues. README says Android preview works, but HANDOVER explicitly has no completed Android gameplay test report. Treat player assessment as pending.
 - Direct `git clone` is proven **in Claude's container only**. Any new environment must separately verify its access and Git blob SHA. The documented lossless alternative remains available.
 
-## Single first unverified next task
+## Development branch / test deployment checkpoint (31 October 2026)
+- Created branch `dev` from `main`; no boss test has been uploaded.
+- The locked WORKFLOW now provides standing authorisation for isolated test-only publishing, not production publishing. `dev:docs/TEST_DEPLOYMENT.md` contains safe deployment requirements.
+- **Publishing blocker:** actual GitHub Pages source and existing Actions workflow configuration have not been inspected; a direct dev-branch Pages switch could replace production. No test URL or automated deployment is verified. Exact boss Test 1 is not in GitHub.
+- **First unverified next action:** inspect Pages/Actions configuration, implement non-destructive test deployment under `tests/`, and independently verify it. Then recover exact boss Test 1 or generate a new SHA-verified test candidate and publish as a standalone HTML.
+
+## Prior gameplay feedback task (after setup)
 **Get user Android gameplay feedback on the Night 3 boss Test 1** (dev panel → Night 3): boss size, node/reactor hit difficulty, orb pressure and any clipping. The private preview does not submit scores. Then plan a scoped Test 2 and deliver a complete standalone downloadable HTML. If the exact candidate is unavailable in a new environment, recover it by an authorised route or rebuild from newly SHA-verified GitHub Alpha2.80, clearly marking it a new unverified candidate. Do **not** imply the uncommitted Test 1 is in GitHub. Do not publish any test or production game without the separate approvals required by WORKFLOW.
 
 ## Handover discipline
