@@ -1,3 +1,41 @@
+## Night 3 mothership boss Test 1 — local candidate built (31 October 2026)
+
+The candidate HTML is local/hosted-preview only and is NOT committed to this repository (no test-hosting permission given). Production and itch.io unchanged.
+
+### Blocker resolved
+- Direct `git clone https://github.com/frankryanjr/dob-defender-mobile.git` works from the Claude container (read-only, anonymous). No Base64/Google Docs transfer needed.
+- Verified with `git hash-object`: `index.html` = `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b` (3,784,184 bytes); `releases/Dob_Defender_Alpha2.80.html` = `1a4c399c361466c384f23767bedc11719cd37895`. Both match handover.
+- `tools/modular_workspace.py split/check` passed (9 blocks, 46 assets, byte-identical rebuild).
+
+### Candidate
+- `Dob_Defender_Alpha2.80_Mothership_Boss_Test_1.html`, 3,792,550 bytes, Git blob `a35d1897ecb9713aeca9e7a0702ec7fdcbc6c65e`.
+- Only `block_006.js` changed (main game script). Telescope, controls, audio files, leaderboard code unchanged.
+- Version label shown as "Alpha2.80 Boss Test 1"; `DD_GAME_VERSION` still `Alpha2.80` (score submissions unchanged).
+
+### Behaviour (placeholder values, none approved)
+- Night 3 only (`bossNight()`); boss arrives as finale after all scheduled threats clear. Night cannot finish while boss is alive.
+- Hull = existing UFO shapes scaled to ~1/3 sky width. Drifts side to side.
+- Phase 1: energy shield absorbs shots; two shield nodes on the rim, 5 hits each.
+- Phase 2 (both nodes down): reactor orbits the hull; vulnerable only on its front arc; 6 hits; orbit speeds up per hit.
+- Attacks: plasma orbs (shootable, reuse meteor-fragment dome/ground damage), one per ~5.5s, max 8.
+- Score: node +50, reactor hit +100, boss +500, orb +10 (existing).
+- Failure: existing rules only (dome lost then telescope destroyed). No timeout.
+
+### Checks
+- Passed: `node --check` on all 4 inline scripts; HTML ends `</html>`; only block_006 differs from baseline.
+- Passed (headless Chrome 390x844, mocked backend): scripted bot clears nodes, reactor, boss dies, night proceeds to dawn; passive run: orbs destroy dome, existing game-over path runs; no page errors.
+- Not done: Android device testing, live leaderboard, regression of other nights, balance, audio cues (reused existing sounds).
+
+### First unverified next step
+User plays Test 1 on Android (dev panel, jump to Night 3), reports boss size, node/reactor difficulty, orb pressure, clipping. Then revise as Test 2. Do not publish.
+
+### Hosted preview (not the verified file)
+A private claude.ai artifact copy exists for Android playtesting. It adds a local stand-in for the leaderboard fetch and strips the outer HTML wrapper; gameplay code is identical. No scores are sent.
+
+### Recovery route for future chats
+`git clone https://github.com/frankryanjr/dob-defender-mobile` works directly from the Claude container; verify with `git hash-object index.html`. Prefer this over the Base64/Google Docs transfer.
+
+
 ## Night 3 mothership boss Test 1 — source transfer blocked (31 October 2026)
 
 - User requested a complete standalone test of mothership boss on every third night, initial Night 3, based on approved Alpha2.80.

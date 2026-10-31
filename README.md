@@ -1,3 +1,5 @@
+**Development checkpoint (31 October 2026):** Night 3 Mothership Boss Test 1 built locally (blob `a35d1897ecb9713aeca9e7a0702ec7fdcbc6c65e`), Android playtest works; user feedback pending for Test 2. Source blocker resolved: direct `git clone` works from the Claude container. Production remains Alpha2.80. See top of `docs/HANDOVER.md`.
+
 **Alpha2.80 post-release confirmation (31 October 2026):** User confirms Android test passed, live GitHub Pages version verified, and itch.io updated. These are user-reported confirmations; itch.io file SHA and fresh independent HTTP validation were not performed in this chat. Production remains Alpha2.80. Next task: select the next gameplay/player-feedback change, starting from verified GitHub production. See `docs/HANDOVER.md`.
 
 **Current production (26 October 2026): Alpha2.80.** User approved bug fixes. Approved Test 1 immutable archive `releases/Dob_Defender_Alpha2.80.html` SHA `1a4c399c361466c384f23767bedc11719cd37895`; `main:index.html` SHA `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`, production commit `9df9a4085e18872de3d6721af8299d54644f51e7`. Actions/Pages/live playback verification separate; see `docs/HANDOVER.md`.
