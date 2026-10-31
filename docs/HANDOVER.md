@@ -1,3 +1,14 @@
+## Alpha2.80 post-release confirmation — 31 October 2026
+
+User confirms the three previously outstanding release items are complete:
+1. Alpha2.80 tested and confirmed on Android.
+2. Live GitHub Pages deployment/version verified (user-reported confirmation; no independent HTTP recheck in this chat).
+3. itch.io listing updated (user-reported confirmation; exact itch.io uploaded file hash not independently established in this chat).
+
+Production baseline remains approved Alpha2.80, GitHub `main:index.html` blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`; immutable release archive `releases/Dob_Defender_Alpha2.80.html` blob `1a4c399c361466c384f23767bedc11719cd37895`. No game code or release artifacts changed by this checkpoint.
+
+**First unverified next task:** select and scope the next gameplay improvement or player-feedback issue; obtain and verify exact GitHub production HTML before coding. Preserve approved gameplay/artwork and follow staged testing and approval procedure.
+
 ## Alpha2.80 release verification update — 26 October 2026
 
 - GitHub Actions on final documentation commit `e129b0412ee4917fe8443891b00b12a8c10eae26`: JavaScript syntax check run `40406456108` **completed success**, GitHub Pages deployment run `40406456897` **completed success**. Intermediate superseded Pages runs were cancelled during successive docs writes; final run succeeded.
