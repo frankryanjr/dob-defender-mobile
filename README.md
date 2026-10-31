@@ -1,4 +1,4 @@
-**Current development status (31 October 2026):** See **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)** for the concise production baseline, active Night 3 boss test, verification gaps and single next action. The detailed handover remains in [docs/HANDOVER.md](docs/HANDOVER.md). Historical release checkpoints belong in the handover/changelog, not as competing current-state claims here.
+**Current development status (31 October 2026):** `dev` branch established; safe test publishing configuration and boss candidate upload are pending verification. See **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)** for the concise production baseline, active Night 3 boss test, test-deployment setup, verification gaps and single next action. The detailed handover remains in [docs/HANDOVER.md](docs/HANDOVER.md). Historical release checkpoints belong in the handover/changelog, not as competing current-state claims here.
 
 # Dob Defender — Project entry point
 
@@ -21,7 +21,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 ## Current state — verify against GitHub at startup
 
 - **Latest documented approved production:** Alpha2.80, `main:index.html` Git blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`. Recheck exact GitHub state before development.
-- **Active development:** unapproved local Night 3 Mothership Boss Test 1; first next step is Android gameplay feedback before Test 2.
+- **Active development:** unapproved local Night 3 Mothership Boss Test 1; first next step is verified isolated test deployment, followed by Android boss gameplay feedback.
 - **Canonical concise restart checkpoint:** [CURRENT_STATE](docs/CURRENT_STATE.md). See it for candidate SHA, pending checks and precise resumption instructions.
 - Modular development and testing tooling is sufficient for now. Do not pursue tooling optimisation without a concrete need.
 - No game code change or production publication is authorised by this documentation. Explicit user approval remains mandatory.
@@ -30,6 +30,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 
 | Document | Purpose |
 | --- | --- |
+| [Development test deployment](docs/TEST_DEPLOYMENT.md) | Dev-branch test publishing procedure (on `dev`; pending activation) |
 | [CURRENT_STATE](docs/CURRENT_STATE.md) | Short verified restart status and first unverified next action |
 | [WORKFLOW](docs/WORKFLOW.md) | **Mandatory full read** of concise locked policy; detailed procedures linked on demand |
 | [EFFICIENCY_HANDOVER](docs/EFFICIENCY_HANDOVER.md) | Current task, completed work, unresolved steps and context-saving rules |
