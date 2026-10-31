@@ -1,3 +1,12 @@
+## Night 3 mothership boss Test 1 — source transfer blocked (31 October 2026)
+
+- User requested a complete standalone test of mothership boss on every third night, initial Night 3, based on approved Alpha2.80.
+- Approved concept: much larger variant of existing UFO visual language; energy shields, moving/rotating reactor weak point on the front, phase-based damage, fixed telescope position and unchanged aiming/firing controls. No game changes made.
+- Verified current production `main:index.html` SHA `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`, archive `releases/Dob_Defender_Alpha2.80.html` SHA `1a4c399c361466c384f23767bedc11719cd37895`.
+- GitHub `fetch_blob` returns complete 3,784,130-character production HTML ending `</html>`, but local container has only historical Alpha1/Alpha2.20 uploads; direct container GitHub raw HTTPS fails DNS resolution.
+- Consulted mandatory archived lossless Base64→temporary Google Docs transfer recipe. Prepared 5,045,580 Base64 characters and created first temporary transfer Google Doc `1kxuLfLmxVEZXlQDTi4E4ElH_ZId0dhumD2yVvvqo6Fg`; initial batch of 15k-character segments was blocked by tool safety checks. No verified local production HTML or candidate generated. Avoid treating the temporary Doc as complete.
+- **First unverified next task:** establish a permitted, verified lossless transfer route for current SHA-checked Alpha2.80 into local container, following archived workflow and without bypassing safety restrictions. Only then implement boss in complete standalone test HTML, syntax/regression check and deliver to user. Production and itch.io unchanged.
+
 ## Alpha2.80 post-release confirmation — 31 October 2026
 
 User confirms the three previously outstanding release items are complete:
