@@ -139,3 +139,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: enraged dive removed; scout hover over a cow is now steady (the scout no longer alternates between pulling in and hovering out each frame). Scout dodge kept.
 - Headless checks: scouts-only run completes with no errors; no-fire run ends with the dome destroyed, as expected when nothing shoots the orbs. The steady hover is confirmed by code only, not by visual check.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 16 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_16.html`, git blob `9f30cbf123f2bfa5ee56df411be6880c19804af9`, 3799668 bytes.
+- Playtest request: at 10% mothership health, the mothership should dodge half of the laser fire.
+- Changes: at 10% health or below (3 of 30 hits), half of laser shots that reach the mothership are dodged, with a "DODGE" label. Scout dodge kept.
+- Headless check: shooting run destroys the mothership with 28 laser left, no errors. The dodge is not separately exercised by the harness.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
