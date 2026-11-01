@@ -54,3 +54,13 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Not yet verified: independent live fetch of the GitHub Pages URL (sandbox blocks github.io); Android playtest.
 - Remaining player tests: Android feedback on Test 5 (saucer shape, glow-line shield pulse, generator hits, radio wave, scout exit and bomb).
 - Design notes to confirm: laser passes through the shield line (generators stay hittable); a hit only pulses the line; a dome destroyed earlier stays down at boss arrival.
+
+## Checkpoint: Mothership Boss Test 6 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_6.html`, git blob `5c9205ee5ac81b96fc307b0a2d153c46f196e835`, 3,795,964 bytes.
+- Source committed to `dev`; test copy published to `main:tests/` with the landing-page card on top. Test 5 tagged PREVIOUS TEST.
+- Changes: no mothership shield or generators; health bar (24 hits, placeholder); laser full for the whole fight (ISS recharge); four scouts take cows with randomised, non-overlapping lifts; mega bomb removed.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+- Headless Chrome checks: shooting run (boss destroyed, 1,080 points, no errors); no-shoot run (three cows lifted, max one beam at a time, energy full, no errors); health bar visible.
+- Not yet verified: live Pages fetch (sandbox blocks github.io); Android playtest.
+- Open design questions for the player: what ends the fight if the scouts take all cows (current: the fight continues until the mothership is shot down); whether the mothership should keep dropping plasma orbs.
