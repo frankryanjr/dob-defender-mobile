@@ -83,3 +83,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Headless spam check: mothership destroyed in about 4 seconds with the laser ending at zero. Spam still wins, but it costs most of the laser bar.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
 - Open options for the next round: ISS passes again to refill the laser; scouts need two hits; a fire-rate limit on the laser.
+
+## Checkpoint: Mothership Boss Test 9 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_9.html`, git blob `1f96be460a2edc69a0167d7128b464285965868b`, 3798008 bytes.
+- Playtest feedback on Test 8: scouts should never be still except while abducting; the mothership should fire more and drop lower occasionally.
+- Changes: scouts wander while waiting and tilt with sideways motion; orbs every 3.2 s (up to 14); mothership drops about 0.6 hull every 9 to 13 s, capped above the dome.
+- Headless checks: no-fire run (lifts spaced, mothership leaves, no errors); probe (scouts tilt and move, mothership descends); shooting run (no errors).
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
