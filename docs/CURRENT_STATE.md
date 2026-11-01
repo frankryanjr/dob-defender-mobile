@@ -99,3 +99,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: scouts have random speed changes and roam targets away from each other; orbs have random speed and interval; mothership sway speed changes at random; an orb hit drains 30 laser (was all of it).
 - Headless checks: no-fire run (no errors, lifts spaced); probe (scouts spread and move, mothership sway varies).
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 11 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_11.html`, git blob `9b0122078ce0bf703b3c131d9cb681eaf10f1e01`, 3798662 bytes.
+- Playtest feedback on Test 10: the mothership should not replenish shield health; there was not enough laser to destroy the mothership and threats with a margin.
+- Changes: no mothership healing; 30 hits to destroy; laser costs 1.5 per shot in the boss fight (was 2); an orb hit drains 20 laser (was 30).
+- Headless check: spam run kills the mothership with 33 laser left, no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
