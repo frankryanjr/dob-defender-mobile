@@ -64,3 +64,13 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Headless Chrome checks: shooting run (boss destroyed, 1,080 points, no errors); no-shoot run (three cows lifted, max one beam at a time, energy full, no errors); health bar visible.
 - Not yet verified: live Pages fetch (sandbox blocks github.io); Android playtest.
 - Open design questions for the player: what ends the fight if the scouts take all cows (current: the fight continues until the mothership is shot down); whether the mothership should keep dropping plasma orbs.
+
+## Checkpoint: Mothership Boss Test 7 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_7.html`, git blob `96984408c1c6956e1a0aee60783bdb59338b118f`, 3796839 bytes.
+- Source committed to `dev`; test copy published to `main:tests/` with the landing-page card on top. Test 6 tagged PREVIOUS TEST.
+- Changes: orb hit on the dome sets laser to zero; orbs stop while laser is empty; shot-down scouts are replaced while unclaimed cows outnumber scouts in play; the mothership leaves once all cows are taken (no destruction bonus); no infinite laser.
+- Headless checks: no-fire run (orb drains laser, four cows lifted one at a time, mothership leaves, no errors); scouts-only run (scouts replaced after kills, four cows lifted, no errors); shooting run (mothership destroyed, bonus awarded).
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+- Not yet verified: live Pages fetch (sandbox blocks github.io); Android playtest.
+- Open placeholder values: 24 mothership hits; 20 points per hit; 500 kill bonus; laser drain of 100% per orb hit (interpreted as "one orb hit depletes the laser to zero").
