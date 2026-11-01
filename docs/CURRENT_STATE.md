@@ -131,3 +131,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: half of laser shots on scouts are dodged; at 50% health the mothership enters an enraged state and dives fast, zips left and right, then climbs back, every 5 to 7 seconds.
 - Headless check: shooting run reaches 50% health, dies with 1 laser left, no errors. The dive and zip are not separately checked.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 15 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_15.html`, git blob `92b98fc844eac157257ae3f00149c55b23af0862`, 3799427 bytes.
+- Playtest feedback on Test 14: the enraged dive-and-zip does not work and is removed; a scout occasionally shakes or vibrates when about to abduct a cow.
+- Changes: enraged dive removed; scout hover over a cow is now steady (the scout no longer alternates between pulling in and hovering out each frame). Scout dodge kept.
+- Headless checks: scouts-only run completes with no errors; no-fire run ends with the dome destroyed, as expected when nothing shoots the orbs. The steady hover is confirmed by code only, not by visual check.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
