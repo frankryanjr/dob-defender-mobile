@@ -107,3 +107,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: no mothership healing; 30 hits to destroy; laser costs 1.5 per shot in the boss fight (was 2); an orb hit drains 20 laser (was 30).
 - Headless check: spam run kills the mothership with 33 laser left, no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 12 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_12.html`, git blob `fa508e03ff0202711b7cbb0d4fcd425d277235ab`, 3798854 bytes.
+- Playtest feedback on Test 11: spam fire still destroys the mothership easily; the first shots after the 3-2-1 countdown do nothing to the mothership.
+- Changes: 220 ms gap between laser shots during the boss fight; laser hits register while the mothership is still entering.
+- Headless check: spam run takes about 12 s to destroy the mothership with 33 laser left, no errors. The early-hit fix is not exercised by the harness.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
