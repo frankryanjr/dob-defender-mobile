@@ -147,3 +147,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: at 10% health or below (3 of 30 hits), half of laser shots that reach the mothership are dodged, with a "DODGE" label. Scout dodge kept.
 - Headless check: shooting run destroys the mothership with 28 laser left, no errors. The dodge is not separately exercised by the harness.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 17 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_17.html`, git blob `9a617cb953e3aca6c65dfa858c9acf3344b0b0e9`, 3799581 bytes.
+- Playtest request: do not show the word dodge in the game.
+- Changes: removed the on-screen "DODGE" label for both scout and mothership deflections. Mechanics unchanged.
+- Headless check: shooting run finishes with 23 laser left, no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
