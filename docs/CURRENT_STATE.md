@@ -91,3 +91,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: scouts wander while waiting and tilt with sideways motion; orbs every 3.2 s (up to 14); mothership drops about 0.6 hull every 9 to 13 s, capped above the dome.
 - Headless checks: no-fire run (lifts spaced, mothership leaves, no errors); probe (scouts tilt and move, mothership descends); shooting run (no errors).
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 10 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_10.html`, git blob `9b6cd3d9d5461ae18db277b081c79e7212561fcb`, 3798865 bytes.
+- Playtest feedback on Test 9: UFOs too slow; laser ran out too quickly; threats bunched; mothership too steady.
+- Changes: scouts have random speed changes and roam targets away from each other; orbs have random speed and interval; mothership sway speed changes at random; an orb hit drains 30 laser (was all of it).
+- Headless checks: no-fire run (no errors, lifts spaced); probe (scouts spread and move, mothership sway varies).
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
