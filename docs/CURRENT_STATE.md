@@ -74,3 +74,12 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
 - Not yet verified: live Pages fetch (sandbox blocks github.io); Android playtest.
 - Open placeholder values: 24 mothership hits; 20 points per hit; 500 kill bonus; laser drain of 100% per orb hit (interpreted as "one orb hit depletes the laser to zero").
+
+## Checkpoint: Mothership Boss Test 8 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_8.html`, git blob `2de4f3dbb941b10fadf5d1e08c7b6fcdfe46a281`, 3797107 bytes.
+- Playtest feedback on Test 7: spamming the laser killed the mothership and the scouts in seconds. The laser has no fire-rate limit.
+- Changes: mothership health 24 to 40 hits; heals 2 HP per second after 4 seconds without a hit. Scouts unchanged.
+- Headless spam check: mothership destroyed in about 4 seconds with the laser ending at zero. Spam still wins, but it costs most of the laser bar.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+- Open options for the next round: ISS passes again to refill the laser; scouts need two hits; a fire-rate limit on the laser.
