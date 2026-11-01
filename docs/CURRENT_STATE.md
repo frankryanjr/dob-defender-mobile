@@ -115,3 +115,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: 220 ms gap between laser shots during the boss fight; laser hits register while the mothership is still entering.
 - Headless check: spam run takes about 12 s to destroy the mothership with 33 laser left, no errors. The early-hit fix is not exercised by the harness.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 13 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_13.html`, git blob `a69b5c7b25bdf3abdeba437be7f57fe926e919e4`, 3798921 bytes.
+- Playtest feedback on Test 12: laser runs out halfway through the mothership fight; the last scout freezes after the fourth cow is taken and the mothership leaves.
+- Changes: laser costs 1.0 per shot in the boss fight (was 1.5); an orb hit drains 12 laser (was 20); scouts keep updating during the leave state, and the mothership is removed only after no scouts remain.
+- Headless checks: spam run ends with 45 laser left, no errors; probe shows the last scout exiting before the mothership is removed.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
