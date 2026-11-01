@@ -123,3 +123,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: laser costs 1.0 per shot in the boss fight (was 1.5); an orb hit drains 12 laser (was 20); scouts keep updating during the leave state, and the mothership is removed only after no scouts remain.
 - Headless checks: spam run ends with 45 laser left, no errors; probe shows the last scout exiting before the mothership is removed.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 14 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_14.html`, git blob `5adffba60200d8ebf8a384398461311a04b0e0cf`, 3799952 bytes.
+- Playtest feedback on Test 13: playable, but still too easy; asked for scouts to dodge some laser fire and for the mothership to get more aggressive under half health.
+- Changes: half of laser shots on scouts are dodged; at 50% health the mothership enters an enraged state and dives fast, zips left and right, then climbs back, every 5 to 7 seconds.
+- Headless check: shooting run reaches 50% health, dies with 1 laser left, no errors. The dive and zip are not separately checked.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
