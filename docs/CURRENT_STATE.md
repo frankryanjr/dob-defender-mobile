@@ -155,3 +155,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: removed the on-screen "DODGE" label for both scout and mothership deflections. Mechanics unchanged.
 - Headless check: shooting run finishes with 23 laser left, no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 18 published under tests/ (1 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_18.html`, git blob `3ca92c4c5df1b72ea52d583074c32aa60e56300a`, 3799347 bytes.
+- Playtest feedback on Test 17: some UFOs took several hits to die; each scout should die from one hit.
+- Changes: removed the scout deflection, so one hit kills a scout. Mothership 10% deflection kept.
+- Headless checks: scouts-only run completes with no errors; the scout deflection path is removed from the code.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
