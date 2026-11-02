@@ -179,3 +179,12 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: with laser at zero, scouts skip waits, choose cows immediately, dive faster, and lift after a shorter gap (2.3 to 2.8 s, still no overlapping lifts).
 - Headless check: laser forced to zero at fight start; lifts begin about 3.5 s later, all four cows taken by about 28 s, one lift at a time, no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 21 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_21.html`, git blob `f6b801d27ee4e86cd66d706225018e16f6908578`, 3800058 bytes.
+- Playtest request: a second ISS pass during the boss fight, once laser falls to about 10%; the player shoots the ISS to refill some laser.
+- Changes: when laser is 10% or below during the fight, one ISS pass starts with a transmission. Refill uses the existing ISS hit (+40), not an automatic refill.
+- Observation from playtest: after the dome shield is destroyed, orbs that reach the telescope empty the laser, so the mothership stops firing orbs (by the laser-zero rule). Not changed in this test.
+- Headless checks: ISS pass spawns at low laser; the harness did not record a clean ISS hit, so the refill is confirmed by code only. No errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
