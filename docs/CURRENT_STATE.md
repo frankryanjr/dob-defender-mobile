@@ -214,3 +214,10 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Headless check: harness run (shoot mode) reaches the boss, the boss dies, the dawn tally shows, no page errors.
 - Not yet checked: returning-player start on a device with a saved callsign; Android playtest.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24 revised (2 November 2026)
+
+- Playtest: the old start overlay ("DOB DEFENDER / DEFEND!") flashed for a moment before the game started. It is in production too.
+- Change: the play overlay is hidden from the first paint, so it no longer flashes. Test 24 file replaced, git blob `c3e126309db855e15149117d0b370ee6797a6ba5`, 3800261 bytes.
+- Headless check: overlay hidden from first paint, callsign prompt shows for new players, shooting run reaches the boss kill with no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.

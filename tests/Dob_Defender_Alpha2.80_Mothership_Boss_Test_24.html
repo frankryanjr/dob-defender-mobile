@@ -38,7 +38,9 @@
 .aircraftSafetyCard .aircraftSeatbeltSign{margin:0 auto 16px;max-width:100%;padding:13px 10px;font-size:clamp(18px,5vw,23px)}
 .aircraftSafetyCard p{margin:11px 0;font-size:clamp(14px,3.8vw,16px);line-height:1.45}
 .aircraftSafetyCard #aircraftOK{margin-top:18px}
-</style><style id="ddStartV1Style">
+</style>
+#overlay[hidden]{display:none!important}
+<style id="ddStartV1Style">
 #ddApprovedStartV1[hidden]{display:none!important}
 #ddApprovedStartV1{position:fixed;inset:0;z-index:10000;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #ddApprovedPosterV1{position:relative;width:min(100vw,66.6015625dvh);aspect-ratio:1023/1536;flex:none;max-height:100dvh}
@@ -83,7 +85,7 @@
 <div id="quickTools"><button id="pauseBtn" class="quickBtn" type="button" aria-label="Pause game">Ⅱ</button><button id="devBtn" class="quickBtn" type="button">DEV</button></div>
 <div id="devPanel" hidden role="dialog" aria-modal="true" aria-label="Developer controls"><div id="devCard"><h2>DEV CONTROLS</h2><div id="skyDataStatus" style="font-size:11px;color:#b6cbd7;line-height:1.4">Star catalogue: checking…</div><label>Jump to night<input id="devNight" type="number" min="1" max="99" inputmode="numeric" value="1"></label><button id="devImportStars" type="button">IMPORT YALE STAR CATALOGUE (.JSON)</button><input id="starFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose Yale BSC5 catalogue"><label style="display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px"><input id="devForcePowerups" type="checkbox" style="width:18px;height:18px;flex:none"> ALWAYS HAVE POWER-UPS IN NIGHT</label><button id="devMusicToggle" type="button" aria-pressed="false">MUSIC: ON</button><button id="devJump" type="button">START SELECTED NIGHT</button><button id="devBossStart" type="button">START MOTHERSHIP BOSS (NIGHT 3)</button><button id="devRestartNight" type="button">RESTART CURRENT NIGHT</button><button id="devRestartGame" type="button">RESTART GAME</button><button id="devViewLeaderboard" type="button">VIEW LEADERBOARD</button><button id="devClose" type="button">CLOSE</button></div></div>
 <div id="results" hidden style="display:none!important" role="status" aria-live="polite"><h2>NIGHT <span id="resultNight">1</span> DEFENDED!</h2><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="resultScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="resultDome">100%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="resultCow">0</b><span class="stat-foot">saved</span></div></div></div>
-<div id="overlay"><h1 id="heading">DOB DEFENDER</h1><p id="message">Protect your observatory from the Meteorites, Asteroids &amp; Comets
+<div id="overlay" hidden><h1 id="heading">DOB DEFENDER</h1><p id="message">Protect your observatory from the Meteorites, Asteroids &amp; Comets
 
 
 Save the cows!
