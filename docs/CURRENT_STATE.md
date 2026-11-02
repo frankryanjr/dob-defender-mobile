@@ -196,3 +196,12 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: a brief "SHOOT ISS FOR LASER ENERGY" label replaces the transmission box on the second pass.
 - Headless check: ISS test run completes with no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 23 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_23.html`, git blob `a1c27cd1a963720ad85180f282000b22582234f6`, 3800143 bytes.
+- Playtest request: when the mothership reaches 10% health, ramp up the orbs.
+- Changes: at 10% health or below, orbs come at about 1.4 s gaps (was 3.2 s), and the orb cap rises by 10.
+- Note: the ramp was in the working copy but not in the published Test 22; Test 23 is the first published build with it.
+- Headless check: shooting run shows the orb count rising about one per second once health is at 3 or below. No errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
