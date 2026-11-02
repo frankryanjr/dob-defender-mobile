@@ -171,3 +171,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: during the mothership fight, an orb that reaches the telescope sets laser to zero and the game continues. Previously the telescope hit called destroyScope, which ended the game.
 - Headless check: nofire run continues with no errors after the dome is drained. The telescope-hit path is confirmed by code only.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 20 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_20.html`, git blob `5b31812f90aeefbca0db5325295454f02d0f6b82`, 3799565 bytes.
+- Playtest request: once the laser drains, the UFOs should go straight to abducting with no waiting.
+- Changes: with laser at zero, scouts skip waits, choose cows immediately, dive faster, and lift after a shorter gap (2.3 to 2.8 s, still no overlapping lifts).
+- Headless check: laser forced to zero at fight start; lifts begin about 3.5 s later, all four cows taken by about 28 s, one lift at a time, no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
