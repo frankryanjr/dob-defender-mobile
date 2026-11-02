@@ -221,3 +221,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Change: the play overlay is hidden from the first paint, so it no longer flashes. Test 24 file replaced, git blob `c3e126309db855e15149117d0b370ee6797a6ba5`, 3800261 bytes.
 - Headless check: overlay hidden from first paint, callsign prompt shows for new players, shooting run reaches the boss kill with no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24 fix, last cow splatted (2 November 2026)
+
+- Playtest: the laser ran out, a UFO was lifting the last cow, and the cow vanished. The mothership stayed in the fight with no scouts left.
+- Cause: a splatted cow is not marked dead, so the "all cows taken" check never passed.
+- Change: the check now counts splatted or lost cows as gone. Test 24 file replaced, git blob `133f84d075b328a5112f1dfd858ef417e81eb178`.
+- Headless check: splatting the last cow now makes the mothership leave and the night ends at dawn. Shoot and no-shoot runs complete with no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
