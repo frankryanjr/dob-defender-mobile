@@ -205,3 +205,12 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Note: the ramp was in the working copy but not in the published Test 22; Test 23 is the first published build with it.
 - Headless check: shooting run shows the orb count rising about one per second once health is at 3 or below. No errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_24.html`, git blob `a25aa10791c52cd399306a64e2743f3916b4b1c6`, 3800212 bytes.
+- Playtest request: remove the title screen from production. Tested first as a candidate, not promoted.
+- Changes: the start splash (`#ddApprovedStartV1`) is hidden. New players go straight to the callsign prompt; returning players go straight into the night. The Worldwide Nights button on the splash is no longer shown.
+- Headless check: harness run (shoot mode) reaches the boss, the boss dies, the dawn tally shows, no page errors.
+- Not yet checked: returning-player start on a device with a saved callsign; Android playtest.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
