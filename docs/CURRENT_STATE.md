@@ -163,3 +163,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Changes: removed the scout deflection, so one hit kills a scout. Mothership 10% deflection kept.
 - Headless checks: scouts-only run completes with no errors; the scout deflection path is removed from the code.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 19 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_19.html`, git blob `8ff43206c5fad30e499303dfad0dfce9a2c56559`, 3799423 bytes.
+- Playtest feedback on Test 18: when an orb hits the telescope, laser should empty fully and stop firing, and the UFOs should be free to take cows.
+- Changes: during the mothership fight, an orb that reaches the telescope sets laser to zero and the game continues. Previously the telescope hit called destroyScope, which ended the game.
+- Headless check: nofire run continues with no errors after the dome is drained. The telescope-hit path is confirmed by code only.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
