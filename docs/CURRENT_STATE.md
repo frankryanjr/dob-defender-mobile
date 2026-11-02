@@ -237,3 +237,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Playtest report: the game takes about 15 seconds to start and the music is slow. Not yet diagnosed; the page is about 3.8 MB with sounds embedded as base64, decoded on the first tap. Headless load takes about 1 second, so the delay is most likely on the phone's network or CPU.
 - Headless check: shoot and splat runs complete with no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24, abducted cows ride up with the UFO (2 November 2026)
+
+- Playtest: when a scout finished a lift, the cow vanished with a destruction burst and the UFO zoomed off. The UFOs should carry the cows up with their legs moving.
+- Cause: the boss lift code removed the cow with a "lost" burst at the end of the lift.
+- Change: the cow stays alive and rides up with its UFO, legs moving, and is removed once the UFO has left the screen. Test 24 file replaced, git blob `76d4e21ade3633a1f779032a3ca99bb338cb2d6c`.
+- Headless check: no-shoot runs end at dawn with no cows left in three runs; splat run and no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
