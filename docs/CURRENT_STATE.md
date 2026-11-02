@@ -188,3 +188,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Observation from playtest: after the dome shield is destroyed, orbs that reach the telescope empty the laser, so the mothership stops firing orbs (by the laser-zero rule). Not changed in this test.
 - Headless checks: ISS pass spawns at low laser; the harness did not record a clean ISS hit, so the refill is confirmed by code only. No errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 22 published under tests/ (2 November 2026)
+
+- Candidate: `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_22.html`, git blob `0fae55d7c2b1e1abb84a168a179f22f006638b9d`, 3799988 bytes.
+- Playtest clarification: the second ISS pass (at about 10% laser) gives no free energy; the player shoots the ISS as on a normal night.
+- Changes: a brief "SHOOT ISS FOR LASER ENERGY" label replaces the transmission box on the second pass.
+- Headless check: ISS test run completes with no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
