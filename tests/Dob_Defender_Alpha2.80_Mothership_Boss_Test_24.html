@@ -1416,7 +1416,7 @@ function bossUpdate(dt){
 bossScoutsUpdate(dt);
  if(B.state==='fight'){
   // All cows taken: the mothership leaves.
-  if(cows.every(c=>c.dead)){B.state='leave';floatText('ALL COWS TAKEN - MOTHERSHIP LEAVING',W/2,H*.38,'#ffb86b');return}
+  if(cows.every(c=>c.dead||c.state==='splat'||c.nightOutcome==='lost')){B.state='leave';floatText('ALL COWS TAKEN - MOTHERSHIP LEAVING',W/2,H*.38,'#ffb86b');return}
   // Shot-down scouts are replaced while unclaimed cows outnumber the scouts in play.
   const alive=enemies.filter(e=>e.type==='miniufo'&&e.hp>0&&e.step!=='exit').length;
   const free=cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle')).length;
