@@ -229,3 +229,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Change: the check now counts splatted or lost cows as gone. Test 24 file replaced, git blob `133f84d075b328a5112f1dfd858ef417e81eb178`.
 - Headless check: splatting the last cow now makes the mothership leave and the night ends at dawn. Shoot and no-shoot runs complete with no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24, orb ramp at 25% (2 November 2026)
+
+- Playtest request: start the orb ramp at 25% mothership health, not 10%. The 10% dodge is unchanged.
+- Change: orb ramp threshold moved from 10% to 25%. Test 24 file replaced, git blob `6e3218998ea39b969ec873ca0604b34bcc9bcb8d`.
+- Playtest report: the game takes about 15 seconds to start and the music is slow. Not yet diagnosed; the page is about 3.8 MB with sounds embedded as base64, decoded on the first tap. Headless load takes about 1 second, so the delay is most likely on the phone's network or CPU.
+- Headless check: shoot and splat runs complete with no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
