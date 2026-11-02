@@ -1217,7 +1217,7 @@ function segmentDistance(px,py,ax,ay,bx,by){const dx=bx-ax,dy=by-ay;const t=clam
 function telescopeStrike(e){const a=origin(),m=tip();const px=e.x,py=e.y;let tube=segmentDistance(px,py,a.x,a.y,m.x,m.y)<e.r+9;let box=Math.abs(px-W/2)<e.r+20&&py>=floor()-45-e.r&&py<=floor()+e.r;return tube||box}
 function cowStrike(e){for(const c of cows){if(c.dead||['splat','fall','lift','enter'].includes(c.state))continue;const cy=cowScreenY(c);if(Math.abs(e.x-c.x)<=e.r+13&&e.y+e.r>=cy-14&&e.y-e.r<=floor()+5){splatCow(c);return true}}return false}
 function changeScore(pts,x,y,label){score+=pts;if(boss)bossPts+=pts;if(pts>0)floatText('+'+pts,x,y,'#bff9cb');hud()}
-function cowScreenY(c){if(c.state==='fall')return c.fallY;if(c.state==='lift'){const carrier=abductingUfoFor(c);if(carrier&&carrier.step==='escape')return carrier.y+20;return floor()-9-Math.pow(c.lift,.7)*72}return floor()-9+(c.state==='sleep'||c.state==='settle'?5:0)}
+function cowScreenY(c){if(c.state==='fall')return c.fallY;if(c.state==='lift'&&c.carrier&&c.carrier.hp>0)return c.carrier.y+20;if(c.state==='lift'){const carrier=abductingUfoFor(c);if(carrier&&carrier.step==='escape')return carrier.y+20;return floor()-9-Math.pow(c.lift,.7)*72}return floor()-9+(c.state==='sleep'||c.state==='settle'?5:0)}
 function splatCow(c){if(c.state==='splat'||c.dead)return;if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.state='splat';c.timer=.65;c.selected=false;c.fallY=floor()-4;burst(c.x,floor()-5,'#e33b49',18)}
 function dropCow(c,e,safe){c.x=cowSafeX(e.x);c.fallY=cowScreenY(c);c.fallV=0;c.safeFall=!!safe;c.state='fall';c.selected=false;c.timer=0}
 function rescue(e){if(!e.cow)return;const cow=e.cow;ddTestSfx('Cow_Rescued',.5);
@@ -1314,12 +1314,13 @@ function bossScoutsUpdate(dt){
    e.x+=(c.x-e.x)*Math.min(1,dt*6);e.y=floor()-96;
    c.state='lift';c.lift=Math.min(1,e.beamT/2.2);
    if(e.beamT>=2.2){
-    c.dead=true;c.selected=false;c.nightOutcome='lost';totalCowDeaths++;
-    ddTestSfx('Cow_Lost',.55);burst(c.x,floor()-40,'#a6ff94',10);
-    e.cow=null;e.step='exit';
+    // The UFO carries the cow up with its legs moving; the cow is removed once the UFO has left the screen.
+    c.selected=false;c.nightOutcome='lost';c.carrier=e;c.lift=1;totalCowDeaths++;
+    ddTestSfx('Cow_Lost',.55);
+    e.carriedCow=c;e.cow=null;e.step='exit';
    }
   }
-  else if(e.step==='exit'){e.y-=180*dt;if(e.y<-40)e.hp=0}
+  else if(e.step==='exit'){e.y-=180*dt;const c=e.carriedCow;if(c&&!c.dead){c.x=e.x;if(e.y<-40){c.dead=true;c.carrier=null}}if(e.y<-40)e.hp=0}
  }
 }
 function bossBeamDraw(){
