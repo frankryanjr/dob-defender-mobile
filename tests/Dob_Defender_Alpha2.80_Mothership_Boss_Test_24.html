@@ -1460,7 +1460,10 @@ function bossDraw(){
  const cg=g.createRadialGradient(cx-h*.14,cy-h*.26,h*.04,cx,cy-h*.02,h*.42);cg.addColorStop(0,'#f2feff');cg.addColorStop(1,'#5cb6d4');
  g.fillStyle=cg;g.beginPath();g.ellipse(cx,cy-h*.02,h*.42,h*.3,0,PI,0);g.fill();
  g.strokeStyle='#d6f3fa';g.lineWidth=1.2;g.stroke();
- for(let i=0;i<12;i++){const a=i/12*TAU,on=((Math.floor(drawTime*5)+i)%3)===0;g.fillStyle=on?'#fff6c8':'#ffb86b';g.beginPath();g.arc(cx+Math.cos(a)*h*.86,cy+Math.sin(a)*h*.16,2.2,0,TAU);g.fill()}
+ // Rim lights warn of the stage: slow blue above half health, faster orange to a quarter, fastest red below.
+ const hpFrac=B.hp/BOSS_HP;
+ const lightCol=hpFrac>.5?'#5ec8ff':hpFrac>.25?'#ff9a3c':'#ff3b3b',lightRate=hpFrac>.5?1.5:hpFrac>.25?3:6;
+ for(let i=0;i<12;i++){const a=i/12*TAU,on=((Math.floor(drawTime*lightRate)+i)%3)===0;g.fillStyle=on?lightCol:'#3b4656';g.beginPath();g.arc(cx+Math.cos(a)*h*.86,cy+Math.sin(a)*h*.16,2.2,0,TAU);g.fill()}
  if(B.hitFlash>0){g.fillStyle='rgba(255,255,255,'+(B.hitFlash*2.5).toFixed(3)+')';g.beginPath();g.ellipse(cx,cy-h*.06,h,h*.28,0,0,TAU);g.fill()}
  // Health bar above the mothership.
  if(!dying){
