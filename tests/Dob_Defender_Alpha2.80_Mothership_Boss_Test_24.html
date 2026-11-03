@@ -1324,7 +1324,7 @@ function bossScoutsUpdate(dt){
  }
 }
 function bossBeamDraw(){
- const iss=enemies.find(e=>e.type==='iss'&&e.bossPass&&e.hp>0&&e.x>-30&&e.x<W+30);
+ const iss=enemies.find(e=>e.type==='iss'&&e.bossPass&&e.freeTopUp&&e.hp>0&&e.x>-30&&e.x<W+30);
  if(!iss)return;
  const x0=iss.x,y0=iss.y+10,yd=domeGeom().top,L=Math.max(40,yd-y0);
  g.save();g.lineCap='round';
@@ -1362,7 +1362,7 @@ function bossIntro(){
  bossIntroStarted=true;
  energy=100;if(shield>0)shield=100;ddEnergyFlash=.24;
  const d=Math.random()<.5?1:-1;
- enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false,bossPass:true});
+ enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false,bossPass:true,freeTopUp:true});
  bossTransmit(['INCOMING TRANSMISSION FROM ISS','Alien mother ship inbound. Replenishing laser power and shields... Good luck.']);
 }
 function bossSpawn(){
@@ -1408,7 +1408,7 @@ function bossUpdate(dt){
   if(B.dyingT>=1.8){for(let i=0;i<6;i++)burst(B.x+rnd(-B.hull*.8,B.hull*.8),B.y+rnd(-B.hull*.3,B.hull*.3),['#ffb86b','#a7ff77','#ffffff'][i%3],18);boss=null;bossDone=true}
   return;
  }
- B.swT-=dt;if(B.swT<=0){B.swT=rnd(1.5,3.5);B.swTarget=rnd(.25,1.6)}
+ B.swT-=dt;if(B.swT<=0){const fastDodge=B.hp<=B.maxHp*.5;B.swT=rnd(1.5,3.5)*(fastDodge?.6:1);B.swTarget=rnd(.25,1.6)*(fastDodge?1.7:1)}
  B.swSpd+=(B.swTarget-B.swSpd)*Math.min(1,dt*1.2);B.swPh+=dt*B.swSpd;
  B.x=W/2+Math.sin(B.swPh)*Math.max(0,W/2-18-B.hull*1.05);
  if(B.state==='leave'){bossScoutsUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)){boss=null;bossDone=true}return}
