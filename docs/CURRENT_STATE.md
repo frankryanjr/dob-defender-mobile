@@ -245,3 +245,10 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Change: the cow stays alive and rides up with its UFO, legs moving, and is removed once the UFO has left the screen. Test 24 file replaced, git blob `76d4e21ade3633a1f779032a3ca99bb338cb2d6c`.
 - Headless check: no-shoot runs end at dawn with no cows left in three runs; splat run and no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24, faster dodge at 50% and ISS graphic (3 November 2026)
+
+- Playtest: the mothership should dodge faster at 50% health. The ISS second pass should not show the radio-wave graphic; that is for the free top-up at the start only.
+- Change: at 50% health or below, the mothership's sideways movement changes direction sooner and faster. The second ISS pass is spawned without the top-up flag, so the radio-wave graphic is drawn only on the start pass. Test 24 file replaced, git blob `50c8b2a201dd8113ab5fb84cf15b1c93fa376b25`.
+- Headless check: shoot run and ISS run complete with no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
