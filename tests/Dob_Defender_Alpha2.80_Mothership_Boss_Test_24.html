@@ -1265,7 +1265,11 @@ function scoutRoamTarget(e){
 function scoutRelease(e){if(e.cow){const c=e.cow;c.selected=false;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}e.cow=null}
 /* Shot down: scouts score points. A scout that was lifting a cow lets the cow go. */
 function scoutDown(e,scored){
- if(e.hp<=0)return;scoutRelease(e);e.hp=0;
+ if(e.hp<=0)return;
+ // Shot down while carrying a cow up: the cow is rescued and drops safely, so it is not left floating.
+ const carried=e.carriedCow;
+ if(carried&&!carried.dead&&carried.carrier===e){dropCow(carried,e,true);carried.carrier=null;carried.nightOutcome=null;totalCowDeaths=Math.max(0,totalCowDeaths-1);ddTestSfx('Cow_Rescued',.5);e.carriedCow=null}
+ scoutRelease(e);e.hp=0;
  if(scored){changeScore(25,e.x,e.y,'SCOUT');burst(e.x,e.y,'#a6ff94',15);ddEventSfx('Satellite_Hit',.30,80)}
 }
 /* Each scout picks a cow after a random wait. Only one lift may start at a time, with a random gap between lifts. */
