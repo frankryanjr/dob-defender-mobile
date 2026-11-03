@@ -252,3 +252,11 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Change: at 50% health or below, the mothership's sideways movement changes direction sooner and faster. The second ISS pass is spawned without the top-up flag, so the radio-wave graphic is drawn only on the start pass. Test 24 file replaced, git blob `50c8b2a201dd8113ab5fb84cf15b1c93fa376b25`.
 - Headless check: shoot run and ISS run complete with no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Mothership Boss Test 24, cow left floating after UFO shot (3 November 2026)
+
+- Playtest: one cow stayed in the air after the player shot the UFO that was carrying it.
+- Cause: a scout shot down after its cow had lifted off had no cow to release, so the cow kept its lift position with no carrier.
+- Change: a cow whose UFO is shot down during the carry drops safely and is counted as saved again. Test 24 file replaced, git blob `60a988bc644619bfe22fb7ade237cf16374e3d26`.
+- Headless check: a simulated shot on a carrying UFO drops the cow to the ground; the night then ends at dawn with all cows removed and no errors.
+- Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
