@@ -1107,7 +1107,7 @@ window.addEventListener('pointerdown',()=>{ddAudioContext=ddAudioContext||new (w
 
 window.addEventListener('keydown',()=>{void ddPrepareSounds()},{once:true,capture:true});
 
-let ddBossLastShot=0;const BOSS_FIRE_GAP_MS=400;
+let ddBossLastShot=0;const BOSS_FIRE_GAP_MS=310;
 function shoot(){const cost=shotEnergyCost();if(paused||mode!=='night')return;if(boss&&boss.state!=='dying'){const now=performance.now();if(now-ddBossLastShot<BOSS_FIRE_GAP_MS)return;ddBossLastShot=now}if(energy<cost){const now=performance.now();if(now-ddLastEmptyClick>110){ddTestSfx('Laser_Energy_Depleted',.6);ddLastEmptyClick=now}return;}energy-=cost;if(ddEnergyEmptyNotified)ddEventSfx('Laser_Restored',.32);ddEnergyEmptyNotified=false;ddPlaySound("WPN_001");shotCount++;nightShots++;flash=.09;let p=tip();shots.push({x:p.x,y:p.y,px:p.x,py:p.y,vx:Math.cos(angle)*710,vy:Math.sin(angle)*710,t:1.7});hud()}
 function spawnRocketJunk(){ddEventSfx('Junk_Burn',.26,400);
  const left=Math.random()<.5,side=left?1:-1;
