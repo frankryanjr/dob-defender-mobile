@@ -1441,9 +1441,16 @@ bossScoutsUpdate(dt);
  }
  for(const b of shots){if(b.t<=0)continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }
+// Stage palette shared by the mothership rim lights and its orbs.
+function bossStage(){
+ const f=boss?boss.hp/BOSS_HP:0;
+ if(f>.5)return{col:'#5ec8ff',core:'rgba(223,244,255,1)',mid:'rgba(94,200,255,.95)',edge:'rgba(94,200,255,0)',rate:5};
+ if(f>.25)return{col:'#ff9a3c',core:'rgba(255,241,208,1)',mid:'rgba(255,154,60,.95)',edge:'rgba(255,154,60,0)',rate:7.5};
+ return{col:'#ff3b3b',core:'rgba(255,224,220,1)',mid:'rgba(255,59,59,.95)',edge:'rgba(255,59,59,0)',rate:10};
+}
 function drawBossOrb(e){
- const p=.5+.5*Math.sin(drawTime*9+e.phase),r=e.r*(1.05+.12*p);
- const gr=g.createRadialGradient(0,0,0,0,0,r*1.9);gr.addColorStop(0,'rgba(255,244,205,1)');gr.addColorStop(.35,'rgba(255,138,106,.95)');gr.addColorStop(1,'rgba(255,90,70,0)');
+ const p=.5+.5*Math.sin(drawTime*9+e.phase),r=e.r*(1.05+.12*p);const st=bossStage();
+ const gr=g.createRadialGradient(0,0,0,0,0,r*1.9);gr.addColorStop(0,st.core);gr.addColorStop(.35,st.mid);gr.addColorStop(1,st.edge);
  g.fillStyle=gr;g.beginPath();g.arc(0,0,r*1.9,0,TAU);g.fill();
 }
 function bossDraw(){
@@ -1460,10 +1467,9 @@ function bossDraw(){
  const cg=g.createRadialGradient(cx-h*.14,cy-h*.26,h*.04,cx,cy-h*.02,h*.42);cg.addColorStop(0,'#f2feff');cg.addColorStop(1,'#5cb6d4');
  g.fillStyle=cg;g.beginPath();g.ellipse(cx,cy-h*.02,h*.42,h*.3,0,PI,0);g.fill();
  g.strokeStyle='#d6f3fa';g.lineWidth=1.2;g.stroke();
- // Rim lights warn of the stage: slow blue above half health, faster orange to a quarter, fastest red below.
- const hpFrac=B.hp/BOSS_HP;
- const lightCol=hpFrac>.5?'#5ec8ff':hpFrac>.25?'#ff9a3c':'#ff3b3b',lightRate=hpFrac>.5?1.5:hpFrac>.25?3:6;
- for(let i=0;i<12;i++){const a=i/12*TAU,on=((Math.floor(drawTime*lightRate)+i)%3)===0;g.fillStyle=on?lightCol:'#3b4656';g.beginPath();g.arc(cx+Math.cos(a)*h*.86,cy+Math.sin(a)*h*.16,2.2,0,TAU);g.fill()}
+ // Rim lights warn of the stage: blue, then amber, then red, each faster than the last.
+ const st=bossStage();
+ for(let i=0;i<12;i++){const a=i/12*TAU,on=((Math.floor(drawTime*st.rate)+i)%3)===0;g.fillStyle=on?st.col:'#3b4656';g.beginPath();g.arc(cx+Math.cos(a)*h*.86,cy+Math.sin(a)*h*.16,2.2,0,TAU);g.fill()}
  if(B.hitFlash>0){g.fillStyle='rgba(255,255,255,'+(B.hitFlash*2.5).toFixed(3)+')';g.beginPath();g.ellipse(cx,cy-h*.06,h,h*.28,0,0,TAU);g.fill()}
  // Health bar above the mothership.
  if(!dying){
