@@ -1455,7 +1455,8 @@ bossScoutsUpdate(dt);
   // Orbs keep firing at the usual rate whatever the laser level.
   B.orbT-=dt;// At 10% health the mothership ramps up its orbs: shorter gaps and a higher cap.
   const low=B.hp<=B.maxHp*.25; // orb ramp starts at 25% health
-  if(B.orbT<=0&&B.orbs<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
+  const orbsInAir=enemies.reduce((n,e)=>n+(e.bossOrb&&e.hp>0?1:0),0);
+  if(B.orbT<=0&&orbsInAir<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
  }
  for(const b of shots){if(b.t<=0)continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }
@@ -1502,7 +1503,7 @@ function endGame(){
  if(mode==='gameover'||mode==='tally')return;
  ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;
  mode='tally';phaseTime=0;overlay.hidden=true;results.hidden=true;
- ddStartTally({night,base:score,energy:Math.floor(energy),dome:Math.floor(shield),saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
+ ddStartTally({night,base:score,energy:Math.floor(energy),dome:Math.floor(shield),boss:null,saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
 }
 function ddFinishGameOver(){
  ddTestSfx('Game_Over',.55);ddSetUfoHum(false);mode='gameover';gameOverReason='OBSERVATORY DESTROYED';hud();
