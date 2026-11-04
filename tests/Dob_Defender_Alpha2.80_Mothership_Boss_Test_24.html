@@ -1331,8 +1331,8 @@ let ddLaserLowOn=false;
 function bossLaserWarnDraw(){
  if(!boss||boss.state!=='fight'||energy<=0||energy>30)return;
  const txt='LASER LOW - SHOOT ISS';
- g.save();g.font='bold 13px system-ui';g.textAlign='center';g.textBaseline='middle';
- const bw=g.measureText(txt).width+28,bh=26,bx=W/2-bw/2,by=50;
+ g.save();g.font='bold 14px system-ui';g.textAlign='center';g.textBaseline='middle';
+ const bw=g.measureText(txt).width+30,bh=28,bx=W/2-bw/2,by=68; // just beneath the laser and dome bars
  g.globalAlpha=.65+.35*Math.sin(drawTime*8);
  g.fillStyle='rgba(60,12,12,.88)';g.beginPath();
  if(g.roundRect)g.roundRect(bx,by,bw,bh,13);else g.rect(bx,by,bw,bh);
