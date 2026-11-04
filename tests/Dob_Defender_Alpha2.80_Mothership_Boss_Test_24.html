@@ -1107,7 +1107,7 @@ window.addEventListener('pointerdown',()=>{ddAudioContext=ddAudioContext||new (w
 
 window.addEventListener('keydown',()=>{void ddPrepareSounds()},{once:true,capture:true});
 
-let ddBossLastShot=0;const BOSS_FIRE_GAP_MS=220;
+let ddBossLastShot=0;const BOSS_FIRE_GAP_MS=400;
 function shoot(){const cost=shotEnergyCost();if(paused||mode!=='night')return;if(boss&&boss.state!=='dying'){const now=performance.now();if(now-ddBossLastShot<BOSS_FIRE_GAP_MS)return;ddBossLastShot=now}if(energy<cost){const now=performance.now();if(now-ddLastEmptyClick>110){ddTestSfx('Laser_Energy_Depleted',.6);ddLastEmptyClick=now}return;}energy-=cost;if(ddEnergyEmptyNotified)ddEventSfx('Laser_Restored',.32);ddEnergyEmptyNotified=false;ddPlaySound("WPN_001");shotCount++;nightShots++;flash=.09;let p=tip();shots.push({x:p.x,y:p.y,px:p.x,py:p.y,vx:Math.cos(angle)*710,vy:Math.sin(angle)*710,t:1.7});hud()}
 function spawnRocketJunk(){ddEventSfx('Junk_Burn',.26,400);
  const left=Math.random()<.5,side=left?1:-1;
@@ -1198,7 +1198,7 @@ function splitMeteor(e){ddEventSfx('Meteor_Split',.35,150);
 }
 function addFlyby(){let d=Math.random()<.5?1:-1;enemies.push({type:'comet',x:d>0?-75:W+75,y:rnd(92,Math.max(150,floor()*.55)),vx:d*32*speedFactor(),vy:rnd(-2,3),r:[5.5,7.5,10][Math.floor(rnd(0,3))],hp:1,phase:0,shape:Array.from({length:9},()=>rnd(.8,1.16)),mandatory:false})}
 function addAircraft(){let d=Math.random()<.5?1:-1;enemies.push({type:'aircraft',x:d>0?-38:W+38,y:rnd(130,Math.max(165,floor()*.49)),vx:d*48,vy:0,r:24,hp:1,phase:0,mandatory:false,dir:d});if(!introAircraft){introAircraft=true;popupTutorial('aircraft')}}
-function addISS(){let d=Math.random()<.5?1:-1;issUsed=true;enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false});if(!introISS){introISS=true;popupTutorial('iss')}else{notice.textContent='ISS PASS ALERT';notice.classList.remove('twice');void notice.offsetWidth;notice.classList.add('twice')}}
+function addISS(){if(bossNight()||boss)return;let d=Math.random()<.5?1:-1;issUsed=true;enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false});if(!introISS){introISS=true;popupTutorial('iss')}else{notice.textContent='ISS PASS ALERT';notice.classList.remove('twice');void notice.offsetWidth;notice.classList.add('twice')}}
 function checkISS(){if(issDecided||issUsed)return;issDecided=true;let odds=energy<=0?0:energy<=25?.45:energy<=50?.2:energy<=75?.1:.05;if(Math.random()<odds){issSoon=true; // Schedule immediately while the player still has time and at least one shot.
  addISS()}}
 function startTrain(ret=false){if(!ret){satTrain={id:++trainSerial,direction:Math.random()<.5?1:-1,alive:new Set(Array.from({length:12},(_,i)=>i)),returned:false,rewarded:false};}
@@ -1655,7 +1655,7 @@ function updateUfo(e,dt){e.phase+=dt*3;if(!e.abduct){e.x+=e.vx*dt;return}let cow
 
 
 function updateNight(dt){nightTime+=dt;laserSightTime=Math.max(0,laserSightTime-dt);ddDomeShake=Math.max(0,ddDomeShake-dt);ddGroundShake=Math.max(0,ddGroundShake-dt);ddEnergyFlash=ddEnergyFlash>0?Math.max(0,ddEnergyFlash-dt):Math.min(0,ddEnergyFlash+dt);ddShieldFlash=Math.max(0,ddShieldFlash-dt);hud();if(!junkSpawned&&nightTime>=junkSpawnAt){junkSpawned=true;spawnRocketJunk()}angle+=(wanted-angle)*Math.min(1,dt*12);flash=Math.max(0,flash-dt);domeFlash=Math.max(0,domeFlash-dt);
- if(!issDecided&&nightTime>=issCheckAt)checkISS();
+ if(!issDecided&&nightTime>=issCheckAt&&!bossNight())checkISS();
  /* Four unique cows are present from the beginning; never replace a lost cow. */
  // Scheduled events can be postponed to respect the simultaneously dangerous limit.
  let guard=0;while(spawnCursor<events.length&&nightTime>=events[spawnCursor].t&&guard++<8){if(!doEvent(events[spawnCursor]))break;spawnCursor++}
