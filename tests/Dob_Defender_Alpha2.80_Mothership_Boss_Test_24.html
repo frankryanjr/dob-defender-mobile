@@ -1452,10 +1452,10 @@ bossScoutsUpdate(dt);
   if(!B.recharged&&energy<=30){B.recharged=true;for(const x of enemies)if(x.type==='iss'&&x.hp>0)x.hp=0;const d=Math.random()<.5?1:-1;
    enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false,bossPass:true});
    floatText('SHOOT ISS FOR LASER ENERGY',W/2,H*.38,'#8ee2ee')}
-  // Orbs fly only while the mothership still has laser to drain.
+  // Orbs keep firing at the usual rate whatever the laser level.
   B.orbT-=dt;// At 10% health the mothership ramps up its orbs: shorter gaps and a higher cap.
   const low=B.hp<=B.maxHp*.25; // orb ramp starts at 25% health
-  if(B.orbT<=0&&B.orbs<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)&&energy>0){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
+  if(B.orbT<=0&&B.orbs<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
  }
  for(const b of shots){if(b.t<=0)continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }
