@@ -1329,7 +1329,7 @@ function bossScoutsUpdate(dt){
 }
 let ddLaserLowOn=false;
 function bossLaserWarnDraw(){
- if(!boss||boss.state!=='fight'||energy<=0||energy>20)return;
+ if(!boss||boss.state!=='fight'||energy<=0||energy>30)return;
  const txt='LASER LOW - SHOOT ISS';
  g.save();g.font='bold 13px system-ui';g.textAlign='center';g.textBaseline='middle';
  const bw=g.measureText(txt).width+28,bh=26,bx=W/2-bw/2,by=50;
@@ -1433,9 +1433,9 @@ function bossUpdate(dt){
  else B.y=B.y0+Math.sin(B.t*1.3)*5;
 bossScoutsUpdate(dt);
  if(B.state==='fight'){
-  // Warning when laser drops to 20%: two beeps on entering the low band, and a banner while it stays low.
-  const lowLaser=energy>0&&energy<=20;
-  if(lowLaser&&!ddLaserLowOn){ddLaserLowOn=true;ddCountdownBeep(1);setTimeout(()=>ddCountdownBeep(1),260)}
+  // Warning when laser drops to 30%: the game's warning sound on entering the low band, and a banner while it stays low.
+  const lowLaser=energy>0&&energy<=30;
+  if(lowLaser&&!ddLaserLowOn){ddLaserLowOn=true;ddTestSfx('Night_Warning',.8)}
   if(!lowLaser)ddLaserLowOn=false;
   // All cows taken: the mothership leaves.
   if(cows.every(c=>c.dead||c.state==='splat'||c.nightOutcome==='lost')){B.state='leave';floatText('ALL COWS TAKEN - MOTHERSHIP LEAVING',W/2,H*.38,'#ffb86b');return}
