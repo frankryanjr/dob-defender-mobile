@@ -1388,7 +1388,6 @@ function bossSpawn(){
  boss={state:'enter',t:0,x:W/2,y:-hull,y0:clamp(floor()*.27,108,175),hull,sx:hull/18,hp:BOSS_HP,maxHp:BOSS_HP,hits:0,hitFlash:0,sinceHit:0,healAcc:0,swPh:rnd(0,TAU),swSpd:.5,swTarget:.5,swT:rnd(1.5,3),
   orbT:3.5,orbs:0,descT:10,y0T:null,drift:rnd(0,TAU),dyingT:0};
  bossLiftCD=rnd(2,4);
- floatText('MOTHERSHIP APPROACHING',W/2,H*.38,'#ffb86b');
  ddEventSfx('Train_Complete',.32,3000);
 }
 function bossInEllipse(px,py,cx,cy,rx,ry){const a=(px-cx)/rx,b=(py-cy)/ry;return a*a+b*b<=1}
