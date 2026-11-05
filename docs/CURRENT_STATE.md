@@ -260,3 +260,12 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - Change: a cow whose UFO is shot down during the carry drops safely and is counted as saved again. Test 24 file replaced, git blob `60a988bc644619bfe22fb7ade237cf16374e3d26`.
 - Headless check: a simulated shot on a carrying UFO drops the cow to the ground; the night then ends at dawn with all cows removed and no errors.
 - Production `main:index.html` (`3a0b8ce5…`) and `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`) unchanged.
+
+## Checkpoint: Night 3 Mothership Boss promoted to production index.html (5 November 2026)
+
+- Approval: the owner approved pushing the approved Test 24 build to production.
+- Production `index.html`: replaced `3a0b8ce5…` with git blob `7f1f4e2dda5a9bc57bb9b9c80a03d8a524961255`, built from the Test 24 source with the title and footer reset to the game version (no "Test" label).
+- Removed from production start: the title poster (`ddApprovedStartV1`), which is now hidden. New players still get the callsign prompt, and returning players go straight into the game.
+- Still unchanged: `releases/Dob_Defender_Alpha2.80.html` (`1a4c399c…`). The version string is still Alpha2.80.
+- Headless check: shoot run reaches the boss, boss is defeated, dawn tally appears, no page errors.
+- Not yet checked: a returning player on a real phone; the next playtest will confirm.
