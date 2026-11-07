@@ -1478,8 +1478,8 @@ function alienBeamDraw(a){
  const half=17;
  g.save();
  const gr=g.createLinearGradient(f.x,f.y,c.x,c.alienY);
- gr.addColorStop(0,'rgba(149,255,179,1)');gr.addColorStop(1,'rgba(110,238,169,.6)');
- g.globalAlpha=Math.min(1,.07*k*pulse*flick); // less opaque; flickers
+ gr.addColorStop(0,'rgba(120,255,190,1)');gr.addColorStop(1,'rgba(60,240,200,.9)');
+ g.globalAlpha=Math.min(1,.15*k*pulse*flick); // more colour; still flickers
  g.fillStyle=gr;g.beginPath();g.moveTo(f.x,f.y-1);g.lineTo(f.x,f.y+1);g.lineTo(c.x+half,c.alienY+4);g.lineTo(c.x-half,c.alienY+4);g.closePath();g.fill();
  g.restore();
 }
@@ -1540,8 +1540,8 @@ function ddSynthKey(){
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
   if(!ddKeyNoise)ddKeyNoise=ddNoiseBuffer(ctx);
   const t=ctx.currentTime,src=ctx.createBufferSource(),bp=ctx.createBiquadFilter(),g=ctx.createGain();
-  src.buffer=ddKeyNoise;bp.type='bandpass';bp.frequency.value=2000+Math.random()*1200;bp.Q.value=1.4;
-  g.gain.setValueAtTime(.2+Math.random()*.06,t);g.gain.exponentialRampToValueAtTime(.001,t+.024);
+  src.buffer=ddKeyNoise;bp.type='bandpass';bp.frequency.value=2500+Math.random()*1500;bp.Q.value=1;
+  g.gain.setValueAtTime(.9+Math.random()*.3,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);
   src.connect(bp);bp.connect(g);g.connect(ctx.destination);src.start(t,Math.random()*.8,.03);
  }catch(e){}
 }
@@ -1618,7 +1618,7 @@ function bossUpdate(dt){
 bossScoutsUpdate(dt);
  if(B.alien)alienUpdate(dt);
  if(B.state==='fight'){
-  if(B.tipAt!=null&&B.t>=B.tipAt){B.tipAt=null;floatText('SHOOT THE TRACTOR BEAMS - NOT THE COWS!',W/2,H*.38+26,'#8ee2ee')}
+  if(B.tipAt!=null&&B.t>=B.tipAt){B.tipAt=null;activeWarnings.push({text:'SHOOT THE TRACTOR BEAMS - NOT THE COWS!',x:W/2,y:H*.38+26,color:'#8ee2ee',t:5})}
   // Warning when laser drops to 30%: the game's warning sound on entering the low band, and a banner while it stays low.
   const lowLaser=energy>0&&energy<=30;
   if(lowLaser&&!ddLaserLowOn){ddLaserLowOn=true;ddTestSfx('Night_Warning',.8)}
