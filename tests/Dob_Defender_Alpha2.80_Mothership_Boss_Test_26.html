@@ -1063,7 +1063,7 @@ function ddSynthTransport(rising){
  if(!rising)return; // no sound on dematerialise
  try{
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
-  const t=ctx.currentTime,dur=1.6,out=ctx.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.26,t+.12);out.gain.setValueAtTime(.26,t+dur-.4);out.gain.linearRampToValueAtTime(0,t+dur);out.connect(ctx.destination);
+  const t=ctx.currentTime,dur=1.6,out=ctx.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.15,t+.12);out.gain.setValueAtTime(.15,t+dur-.4);out.gain.linearRampToValueAtTime(0,t+dur);out.connect(ctx.destination);
   const f0=rising?520:2600,f1=rising?2600:520;
   const tone=ctx.createOscillator(),trem=ctx.createOscillator(),tremG=ctx.createGain(),toneG=ctx.createGain();
   tone.type='sine';tone.frequency.setValueAtTime(f0,t);tone.frequency.exponentialRampToValueAtTime(f1,t+dur);
