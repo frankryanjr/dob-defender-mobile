@@ -1076,7 +1076,7 @@ function ddSynthTransport(rising){
  }catch(e){console.warn('Transport sound:',e)}
 }
 /* Alien grumble: a low growling sawtooth with a slow wobble, falling in pitch. Played when the beam is hit. */
-function ddSynthGrumble(){
+function ddSynthGrumble(fast){
  try{
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
   // about 0.4 seconds: five quick voiced "mur" pulses. A low-pass keeps the growl and a mid boost gives it body, so phone speakers play it.
@@ -1084,8 +1084,9 @@ function ddSynthGrumble(){
   out.gain.value=.32;lp.type='lowpass';lp.frequency.value=1000;lp.Q.value=1;
   pk.type='peaking';pk.frequency.value=420;pk.gain.value=9;pk.Q.value=1.2;
   lp.connect(pk);pk.connect(out);out.connect(ctx.destination);
+  const gap=fast?.072:.085,len=fast?.063:.075;
   for(let k=0;k<5;k++){
-   const s0=k*.085,s1=s0+.075;
+   const s0=k*gap,s1=s0+len;
    const o=ctx.createOscillator(),vib=ctx.createOscillator(),vg=ctx.createGain(),env=ctx.createGain();
    o.type='sawtooth';o.frequency.setValueAtTime(155,t+s0);o.frequency.linearRampToValueAtTime(120,t+s1);
    vib.frequency.value=9;vg.gain.value=12;vib.connect(vg);vg.connect(o.detune);
@@ -1376,11 +1377,12 @@ function bossScoutsUpdate(dt){
 let aliens=[],alienSpawnT=2;
 const ALIEN_MAX=3,ALIEN_LIFT_T=6.5,ALIEN_BEAM_HITS=1;
 function alienFreeCows(){return cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle'))}
+let alienVoiceCount=0;
 function alienSpawn(){
  const free=alienFreeCows();if(!free.length)return false;
  const c=free[Math.floor(Math.random()*free.length)],side=Math.random()<.5?-1:1;
  c.selected=true;c.alienY=null;
- aliens.push({step:'in',t:0,x:clamp(c.x+side*rnd(18,40),22,W-22),y:floor(),face:-side,cow:c,beamHits:0,gone:false,blinkT:rnd(1,3),blinkDur:0});
+ aliens.push({fastVoice:(alienVoiceCount++)%2===1,step:'in',t:0,x:clamp(c.x+side*rnd(18,40),22,W-22),y:floor(),face:-side,cow:c,beamHits:0,gone:false,blinkT:rnd(1,3),blinkDur:0});
  ddSynthTransport(true);
  return true;
 }
@@ -1420,7 +1422,7 @@ function alienUpdate(dt){
     a.cow=null;a.step='out';a.t=0;ddSynthTransport(false);continue;
    }
   }
-  else if(a.step==='wait'){if(!a.saved||a.saved.state!=='fall'||a.t>4){ddSynthGrumble();a.step='fist';a.t=0}}
+  else if(a.step==='wait'){if(!a.saved||a.saved.state!=='fall'||a.t>4){ddSynthGrumble(a.fastVoice);a.step='fist';a.t=0}}
   else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0;ddSynthTransport(false)}}
   else if(a.step==='out'){if(a.t>=1)a.gone=true}
  }
@@ -1615,11 +1617,32 @@ function bossLaunchOrb(){
  enemies.push({type:'meteor',fragment:true,bossOrb:true,x:sx,y:sy,vx:dx/len*sp,vy:dy/len*sp,r:9,hp:1,phase:rnd(0,TAU),shape:Array.from({length:9},()=>1),mandatory:true});
  pendingMandatory++;B.orbs++;ddEventSfx('Meteor_New',.3,200);
 }
+let bossBlasts=[];
+function bossBlastStart(x,y,hull){
+ const t0=performance.now(),h=hull;
+ bossBlasts.push({x,y,h,t0,
+  rings:[{d:0,max:h*6,w:5,c:'#ffd27a'},{d:.08,max:h*9,w:3,c:'#a7ff77'},{d:.22,max:h*5,w:3,c:'#ffffff'}],
+  bursts:[{at:0,dx:0,dy:0,c:'#ffffff',n:40},{at:.1,dx:-h*.7,dy:-h*.2,c:'#ffb86b',n:26},{at:.18,dx:h*.7,dy:h*.25,c:'#a7ff77',n:26},{at:.3,dx:-h*.4,dy:h*.35,c:'#ff6b6b',n:24},{at:.42,dx:h*.5,dy:-h*.4,c:'#ffd27a',n:30},{at:.6,dx:0,dy:0,c:'#ffb86b',n:36}],
+  sounds:[{at:0,n:'Asteroid_Destroyed',v:.95},{at:.45,n:'Telescope_Destroyed',v:.6}]});
+ ddGroundShake=Math.max(ddGroundShake,1.4);
+ flash=.6;
+}
+function bossBlastDraw(){
+ if(!bossBlasts.length)return;
+ const now=performance.now();bossBlasts=bossBlasts.filter(b=>now-b.t0<2400);
+ for(const b of bossBlasts){
+  const age=(now-b.t0)/1000;
+  for(const bu of b.bursts){if(!bu.done&&age>=bu.at){bu.done=true;burst(b.x+bu.dx,b.y+bu.dy,bu.c,bu.n)}}
+  for(const so of b.sounds){if(!so.done&&age>=so.at){so.done=true;ddTestSfx(so.n,so.v)}}
+  if(age<.3){g.save();g.globalAlpha=(1-age/.3)*.9;g.fillStyle='#fff8e0';g.beginPath();g.arc(b.x,b.y,b.h*1.8*(.4+age*2.2),0,TAU);g.fill();g.restore()}
+  for(const r of b.rings){const a=age-r.d;if(a<0)continue;const k=Math.min(1,a/.9),rad=r.max*(1-Math.pow(1-k,3));g.save();g.globalAlpha=(1-k)*.9;g.strokeStyle=r.c;g.lineWidth=r.w*(1-k*.6);g.beginPath();g.arc(b.x,b.y,rad,0,TAU);g.stroke();g.restore()}
+ }
+}
 function bossUpdate(dt){
  const B=boss;B.t+=dt;B.hitFlash=Math.max(0,B.hitFlash-dt);
  if(B.state==='dying'){
   B.dyingT+=dt;if(Math.random()<dt*34)burst(B.x+rnd(-B.hull,B.hull),B.y+rnd(-B.hull*.4,B.hull*.4),Math.random()<.5?'#ffb86b':'#a7ff77',10);
-  if(B.dyingT>=1.8){for(let i=0;i<6;i++)burst(B.x+rnd(-B.hull*.8,B.hull*.8),B.y+rnd(-B.hull*.3,B.hull*.3),['#ffb86b','#a7ff77','#ffffff'][i%3],18);boss=null;bossDone=true}
+  if(B.dyingT>=1.8){bossBlastStart(B.x,B.y,B.hull);boss=null;bossDone=true}
   return;
  }
  B.swT-=dt;if(B.swT<=0){const fastDodge=B.hp<=B.maxHp*.5;B.swT=rnd(1.5,3.5)*(fastDodge?.6:1);B.swTarget=rnd(.25,1.6)*(fastDodge?1.7:1)}
@@ -2176,7 +2199,7 @@ function draw(){g.save();if(mode==='night'&&ddGroundShake>0){const strength=3.5*
  g.fillStyle=day>.5?'#345a64':'#1e3440';g.beginPath();g.moveTo(0,floor());for(let x=0;x<=W+10;x+=10)g.lineTo(x,floor()-15+Math.sin(x*.05)*10);g.lineTo(W,H);g.lineTo(0,H);g.fill();g.fillStyle=day>.5?'#526b46':'#2a4537';g.fillRect(0,floor(),W,H-floor());
  for(let e of enemies)if(e.hp>0)drawEnemy(e);
  if(boss&&(mode==='night'||mode==='destroyed'))bossDraw();
- drawDome();bossBeamDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
+ drawDome();bossBeamDraw();bossBlastDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
  for(let b of shots){g.shadowColor=ddEnergyColor();g.shadowBlur=18;g.strokeStyle=ddEnergyColor();g.lineWidth=3;g.beginPath();g.moveTo(b.x,b.y);g.lineTo(b.x-b.vx*.065,b.y-b.vy*.065);g.stroke();g.shadowBlur=0}
  if(flash>0&&!scopeBroken){let q=tip();g.shadowColor=ddEnergyColor();g.shadowBlur=20;g.fillStyle='#dfffed';g.beginPath();g.arc(q.x,q.y,3,0,TAU);g.fill();g.shadowBlur=0}
  for(const a of junkAfterglows){
