@@ -1601,11 +1601,12 @@ function bossUpdate(dt){
   if(B.collectX!=null){const tx=clamp(B.collectX,W/2-amp,W/2+amp);B.x+=(tx-B.x)*Math.min(1,dt*4)} // glide over to the cow
   else B.x+=(sinX-B.x)*Math.min(1,dt*2)}
  if(B.state==='leave'){bossScoutsUpdate(dt);if(B.alien)alienUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)&&!aliens.length){boss=null;bossDone=true}return}
- if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText(B.alien?'ALIENS ARE TAKING THE COWS':'SCOUTS ARE TAKING THE COWS',W/2,H*.38,'#ff929b')}}
+ if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText('THE ALIENS ARE TAKING THE COWS',W/2,H*.38,'#ff929b');if(B.alien)B.tipAt=B.t+3.5}}
  else B.y=B.y0+Math.sin(B.t*1.3)*5;
 bossScoutsUpdate(dt);
  if(B.alien)alienUpdate(dt);
  if(B.state==='fight'){
+  if(B.tipAt!=null&&B.t>=B.tipAt){B.tipAt=null;floatText('SHOOT THE TRACTOR BEAMS - NOT THE COWS!',W/2,H*.38+26,'#8ee2ee')}
   // Warning when laser drops to 30%: the game's warning sound on entering the low band, and a banner while it stays low.
   const lowLaser=energy>0&&energy<=30;
   if(lowLaser&&!ddLaserLowOn){ddLaserLowOn=true;ddTestSfx('Night_Warning',.8)}
