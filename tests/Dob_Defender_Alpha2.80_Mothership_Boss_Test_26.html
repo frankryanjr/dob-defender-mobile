@@ -262,10 +262,12 @@ function ddUpdateGate(){
  ddGateDefend.disabled=ddGatePending||!valid;
  ddGateDefend.textContent=ddGatePending?'REGISTERING…':'DEFEND!';
 }
+/* New players choose their own callsign. The name box is open straight away, pre-filled with a suggestion they can overwrite. */
 function ddShowGate(){
  ddSuggested=ddNewSuggestion();$('ddCallsignSuggestion').textContent=ddSuggested;
- ddGateEditing=false;ddGatePending=false;ddGateGenerated.hidden=false;ddGateChange.hidden=false;ddGateEdit.hidden=true;ddGateInput.value='';ddGateError.textContent='';
- ddGate.hidden=false;ddUpdateGate();
+ ddGateEditing=true;ddGatePending=false;ddGateGenerated.hidden=true;ddGateChange.hidden=true;ddGateEdit.hidden=false;
+ ddGateInput.value=ddSuggested;ddGateError.textContent='';
+ ddGate.hidden=false;ddUpdateGate();ddGateInput.focus();
 }
 ddGateChange.addEventListener('click',()=>{
  ddGateEditing=true;ddGateGenerated.hidden=true;ddGateChange.hidden=true;ddGateEdit.hidden=false;ddGateError.textContent='';ddUpdateGate();ddGateInput.focus();
@@ -290,9 +292,7 @@ ddGateDefend.addEventListener('click',async()=>{
  }catch(e){ddGateError.textContent=e.message||'Registration unavailable. Check your connection.';ddGate.hidden=false;ddGateGenerated.hidden=false;ddGateChange.hidden=false;ddGateEdit.hidden=true}
  finally{ddGatePending=false;ddUpdateGate()}
 });
-/* No callsign screen: a new player is registered silently with a suggested callsign. The gate only appears if that fails. */
-function ddAutoDefend(){ddSuggested=ddNewSuggestion();ddGateEditing=false;ddGatePending=false;ddUpdateGate();ddGateDefend.click()}
-$('play').addEventListener('click',e=>{if(!ddPlayer&&mode!=='gameover'){e.preventDefault();e.stopImmediatePropagation();ddAutoDefend()}},true);
+$('play').addEventListener('click',e=>{if(!ddPlayer&&mode!=='gameover'){e.preventDefault();e.stopImmediatePropagation();ddShowGate()}},true);
 
 
 const PI=Math.PI,TAU=2*PI,rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
