@@ -17,7 +17,7 @@
 - **Production archive:** `releases/Dob_Defender_Alpha2.82.html`. Previous production: `releases/Dob_Defender_Alpha2.81.html`.
 - **Approved test archive it was derived from:** `releases/Dob_Defender_Alpha2.81_Mothership_Boss_Test_27.html`, Git blob `152c40ca88ff492ac7df28f465c0efb59b3bccd9`.
 - **Live web play link:** https://frankryanjr.github.io/dob-defender-mobile/
-- **itch.io:** https://stargazerman.itch.io/dob-defender. Updated to Alpha2.81 on 7 November 2026 at the user's explicit request. Public embedded game loaded and displayed Alpha2.81; served HTML contains the exact approved 3,817,623-byte production file (blob `09068f9fc7ede5118f5c74f1af94c6713446b268`) plus only itch.io's standard 87-byte `htmlgame.js` hosting suffix. Existing Alpha2.80 remains available as a separate download. Android gameplay on the updated itch.io build remains untested.
+- **itch.io:** https://stargazerman.itch.io/dob-defender. Updated to Alpha2.82 on 7 November 2026 at the user's explicit request. Public embedded game loaded and displayed Alpha2.82. Independently retrieved served HTML matches the approved 3,817,622-byte production file (blob `b7bf1fd3d0a0e5e42df039ffab1468763018a06f`) plus only itch.io's standard 87-byte hosting script. Alpha2.80 and Alpha2.81 remain separate downloads. Android gameplay of the updated itch.io build awaits confirmation.
 - **Player status:** the user tested Alpha2.81 and reported it as good. Test 27 (late-stage orb reduction) was approved and released as Alpha2.82 on 7 November.
 
 ## What production contains
@@ -42,7 +42,7 @@
 ## Open items
 - **Source is not in GitHub.** The game's build sources and test scripts are in the assistant's working environment, not in this repo. A new AI can edit the standalone HTML directly, but cannot regenerate it from source. **Decision needed:** should the source blocks and build script be committed to a `source/` folder on `dev`?
 - **`tests/index.html` still lists Test 26 as UNAPPROVED.** Update it when the next test is published.
-- **itch.io:** Alpha2.81 browser upload and public version verified on 7 November. Android gameplay still awaits user confirmation; Alpha2.80 remains a separate download.
+- **itch.io:** Alpha2.82 browser upload and public version verified on 7 November. Android gameplay still awaits user confirmation; older uploads remain separate downloads.
 - **Docs not yet updated for November work:** `PROJECT_HISTORY.md`, `DEVELOPMENT.md` and `HANDOVER.md` still stop in late October.
 - **Difficulty progression across nights** is not specified or verified. The user wants bosses to get harder as the game goes on.
 - **Android device testing** of the grumble timing and the explosion volume is still pending from the user.
