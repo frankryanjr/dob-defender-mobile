@@ -287,10 +287,12 @@ ddGateDefend.addEventListener('click',async()=>{
   if(!data)throw Error('Unable to assign a unique callsign. Try again.');
   ddStore(data.player,secret);
   ddGate.hidden=true;ddRefreshGameplayViewport();resetGame();
- }catch(e){ddGateError.textContent=e.message||'Registration unavailable. Check your connection.'}
+ }catch(e){ddGateError.textContent=e.message||'Registration unavailable. Check your connection.';ddGate.hidden=false;ddGateGenerated.hidden=false;ddGateChange.hidden=false;ddGateEdit.hidden=true}
  finally{ddGatePending=false;ddUpdateGate()}
 });
-$('play').addEventListener('click',e=>{if(!ddPlayer&&mode!=='gameover'){e.preventDefault();e.stopImmediatePropagation();ddShowGate()}},true);
+/* No callsign screen: a new player is registered silently with a suggested callsign. The gate only appears if that fails. */
+function ddAutoDefend(){ddSuggested=ddNewSuggestion();ddGateEditing=false;ddGatePending=false;ddUpdateGate();ddGateDefend.click()}
+$('play').addEventListener('click',e=>{if(!ddPlayer&&mode!=='gameover'){e.preventDefault();e.stopImmediatePropagation();ddAutoDefend()}},true);
 
 
 const PI=Math.PI,TAU=2*PI,rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
