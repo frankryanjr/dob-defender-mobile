@@ -1,4 +1,4 @@
-**Current development status (31 October 2026):** `dev` branch established; safe test publishing configuration and boss candidate upload are pending verification. See **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)** for the concise production baseline, active Night 3 boss test, test-deployment setup, verification gaps and single next action. The detailed handover remains in [docs/HANDOVER.md](docs/HANDOVER.md). Historical release checkpoints belong in the handover/changelog, not as competing current-state claims here.
+**Current status (7 November 2026):** production is Alpha2.81, with Night 3 and Night 6 boss fights. Next work and open items are in **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)**. Read `docs/WORKFLOW.md` before any development or release.
 
 # Dob Defender — Project entry point
 
