@@ -1077,13 +1077,16 @@ function ddSynthTransport(rising){
 function ddSynthGrumble(){
  try{
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
-  const t=ctx.currentTime,dur=.6,out=ctx.createGain(),lp=ctx.createBiquadFilter();
-  out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.3,t+.05);out.gain.exponentialRampToValueAtTime(.001,t+dur);
-  lp.type='lowpass';lp.frequency.value=520;lp.Q.value=2;lp.connect(out);out.connect(ctx.destination);
-  for(const detune of [0,-18]){
+  // higher and louder than before so phone speakers reproduce it: a sawtooth growl that falls in pitch, with a wobble
+  const t=ctx.currentTime,dur=.7,out=ctx.createGain(),lp=ctx.createBiquadFilter(),pk=ctx.createBiquadFilter();
+  out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.45,t+.06);out.gain.setValueAtTime(.45,t+.3);out.gain.exponentialRampToValueAtTime(.001,t+dur);
+  lp.type='lowpass';lp.frequency.value=1100;lp.Q.value=1.5;
+  pk.type='peaking';pk.frequency.value=380;pk.gain.value=8;
+  lp.connect(pk);pk.connect(out);out.connect(ctx.destination);
+  for(const detune of [0,-14,9]){
    const o=ctx.createOscillator(),wob=ctx.createOscillator(),wobG=ctx.createGain(),og=ctx.createGain();
-   o.type='sawtooth';o.frequency.setValueAtTime(118,t);o.frequency.linearRampToValueAtTime(74,t+dur);o.detune.value=detune;
-   wob.frequency.value=21;wobG.gain.value=.5;wob.connect(wobG);og.gain.value=.5;wobG.connect(og.gain);
+   o.type='sawtooth';o.frequency.setValueAtTime(235,t);o.frequency.linearRampToValueAtTime(150,t+dur);o.detune.value=detune;
+   wob.frequency.value=13;wobG.gain.value=.3;wob.connect(wobG);og.gain.value=.7;wobG.connect(og.gain);
    o.connect(og);og.connect(lp);o.start(t);wob.start(t);o.stop(t+dur);wob.stop(t+dur);
   }
  }catch(e){console.warn('Grumble sound:',e)}
@@ -1835,7 +1838,7 @@ function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
   if(c.x>=maxX){c.x=maxX;c.dir=-1}
   return;
  }
-if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallY>=floor()-9){if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;if(shield>0)shield=Math.min(100,shield+10); // a downed dome stays down after a savechangeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
+if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallY>=floor()-9){if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;/* a downed dome stays down after a save */if(shield>0)shield=Math.min(100,shield+10);changeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
  else if(c.state==='settle'){if(c.timer<=0){c.state='sleep';c.timer=rnd(5,12)}}
  else if(c.state==='graze'||c.state==='stand'){if(c.timer<=0){c.state='settle';c.timer=rnd(1.5,3)}}else if(c.state==='sleep'){/* Remain settled until abduction or dawn. */}}
 function updateUfo(e,dt){e.phase+=dt*3;if(!e.abduct){e.x+=e.vx*dt;return}let cow=e.cow;if(!cow||cow.dead){e.step='pass';e.abduct=false;if(activeUfo===e)activeUfo=null;return}
