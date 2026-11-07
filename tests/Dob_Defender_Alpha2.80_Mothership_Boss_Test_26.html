@@ -1500,8 +1500,7 @@ function alienDraw(a){
  if(alpha<=0)return;
  if(a.step==='lift'&&a.cow&&a.cow.alienY!=null)alienBeamDraw(a);
  g.save();g.globalAlpha=alpha;alienBody(a);g.restore();
- if(a.step==='lift'){for(let i=0;i<3;i++){g.fillStyle=i>=ALIEN_BEAM_HITS-a.beamHits?'#9dffb0':'rgba(157,255,176,.18)';g.beginPath();g.arc(a.x-6+i*6,a.y-45,2.2,0,TAU);g.fill()}}
-}
+ }
 function alienDrawAll(){if(!boss||!boss.alien)return;for(const a of aliens)alienDraw(a)}
 let ddLaserLowOn=false;
 function bossLaserWarnDraw(){
