@@ -1262,7 +1262,7 @@ function telescopeStrike(e){const a=origin(),m=tip();const px=e.x,py=e.y;let tub
 function cowStrike(e){for(const c of cows){if(c.dead||['splat','fall','lift','enter'].includes(c.state))continue;const cy=cowScreenY(c);if(Math.abs(e.x-c.x)<=e.r+13&&e.y+e.r>=cy-14&&e.y-e.r<=floor()+5){splatCow(c);return true}}return false}
 function changeScore(pts,x,y,label){score+=pts;if(boss)bossPts+=pts;if(pts>0)floatText('+'+pts,x,y,'#bff9cb');hud()}
 function cowScreenY(c){if(c.state==='fall')return c.fallY;if(c.state==='lift'&&c.alienY!=null)return c.alienY;if(c.state==='lift'&&c.carrier&&c.carrier.hp>0)return c.carrier.y+20;if(c.state==='lift'){const carrier=abductingUfoFor(c);if(carrier&&carrier.step==='escape')return carrier.y+20;return floor()-9-Math.pow(c.lift,.7)*72}return floor()-9+(c.state==='sleep'||c.state==='settle'?5:0)}
-function splatCow(c){if(c.state==='splat'||c.dead)return;if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.state='splat';c.timer=.65;c.selected=false;c.fallY=floor()-4;burst(c.x,floor()-5,'#e33b49',18)}
+function splatCow(c){if(c.state==='splat'||c.dead)return;if(c.state==='lift'){const y=cowScreenY(c);if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;c.selected=false;c.alienY=null;c.carrier=null;burst(c.x,y,'#ff3b3b',22);burst(c.x,y,'#ff8a80',16);burst(c.x,y,'#ffd0c8',10);return}if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.state='splat';c.timer=.65;c.selected=false;c.fallY=floor()-4;burst(c.x,floor()-5,'#e33b49',18)}
 function dropCow(c,e,safe){c.x=cowSafeX(e.x);c.fallY=cowScreenY(c);c.fallV=0;c.safeFall=!!safe;c.state='fall';c.selected=false;c.timer=0}
 function rescue(e){if(!e.cow)return;const cow=e.cow;ddTestSfx('Cow_Rescued',.5);
  if(e.step==='lift')dropCow(cow,e,true);
@@ -1437,7 +1437,7 @@ function alienBeamShot(b){
   const f=alienGun(a);
   for(let i=0;i<=5;i++){
    const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
-   if(Math.hypot(px-c.x,py-c.alienY)<13)return false; // the laser touches the cow body: a normal cow hit
+   if(Math.hypot(px-c.x,py-c.alienY)<18)return false; // the laser touches the cow body: a normal cow hit
    if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
     b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);changeScore(20,px,py,'BEAM');
     return true;
@@ -1895,7 +1895,7 @@ if(across>=.81){
  for(let c of cows)updateCow(c,dt);
  for(let p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=105*dt;p.t-=dt}
  for(let w of activeWarnings){w.t-=dt;w.y-=17*dt}
- for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter')continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1);if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<13&&u<best){candidate={cow:c};best=u}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
+ for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter')continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1);if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<(c.state==='lift'?18:13)&&u<best){candidate={cow:c};best=u}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
  for(let e of enemies){if(e.hp<=0)continue;if(e.mandatory){if(shield>0&&e.x>=domeGeom().left&&e.x<=domeGeom().right&&e.y+e.r>=domeY(e.x)){impact(e,false)}else if(shield<=0&&telescopeStrike(e)){destroyScope(e);return}else if(cowStrike(e)){impact(e,true)}else if(e.y+e.r>=nearHorizonY(e.x)){impact(e,true)}}else if(e.type==='ufo'&&!e.abduct&&(e.x<-60||e.x>W+60))e.hp=0;else if(['sat','iss','aircraft','comet'].includes(e.type)&&!e.mandatory){if(e.x>0&&e.x<W)e.entered=true;if(e.entered&&(e.x<-70||e.x>W+70))e.hp=0}}
  if(mode!=='night')return;
  shots=shots.filter(b=>b.t>0&&b.x>-50&&b.x<W+50&&b.y>-50&&b.y<H+40);
