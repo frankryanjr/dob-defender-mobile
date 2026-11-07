@@ -1,3 +1,13 @@
+## itch.io Alpha2.81 update — 7 November 2026
+
+- **User instruction:** “Id like to update the game on itch to the latest version”.
+- Downloaded `releases/Dob_Defender_Alpha2.81.html`; verified 3,817,623 bytes and Git blob `09068f9fc7ede5118f5c74f1af94c6713446b268` before uploading.
+- Uploaded the exact file to itch.io project 5233326, selected it for browser play and saved. Public page https://stargazerman.itch.io/dob-defender loaded the game and displayed Alpha2.81.
+- Independent served-file retrieval verified the entire approved source is byte-identical at offset zero; itch.io appends only its standard 87-byte `htmlgame.js` script. No game code edits.
+- Initial upload returned “mismatched token”; reloading the editor and retrying succeeded.
+- Alpha2.80 remains a separate downloadable file. Automatic approval review rejected hiding it as an unrequested access change; it was left available. Page description, artwork, pricing and embed options unchanged.
+- **First unverified next task:** user plays the updated itch.io game on Android and confirms controls, audio and boss gameplay. No GitHub production release or new version was created.
+
 ## Night 3 mothership boss Test 1 — local candidate built (31 October 2026)
 
 The candidate HTML is local/hosted-preview only and is NOT committed to this repository (no test-hosting permission given). Production and itch.io unchanged.
