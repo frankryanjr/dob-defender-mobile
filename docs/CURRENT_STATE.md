@@ -17,8 +17,8 @@ Updated: 31 October 2026. **Status is a committed documentation checkpoint, not 
 - This file is a short restart pointer. Current verified repository evidence takes precedence over this snapshot.
 
 ## Approved production
-- Latest documented approved production: **Alpha2.80**.
-- `main:index.html`: Git blob SHA `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`, 3,784,184 bytes; production commit `9df9a4085e18872de3d6721af8299d54644f51e7`.
+- Latest documented approved production: **Alpha2.81** (7 November 2026): approved Test 26 (Night 3 mothership boss and Night 6 alien fight) promoted with label-only changes.
+- `main:index.html`: Git blob SHA `09068f9fc7ede5118f5c74f1af94c6713446b268`, 3,817,623 bytes. Approved archive `releases/Dob_Defender_Alpha2.80_Mothership_Boss_Test_26.html`, blob `398334335c90e4062141445ff6eaf3ebfdd955bb`. Production archive `releases/Dob_Defender_Alpha2.81.html`.
 - Approved immutable release: `releases/Dob_Defender_Alpha2.80.html`, Git blob SHA `1a4c399c361466c384f23767bedc11719cd37895`.
 - GitHub Actions Pages/syntax workflows reported success on 26 October. On 31 October user confirmed Android production playback, Pages version and itch.io update; independent fresh live HTTP and exact itch.io upload SHA were not established in that confirmation.
 - **No new production release is approved.** Do not edit production or release artifacts without explicit approval and WORKFLOW release gates.

@@ -20,7 +20,7 @@ Mobile browser game: Dobsonian telescope defence. **GitHub is the source of trut
 
 ## Current state — verify against GitHub at startup
 
-- **Latest documented approved production:** Alpha2.80, `main:index.html` Git blob `3a0b8ce5f0fc32abc950a1f68b8fd6a2e81f000b`. Recheck exact GitHub state before development.
+- **Latest documented approved production:** Alpha2.81, `main:index.html` Git blob `09068f9fc7ede5118f5c74f1af94c6713446b268`; archive `releases/Dob_Defender_Alpha2.81.html`. Recheck exact GitHub state before development.
 - **Active development:** unapproved local Night 3 Mothership Boss Test 1; first next step is verified isolated test deployment, followed by Android boss gameplay feedback.
 - **Canonical concise restart checkpoint:** [CURRENT_STATE](docs/CURRENT_STATE.md). See it for candidate SHA, pending checks and precise resumption instructions.
 - Modular development and testing tooling is sufficient for now. Do not pursue tooling optimisation without a concrete need.

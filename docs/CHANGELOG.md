@@ -1,3 +1,12 @@
+## Alpha2.81 production release — 7 November 2026
+
+- **Explicit user approval:** “Perfect. Push to prod” (7 November 2026, after Test 26 play-testing).
+- **Immutable exact approved test archive:** `releases/Dob_Defender_Alpha2.80_Mothership_Boss_Test_26.html`, Git blob `398334335c90e4062141445ff6eaf3ebfdd955bb`, 3,817,645 bytes. Byte-identical to `tests/Dob_Defender_Alpha2.80_Mothership_Boss_Test_26.html`.
+- **Production:** `releases/Dob_Defender_Alpha2.81.html` and `main:index.html`, Git blob `09068f9fc7ede5118f5c74f1af94c6713446b268`, 3,817,623 bytes. Derived from the archive with only label substitutions: version `Alpha2.80` → `Alpha2.81` (three places, including the HTML title) and removal of the ` Alien Boss Test 26` title suffix. Diff against the archive contains only those lines.
+- **Contents (approved Test 26):** Night 3 mothership boss and Night 6 alien boss fight. Aliens lift cows on tractor beams; lasers break the beam (one hit) or the cow is taken. Lifted cows are easier to hit and a laser kill in the air uses a red burst. Lifted cows take priority over standing cows in the same beam. Two alternating alien grumble voices. Mothership destruction explosion (flash, rings, staggered bursts, sounds, ground shake). Tally reads `Mothership defeated` only when destroyed, otherwise `Mothership damaged`. Typewriter sound on ISS transmissions. Callsign entry for new players. Spacebar fires on PC; tap fires on touch; mouse click does not fire.
+- **Validation:** all four inline scripts pass `node --check`; headless Chromium at 390×844 runs Night 1 and the alien fight with no page errors; the explosion renders mid-blast. Android playability and live Pages version are **not yet confirmed** by the user or independently checked at the time of writing.
+- **Known limitations:** grumble, explosion, and blink audibility on Android not yet confirmed; leaderboard and backend behaviour for Night 6 not separately tested.
+
 ## Alpha2.80 production release — 26 October 2026
 
 - **Explicit user approval:** “Push fixes to prod” after confirming abducted-cow fix looks good and leaderboard seems fixed.

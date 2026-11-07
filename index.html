@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.80</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.81</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -81,7 +81,7 @@
 <div id="resourceBars"><div><div class="resourceHeader"><span>LASER</span><span id="energyVal">100%</span></div><div class="meter"><div id="energyFill" class="fill" style="width:100%"></div></div></div><div><div class="resourceHeader"><span>DOME</span><span id="shieldVal">100%</span></div><div class="meter"><div id="shieldFill" class="fill" style="width:100%;background:#68cfe2"></div></div></div></div>
 <div id="notice" aria-live="polite"></div><div id="controls"><div id="track"><div id="line"></div><div id="knob"></div></div></div>
 <div id="quickTools"><button id="pauseBtn" class="quickBtn" type="button" aria-label="Pause game">Ⅱ</button><button id="devBtn" class="quickBtn" type="button">DEV</button></div>
-<div id="devPanel" hidden role="dialog" aria-modal="true" aria-label="Developer controls"><div id="devCard"><h2>DEV CONTROLS</h2><div id="skyDataStatus" style="font-size:11px;color:#b6cbd7;line-height:1.4">Star catalogue: checking…</div><label>Jump to night<input id="devNight" type="number" min="1" max="99" inputmode="numeric" value="1"></label><button id="devImportStars" type="button">IMPORT YALE STAR CATALOGUE (.JSON)</button><input id="starFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose Yale BSC5 catalogue"><label style="display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px"><input id="devForcePowerups" type="checkbox" style="width:18px;height:18px;flex:none"> ALWAYS HAVE POWER-UPS IN NIGHT</label><button id="devMusicToggle" type="button" aria-pressed="false">MUSIC: ON</button><button id="devJump" type="button">START SELECTED NIGHT</button><button id="devBossStart" type="button">START MOTHERSHIP BOSS (NIGHT 3)</button><button id="devRestartNight" type="button">RESTART CURRENT NIGHT</button><button id="devRestartGame" type="button">RESTART GAME</button><button id="devViewLeaderboard" type="button">VIEW LEADERBOARD</button><button id="devClose" type="button">CLOSE</button></div></div>
+<div id="devPanel" hidden role="dialog" aria-modal="true" aria-label="Developer controls"><div id="devCard"><h2>DEV CONTROLS</h2><div id="skyDataStatus" style="font-size:11px;color:#b6cbd7;line-height:1.4">Star catalogue: checking…</div><label>Jump to night<input id="devNight" type="number" min="1" max="99" inputmode="numeric" value="1"></label><button id="devImportStars" type="button">IMPORT YALE STAR CATALOGUE (.JSON)</button><input id="starFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose Yale BSC5 catalogue"><label style="display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px"><input id="devForcePowerups" type="checkbox" style="width:18px;height:18px;flex:none"> ALWAYS HAVE POWER-UPS IN NIGHT</label><button id="devMusicToggle" type="button" aria-pressed="false">MUSIC: ON</button><button id="devJump" type="button">START SELECTED NIGHT</button><button id="devBossStart" type="button">START MOTHERSHIP BOSS (NIGHT 3)</button><button id="devAlienStart" type="button">START ALIEN BOSS (NIGHT 6)</button><button id="devRestartNight" type="button">RESTART CURRENT NIGHT</button><button id="devRestartGame" type="button">RESTART GAME</button><button id="devViewLeaderboard" type="button">VIEW LEADERBOARD</button><button id="devClose" type="button">CLOSE</button></div></div>
 <div id="results" hidden style="display:none!important" role="status" aria-live="polite"><h2>NIGHT <span id="resultNight">1</span> DEFENDED!</h2><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="resultScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="resultDome">100%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="resultCow">0</b><span class="stat-foot">saved</span></div></div></div>
 <div id="overlay"><h1 id="heading">DOB DEFENDER</h1><p id="message">Protect your observatory from the Meteorites, Asteroids &amp; Comets
 
@@ -145,7 +145,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.80';
+const DD_GAME_VERSION='Alpha2.81';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -211,7 +211,7 @@ $('ddRegister').addEventListener('click',async()=>{
 $('ddRename').addEventListener('click',async()=>{
  try{const data=await ddCall('rename',{id:ddPlayer.id,secret:ddPlayer.secret,nickname:$('ddNewNickname').value.trim()});ddStore(data.player);ddOpen()}catch(e){ddSetMessage(e.message)}
 });
-// Alpha2.80 Test 1: show score delivery status on GAME OVER, including failures
+// Alpha2.81 Test 1: show score delivery status on GAME OVER, including failures
 // that were previously rendered only inside the hidden leaderboard panel.
 let ddLastScorePending=null;
 function ddScoreStatus(text,isFailure=false){
@@ -262,10 +262,12 @@ function ddUpdateGate(){
  ddGateDefend.disabled=ddGatePending||!valid;
  ddGateDefend.textContent=ddGatePending?'REGISTERING…':'DEFEND!';
 }
+/* New players choose their own callsign. The name box is open straight away, pre-filled with a suggestion they can overwrite. */
 function ddShowGate(){
  ddSuggested=ddNewSuggestion();$('ddCallsignSuggestion').textContent=ddSuggested;
- ddGateEditing=false;ddGatePending=false;ddGateGenerated.hidden=false;ddGateChange.hidden=false;ddGateEdit.hidden=true;ddGateInput.value='';ddGateError.textContent='';
- ddGate.hidden=false;ddUpdateGate();
+ ddGateEditing=true;ddGatePending=false;ddGateGenerated.hidden=true;ddGateChange.hidden=true;ddGateEdit.hidden=false;
+ ddGateInput.value=ddSuggested;ddGateError.textContent='';
+ ddGate.hidden=false;ddUpdateGate();ddGateInput.focus();
 }
 ddGateChange.addEventListener('click',()=>{
  ddGateEditing=true;ddGateGenerated.hidden=true;ddGateChange.hidden=true;ddGateEdit.hidden=false;ddGateError.textContent='';ddUpdateGate();ddGateInput.focus();
@@ -287,7 +289,7 @@ ddGateDefend.addEventListener('click',async()=>{
   if(!data)throw Error('Unable to assign a unique callsign. Try again.');
   ddStore(data.player,secret);
   ddGate.hidden=true;ddRefreshGameplayViewport();resetGame();
- }catch(e){ddGateError.textContent=e.message||'Registration unavailable. Check your connection.'}
+ }catch(e){ddGateError.textContent=e.message||'Registration unavailable. Check your connection.';ddGate.hidden=false;ddGateGenerated.hidden=false;ddGateChange.hidden=false;ddGateEdit.hidden=true}
  finally{ddGatePending=false;ddUpdateGate()}
 });
 $('play').addEventListener('click',e=>{if(!ddPlayer&&mode!=='gameover'){e.preventDefault();e.stopImmediatePropagation();ddShowGate()}},true);
@@ -931,7 +933,10 @@ track.addEventListener('pointermove',e=>{
 track.addEventListener('pointerup',e=>{if(e.pointerId!==drag)return;e.preventDefault();const isTap=!aimMoved&&Math.hypot(e.clientX-aimStartX,e.clientY-aimStartY)<=10;drag=null;if(track.hasPointerCapture(e.pointerId))track.releasePointerCapture(e.pointerId);if(isTap)shoot()});
 for(const name of ['pointercancel','lostpointercapture'])track.addEventListener(name,e=>{if(e.pointerId===drag)drag=null});
 // Single tap means one shot. No continuous fire on hold.
-canvas.addEventListener('pointerdown',e=>{if(mode!=='night')return;e.preventDefault();shoot()});
+// Spacebar fires (one shot per press). Left-click and hold on the bottom slider to slide the aim.
+// Touch: a tap on the play area fires (phones have no spacebar). Mouse clicks do not fire.
+canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;if(mode!=='night')return;e.preventDefault();shoot()});
+window.addEventListener('keydown',e=>{if(e.code!=='Space')return;e.preventDefault();if(e.repeat)return;if(mode!=='night')return;shoot()});
 const shotEnergyCost=()=>boss&&boss.state!=='dying'?1.0:night>=13?2:night>=11?1.85:night>=6?1.65:2;
 
 // Sound Test 4: user-selected Freesound recordings, self-contained and independent of production.
@@ -1051,6 +1056,46 @@ function ddUpdateSlewSound(){
  }catch(e){console.warn('Slewing audio:',e);ddSlewSource=null;ddSlewGain=null}
 }
 let ddLastSoundAt={};
+/* Synthesised sounds for the alien fight (no sample exists for these). */
+function ddNoiseBuffer(ctx){const n=ctx.sampleRate,b=ctx.createBuffer(1,n,n),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return b}
+/* Star Trek style transporter: a rising (materialise) or falling (dematerialise) shimmer with noise and fast tremolo. */
+function ddSynthTransport(rising){
+ if(!rising)return; // no sound on dematerialise
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  const t=ctx.currentTime,dur=1.6,out=ctx.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.15,t+.12);out.gain.setValueAtTime(.15,t+dur-.4);out.gain.linearRampToValueAtTime(0,t+dur);out.connect(ctx.destination);
+  const f0=rising?520:2600,f1=rising?2600:520;
+  const tone=ctx.createOscillator(),trem=ctx.createOscillator(),tremG=ctx.createGain(),toneG=ctx.createGain();
+  tone.type='sine';tone.frequency.setValueAtTime(f0,t);tone.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  trem.frequency.value=16;tremG.gain.value=.45;trem.connect(tremG);toneG.gain.value=.55;tremG.connect(toneG.gain);
+  tone.connect(toneG);toneG.connect(out);
+  const nz=ctx.createBufferSource(),bp=ctx.createBiquadFilter(),ng=ctx.createGain();nz.buffer=ddNoiseBuffer(ctx);nz.loop=true;
+  bp.type='bandpass';bp.Q.value=4;bp.frequency.setValueAtTime(f0*2,t);bp.frequency.exponentialRampToValueAtTime(f1*2,t+dur);
+  ng.gain.value=.22;nz.connect(bp);bp.connect(ng);ng.connect(out);
+  tone.start(t);trem.start(t);nz.start(t);tone.stop(t+dur);trem.stop(t+dur);nz.stop(t+dur);
+ }catch(e){console.warn('Transport sound:',e)}
+}
+/* Alien grumble: a low growling sawtooth with a slow wobble, falling in pitch. Played when the beam is hit. */
+function ddSynthGrumble(fast){
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  // about 0.4 seconds: five quick voiced "mur" pulses. A low-pass keeps the growl and a mid boost gives it body, so phone speakers play it.
+  const t=ctx.currentTime,out=ctx.createGain(),lp=ctx.createBiquadFilter(),pk=ctx.createBiquadFilter();
+  out.gain.value=.32;lp.type='lowpass';lp.frequency.value=1000;lp.Q.value=1;
+  pk.type='peaking';pk.frequency.value=420;pk.gain.value=9;pk.Q.value=1.2;
+  lp.connect(pk);pk.connect(out);out.connect(ctx.destination);
+  const gap=fast?.072:.085,len=fast?.063:.075;
+  for(let k=0;k<5;k++){
+   const s0=k*gap,s1=s0+len;
+   const o=ctx.createOscillator(),vib=ctx.createOscillator(),vg=ctx.createGain(),env=ctx.createGain();
+   o.type='sawtooth';o.frequency.setValueAtTime(155,t+s0);o.frequency.linearRampToValueAtTime(120,t+s1);
+   vib.frequency.value=9;vg.gain.value=12;vib.connect(vg);vg.connect(o.detune);
+   env.gain.setValueAtTime(0,t+s0);env.gain.linearRampToValueAtTime(1,t+s0+.015);env.gain.linearRampToValueAtTime(0,t+s1);
+   o.connect(env);env.connect(lp);
+   o.start(t+s0);vib.start(t+s0);o.stop(t+s1);vib.stop(t+s1);
+  }
+ }catch(e){console.warn('Grumble sound:',e)}
+}
 function ddEventSfx(name,volume=.35,minGap=0){const now=performance.now();if(minGap&&now-(ddLastSoundAt[name]||-1e9)<minGap)return;ddLastSoundAt[name]=now;ddTestSfx(name,volume)}
 function ddSetUfoHum(on){
  try{
@@ -1207,7 +1252,7 @@ function doEvent(e){switch(e.type){case'threat':if(enemies.filter(x=>x.mandatory
 function eligibleCow(c){return !c.dead&&!c.selected&&c.state!=='lift'&&c.state!=='splat'&&c.x>=23&&c.x<=W-23}
 function activeAbductors(){return enemies.filter(e=>e.type==='ufo'&&e.hp>0&&e.abduct)}
 function abductingUfoFor(c){return activeAbductors().find(e=>e.cow===c)}
-function spawnUfo(abduct){if(abduct&&activeAbductors().length>=(night>=6?2:1))return;let available=abduct?cows.filter(eligibleCow):[];let cow=abduct?available[Math.floor(Math.random()*available.length)]:null;if(abduct&&!cow)return;let d=Math.random()<.5?1:-1;let targetY=floor()-113;let e={type:'ufo',x:abduct?clamp(cow.x+d*105,24,W-24):(d>0?-30:W+30),y:abduct?-35:rnd(125,Math.max(180,floor()*.45)),vx:d*60*speedFactor(),vy:0,r:17,hp:1,phase:0,tilt:0,hoverPhase:0,mandatory:false,dir:d,abduct,step:abduct?'dive':'pass',timer:0,targetY,cow:cow||null};if(cow)cow.selected=true;enemies.push(e);if(abduct)activeUfo=e}
+function spawnUfo(abduct){if(boss)return;/* no UFOs during the boss fight */if(abduct&&activeAbductors().length>=(night>=6?2:1))return;let available=abduct?cows.filter(eligibleCow):[];let cow=abduct?available[Math.floor(Math.random()*available.length)]:null;if(abduct&&!cow)return;let d=Math.random()<.5?1:-1;let targetY=floor()-113;let e={type:'ufo',x:abduct?clamp(cow.x+d*105,24,W-24):(d>0?-30:W+30),y:abduct?-35:rnd(125,Math.max(180,floor()*.45)),vx:d*60*speedFactor(),vy:0,r:17,hp:1,phase:0,tilt:0,hoverPhase:0,mandatory:false,dir:d,abduct,step:abduct?'dive':'pass',timer:0,targetY,cow:cow||null};if(cow)cow.selected=true;enemies.push(e);if(abduct)activeUfo=e}
 
 
 function damageDome(amount,x,y,structural=false){if(shield<=0)return;ddTestSfx('Dome_Damaged',.35);hadImpact=true;domeFlash=structural?.23:.65;ddShieldFlash=.22;ddDomeShake=structural?.30:.40;if(structural)ddGroundShake=Math.max(ddGroundShake,.34);ddDomeShakeStrength=structural?2.5:4.5;burst(x,y,structural?'#bb9b79':'#8ee2ee',structural?5:10);shield=Math.max(0,shield-amount);if(shield===0){ddDomeRetract=.00001;ddTestSfx('Dome_Destroyed_Shield_Depletion',.65)}hud()}
@@ -1217,8 +1262,8 @@ function segmentDistance(px,py,ax,ay,bx,by){const dx=bx-ax,dy=by-ay;const t=clam
 function telescopeStrike(e){const a=origin(),m=tip();const px=e.x,py=e.y;let tube=segmentDistance(px,py,a.x,a.y,m.x,m.y)<e.r+9;let box=Math.abs(px-W/2)<e.r+20&&py>=floor()-45-e.r&&py<=floor()+e.r;return tube||box}
 function cowStrike(e){for(const c of cows){if(c.dead||['splat','fall','lift','enter'].includes(c.state))continue;const cy=cowScreenY(c);if(Math.abs(e.x-c.x)<=e.r+13&&e.y+e.r>=cy-14&&e.y-e.r<=floor()+5){splatCow(c);return true}}return false}
 function changeScore(pts,x,y,label){score+=pts;if(boss)bossPts+=pts;if(pts>0)floatText('+'+pts,x,y,'#bff9cb');hud()}
-function cowScreenY(c){if(c.state==='fall')return c.fallY;if(c.state==='lift'&&c.carrier&&c.carrier.hp>0)return c.carrier.y+20;if(c.state==='lift'){const carrier=abductingUfoFor(c);if(carrier&&carrier.step==='escape')return carrier.y+20;return floor()-9-Math.pow(c.lift,.7)*72}return floor()-9+(c.state==='sleep'||c.state==='settle'?5:0)}
-function splatCow(c){if(c.state==='splat'||c.dead)return;if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.state='splat';c.timer=.65;c.selected=false;c.fallY=floor()-4;burst(c.x,floor()-5,'#e33b49',18)}
+function cowScreenY(c){if(c.state==='fall')return c.fallY;if(c.state==='lift'&&c.alienY!=null)return c.alienY;if(c.state==='lift'&&c.carrier&&c.carrier.hp>0)return c.carrier.y+20;if(c.state==='lift'){const carrier=abductingUfoFor(c);if(carrier&&carrier.step==='escape')return carrier.y+20;return floor()-9-Math.pow(c.lift,.7)*72}return floor()-9+(c.state==='sleep'||c.state==='settle'?5:0)}
+function splatCow(c){if(c.state==='splat'||c.dead)return;if(c.state==='lift'){const y=cowScreenY(c);if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;c.selected=false;c.alienY=null;c.carrier=null;burst(c.x,y,'#ff3b3b',22);burst(c.x,y,'#ff8a80',16);burst(c.x,y,'#ffd0c8',10);return}if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.state='splat';c.timer=.65;c.selected=false;c.fallY=floor()-4;burst(c.x,floor()-5,'#e33b49',18)}
 function dropCow(c,e,safe){c.x=cowSafeX(e.x);c.fallY=cowScreenY(c);c.fallV=0;c.safeFall=!!safe;c.state='fall';c.selected=false;c.timer=0}
 function rescue(e){if(!e.cow)return;const cow=e.cow;ddTestSfx('Cow_Rescued',.5);
  if(e.step==='lift')dropCow(cow,e,true);
@@ -1241,8 +1286,9 @@ function hit(e,b){b.t=0;if(e.type==='miniufo'){
    No mothership shield or generators. The ISS keeps the laser full during the fight.
    Four scouts take the cows, with lifts spaced apart so they never overlap. */
 const BOSS_HP=40,BOSS_HIT_PTS=20,BOSS_KILL_PTS=500,BOSS_ORB_EVERY=3.2,BOSS_MAX_ORBS=14;
-let bossLiftCD=0;
-function bossNight(){return night===3}
+let bossLiftCD=0,bossKilled=false;
+function bossNight(){return night===3||night===6}
+function alienNight(){return night===6}
 function bossPending(){return bossNight()&&!bossDone&&!boss&&mode==='night'}
 /* ---- Scouts: four small UFOs, same size as night UFOs. ---- */
 function bossLaunchScout(i,delay){
@@ -1250,7 +1296,7 @@ function bossLaunchScout(i,delay){
  enemies.push({type:'miniufo',x:B.x+side*B.hull*.55,y:B.y+B.sx*6,vx:0,vy:0,r:17,hp:1,phase:rnd(0,TAU),mandatory:false,
   step:'roam',timer:delay,tx:rnd(40,W-40),ty:rnd(120,floor()-170),cow:null,beamT:0,delay:0,spd:rnd(110,210),spdMul:1,spdT:0});
 }
-function bossLaunchScouts(){for(let i=0;i<4;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
+function bossLaunchScouts(){const n=boss&&boss.alien?0:4;for(let i=0;i<n;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
 /* Keeps a scout moving while it waits, so it is never still unless it is abducting. */
 function wanderScout(e,dt){const dx=e.tx-e.x,dy=e.ty-e.y,L=Math.hypot(dx,dy)||1,m=Math.min(L,scoutSpeed(e,dt)*dt);e.x+=dx/L*m;e.y+=dy/L*m;e.timer-=dt;if(e.timer<=0||L<8)scoutRoamTarget(e)}
 /* Each scout has its own base speed, and its speed multiplier changes at random. */
@@ -1327,6 +1373,138 @@ function bossScoutsUpdate(dt){
   else if(e.step==='exit'){e.y-=180*dt;const c=e.carriedCow;if(c&&!c.dead){c.x=e.x;if(e.y<-40){c.dead=true;c.carrier=null}}if(e.y<-40)e.hp=0}
  }
 }
+/* ---- Night 6 aliens: green greys beam down, lift a cow on a tractor column and hold it. Three hits on the column make the cow fall safely. ---- */
+let aliens=[],alienSpawnT=2;
+const ALIEN_MAX=3,ALIEN_LIFT_T=6.5,ALIEN_BEAM_HITS=1;
+function alienFreeCows(){return cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle'))}
+let alienVoiceCount=0;
+function alienSpawn(){
+ const free=alienFreeCows();if(!free.length)return false;
+ const c=free[Math.floor(Math.random()*free.length)],side=Math.random()<.5?-1:1;
+ c.selected=true;c.alienY=null;
+ aliens.push({fastVoice:(alienVoiceCount++)%2===1,step:'in',t:0,x:clamp(c.x+side*rnd(18,40),22,W-22),y:floor(),face:-side,cow:c,beamHits:0,gone:false,blinkT:rnd(1,3),blinkDur:0});
+ ddSynthTransport(true);
+ return true;
+}
+/* The alien leaves; a cow it was holding is released to stand again. */
+function alienLeave(a){a.step='out';a.t=0;ddSynthTransport(false);const c=a.cow;a.cow=null;if(c){c.selected=false;c.alienY=null;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}}
+function alienClear(){for(const a of aliens){const c=a.cow;if(c){c.selected=false;c.alienY=null;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}}aliens=[]}
+function alienUpdate(dt){
+ const B=boss;if(!B||!B.alien)return;
+ if(B.state==='fight'){
+  alienSpawnT-=dt;
+  const live=aliens.filter(a=>a.step!=='out').length;
+  if(live<ALIEN_MAX&&alienSpawnT<=0){alienSpawnT=alienSpawn()?rnd(3,6):.6}
+ }
+ const top=B.y+B.sx*6;let collectX=null,collectP=0; // the mothership moves to a cow once it is lifted high
+ for(const a of aliens){
+  if(a.gone)continue;
+  a.t+=dt;const c=a.cow;a.blinkT=(a.blinkT==null?rnd(1,3):a.blinkT)-dt;if(a.blinkT<=0){a.blinkDur=.2;a.blinkT=rnd(1.2,2.6)}a.blinkDur=Math.max(0,(a.blinkDur||0)-dt);
+  if(a.step==='in'){if(a.t>=1.2){a.step='aim';a.t=0}}
+  else if(a.step==='aim'){
+   if(!c||c.dead||c.state==='splat'||c.state==='fall'){alienLeave(a);continue}
+   if(a.t>=.8){a.step='lift';a.t=0;a.beamHits=0;c.state='lift';c.lift=0;c.alienY=floor()-9;c.timer=0;ddEventSfx('Meteor_New',.25,160)}
+  }
+  else if(a.step==='lift'){
+   if(!c||c.dead||c.state!=='lift'){alienLeave(a);continue}
+   const p=Math.min(1,a.t/ALIEN_LIFT_T),bottom=floor()-9;
+   c.lift=p;c.alienY=bottom+(top-bottom)*p;if(p>=.55&&p>collectP){collectP=p;collectX=c.x}
+   if(a.beamHits>=ALIEN_BEAM_HITS){
+    // Column broken three times: the cow falls from where it is and lands safely.
+    dropCow(c,a,true);c.alienY=null;c.carrier=null;
+    ddTestSfx('Cow_Rescued',.5);changeScore(100,c.x,c.fallY,'COW SAVED');
+    a.saved=c;a.cow=null;a.step='wait';a.t=0;continue;
+   }
+   if(p>=1){
+    // Not broken in time: the cow reaches the ship and is taken aboard.
+    c.alienY=null;c.selected=false;c.nightOutcome='lost';totalCowDeaths++;c.dead=true;
+    ddTestSfx('Cow_Lost',.55);burst(c.x,top,'#9dffb0',18);
+    a.cow=null;a.step='out';a.t=0;ddSynthTransport(false);continue;
+   }
+  }
+  else if(a.step==='wait'){if(!a.saved||a.saved.state!=='fall'||a.t>4){ddSynthGrumble(a.fastVoice);a.step='fist';a.t=0}}
+  else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0;ddSynthTransport(false)}}
+  else if(a.step==='out'){if(a.t>=1)a.gone=true}
+ }
+ aliens=aliens.filter(a=>!a.gone);B.collectX=collectX;
+}
+function alienGun(a){return{x:a.x+a.face*25,y:a.y-19}}
+/* A shot that crosses the tractor column or the ray weakens the beam. Returns true when the shot was used. */
+function alienSegDist(px,py,x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,L=dx*dx+dy*dy||1;const u=clamp(((px-x1)*dx+(py-y1)*dy)/L,0,1);return Math.hypot(px-x1-dx*u,py-y1-dy*u)}
+function alienBeamShot(b){
+ const B=boss;
+ for(const a of aliens){
+  if(a.step!=='lift'||a.gone)continue;
+  const c=a.cow;if(!c||c.dead||c.state!=='lift'||c.alienY==null)continue;
+  const f=alienGun(a);
+  for(let i=0;i<=5;i++){
+   const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
+   if(Math.hypot(px-c.x,py-c.alienY)<18)return false; // the laser touches the cow body: a normal cow hit
+   if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
+    b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);changeScore(20,px,py,'BEAM');
+    return true;
+   }
+  }
+ }
+ return false;
+}
+function alienBody(a){
+ const f=a.face;
+ g.save();g.translate(a.x,a.y);g.scale(f,1);g.lineCap='round';g.lineJoin='round';
+ const green='#9dff7a',edge='#2fbf4a';
+ g.strokeStyle=edge;g.lineWidth=1.5;
+ g.beginPath();g.moveTo(-2,-7);g.lineTo(-3,0);g.moveTo(2,-7);g.lineTo(3,0);g.stroke();
+ g.fillStyle='#8bf076';g.beginPath();g.ellipse(0,-11,3.4,4.6,0,0,TAU);g.fill();
+ g.strokeStyle=edge;g.lineWidth=1;g.stroke();
+ g.strokeStyle=edge;g.lineWidth=1.4;
+ g.beginPath();g.moveTo(-3,-15);g.lineTo(-9,-8);g.lineTo(-10,0);g.stroke();
+ if(a.step==='fist'){
+  const sh=Math.sin(drawTime*34)*2.2;
+  g.beginPath();g.moveTo(3,-15);g.lineTo(11,-25);g.lineTo(9+sh*.3,-36+sh);g.stroke();
+  g.fillStyle=green;g.beginPath();g.arc(9+sh*.3,-37+sh,2.6,0,TAU);g.fill();
+ }else{
+  g.beginPath();g.moveTo(3,-15);g.lineTo(13,-15);g.lineTo(20,-18);g.lineTo(24,-19);g.stroke();
+ }
+ g.fillStyle=green;g.strokeStyle=edge;g.lineWidth=1.2;
+ g.beginPath();g.moveTo(0,-37);g.bezierCurveTo(10,-37,11.5,-27,4,-16);g.bezierCurveTo(2,-13,-2,-13,-4,-16);g.bezierCurveTo(-11.5,-27,-10,-37,0,-37);g.closePath();
+ g.fill();g.stroke();
+ const bl=a.blinkDur>0?.12:1;
+ g.fillStyle='#050d06';
+ g.beginPath();g.ellipse(-4.2,-26,3.2,5.4*bl,-.3,0,TAU);g.fill();
+ g.beginPath();g.ellipse(4.2,-26,3.2,5.4*bl,.3,0,TAU);g.fill();
+ if(bl>.5){g.fillStyle='#ffffff';
+ g.beginPath();g.arc(-5.2,-28.2,.95,0,TAU);g.fill();
+ g.beginPath();g.arc(3.2,-28.2,.95,0,TAU);g.fill();}
+ g.restore();
+ if(a.step!=='fist'){
+  const tip={x:a.x+f*24,y:a.y-19},p=.85+.15*Math.sin(drawTime*5+a.x),r=6.5*p;
+  const gr=g.createRadialGradient(tip.x,tip.y,0,tip.x,tip.y,r*2.2);
+  gr.addColorStop(0,'rgba(240,255,240,1)');gr.addColorStop(.35,'rgba(170,255,180,'+(.85*p).toFixed(3)+')');gr.addColorStop(1,'rgba(120,255,150,0)');
+  g.fillStyle=gr;g.beginPath();g.arc(tip.x,tip.y,r*2.2,0,TAU);g.fill();
+ }
+}
+function alienBeamDraw(a){
+ // Solid, transparent cone from the glowing finger to the cow only. Same green as the UFO beam. Pulses very slightly.
+ const c=a.cow,f=alienGun(a),k=1-.28*a.beamHits,pulse=.92+.08*Math.sin(drawTime*5.5+a.x*.3),flick=.5+.5*Math.abs(Math.sin(drawTime*27+a.x*.9))*(.6+.4*Math.sin(drawTime*13.7));
+ const half=17;
+ g.save();
+ const gr=g.createLinearGradient(f.x,f.y,c.x,c.alienY);
+ gr.addColorStop(0,'rgba(120,255,190,1)');gr.addColorStop(1,'rgba(60,240,200,.9)');
+ g.globalAlpha=Math.min(1,.15*k*pulse*flick); // more colour; still flickers
+ g.fillStyle=gr;g.beginPath();g.moveTo(f.x,f.y-1);g.lineTo(f.x,f.y+1);g.lineTo(c.x+half,c.alienY+4);g.lineTo(c.x-half,c.alienY+4);g.closePath();g.fill();
+ g.restore();
+}
+function alienDraw(a){
+ // The alien itself phases in and out: its body flickers on and off while it solidifies or fades.
+ let alpha=1;
+ if(a.step==='in')alpha=clamp(a.t/1.2,0,1);
+ else if(a.step==='out')alpha=1-clamp(a.t,0,1);
+ if(alpha<1){const on=Math.sin(drawTime*48+a.x*.7)>-.25-.6*(1-alpha)?1:.12;alpha=clamp(alpha*on,0,1)}
+ if(alpha<=0)return;
+ if(a.step==='lift'&&a.cow&&a.cow.alienY!=null)alienBeamDraw(a);
+ g.save();g.globalAlpha=alpha;alienBody(a);g.restore();
+ }
+function alienDrawAll(){if(!boss||!boss.alien)return;for(const a of aliens)alienDraw(a)}
 let ddLaserLowOn=false;
 function bossLaserWarnDraw(){
  if(!boss||boss.state!=='fight'||energy<=0||energy>30)return;
@@ -1365,13 +1543,32 @@ function drawMiniUfo(e){
  g.fillStyle='#94a5b5';g.beginPath();g.ellipse(0,3,18,6,0,0,TAU);g.fill();
  for(let x of [-10,0,10]){g.fillStyle='#a7ff77';g.beginPath();g.arc(x,5,2,0,TAU);g.fill()}
 }
+/* Keyboard-style click for each typed character of an ISS transmission. */
+let ddKeyNoise=null;
+function ddSynthKey(){
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  if(!ddKeyNoise)ddKeyNoise=ddNoiseBuffer(ctx);
+  const t=ctx.currentTime;
+  // mechanical key strike: a short, dull burst of noise through a low band-pass
+  const src=ctx.createBufferSource(),bp=ctx.createBiquadFilter(),g=ctx.createGain();
+  src.buffer=ddKeyNoise;bp.type='bandpass';bp.frequency.value=1000+Math.random()*350;bp.Q.value=2.2;
+  g.gain.setValueAtTime(.55+Math.random()*.1,t);g.gain.exponentialRampToValueAtTime(.001,t+.045);
+  src.connect(bp);bp.connect(g);g.connect(ctx.destination);src.start(t,Math.random()*.8,.05);
+  // low thud of the typebar hitting the platen
+  const o=ctx.createOscillator(),og=ctx.createGain();
+  o.type='sine';o.frequency.setValueAtTime(190,t);o.frequency.exponentialRampToValueAtTime(90,t+.05);
+  og.gain.setValueAtTime(.45,t);og.gain.exponentialRampToValueAtTime(.001,t+.06);
+  o.connect(og);og.connect(ctx.destination);o.start(t);o.stop(t+.06);
+ }catch(e){}
+}
 let bossTxTimers=[];
 function bossTxStop(){for(const t of bossTxTimers){clearTimeout(t);clearInterval(t)}bossTxTimers=[];const el=document.getElementById('ddTransmission');if(el){el.hidden=true;el.textContent=''}}
 function bossTransmit(lines){
  bossTxStop();
  const el=document.getElementById('ddTransmission');if(!el)return;
  const text=lines.join('\n');let i=0;el.textContent='';el.hidden=false;
- const type=setInterval(()=>{el.textContent=text.slice(0,++i)+(i<text.length?'_':'');if(i>=text.length){clearInterval(type);bossTxTimers.push(setTimeout(()=>{el.hidden=true;el.textContent=''},4500))}},38);
+ const type=setInterval(()=>{el.textContent=text.slice(0,++i)+(i<text.length?'_':'');const ch=text[i-1];if(ch&&ch.trim())ddSynthKey();if(i>=text.length){clearInterval(type);bossTxTimers.push(setTimeout(()=>{el.hidden=true;el.textContent=''},4500))}},38);
  bossTxTimers.push(type);
 }
 /* Night 3 finale: ISS flies over with a transmission. The laser and dome replenish, then the mothership arrives once the ISS has left. */
@@ -1388,6 +1585,8 @@ function bossSpawn(){
  boss={state:'enter',t:0,x:W/2,y:-hull,y0:clamp(floor()*.27,108,175),hull,sx:hull/18,hp:BOSS_HP,maxHp:BOSS_HP,hits:0,hitFlash:0,sinceHit:0,healAcc:0,swPh:rnd(0,TAU),swSpd:.5,swTarget:.5,swT:rnd(1.5,3),
   orbT:3.5,orbs:0,descT:10,y0T:null,drift:rnd(0,TAU),dyingT:0};
  bossLiftCD=rnd(2,4);
+ bossKilled=false;boss.alien=alienNight();alienClear();alienSpawnT=2;
+ for(const e of enemies){if(e.type==='ufo'&&e.hp>0){rescue(e);e.hp=0}} // clear any UFO still abducting when the boss arrives
  ddEventSfx('Train_Complete',.32,3000);
 }
 function bossInEllipse(px,py,cx,cy,rx,ry){const a=(px-cx)/rx,b=(py-cy)/ry;return a*a+b*b<=1}
@@ -1408,7 +1607,7 @@ function bossHit(px,py,b){
  const B=boss;b.t=0;B.hp--;B.hits++;B.hitFlash=.16;B.sinceHit=0;hitCount++;nightHits++;
  burst(px,py,'#ffb86b',9);ddEventSfx('Asteroid_Tone_Mid',.4,60);changeScore(BOSS_HIT_PTS,px,py,'HIT');
  if(B.hp<=0){
-  B.state='dying';B.dyingT=0;changeScore(BOSS_KILL_PTS,B.x,B.y,'MOTHERSHIP');floatText('MOTHERSHIP DESTROYED',W/2,H*.38,'#a7ff77');ddTestSfx('UFO_Hit',.68);
+  alienClear();bossKilled=true;B.state='dying';B.dyingT=0;changeScore(BOSS_KILL_PTS,B.x,B.y,'MOTHERSHIP');floatText('MOTHERSHIP DESTROYED',W/2,H*.38,'#a7ff77');ddTestSfx('UFO_Hit',.68);
   for(const e of enemies){if(e.bossOrb&&e.hp>0){e.hp=0;pendingMandatory--;burst(e.x,e.y,'#ff8a6a',10)}if(e.type==='miniufo')scoutDown(e,false)}
  }
 }
@@ -1418,21 +1617,46 @@ function bossLaunchOrb(){
  enemies.push({type:'meteor',fragment:true,bossOrb:true,x:sx,y:sy,vx:dx/len*sp,vy:dy/len*sp,r:9,hp:1,phase:rnd(0,TAU),shape:Array.from({length:9},()=>1),mandatory:true});
  pendingMandatory++;B.orbs++;ddEventSfx('Meteor_New',.3,200);
 }
+let bossBlasts=[];
+function bossBlastStart(x,y,hull){
+ const t0=performance.now(),h=hull;
+ bossBlasts.push({x,y,h,t0,
+  rings:[{d:0,max:h*6,w:5,c:'#ffd27a'},{d:.08,max:h*9,w:3,c:'#a7ff77'},{d:.22,max:h*5,w:3,c:'#ffffff'}],
+  bursts:[{at:0,dx:0,dy:0,c:'#ffffff',n:40},{at:.1,dx:-h*.7,dy:-h*.2,c:'#ffb86b',n:26},{at:.18,dx:h*.7,dy:h*.25,c:'#a7ff77',n:26},{at:.3,dx:-h*.4,dy:h*.35,c:'#ff6b6b',n:24},{at:.42,dx:h*.5,dy:-h*.4,c:'#ffd27a',n:30},{at:.6,dx:0,dy:0,c:'#ffb86b',n:36}],
+  sounds:[{at:0,n:'Asteroid_Destroyed',v:.95},{at:.45,n:'Telescope_Destroyed',v:.6}]});
+ ddGroundShake=Math.max(ddGroundShake,1.4);
+ flash=.6;
+}
+function bossBlastDraw(){
+ if(!bossBlasts.length)return;
+ const now=performance.now();bossBlasts=bossBlasts.filter(b=>now-b.t0<2400);
+ for(const b of bossBlasts){
+  const age=(now-b.t0)/1000;
+  for(const bu of b.bursts){if(!bu.done&&age>=bu.at){bu.done=true;burst(b.x+bu.dx,b.y+bu.dy,bu.c,bu.n)}}
+  for(const so of b.sounds){if(!so.done&&age>=so.at){so.done=true;ddTestSfx(so.n,so.v)}}
+  if(age<.3){g.save();g.globalAlpha=(1-age/.3)*.9;g.fillStyle='#fff8e0';g.beginPath();g.arc(b.x,b.y,b.h*1.8*(.4+age*2.2),0,TAU);g.fill();g.restore()}
+  for(const r of b.rings){const a=age-r.d;if(a<0)continue;const k=Math.min(1,a/.9),rad=r.max*(1-Math.pow(1-k,3));g.save();g.globalAlpha=(1-k)*.9;g.strokeStyle=r.c;g.lineWidth=r.w*(1-k*.6);g.beginPath();g.arc(b.x,b.y,rad,0,TAU);g.stroke();g.restore()}
+ }
+}
 function bossUpdate(dt){
  const B=boss;B.t+=dt;B.hitFlash=Math.max(0,B.hitFlash-dt);
  if(B.state==='dying'){
   B.dyingT+=dt;if(Math.random()<dt*34)burst(B.x+rnd(-B.hull,B.hull),B.y+rnd(-B.hull*.4,B.hull*.4),Math.random()<.5?'#ffb86b':'#a7ff77',10);
-  if(B.dyingT>=1.8){for(let i=0;i<6;i++)burst(B.x+rnd(-B.hull*.8,B.hull*.8),B.y+rnd(-B.hull*.3,B.hull*.3),['#ffb86b','#a7ff77','#ffffff'][i%3],18);boss=null;bossDone=true}
+  if(B.dyingT>=1.8){bossBlastStart(B.x,B.y,B.hull);boss=null;bossDone=true}
   return;
  }
  B.swT-=dt;if(B.swT<=0){const fastDodge=B.hp<=B.maxHp*.5;B.swT=rnd(1.5,3.5)*(fastDodge?.6:1);B.swTarget=rnd(.25,1.6)*(fastDodge?1.7:1)}
  B.swSpd+=(B.swTarget-B.swSpd)*Math.min(1,dt*1.2);B.swPh+=dt*B.swSpd;
- B.x=W/2+Math.sin(B.swPh)*Math.max(0,W/2-18-B.hull*1.05);
- if(B.state==='leave'){bossScoutsUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)){boss=null;bossDone=true}return}
- if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText('SCOUTS ARE TAKING THE COWS',W/2,H*.38,'#ff929b')}}
+ {const amp=Math.max(0,W/2-18-B.hull*1.05),sinX=W/2+Math.sin(B.swPh)*amp;
+  if(B.collectX!=null){const tx=clamp(B.collectX,W/2-amp,W/2+amp);B.x+=(tx-B.x)*Math.min(1,dt*4)} // glide over to the cow
+  else B.x+=(sinX-B.x)*Math.min(1,dt*2)}
+ if(B.state==='leave'){bossScoutsUpdate(dt);if(B.alien)alienUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)&&!aliens.length){boss=null;bossDone=true}return}
+ if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText('THE ALIENS ARE TAKING THE COWS',W/2,H*.38,'#ff929b');if(B.alien)B.tipAt=B.t+3.5}}
  else B.y=B.y0+Math.sin(B.t*1.3)*5;
 bossScoutsUpdate(dt);
+ if(B.alien)alienUpdate(dt);
  if(B.state==='fight'){
+  if(B.tipAt!=null&&B.t>=B.tipAt){B.tipAt=null;activeWarnings.push({text:'SHOOT THE TRACTOR BEAMS - NOT THE COWS!',x:W/2,y:H*.38+26,color:'#8ee2ee',t:5})}
   // Warning when laser drops to 30%: the game's warning sound on entering the low band, and a banner while it stays low.
   const lowLaser=energy>0&&energy<=30;
   if(lowLaser&&!ddLaserLowOn){ddLaserLowOn=true;ddTestSfx('Night_Warning',.8)}
@@ -1442,7 +1666,7 @@ bossScoutsUpdate(dt);
   // Shot-down scouts are replaced while unclaimed cows outnumber the scouts in play.
   const alive=enemies.filter(e=>e.type==='miniufo'&&e.hp>0&&e.step!=='exit').length;
   const free=cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle')).length;
-  if(alive<4&&free>alive){if(B.respawnT==null)B.respawnT=rnd(2.5,4.5);B.respawnT-=dt;if(B.respawnT<=0){B.respawnT=null;bossLaunchScout(alive,rnd(.3,1))}}
+  if(!B.alien&&alive<4&&free>alive){if(B.respawnT==null)B.respawnT=rnd(2.5,4.5);B.respawnT-=dt;if(B.respawnT<=0){B.respawnT=null;bossLaunchScout(alive,rnd(.3,1))}}
   else B.respawnT=null;
   // The mothership drops lower every so often, so the orbs have less distance to travel.
   B.descT-=dt;if(B.descT<=0){B.descT=rnd(9,13);const maxY=domeGeom().top-B.hull*1.05;B.y0T=Math.min(maxY,(B.y0T==null?B.y0:B.y0T)+B.hull*.6)}
@@ -1457,7 +1681,7 @@ bossScoutsUpdate(dt);
   const orbsInAir=enemies.reduce((n,e)=>n+(e.bossOrb&&e.hp>0?1:0),0);
   if(B.orbT<=0&&orbsInAir<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
  }
- for(const b of shots){if(b.t<=0)continue;bossShot(b);if(!boss||boss.state==='dying')break}
+ for(const b of shots){if(b.t<=0)continue;if(B.alien&&alienBeamShot(b))continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }
 // Stage palette shared by the mothership rim lights and its orbs.
 function bossStage(){
@@ -1472,6 +1696,7 @@ function drawBossOrb(e){
  g.fillStyle=gr;g.beginPath();g.arc(0,0,r*1.9,0,TAU);g.fill();
 }
 function bossDraw(){
+ alienDrawAll();
  const B=boss,h=B.hull,dying=B.state==='dying',pulse=.5+.5*Math.sin(drawTime*3);
  const jx=dying?Math.sin(drawTime*70)*2:0,jy=dying?Math.cos(drawTime*53)*1.5:0;
  const cx=B.x+jx,cy=B.y+jy;
@@ -1502,7 +1727,7 @@ function endGame(){
  if(mode==='gameover'||mode==='tally')return;
  ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;
  mode='tally';phaseTime=0;overlay.hidden=true;results.hidden=true;
- ddStartTally({night,base:score-bossPts,energy:Math.floor(energy),dome:Math.floor(shield),boss:boss?bossPts:null,defeated:false,saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
+ ddStartTally({night,base:score-bossPts,energy:Math.floor(energy),dome:Math.floor(shield),boss:boss?bossPts:null,defeated:bossKilled,saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
 }
 function ddFinishGameOver(){
  ddTestSfx('Game_Over',.55);ddSetUfoHum(false);mode='gameover';gameOverReason='OBSERVATORY DESTROYED';hud();
@@ -1594,7 +1819,7 @@ function ddStartTally(d){
  q('ddEnergyPoints').textContent='+'+d.energy;
  q('ddDomePoints').textContent='+'+d.dome;
  q('ddSavedPoints').textContent='+'+(d.saved*25);
- q('ddLostPoints').textContent=d.lost?'−'+(d.lost*25):'0';q('ddBossLine').hidden=d.boss===null;q('ddBossLine').querySelector('.head span').textContent=d.defeated===false?'MOTHERSHIP FIGHT':'MOTHERSHIP DEFEATED';q('ddBossPoints').textContent=d.boss===null?'':'+'+d.boss;
+ q('ddLostPoints').textContent=d.lost?'−'+(d.lost*25):'0';q('ddBossLine').hidden=d.boss===null;q('ddBossLine').querySelector('.head span').textContent=d.defeated?'MOTHERSHIP DEFEATED':'MOTHERSHIP DAMAGE';q('ddBossPoints').textContent=d.boss===null?'':'+'+d.boss;
   for(const id of ['ddEnergyFill','ddDomeFill']){q(id).style.transition='none';q(id).style.width='0%'}
  const cowSvg='<svg class="cow" viewBox="0 0 64 44" aria-hidden="true"><path class="cow-tail" d="M9 12Q4 6 6 2" fill="none" stroke="#e9f0ec" stroke-width="2"/><path class="cow-body" d="M11 12h34v21H11z" fill="#f1f4ed"/><path class="cow-detail" d="M16 12h13l-2 15-11-3zm19 3h10v14l-10-3z" fill="#293638"/><path class="cow-leg" d="M14 32v10h6V32m18 0v10h6V32" stroke="#f0f3ec" stroke-width="5"/><path class="cow-muzzle" d="M24 30h12v8H24z" fill="#f2aab2"/><path class="cow-body" d="M46 13l4-8 3 8 5-2v10l5 4v8H46z" fill="#f0f4ed"/><path class="cow-muzzle" d="M51 24h12v8H51z" fill="#edabb6"/><circle cx="55" cy="18" r="2" fill="#182c32"/></svg>';
  const savedIcons=q('ddSavedIcons'),lostIcons=q('ddLostIcons');savedIcons.innerHTML='';lostIcons.innerHTML='';
@@ -1614,7 +1839,7 @@ function ddStartTally(d){
   q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width .3s';q('ddDomeFill').style.width=d.dome+'%';ddTallyAudio('rise');await sleep(320);q('ddDomePoints').textContent='+'+d.dome;await sleep(40);await fly('ddDomePoints',d.dome,'#71dcef');
   q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');ddTallyAudio('happy');await sleep(140)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(80);await fly('ddSavedPoints',d.saved*25,'#86eea4');
   if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');ddTallyAudio('dud');await sleep(140)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(80);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
-  if(d.boss!==null){q('ddStatus').textContent='Mothership defeated';await sleep(80);await fly('ddBossPoints',d.boss,'#ffb86b')}
+  if(d.boss!==null){q('ddStatus').textContent=d.defeated?'Mothership defeated':'Mothership damaged';await sleep(80);await fly('ddBossPoints',d.boss,'#ffb86b')}
   score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.style.color='#f4f7fb';q('ddStatus').textContent='';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE';
  }
  run().catch(err=>{console.error('Night tally error',err);q('ddStatus').textContent='Tally error';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE'});
@@ -1622,7 +1847,7 @@ function ddStartTally(d){
 }
 
 
-function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:true,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles.length=0;enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
+function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:bossKilled,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles.length=0;enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
 function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
  // While dawn brightens, cows that survived remain awake and stroll around.
  // Keep the central telescope exclusion zone and the same existing cow artwork.
@@ -1640,7 +1865,7 @@ function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
   if(c.x>=maxX){c.x=maxX;c.dir=-1}
   return;
  }
-if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallY>=floor()-9){if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;shield=Math.min(100,shield+10);changeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
+if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallY>=floor()-9){if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;/* a downed dome stays down after a save */if(shield>0)shield=Math.min(100,shield+10);changeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
  else if(c.state==='settle'){if(c.timer<=0){c.state='sleep';c.timer=rnd(5,12)}}
  else if(c.state==='graze'||c.state==='stand'){if(c.timer<=0){c.state='settle';c.timer=rnd(1.5,3)}}else if(c.state==='sleep'){/* Remain settled until abduction or dawn. */}}
 function updateUfo(e,dt){e.phase+=dt*3;if(!e.abduct){e.x+=e.vx*dt;return}let cow=e.cow;if(!cow||cow.dead){e.step='pass';e.abduct=false;if(activeUfo===e)activeUfo=null;return}
@@ -1693,7 +1918,7 @@ if(across>=.81){
  for(let c of cows)updateCow(c,dt);
  for(let p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=105*dt;p.t-=dt}
  for(let w of activeWarnings){w.t-=dt;w.y-=17*dt}
- for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter')continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1);if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<13&&u<best){candidate={cow:c};best=u}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
+ for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity,bestPri=9;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter')continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1),pri=c.state==='lift'?0:1;if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<(c.state==='lift'?18:13)&&(pri<bestPri||(pri===bestPri&&u<best))){candidate={cow:c};best=u;bestPri=pri}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
  for(let e of enemies){if(e.hp<=0)continue;if(e.mandatory){if(shield>0&&e.x>=domeGeom().left&&e.x<=domeGeom().right&&e.y+e.r>=domeY(e.x)){impact(e,false)}else if(shield<=0&&telescopeStrike(e)){destroyScope(e);return}else if(cowStrike(e)){impact(e,true)}else if(e.y+e.r>=nearHorizonY(e.x)){impact(e,true)}}else if(e.type==='ufo'&&!e.abduct&&(e.x<-60||e.x>W+60))e.hp=0;else if(['sat','iss','aircraft','comet'].includes(e.type)&&!e.mandatory){if(e.x>0&&e.x<W)e.entered=true;if(e.entered&&(e.x<-70||e.x>W+70))e.hp=0}}
  if(mode!=='night')return;
  shots=shots.filter(b=>b.t>0&&b.x>-50&&b.x<W+50&&b.y>-50&&b.y<H+40);
@@ -1974,7 +2199,7 @@ function draw(){g.save();if(mode==='night'&&ddGroundShake>0){const strength=3.5*
  g.fillStyle=day>.5?'#345a64':'#1e3440';g.beginPath();g.moveTo(0,floor());for(let x=0;x<=W+10;x+=10)g.lineTo(x,floor()-15+Math.sin(x*.05)*10);g.lineTo(W,H);g.lineTo(0,H);g.fill();g.fillStyle=day>.5?'#526b46':'#2a4537';g.fillRect(0,floor(),W,H-floor());
  for(let e of enemies)if(e.hp>0)drawEnemy(e);
  if(boss&&(mode==='night'||mode==='destroyed'))bossDraw();
- drawDome();bossBeamDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
+ drawDome();bossBeamDraw();bossBlastDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
  for(let b of shots){g.shadowColor=ddEnergyColor();g.shadowBlur=18;g.strokeStyle=ddEnergyColor();g.lineWidth=3;g.beginPath();g.moveTo(b.x,b.y);g.lineTo(b.x-b.vx*.065,b.y-b.vy*.065);g.stroke();g.shadowBlur=0}
  if(flash>0&&!scopeBroken){let q=tip();g.shadowColor=ddEnergyColor();g.shadowBlur=20;g.fillStyle='#dfffed';g.beginPath();g.arc(q.x,q.y,3,0,TAU);g.fill();g.shadowBlur=0}
  for(const a of junkAfterglows){
@@ -2019,6 +2244,7 @@ $('devViewLeaderboard').addEventListener('click',()=>{closeDev();ddFinalLeaderbo
 $('devForcePowerups').addEventListener('change',e=>{devForcePowerups=e.target.checked;if(devForcePowerups&&!junkSpawned&&mode==='night')junkSpawnAt=Math.min(junkSpawnAt,nightTime+2);});
 $('devJump').addEventListener('click',()=>{const requested=Number($('devNight').value);if(!Number.isInteger(requested)||requested<1||requested>99){$('devNight').focus();return;}night=requested;startNight();devWasPaused=false;paused=false;closeDev();});
 $('devBossStart').addEventListener('click',()=>{night=3;devBossOnly=true;startNight();devWasPaused=false;paused=false;closeDev();});
+$('devAlienStart').addEventListener('click',()=>{night=6;devBossOnly=true;startNight();devWasPaused=false;paused=false;closeDev();});
 $('devRestartNight').addEventListener('click',()=>{startNight();devWasPaused=false;paused=false;closeDev();});
 $('devRestartGame').addEventListener('click',()=>{resetGame();devWasPaused=false;paused=false;closeDev();});
 function loop(t){let dt=last?Math.min(.04,(t-last)/1000):.016;last=t;ddUpdateTestSoundState();if(!paused&&mode!=='tutorial'&&mode!=='title'&&mode!=='gameover')update(dt);draw();frame=requestAnimationFrame(loop)}
