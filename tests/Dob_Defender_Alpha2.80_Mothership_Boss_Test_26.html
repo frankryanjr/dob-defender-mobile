@@ -1386,7 +1386,7 @@ function alienUpdate(dt){
   const live=aliens.filter(a=>a.step!=='out').length;
   if(live<ALIEN_MAX&&alienSpawnT<=0){alienSpawnT=alienSpawn()?rnd(3,6):.6}
  }
- const top=B.y+B.sx*6;
+ const top=B.y+B.sx*6;let collectX=null,collectP=0; // the mothership moves to a cow once it is lifted high
  for(const a of aliens){
   if(a.gone)continue;
   a.t+=dt;const c=a.cow;a.blinkT=(a.blinkT==null?rnd(1,3):a.blinkT)-dt;if(a.blinkT<=0){a.blinkDur=.13;a.blinkT=rnd(2,5)}a.blinkDur=Math.max(0,(a.blinkDur||0)-dt);
@@ -1398,7 +1398,7 @@ function alienUpdate(dt){
   else if(a.step==='lift'){
    if(!c||c.dead||c.state!=='lift'){alienLeave(a);continue}
    const p=Math.min(1,a.t/ALIEN_LIFT_T),bottom=floor()-9;
-   c.lift=p;c.alienY=bottom+(top-bottom)*p;
+   c.lift=p;c.alienY=bottom+(top-bottom)*p;if(p>=.55&&p>collectP){collectP=p;collectX=c.x}
    if(a.beamHits>=ALIEN_BEAM_HITS){
     // Column broken three times: the cow falls from where it is and lands safely.
     dropCow(c,a,true);c.alienY=null;c.carrier=null;
@@ -1415,7 +1415,7 @@ function alienUpdate(dt){
   else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0;ddSynthTransport(false)}}
   else if(a.step==='out'){if(a.t>=1)a.gone=true}
  }
- aliens=aliens.filter(a=>!a.gone);
+ aliens=aliens.filter(a=>!a.gone);B.collectX=collectX;
 }
 function alienGun(a){return{x:a.x+a.face*25,y:a.y-19}}
 /* A shot that crosses the tractor column or the ray weakens the beam. Returns true when the shot was used. */
@@ -1597,7 +1597,9 @@ function bossUpdate(dt){
  }
  B.swT-=dt;if(B.swT<=0){const fastDodge=B.hp<=B.maxHp*.5;B.swT=rnd(1.5,3.5)*(fastDodge?.6:1);B.swTarget=rnd(.25,1.6)*(fastDodge?1.7:1)}
  B.swSpd+=(B.swTarget-B.swSpd)*Math.min(1,dt*1.2);B.swPh+=dt*B.swSpd;
- B.x=W/2+Math.sin(B.swPh)*Math.max(0,W/2-18-B.hull*1.05);
+ {const amp=Math.max(0,W/2-18-B.hull*1.05),sinX=W/2+Math.sin(B.swPh)*amp;
+  if(B.collectX!=null){const tx=clamp(B.collectX,W/2-amp,W/2+amp);B.x+=(tx-B.x)*Math.min(1,dt*4)} // glide over to the cow
+  else B.x+=(sinX-B.x)*Math.min(1,dt*2)}
  if(B.state==='leave'){bossScoutsUpdate(dt);if(B.alien)alienUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)&&!aliens.length){boss=null;bossDone=true}return}
  if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText(B.alien?'ALIENS ARE TAKING THE COWS':'SCOUTS ARE TAKING THE COWS',W/2,H*.38,'#ff929b')}}
  else B.y=B.y0+Math.sin(B.t*1.3)*5;
