@@ -1079,17 +1079,17 @@ function ddSynthTransport(rising){
 function ddSynthGrumble(){
  try{
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
-  // higher and louder than before so phone speakers reproduce it: a sawtooth growl that falls in pitch, with a wobble
-  const t=ctx.currentTime,dur=.7,out=ctx.createGain(),lp=ctx.createBiquadFilter(),pk=ctx.createBiquadFilter();
-  out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.45,t+.06);out.gain.setValueAtTime(.45,t+.3);out.gain.exponentialRampToValueAtTime(.001,t+dur);
-  lp.type='lowpass';lp.frequency.value=1100;lp.Q.value=1.5;
-  pk.type='peaking';pk.frequency.value=380;pk.gain.value=8;
-  lp.connect(pk);pk.connect(out);out.connect(ctx.destination);
-  for(const detune of [0,-14,9]){
-   const o=ctx.createOscillator(),wob=ctx.createOscillator(),wobG=ctx.createGain(),og=ctx.createGain();
-   o.type='sawtooth';o.frequency.setValueAtTime(235,t);o.frequency.linearRampToValueAtTime(150,t+dur);o.detune.value=detune;
-   wob.frequency.value=13;wobG.gain.value=.3;wob.connect(wobG);og.gain.value=.7;wobG.connect(og.gain);
-   o.connect(og);og.connect(lp);o.start(t);wob.start(t);o.stop(t+dur);wob.stop(t+dur);
+  // quieter, voice-like: two grumbled syllables ("wah", then "wrr"), each a growling sawtooth through a moving band-pass, with a little vibrato
+  const t=ctx.currentTime,out=ctx.createGain();out.gain.value=.16;out.connect(ctx.destination);
+  const syllables=[[0,.34,820,300],[.42,.72,520,200]]; // start, end (seconds), filter start and end (Hz)
+  for(const [s0,s1,f0,f1] of syllables){
+   const o=ctx.createOscillator(),vib=ctx.createOscillator(),vg=ctx.createGain(),bp=ctx.createBiquadFilter(),env=ctx.createGain();
+   o.type='sawtooth';o.frequency.setValueAtTime(140,t+s0);o.frequency.linearRampToValueAtTime(105,t+s1);
+   vib.frequency.value=6;vg.gain.value=15;vib.connect(vg);vg.connect(o.detune);
+   bp.type='bandpass';bp.Q.value=5;bp.frequency.setValueAtTime(f0,t+s0);bp.frequency.linearRampToValueAtTime(f1,t+s1);
+   env.gain.setValueAtTime(0,t+s0);env.gain.linearRampToValueAtTime(1,t+s0+.05);env.gain.setValueAtTime(1,t+s1-.08);env.gain.linearRampToValueAtTime(0,t+s1);
+   o.connect(bp);bp.connect(env);env.connect(out);
+   o.start(t+s0);vib.start(t+s0);o.stop(t+s1);vib.stop(t+s1);
   }
  }catch(e){console.warn('Grumble sound:',e)}
 }
