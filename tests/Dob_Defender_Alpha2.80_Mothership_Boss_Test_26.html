@@ -1384,7 +1384,7 @@ function alienUpdate(dt){
  }
  aliens=aliens.filter(a=>!a.gone);
 }
-function alienGun(a){return{x:a.x+a.face*23,y:a.y-17}}
+function alienGun(a){return{x:a.x+a.face*25,y:a.y-19}}
 /* A shot that crosses the tractor column or the ray weakens the beam. Returns true when the shot was used. */
 function alienSegDist(px,py,x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,L=dx*dx+dy*dy||1;const u=clamp(((px-x1)*dx+(py-y1)*dy)/L,0,1);return Math.hypot(px-x1-dx*u,py-y1-dy*u)}
 function alienBeamShot(b){
@@ -1392,10 +1392,10 @@ function alienBeamShot(b){
  for(const a of aliens){
   if(a.step!=='lift'||a.gone)continue;
   const c=a.cow;if(!c||c.dead||c.state!=='lift'||c.alienY==null)continue;
-  const top=B.y+B.sx*6,gun=alienGun(a);
+  const f=alienGun(a);
   for(let i=0;i<=5;i++){
    const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
-   if(alienSegDist(px,py,c.x,c.alienY,c.x,top)<9||alienSegDist(px,py,gun.x,gun.y,c.x,c.alienY)<6){
+   if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
     b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);ddEventSfx('Asteroid_Tone_Mid',.4,60);changeScore(20,px,py,'BEAM');
     return true;
    }
@@ -1406,35 +1406,46 @@ function alienBeamShot(b){
 function alienBody(a){
  const f=a.face;
  g.save();g.translate(a.x,a.y);g.scale(f,1);g.lineCap='round';g.lineJoin='round';
- g.strokeStyle='#4fbf5a';g.lineWidth=1.6;
- g.beginPath();g.moveTo(-2,-8);g.lineTo(-3,0);g.moveTo(2,-8);g.lineTo(3,0);g.stroke();
- g.fillStyle='#6fe07a';g.beginPath();g.ellipse(0,-12,3.6,4.8,0,0,TAU);g.fill();
- g.strokeStyle='#5ad26a';g.lineWidth=1.3;
- g.beginPath();g.moveTo(-3,-16);g.lineTo(-9,-8);g.lineTo(-11,-1);g.stroke();
+ const green='#9dff7a',edge='#2fbf4a';
+ g.strokeStyle=edge;g.lineWidth=1.5;
+ g.beginPath();g.moveTo(-2,-7);g.lineTo(-3,0);g.moveTo(2,-7);g.lineTo(3,0);g.stroke();
+ g.fillStyle='#8bf076';g.beginPath();g.ellipse(0,-11,3.4,4.6,0,0,TAU);g.fill();
+ g.strokeStyle=edge;g.lineWidth=1;g.stroke();
+ g.strokeStyle=edge;g.lineWidth=1.4;
+ g.beginPath();g.moveTo(-3,-15);g.lineTo(-9,-8);g.lineTo(-10,0);g.stroke();
  if(a.step==='fist'){
   const sh=Math.sin(drawTime*34)*2.2;
-  g.beginPath();g.moveTo(3,-16);g.lineTo(11,-25);g.lineTo(9+sh*.3,-36+sh);g.stroke();
-  g.fillStyle='#7dff6a';g.beginPath();g.arc(9+sh*.3,-37+sh,2.6,0,TAU);g.fill();
+  g.beginPath();g.moveTo(3,-15);g.lineTo(11,-25);g.lineTo(9+sh*.3,-36+sh);g.stroke();
+  g.fillStyle=green;g.beginPath();g.arc(9+sh*.3,-37+sh,2.6,0,TAU);g.fill();
  }else{
-  g.beginPath();g.moveTo(3,-16);g.lineTo(13,-18);g.lineTo(17,-17);g.stroke();
-  g.strokeStyle='#cfeedd';g.lineWidth=2;g.beginPath();g.moveTo(16,-18);g.lineTo(23,-17);g.stroke();
-  g.fillStyle='#9dffb0';g.beginPath();g.arc(23,-17,1.8,0,TAU);g.fill();
+  g.beginPath();g.moveTo(3,-15);g.lineTo(13,-15);g.lineTo(20,-18);g.lineTo(24,-19);g.stroke();
  }
- g.fillStyle='#7dff6a';g.beginPath();g.ellipse(0,-23,8.5,10.5,0,0,TAU);g.fill();
- g.fillStyle='#0a1a0c';
- g.beginPath();g.ellipse(-3.6,-22,2.6,4.6,-.25,0,TAU);g.fill();
- g.beginPath();g.ellipse(3.6,-22,2.6,4.6,.25,0,TAU);g.fill();
+ g.fillStyle=green;g.strokeStyle=edge;g.lineWidth=1.2;
+ g.beginPath();g.moveTo(0,-37);g.bezierCurveTo(10,-37,11.5,-27,4,-16);g.bezierCurveTo(2,-13,-2,-13,-4,-16);g.bezierCurveTo(-11.5,-27,-10,-37,0,-37);g.closePath();
+ g.fill();g.stroke();
+ g.fillStyle='#050d06';
+ g.beginPath();g.ellipse(-4.2,-26,3.2,5.4,-.3,0,TAU);g.fill();
+ g.beginPath();g.ellipse(4.2,-26,3.2,5.4,.3,0,TAU);g.fill();
+ g.fillStyle='#ffffff';
+ g.beginPath();g.arc(-5.2,-28.2,.95,0,TAU);g.fill();
+ g.beginPath();g.arc(3.2,-28.2,.95,0,TAU);g.fill();
  g.restore();
+ if(a.step!=='fist'){
+  const tip={x:a.x+f*24,y:a.y-19},p=.85+.15*Math.sin(drawTime*5+a.x),r=6.5*p;
+  const gr=g.createRadialGradient(tip.x,tip.y,0,tip.x,tip.y,r*2.2);
+  gr.addColorStop(0,'rgba(240,255,240,1)');gr.addColorStop(.35,'rgba(170,255,180,'+(.85*p).toFixed(3)+')');gr.addColorStop(1,'rgba(120,255,150,0)');
+  g.fillStyle=gr;g.beginPath();g.arc(tip.x,tip.y,r*2.2,0,TAU);g.fill();
+ }
 }
-/* Tractor column from the cow up to the saucer, with the ray from the gun. It dims as the column is hit. */
 function alienBeamDraw(a){
- const c=a.cow,top=boss.y+boss.sx*6,gun=alienGun(a),k=1-.25*a.beamHits,flick=a.beamHits>0?(Math.sin(drawTime*40)>-.4?1:.35):1;
+ // Solid, transparent cone from the glowing finger to the cow only. Same green as the UFO beam. Pulses very slightly.
+ const c=a.cow,f=alienGun(a),k=1-.25*a.beamHits,pulse=.92+.08*Math.sin(drawTime*5.5+a.x*.3),flick=a.beamHits>0?(Math.sin(drawTime*40)>-.4?1:.45):1;
+ const half=17;
  g.save();
- const gr=g.createLinearGradient(0,c.alienY,0,top);
- gr.addColorStop(0,'rgba(180,255,190,'+(.55*k*flick).toFixed(3)+')');gr.addColorStop(1,'rgba(180,255,190,'+(.15*k*flick).toFixed(3)+')');
- g.fillStyle=gr;g.beginPath();g.moveTo(c.x-6,c.alienY);g.lineTo(c.x+6,c.alienY);g.lineTo(c.x+12,top);g.lineTo(c.x-12,top);g.closePath();g.fill();
- g.strokeStyle='rgba(200,255,210,'+(.9*k*flick).toFixed(3)+')';g.lineWidth=1.6;
- g.beginPath();g.moveTo(gun.x,gun.y);g.lineTo(c.x,c.alienY);g.stroke();
+ const gr=g.createLinearGradient(f.x,f.y,c.x,c.alienY);
+ gr.addColorStop(0,'rgba(149,255,179,.85)');gr.addColorStop(1,'rgba(110,238,169,.23)');
+ g.globalAlpha=Math.min(1,.19*k*pulse*flick);
+ g.fillStyle=gr;g.beginPath();g.moveTo(f.x,f.y-1);g.lineTo(f.x,f.y+1);g.lineTo(c.x+half,c.alienY+4);g.lineTo(c.x-half,c.alienY+4);g.closePath();g.fill();
  g.restore();
 }
 function alienDraw(a){
