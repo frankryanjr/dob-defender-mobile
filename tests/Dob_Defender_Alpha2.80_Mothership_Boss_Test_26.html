@@ -1533,13 +1533,25 @@ function drawMiniUfo(e){
  g.fillStyle='#94a5b5';g.beginPath();g.ellipse(0,3,18,6,0,0,TAU);g.fill();
  for(let x of [-10,0,10]){g.fillStyle='#a7ff77';g.beginPath();g.arc(x,5,2,0,TAU);g.fill()}
 }
+/* Keyboard-style click for each typed character of an ISS transmission. */
+let ddKeyNoise=null;
+function ddSynthKey(){
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  if(!ddKeyNoise)ddKeyNoise=ddNoiseBuffer(ctx);
+  const t=ctx.currentTime,src=ctx.createBufferSource(),bp=ctx.createBiquadFilter(),g=ctx.createGain();
+  src.buffer=ddKeyNoise;bp.type='bandpass';bp.frequency.value=2000+Math.random()*1200;bp.Q.value=1.4;
+  g.gain.setValueAtTime(.2+Math.random()*.06,t);g.gain.exponentialRampToValueAtTime(.001,t+.024);
+  src.connect(bp);bp.connect(g);g.connect(ctx.destination);src.start(t,Math.random()*.8,.03);
+ }catch(e){}
+}
 let bossTxTimers=[];
 function bossTxStop(){for(const t of bossTxTimers){clearTimeout(t);clearInterval(t)}bossTxTimers=[];const el=document.getElementById('ddTransmission');if(el){el.hidden=true;el.textContent=''}}
 function bossTransmit(lines){
  bossTxStop();
  const el=document.getElementById('ddTransmission');if(!el)return;
  const text=lines.join('\n');let i=0;el.textContent='';el.hidden=false;
- const type=setInterval(()=>{el.textContent=text.slice(0,++i)+(i<text.length?'_':'');if(i>=text.length){clearInterval(type);bossTxTimers.push(setTimeout(()=>{el.hidden=true;el.textContent=''},4500))}},38);
+ const type=setInterval(()=>{el.textContent=text.slice(0,++i)+(i<text.length?'_':'');const ch=text[i-1];if(ch&&ch.trim())ddSynthKey();if(i>=text.length){clearInterval(type);bossTxTimers.push(setTimeout(()=>{el.hidden=true;el.textContent=''},4500))}},38);
  bossTxTimers.push(type);
 }
 /* Night 3 finale: ISS flies over with a transmission. The laser and dome replenish, then the mothership arrives once the ISS has left. */
