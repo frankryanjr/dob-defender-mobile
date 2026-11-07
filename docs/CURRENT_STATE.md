@@ -8,6 +8,7 @@
 3. This file: where things stand now.
 4. `docs/PLAYTEST_LOG.md`: what the player reported and what changed because of it.
 5. `docs/GAMEPLAY.md` and `docs/BOSS_MOTHERSHIP.md`: the game design and the boss-fight design.
+5a. `docs/MODULAR_BUILD_HANDOFF.md`: how to split the game HTML into editable pieces and rebuild it. Read this before any code change.
 6. `docs/CHANGELOG.md`: what each production release contains.
 
 ## Production (live)
