@@ -932,6 +932,8 @@ track.addEventListener('pointerup',e=>{if(e.pointerId!==drag)return;e.preventDef
 for(const name of ['pointercancel','lostpointercapture'])track.addEventListener(name,e=>{if(e.pointerId===drag)drag=null});
 // Single tap means one shot. No continuous fire on hold.
 // Spacebar fires (one shot per press). Left-click and hold on the bottom slider to slide the aim.
+// Touch: a tap on the play area fires (phones have no spacebar). Mouse clicks do not fire.
+canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;if(mode!=='night')return;e.preventDefault();shoot()});
 window.addEventListener('keydown',e=>{if(e.code!=='Space')return;e.preventDefault();if(e.repeat)return;if(mode!=='night')return;shoot()});
 const shotEnergyCost=()=>boss&&boss.state!=='dying'?1.0:night>=13?2:night>=11?1.85:night>=6?1.65:2;
 
