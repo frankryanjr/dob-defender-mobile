@@ -1366,7 +1366,7 @@ function bossScoutsUpdate(dt){
 }
 /* ---- Night 6 aliens: green greys beam down, lift a cow on a tractor column and hold it. Three hits on the column make the cow fall safely. ---- */
 let aliens=[],alienSpawnT=2;
-const ALIEN_MAX=3,ALIEN_LIFT_T=6.5,ALIEN_BEAM_HITS=3;
+const ALIEN_MAX=3,ALIEN_LIFT_T=6.5,ALIEN_BEAM_HITS=1;
 function alienFreeCows(){return cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle'))}
 function alienSpawn(){
  const free=alienFreeCows();if(!free.length)return false;
@@ -1474,12 +1474,12 @@ function alienBody(a){
 }
 function alienBeamDraw(a){
  // Solid, transparent cone from the glowing finger to the cow only. Same green as the UFO beam. Pulses very slightly.
- const c=a.cow,f=alienGun(a),k=1-.28*a.beamHits,pulse=.92+.08*Math.sin(drawTime*5.5+a.x*.3),flick=a.beamHits>0?(Math.sin(drawTime*40)>-.4?1:.45):1;
+ const c=a.cow,f=alienGun(a),k=1-.28*a.beamHits,pulse=.92+.08*Math.sin(drawTime*5.5+a.x*.3),flick=.5+.5*Math.abs(Math.sin(drawTime*27+a.x*.9))*(.6+.4*Math.sin(drawTime*13.7));
  const half=17;
  g.save();
  const gr=g.createLinearGradient(f.x,f.y,c.x,c.alienY);
  gr.addColorStop(0,'rgba(149,255,179,1)');gr.addColorStop(1,'rgba(110,238,169,.6)');
- g.globalAlpha=Math.min(1,.12*k*pulse*flick); // lighter overall; fades with each hit
+ g.globalAlpha=Math.min(1,.07*k*pulse*flick); // less opaque; flickers
  g.fillStyle=gr;g.beginPath();g.moveTo(f.x,f.y-1);g.lineTo(f.x,f.y+1);g.lineTo(c.x+half,c.alienY+4);g.lineTo(c.x-half,c.alienY+4);g.closePath();g.fill();
  g.restore();
 }
