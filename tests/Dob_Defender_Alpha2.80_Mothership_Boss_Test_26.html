@@ -1054,6 +1054,39 @@ function ddUpdateSlewSound(){
  }catch(e){console.warn('Slewing audio:',e);ddSlewSource=null;ddSlewGain=null}
 }
 let ddLastSoundAt={};
+/* Synthesised sounds for the alien fight (no sample exists for these). */
+function ddNoiseBuffer(ctx){const n=ctx.sampleRate,b=ctx.createBuffer(1,n,n),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return b}
+/* Star Trek style transporter: a rising (materialise) or falling (dematerialise) shimmer with noise and fast tremolo. */
+function ddSynthTransport(rising){
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  const t=ctx.currentTime,dur=1.6,out=ctx.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.26,t+.12);out.gain.setValueAtTime(.26,t+dur-.4);out.gain.linearRampToValueAtTime(0,t+dur);out.connect(ctx.destination);
+  const f0=rising?520:2600,f1=rising?2600:520;
+  const tone=ctx.createOscillator(),trem=ctx.createOscillator(),tremG=ctx.createGain(),toneG=ctx.createGain();
+  tone.type='sine';tone.frequency.setValueAtTime(f0,t);tone.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  trem.frequency.value=16;tremG.gain.value=.45;trem.connect(tremG);toneG.gain.value=.55;tremG.connect(toneG.gain);
+  tone.connect(toneG);toneG.connect(out);
+  const nz=ctx.createBufferSource(),bp=ctx.createBiquadFilter(),ng=ctx.createGain();nz.buffer=ddNoiseBuffer(ctx);nz.loop=true;
+  bp.type='bandpass';bp.Q.value=4;bp.frequency.setValueAtTime(f0*2,t);bp.frequency.exponentialRampToValueAtTime(f1*2,t+dur);
+  ng.gain.value=.22;nz.connect(bp);bp.connect(ng);ng.connect(out);
+  tone.start(t);trem.start(t);nz.start(t);tone.stop(t+dur);trem.stop(t+dur);nz.stop(t+dur);
+ }catch(e){console.warn('Transport sound:',e)}
+}
+/* Alien grumble: a low growling sawtooth with a slow wobble, falling in pitch. Played when the beam is hit. */
+function ddSynthGrumble(){
+ try{
+  if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
+  const t=ctx.currentTime,dur=.6,out=ctx.createGain(),lp=ctx.createBiquadFilter();
+  out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.3,t+.05);out.gain.exponentialRampToValueAtTime(.001,t+dur);
+  lp.type='lowpass';lp.frequency.value=520;lp.Q.value=2;lp.connect(out);out.connect(ctx.destination);
+  for(const detune of [0,-18]){
+   const o=ctx.createOscillator(),wob=ctx.createOscillator(),wobG=ctx.createGain(),og=ctx.createGain();
+   o.type='sawtooth';o.frequency.setValueAtTime(118,t);o.frequency.linearRampToValueAtTime(74,t+dur);o.detune.value=detune;
+   wob.frequency.value=21;wobG.gain.value=.5;wob.connect(wobG);og.gain.value=.5;wobG.connect(og.gain);
+   o.connect(og);og.connect(lp);o.start(t);wob.start(t);o.stop(t+dur);wob.stop(t+dur);
+  }
+ }catch(e){console.warn('Grumble sound:',e)}
+}
 function ddEventSfx(name,volume=.35,minGap=0){const now=performance.now();if(minGap&&now-(ddLastSoundAt[name]||-1e9)<minGap)return;ddLastSoundAt[name]=now;ddTestSfx(name,volume)}
 function ddSetUfoHum(on){
  try{
@@ -1254,7 +1287,7 @@ function bossLaunchScout(i,delay){
  enemies.push({type:'miniufo',x:B.x+side*B.hull*.55,y:B.y+B.sx*6,vx:0,vy:0,r:17,hp:1,phase:rnd(0,TAU),mandatory:false,
   step:'roam',timer:delay,tx:rnd(40,W-40),ty:rnd(120,floor()-170),cow:null,beamT:0,delay:0,spd:rnd(110,210),spdMul:1,spdT:0});
 }
-function bossLaunchScouts(){const n=boss&&boss.alien?2:4;for(let i=0;i<n;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
+function bossLaunchScouts(){const n=boss&&boss.alien?0:4;for(let i=0;i<n;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
 /* Keeps a scout moving while it waits, so it is never still unless it is abducting. */
 function wanderScout(e,dt){const dx=e.tx-e.x,dy=e.ty-e.y,L=Math.hypot(dx,dy)||1,m=Math.min(L,scoutSpeed(e,dt)*dt);e.x+=dx/L*m;e.y+=dy/L*m;e.timer-=dt;if(e.timer<=0||L<8)scoutRoamTarget(e)}
 /* Each scout has its own base speed, and its speed multiplier changes at random. */
@@ -1339,12 +1372,12 @@ function alienSpawn(){
  const free=alienFreeCows();if(!free.length)return false;
  const c=free[Math.floor(Math.random()*free.length)],side=Math.random()<.5?-1:1;
  c.selected=true;c.alienY=null;
- aliens.push({step:'in',t:0,x:clamp(c.x+side*rnd(18,40),22,W-22),y:floor(),face:-side,cow:c,beamHits:0,gone:false});
- ddEventSfx('Meteor_New',.3,200);
+ aliens.push({step:'in',t:0,x:clamp(c.x+side*rnd(18,40),22,W-22),y:floor(),face:-side,cow:c,beamHits:0,gone:false,blinkT:rnd(1,3),blinkDur:0});
+ ddSynthTransport(true);
  return true;
 }
 /* The alien leaves; a cow it was holding is released to stand again. */
-function alienLeave(a){a.step='out';a.t=0;const c=a.cow;a.cow=null;if(c){c.selected=false;c.alienY=null;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}}
+function alienLeave(a){a.step='out';a.t=0;ddSynthTransport(false);const c=a.cow;a.cow=null;if(c){c.selected=false;c.alienY=null;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}}
 function alienClear(){for(const a of aliens){const c=a.cow;if(c){c.selected=false;c.alienY=null;if(!c.dead&&c.state==='lift'){c.state='stand';c.lift=0;c.timer=rnd(2,4)}}}aliens=[]}
 function alienUpdate(dt){
  const B=boss;if(!B||!B.alien)return;
@@ -1356,7 +1389,7 @@ function alienUpdate(dt){
  const top=B.y+B.sx*6;
  for(const a of aliens){
   if(a.gone)continue;
-  a.t+=dt;const c=a.cow;
+  a.t+=dt;const c=a.cow;a.blinkT=(a.blinkT==null?rnd(1,3):a.blinkT)-dt;if(a.blinkT<=0){a.blinkDur=.13;a.blinkT=rnd(2,5)}a.blinkDur=Math.max(0,(a.blinkDur||0)-dt);
   if(a.step==='in'){if(a.t>=1.2){a.step='aim';a.t=0}}
   else if(a.step==='aim'){
    if(!c||c.dead||c.state==='splat'||c.state==='fall'){alienLeave(a);continue}
@@ -1376,10 +1409,10 @@ function alienUpdate(dt){
     // Not broken in time: the cow reaches the ship and is taken aboard.
     c.alienY=null;c.selected=false;c.nightOutcome='lost';totalCowDeaths++;c.dead=true;
     ddTestSfx('Cow_Lost',.55);burst(c.x,top,'#9dffb0',18);
-    a.cow=null;a.step='out';a.t=0;continue;
+    a.cow=null;a.step='out';a.t=0;ddSynthTransport(false);continue;
    }
   }
-  else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0}}
+  else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0;ddSynthTransport(false)}}
   else if(a.step==='out'){if(a.t>=1)a.gone=true}
  }
  aliens=aliens.filter(a=>!a.gone);
@@ -1397,7 +1430,7 @@ function alienBeamShot(b){
    const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
    if(Math.hypot(px-c.x,py-c.alienY)<14)return false; // the shot reaches the cow itself: a normal cow hit, which can kill it
    if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
-    b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);ddEventSfx('Asteroid_Tone_Mid',.4,60);changeScore(20,px,py,'BEAM');
+    b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);ddSynthGrumble();changeScore(20,px,py,'BEAM');
     return true;
    }
   }
@@ -1424,12 +1457,13 @@ function alienBody(a){
  g.fillStyle=green;g.strokeStyle=edge;g.lineWidth=1.2;
  g.beginPath();g.moveTo(0,-37);g.bezierCurveTo(10,-37,11.5,-27,4,-16);g.bezierCurveTo(2,-13,-2,-13,-4,-16);g.bezierCurveTo(-11.5,-27,-10,-37,0,-37);g.closePath();
  g.fill();g.stroke();
+ const bl=a.blinkDur>0?.12:1;
  g.fillStyle='#050d06';
- g.beginPath();g.ellipse(-4.2,-26,3.2,5.4,-.3,0,TAU);g.fill();
- g.beginPath();g.ellipse(4.2,-26,3.2,5.4,.3,0,TAU);g.fill();
- g.fillStyle='#ffffff';
+ g.beginPath();g.ellipse(-4.2,-26,3.2,5.4*bl,-.3,0,TAU);g.fill();
+ g.beginPath();g.ellipse(4.2,-26,3.2,5.4*bl,.3,0,TAU);g.fill();
+ if(bl>.5){g.fillStyle='#ffffff';
  g.beginPath();g.arc(-5.2,-28.2,.95,0,TAU);g.fill();
- g.beginPath();g.arc(3.2,-28.2,.95,0,TAU);g.fill();
+ g.beginPath();g.arc(3.2,-28.2,.95,0,TAU);g.fill();}
  g.restore();
  if(a.step!=='fist'){
   const tip={x:a.x+f*24,y:a.y-19},p=.85+.15*Math.sin(drawTime*5+a.x),r=6.5*p;
@@ -1578,7 +1612,7 @@ bossScoutsUpdate(dt);
   // Shot-down scouts are replaced while unclaimed cows outnumber the scouts in play.
   const alive=enemies.filter(e=>e.type==='miniufo'&&e.hp>0&&e.step!=='exit').length;
   const free=cows.filter(c=>!c.dead&&!c.selected&&(c.state==='stand'||c.state==='sleep'||c.state==='settle')).length;
-  if(alive<(B.alien?2:4)&&free>alive){if(B.respawnT==null)B.respawnT=rnd(2.5,4.5);B.respawnT-=dt;if(B.respawnT<=0){B.respawnT=null;bossLaunchScout(alive,rnd(.3,1))}}
+  if(!B.alien&&alive<4&&free>alive){if(B.respawnT==null)B.respawnT=rnd(2.5,4.5);B.respawnT-=dt;if(B.respawnT<=0){B.respawnT=null;bossLaunchScout(alive,rnd(.3,1))}}
   else B.respawnT=null;
   // The mothership drops lower every so often, so the orbs have less distance to travel.
   B.descT-=dt;if(B.descT<=0){B.descT=rnd(9,13);const maxY=domeGeom().top-B.hull*1.05;B.y0T=Math.min(maxY,(B.y0T==null?B.y0:B.y0T)+B.hull*.6)}
