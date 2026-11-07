@@ -1243,7 +1243,7 @@ function doEvent(e){switch(e.type){case'threat':if(enemies.filter(x=>x.mandatory
 function eligibleCow(c){return !c.dead&&!c.selected&&c.state!=='lift'&&c.state!=='splat'&&c.x>=23&&c.x<=W-23}
 function activeAbductors(){return enemies.filter(e=>e.type==='ufo'&&e.hp>0&&e.abduct)}
 function abductingUfoFor(c){return activeAbductors().find(e=>e.cow===c)}
-function spawnUfo(abduct){if(abduct&&activeAbductors().length>=(night>=6?2:1))return;let available=abduct?cows.filter(eligibleCow):[];let cow=abduct?available[Math.floor(Math.random()*available.length)]:null;if(abduct&&!cow)return;let d=Math.random()<.5?1:-1;let targetY=floor()-113;let e={type:'ufo',x:abduct?clamp(cow.x+d*105,24,W-24):(d>0?-30:W+30),y:abduct?-35:rnd(125,Math.max(180,floor()*.45)),vx:d*60*speedFactor(),vy:0,r:17,hp:1,phase:0,tilt:0,hoverPhase:0,mandatory:false,dir:d,abduct,step:abduct?'dive':'pass',timer:0,targetY,cow:cow||null};if(cow)cow.selected=true;enemies.push(e);if(abduct)activeUfo=e}
+function spawnUfo(abduct){if(boss)return;/* no UFOs during the boss fight */if(abduct&&activeAbductors().length>=(night>=6?2:1))return;let available=abduct?cows.filter(eligibleCow):[];let cow=abduct?available[Math.floor(Math.random()*available.length)]:null;if(abduct&&!cow)return;let d=Math.random()<.5?1:-1;let targetY=floor()-113;let e={type:'ufo',x:abduct?clamp(cow.x+d*105,24,W-24):(d>0?-30:W+30),y:abduct?-35:rnd(125,Math.max(180,floor()*.45)),vx:d*60*speedFactor(),vy:0,r:17,hp:1,phase:0,tilt:0,hoverPhase:0,mandatory:false,dir:d,abduct,step:abduct?'dive':'pass',timer:0,targetY,cow:cow||null};if(cow)cow.selected=true;enemies.push(e);if(abduct)activeUfo=e}
 
 
 function damageDome(amount,x,y,structural=false){if(shield<=0)return;ddTestSfx('Dome_Damaged',.35);hadImpact=true;domeFlash=structural?.23:.65;ddShieldFlash=.22;ddDomeShake=structural?.30:.40;if(structural)ddGroundShake=Math.max(ddGroundShake,.34);ddDomeShakeStrength=structural?2.5:4.5;burst(x,y,structural?'#bb9b79':'#8ee2ee',structural?5:10);shield=Math.max(0,shield-amount);if(shield===0){ddDomeRetract=.00001;ddTestSfx('Dome_Destroyed_Shield_Depletion',.65)}hud()}
@@ -1557,6 +1557,7 @@ function bossSpawn(){
   orbT:3.5,orbs:0,descT:10,y0T:null,drift:rnd(0,TAU),dyingT:0};
  bossLiftCD=rnd(2,4);
  boss.alien=alienNight();alienClear();alienSpawnT=2;
+ for(const e of enemies){if(e.type==='ufo'&&e.hp>0){rescue(e);e.hp=0}} // clear any UFO still abducting when the boss arrives
  ddEventSfx('Train_Complete',.32,3000);
 }
 function bossInEllipse(px,py,cx,cy,rx,ry){const a=(px-cx)/rx,b=(py-cy)/ry;return a*a+b*b<=1}
