@@ -1403,17 +1403,6 @@ function alienBeamShot(b){
  }
  return false;
 }
-function alienShimmer(x,y1,y2,k){
- if(k<=0)return;
- g.save();g.lineWidth=1.2;
- for(let i=0;i<4;i++){
-  g.strokeStyle='rgba(190,255,205,'+(.85*k).toFixed(3)+')';
-  g.beginPath();const ph=drawTime*30+i*1.7;
-  for(let s=0;s<=10;s++){const u=s/10,yy=y1+(y2-y1)*u,xx=x+(i-1.5)*5+Math.sin(ph+u*14+i)*(3+2*Math.sin(drawTime*17+i))*k;if(s===0)g.moveTo(xx,yy);else g.lineTo(xx,yy)}
-  g.stroke();
- }
- g.restore();
-}
 function alienBody(a){
  const f=a.face;
  g.save();g.translate(a.x,a.y);g.scale(f,1);g.lineCap='round';g.lineJoin='round';
@@ -1449,9 +1438,11 @@ function alienBeamDraw(a){
  g.restore();
 }
 function alienDraw(a){
- const top=boss.y+boss.sx*6;let alpha=1;
- if(a.step==='in'){const p=clamp(a.t/1.2,0,1);alpha=p;alienShimmer(a.x,top,a.y-36,1-p)}
- else if(a.step==='out'){const p=clamp(a.t,0,1);alpha=1-p;alienShimmer(a.x,a.y-36,top,p)}
+ // The alien itself phases in and out: its body flickers on and off while it solidifies or fades.
+ let alpha=1;
+ if(a.step==='in')alpha=clamp(a.t/1.2,0,1);
+ else if(a.step==='out')alpha=1-clamp(a.t,0,1);
+ if(alpha<1){const on=Math.sin(drawTime*48+a.x*.7)>-.25-.6*(1-alpha)?1:.12;alpha=clamp(alpha*on,0,1)}
  if(alpha<=0)return;
  if(a.step==='lift'&&a.cow&&a.cow.alienY!=null)alienBeamDraw(a);
  g.save();g.globalAlpha=alpha;alienBody(a);g.restore();
