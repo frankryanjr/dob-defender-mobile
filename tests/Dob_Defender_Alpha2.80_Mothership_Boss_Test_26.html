@@ -1397,7 +1397,7 @@ function alienUpdate(dt){
  const top=B.y+B.sx*6;let collectX=null,collectP=0; // the mothership moves to a cow once it is lifted high
  for(const a of aliens){
   if(a.gone)continue;
-  a.t+=dt;const c=a.cow;a.blinkT=(a.blinkT==null?rnd(1,3):a.blinkT)-dt;if(a.blinkT<=0){a.blinkDur=.13;a.blinkT=rnd(2,5)}a.blinkDur=Math.max(0,(a.blinkDur||0)-dt);
+  a.t+=dt;const c=a.cow;a.blinkT=(a.blinkT==null?rnd(1,3):a.blinkT)-dt;if(a.blinkT<=0){a.blinkDur=.2;a.blinkT=rnd(1.2,2.6)}a.blinkDur=Math.max(0,(a.blinkDur||0)-dt);
   if(a.step==='in'){if(a.t>=1.2){a.step='aim';a.t=0}}
   else if(a.step==='aim'){
    if(!c||c.dead||c.state==='splat'||c.state==='fall'){alienLeave(a);continue}
@@ -1411,7 +1411,7 @@ function alienUpdate(dt){
     // Column broken three times: the cow falls from where it is and lands safely.
     dropCow(c,a,true);c.alienY=null;c.carrier=null;
     ddTestSfx('Cow_Rescued',.5);changeScore(100,c.x,c.fallY,'COW SAVED');
-    a.cow=null;a.step='fist';a.t=0;continue;
+    a.saved=c;a.cow=null;a.step='wait';a.t=0;continue;
    }
    if(p>=1){
     // Not broken in time: the cow reaches the ship and is taken aboard.
@@ -1420,6 +1420,7 @@ function alienUpdate(dt){
     a.cow=null;a.step='out';a.t=0;ddSynthTransport(false);continue;
    }
   }
+  else if(a.step==='wait'){if(!a.saved||a.saved.state!=='fall'||a.t>4){ddSynthGrumble();a.step='fist';a.t=0}}
   else if(a.step==='fist'){if(a.t>=1.8){a.step='out';a.t=0;ddSynthTransport(false)}}
   else if(a.step==='out'){if(a.t>=1)a.gone=true}
  }
@@ -1436,9 +1437,8 @@ function alienBeamShot(b){
   const f=alienGun(a);
   for(let i=0;i<=5;i++){
    const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
-   if(Math.hypot(px-c.x,py-c.alienY)<14)return false; // the shot reaches the cow itself: a normal cow hit, which can kill it
    if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
-    b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);ddSynthGrumble();changeScore(20,px,py,'BEAM');
+    b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);changeScore(20,px,py,'BEAM');
     return true;
    }
   }
