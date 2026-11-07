@@ -1,3 +1,12 @@
+## itch.io Alpha2.82 update — 7 November 2026
+
+- **User instruction:** “Game has been updated to 2.82. please update on itch”.
+- Verified current production and release archive share blob `b7bf1fd3d0a0e5e42df039ffab1468763018a06f`. Downloaded and SHA-verified exact `releases/Dob_Defender_Alpha2.82.html`, 3,817,622 bytes.
+- Uploaded exact file to itch.io project 5233326, selected it for browser play and saved. Public https://stargazerman.itch.io/dob-defender loaded and displayed Alpha2.82.
+- Independently retrieved embedded served HTML: exact approved production bytes plus only itch.io's standard 87-byte `htmlgame.js` script. No code edits or new GitHub production release.
+- Older Alpha2.80 and Alpha2.81 uploads remain separate downloads. Existing page text, images and embed settings retained.
+- **First unverified next task:** user tests Alpha2.82 on itch.io on Android, including late-stage boss orb pressure and audio. Device gameplay has not been independently tested here.
+
 ## itch.io Alpha2.81 update — 7 November 2026
 
 - **User instruction:** “Id like to update the game on itch to the latest version”.
