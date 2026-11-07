@@ -1277,7 +1277,7 @@ function hit(e,b){b.t=0;if(e.type==='miniufo'){
    No mothership shield or generators. The ISS keeps the laser full during the fight.
    Four scouts take the cows, with lifts spaced apart so they never overlap. */
 const BOSS_HP=40,BOSS_HIT_PTS=20,BOSS_KILL_PTS=500,BOSS_ORB_EVERY=3.2,BOSS_MAX_ORBS=14;
-let bossLiftCD=0;
+let bossLiftCD=0,bossKilled=false;
 function bossNight(){return night===3||night===6}
 function alienNight(){return night===6}
 function bossPending(){return bossNight()&&!bossDone&&!boss&&mode==='night'}
@@ -1556,7 +1556,7 @@ function bossSpawn(){
  boss={state:'enter',t:0,x:W/2,y:-hull,y0:clamp(floor()*.27,108,175),hull,sx:hull/18,hp:BOSS_HP,maxHp:BOSS_HP,hits:0,hitFlash:0,sinceHit:0,healAcc:0,swPh:rnd(0,TAU),swSpd:.5,swTarget:.5,swT:rnd(1.5,3),
   orbT:3.5,orbs:0,descT:10,y0T:null,drift:rnd(0,TAU),dyingT:0};
  bossLiftCD=rnd(2,4);
- boss.alien=alienNight();alienClear();alienSpawnT=2;
+ bossKilled=false;boss.alien=alienNight();alienClear();alienSpawnT=2;
  for(const e of enemies){if(e.type==='ufo'&&e.hp>0){rescue(e);e.hp=0}} // clear any UFO still abducting when the boss arrives
  ddEventSfx('Train_Complete',.32,3000);
 }
@@ -1578,7 +1578,7 @@ function bossHit(px,py,b){
  const B=boss;b.t=0;B.hp--;B.hits++;B.hitFlash=.16;B.sinceHit=0;hitCount++;nightHits++;
  burst(px,py,'#ffb86b',9);ddEventSfx('Asteroid_Tone_Mid',.4,60);changeScore(BOSS_HIT_PTS,px,py,'HIT');
  if(B.hp<=0){
-  alienClear();B.state='dying';B.dyingT=0;changeScore(BOSS_KILL_PTS,B.x,B.y,'MOTHERSHIP');floatText('MOTHERSHIP DESTROYED',W/2,H*.38,'#a7ff77');ddTestSfx('UFO_Hit',.68);
+  alienClear();bossKilled=true;B.state='dying';B.dyingT=0;changeScore(BOSS_KILL_PTS,B.x,B.y,'MOTHERSHIP');floatText('MOTHERSHIP DESTROYED',W/2,H*.38,'#a7ff77');ddTestSfx('UFO_Hit',.68);
   for(const e of enemies){if(e.bossOrb&&e.hp>0){e.hp=0;pendingMandatory--;burst(e.x,e.y,'#ff8a6a',10)}if(e.type==='miniufo')scoutDown(e,false)}
  }
 }
@@ -1677,7 +1677,7 @@ function endGame(){
  if(mode==='gameover'||mode==='tally')return;
  ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;
  mode='tally';phaseTime=0;overlay.hidden=true;results.hidden=true;
- ddStartTally({night,base:score-bossPts,energy:Math.floor(energy),dome:Math.floor(shield),boss:boss?bossPts:null,defeated:false,saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
+ ddStartTally({night,base:score-bossPts,energy:Math.floor(energy),dome:Math.floor(shield),boss:boss?bossPts:null,defeated:bossKilled,saved:cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length,lost:cows.filter(c=>c.nightOutcome==='lost'||c.dead||c.state==='splat').length,final:true});
 }
 function ddFinishGameOver(){
  ddTestSfx('Game_Over',.55);ddSetUfoHum(false);mode='gameover';gameOverReason='OBSERVATORY DESTROYED';hud();
@@ -1769,7 +1769,7 @@ function ddStartTally(d){
  q('ddEnergyPoints').textContent='+'+d.energy;
  q('ddDomePoints').textContent='+'+d.dome;
  q('ddSavedPoints').textContent='+'+(d.saved*25);
- q('ddLostPoints').textContent=d.lost?'−'+(d.lost*25):'0';q('ddBossLine').hidden=d.boss===null;q('ddBossLine').querySelector('.head span').textContent=d.defeated===false?'MOTHERSHIP FIGHT':'MOTHERSHIP DEFEATED';q('ddBossPoints').textContent=d.boss===null?'':'+'+d.boss;
+ q('ddLostPoints').textContent=d.lost?'−'+(d.lost*25):'0';q('ddBossLine').hidden=d.boss===null;q('ddBossLine').querySelector('.head span').textContent=d.defeated?'MOTHERSHIP DEFEATED':'MOTHERSHIP DAMAGE';q('ddBossPoints').textContent=d.boss===null?'':'+'+d.boss;
   for(const id of ['ddEnergyFill','ddDomeFill']){q(id).style.transition='none';q(id).style.width='0%'}
  const cowSvg='<svg class="cow" viewBox="0 0 64 44" aria-hidden="true"><path class="cow-tail" d="M9 12Q4 6 6 2" fill="none" stroke="#e9f0ec" stroke-width="2"/><path class="cow-body" d="M11 12h34v21H11z" fill="#f1f4ed"/><path class="cow-detail" d="M16 12h13l-2 15-11-3zm19 3h10v14l-10-3z" fill="#293638"/><path class="cow-leg" d="M14 32v10h6V32m18 0v10h6V32" stroke="#f0f3ec" stroke-width="5"/><path class="cow-muzzle" d="M24 30h12v8H24z" fill="#f2aab2"/><path class="cow-body" d="M46 13l4-8 3 8 5-2v10l5 4v8H46z" fill="#f0f4ed"/><path class="cow-muzzle" d="M51 24h12v8H51z" fill="#edabb6"/><circle cx="55" cy="18" r="2" fill="#182c32"/></svg>';
  const savedIcons=q('ddSavedIcons'),lostIcons=q('ddLostIcons');savedIcons.innerHTML='';lostIcons.innerHTML='';
@@ -1789,7 +1789,7 @@ function ddStartTally(d){
   q('ddStatus').textContent='Counting dome integrity';q('ddDomeFill').style.transition='width .3s';q('ddDomeFill').style.width=d.dome+'%';ddTallyAudio('rise');await sleep(320);q('ddDomePoints').textContent='+'+d.dome;await sleep(40);await fly('ddDomePoints',d.dome,'#71dcef');
   q('ddStatus').textContent='Counting saved cows';for(let i=0;i<d.saved;i++){savedIcons.children[i].classList.add('on');ddTallyAudio('happy');await sleep(140)}q('ddSavedPoints').textContent='+'+(d.saved*25);await sleep(80);await fly('ddSavedPoints',d.saved*25,'#86eea4');
   if(d.lost){q('ddStatus').textContent='Cow penalties';for(let i=0;i<d.lost;i++){lostIcons.children[i].classList.add('on');ddTallyAudio('dud');await sleep(140)}q('ddLostPoints').textContent='−'+(d.lost*25);await sleep(80);await fly('ddLostPoints',-d.lost*25,'#ff929b')}
-  if(d.boss!==null){q('ddStatus').textContent='Mothership defeated';await sleep(80);await fly('ddBossPoints',d.boss,'#ffb86b')}
+  if(d.boss!==null){q('ddStatus').textContent=d.defeated?'Mothership defeated':'Mothership damaged';await sleep(80);await fly('ddBossPoints',d.boss,'#ffb86b')}
   score=sum;hud();total.textContent=sum.toLocaleString('en-IE');total.style.color='#f4f7fb';q('ddStatus').textContent='';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE';
  }
  run().catch(err=>{console.error('Night tally error',err);q('ddStatus').textContent='Tally error';q('ddContinue').disabled=false;q('ddContinue').textContent=d.final?'GAME OVER':'CONTINUE'});
@@ -1797,7 +1797,7 @@ function ddStartTally(d){
 }
 
 
-function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:true,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles.length=0;enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
+function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:bossKilled,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles.length=0;enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
 function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
  // While dawn brightens, cows that survived remain awake and stroll around.
  // Keep the central telescope exclusion zone and the same existing cow artwork.
