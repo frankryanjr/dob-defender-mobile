@@ -1079,13 +1079,13 @@ function ddSynthTransport(rising){
 function ddSynthGrumble(){
  try{
   if(!ddAudioContext)return;const ctx=ddAudioContext;if(ctx.state==='suspended')void ctx.resume();
-  // about 0.6 seconds: five quick voiced "mur" pulses. A low-pass keeps the growl and a mid boost gives it body, so phone speakers play it.
+  // about 0.4 seconds: five quick voiced "mur" pulses. A low-pass keeps the growl and a mid boost gives it body, so phone speakers play it.
   const t=ctx.currentTime,out=ctx.createGain(),lp=ctx.createBiquadFilter(),pk=ctx.createBiquadFilter();
   out.gain.value=.32;lp.type='lowpass';lp.frequency.value=1000;lp.Q.value=1;
   pk.type='peaking';pk.frequency.value=420;pk.gain.value=9;pk.Q.value=1.2;
   lp.connect(pk);pk.connect(out);out.connect(ctx.destination);
   for(let k=0;k<5;k++){
-   const s0=k*.12,s1=s0+.11;
+   const s0=k*.085,s1=s0+.075;
    const o=ctx.createOscillator(),vib=ctx.createOscillator(),vg=ctx.createGain(),env=ctx.createGain();
    o.type='sawtooth';o.frequency.setValueAtTime(155,t+s0);o.frequency.linearRampToValueAtTime(120,t+s1);
    vib.frequency.value=9;vg.gain.value=12;vib.connect(vg);vg.connect(o.detune);
