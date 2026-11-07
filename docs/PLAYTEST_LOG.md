@@ -2,6 +2,11 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 7 November 2026: Test 27 (released as Alpha2.82)
+- **Report:** the first boss fight is a little too hard; reduce the orbs in the later stage.
+  - **Decision:** below 25% health, orbs come every 2.1 s (was 1.4) with a cap of 18 in the air (was 24).
+  - **Result:** "Yes it works please push to prod." Released as Alpha2.82.
+
 ## 7 November 2026: Alpha2.81 production release
 - **Report:** "I tested the latest release and it's good."
 - **Result:** Alpha2.81 accepted by the user. Device not stated.

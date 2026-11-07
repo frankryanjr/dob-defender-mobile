@@ -1,3 +1,12 @@
+## Alpha2.82 production release — 7 November 2026
+
+- **Explicit user approval:** "Yes it works please push to prod" (7 November 2026, after Test 27 play-testing).
+- **Immutable exact approved test archive:** `releases/Dob_Defender_Alpha2.81_Mothership_Boss_Test_27.html`, Git blob `152c40ca88ff492ac7df28f465c0efb59b3bccd9`, 3,817,644 bytes. Byte-identical to `tests/Dob_Defender_Alpha2.81_Mothership_Boss_Test_27.html`.
+- **Production:** `releases/Dob_Defender_Alpha2.82.html` and `main:index.html`, Git blob `b7bf1fd3d0a0e5e42df039ffab1468763018a06f`, 3,817,622 bytes. Derived from the archive with only label substitutions: version `Alpha2.81` → `Alpha2.82` (three places, including the HTML title) and removal of the ` Alien Boss Test 27` title suffix.
+- **Change in this release:** late-stage mothership orbs (below 25% health) come every 2.1 seconds instead of 1.4, and the cap in the air is 18 instead of 24. The early stage is unchanged.
+- **Validation:** all four inline scripts pass `node --check`; headless Chromium at 390×844 loads with no page errors. The user played Test 27 and approved it.
+- **Known limitations:** Android playability of this build not yet independently checked; the live Pages version is not independently fetched from this session.
+
 ## Alpha2.81 production release — 7 November 2026
 
 - **Explicit user approval:** “Perfect. Push to prod” (7 November 2026, after Test 26 play-testing).

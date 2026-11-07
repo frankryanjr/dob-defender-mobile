@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.81</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.82</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -145,7 +145,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.81';
+const DD_GAME_VERSION='Alpha2.82';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -211,7 +211,7 @@ $('ddRegister').addEventListener('click',async()=>{
 $('ddRename').addEventListener('click',async()=>{
  try{const data=await ddCall('rename',{id:ddPlayer.id,secret:ddPlayer.secret,nickname:$('ddNewNickname').value.trim()});ddStore(data.player);ddOpen()}catch(e){ddSetMessage(e.message)}
 });
-// Alpha2.81 Test 1: show score delivery status on GAME OVER, including failures
+// Alpha2.82 Test 1: show score delivery status on GAME OVER, including failures
 // that were previously rendered only inside the hidden leaderboard panel.
 let ddLastScorePending=null;
 function ddScoreStatus(text,isFailure=false){
@@ -1679,7 +1679,7 @@ bossScoutsUpdate(dt);
   B.orbT-=dt;// At 10% health the mothership ramps up its orbs: shorter gaps and a higher cap.
   const low=B.hp<=B.maxHp*.25; // orb ramp starts at 25% health
   const orbsInAir=enemies.reduce((n,e)=>n+(e.bossOrb&&e.hp>0?1:0),0);
-  if(B.orbT<=0&&orbsInAir<(low?BOSS_MAX_ORBS+10:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?1.4:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
+  if(B.orbT<=0&&orbsInAir<(low?BOSS_MAX_ORBS+4:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?2.1:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
  }
  for(const b of shots){if(b.t<=0)continue;if(B.alien&&alienBeamShot(b))continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }

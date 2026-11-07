@@ -12,13 +12,13 @@
 6. `docs/CHANGELOG.md`: what each production release contains.
 
 ## Production (live)
-- **Version:** Alpha2.81, released 7 November 2026.
-- **Production file:** `main:index.html`, Git blob `09068f9fc7ede5118f5c74f1af94c6713446b268`.
-- **Production archive:** `releases/Dob_Defender_Alpha2.81.html`.
-- **Approved test archive it was derived from:** `releases/Dob_Defender_Alpha2.80_Mothership_Boss_Test_26.html`, Git blob `398334335c90e4062141445ff6eaf3ebfdd955bb`.
+- **Version:** Alpha2.82, released 7 November 2026.
+- **Production file:** `main:index.html`, Git blob `b7bf1fd3d0a0e5e42df039ffab1468763018a06f`.
+- **Production archive:** `releases/Dob_Defender_Alpha2.82.html`. Previous production: `releases/Dob_Defender_Alpha2.81.html`.
+- **Approved test archive it was derived from:** `releases/Dob_Defender_Alpha2.81_Mothership_Boss_Test_27.html`, Git blob `152c40ca88ff492ac7df28f465c0efb59b3bccd9`.
 - **Live web play link:** https://frankryanjr.github.io/dob-defender-mobile/
 - **itch.io:** https://stargazerman.itch.io/dob-defender. Updated to Alpha2.81 on 7 November 2026 at the user's explicit request. Public embedded game loaded and displayed Alpha2.81; served HTML contains the exact approved 3,817,623-byte production file (blob `09068f9fc7ede5118f5c74f1af94c6713446b268`) plus only itch.io's standard 87-byte `htmlgame.js` hosting suffix. Existing Alpha2.80 remains available as a separate download. Android gameplay on the updated itch.io build remains untested.
-- **Player status:** the user tested the Alpha2.81 release on 7 November and reported it as good.
+- **Player status:** the user tested Alpha2.81 and reported it as good. Test 27 (late-stage orb reduction) was approved and released as Alpha2.82 on 7 November.
 
 ## What production contains
 - **Night 3:** mothership boss with UFO scouts and plasma orbs (in production since 5 November).

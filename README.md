@@ -1,4 +1,4 @@
-**Current status (7 November 2026):** production is Alpha2.81, with Night 3 and Night 6 boss fights. Next work and open items are in **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)**. Read `docs/WORKFLOW.md` before any development or release.
+**Current status (7 November 2026):** production is Alpha2.82, with Night 3 and Night 6 boss fights. Next work and open items are in **[docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)**. Read `docs/WORKFLOW.md` before any development or release.
 
 # Dob Defender — Project entry point
 
