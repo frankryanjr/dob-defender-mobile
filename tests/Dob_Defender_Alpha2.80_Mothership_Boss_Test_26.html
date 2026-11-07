@@ -1437,6 +1437,7 @@ function alienBeamShot(b){
   const f=alienGun(a);
   for(let i=0;i<=5;i++){
    const u=i/5,px=b.px+(b.x-b.px)*u,py=b.py+(b.y-b.py)*u;
+   if(Math.hypot(px-c.x,py-c.alienY)<13)return false; // the laser touches the cow body: a normal cow hit
    if(alienSegDist(px,py,f.x,f.y,c.x,c.alienY)<10){
     b.t=0;a.beamHits++;burst(px,py,'#b8ffcf',10);changeScore(20,px,py,'BEAM');
     return true;
