@@ -2,6 +2,18 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 8 November 2026: Test 34 (unapproved, awaiting playtest)
+- **Report (on Test 33):** the cable and claw must not be yellow or flashing.
+  - **Decision:** cable, ring, arms, hit pips and hit sparks are plain grey-white. The cable is a steady 3 px line.
+- **Report:** at the start of the night the mothership seems to jump to the side.
+  - **Cause:** the claw logic set the ship's x position directly, while the old sideways drift had been moving it during the entrance. The two disagreed when the fight began and again after every grab.
+  - **Decision:** no drift during the entrance (the ship comes in at the centre), and the sideways sway between grabs is eased from a continuous phase, so it never snaps.
+- **Report:** when the mothership leaves it extends the claw again.
+  - **Cause:** the claw kept its last lowered position while the ship flew up, so the cable stretched.
+  - **Decision:** nothing is drawn once the ship is leaving. After each grab the claw is also reeled back up under the ship before the next one.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome at 390×844 played the full Night 9 sequence with no page errors. Largest ship movement is a smooth glide of about 34 px per 0.1 s toward the next cow. A screenshot as the ship leaves shows no claw. Android feel is untested.
+  - **Result:** awaiting playtest.
+
 ## 8 November 2026: Test 33 (unapproved, awaiting playtest)
 - **Report:** Test 32 link returned a 404 for the user. The file is on main and the filename matches. Not confirmed as fixed. The user was asked to retry without `?v=`.
 - **Request (design sketch):** the claw should grab around the cow. Single cable, slightly thicker than in Test 32. The cable is not doubled.
