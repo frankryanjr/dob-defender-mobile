@@ -2,6 +2,17 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 8 November 2026: Test 33 (unapproved, awaiting playtest)
+- **Report:** Test 32 link returned a 404 for the user. The file is on main and the filename matches. Not confirmed as fixed. The user was asked to retry without `?v=`.
+- **Request (design sketch):** the claw should grab around the cow. Single cable, slightly thicker than in Test 32. The cable is not doubled.
+  - **Decision:** hub ring on the cable end with two curved arms. Open is a wide arch. Closed, the arms wrap round the cow's body and are drawn in front of it. Cable width is 3.4 px while winching and 2.8 px otherwise (was 2.2 and 1.6). The cable hit area grew from 9 to 11 px.
+- **Request:** on the Night 9 boss the ship should try to abduct all 4 cows before it leaves.
+  - **Decision:** the claw takes one cow at a time (nearest standing cow first) and each cow is tried once. A cow saved by three cable hits is not retried. After the fourth attempt, or when no untried cow is left, the ship leaves. A banner shows "COW n OF 4".
+  - **Also changed:** the ship's x position is now owned by the claw logic during the fight, so the claw lines up over the cow before closing. The cow no longer swings out of the arms while it is winched. A cow held when the ship is destroyed is released.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome at 390×844 ran the full Night 9 sequence: 4 grabs, one cow saved by 3 cable hits, 3 taken, ship leaves, no page errors. Android feel is untested.
+  - **Result:** awaiting playtest.
+- **Not yet reported by the user:** results for Tests 28 (shield refill), 29 (cows walk in), 31 and 32 (claw difficulty and feel). Record them here when reported.
+
 ## 7 November 2026: Test 27 (released as Alpha2.82)
 - **Report:** the first boss fight is a little too hard; reduce the orbs in the later stage.
   - **Decision:** below 25% health, orbs come every 2.1 s (was 1.4) with a cap of 18 in the air (was 24).
