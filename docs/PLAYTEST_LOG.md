@@ -2,6 +2,14 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 38 (unapproved, awaiting playtest)
+- **Report:** when the mothership is destroyed, a few of its destruction particles freeze on screen and stay there through the dawn animation. They should fade away even while dawn is happening.
+  - **Cause:** the night ends the moment the mothership is gone, so dawn starts while the explosion is still going. The explosion spawns its later bursts from the draw loop (on a wall-clock timer), so they appear after dawn has begun. Dawn mode never updated the particle list, so every one of them stayed where it was spawned. In the reproduction on Test 37, 182 particles stayed frozen through all of dawn and into the tally screen.
+  - **Decision:** fading particles are now updated in every mode except night and the observatory-destroyed screen (which has its own update), so dawn, the tally and dusk move and expire them. The end-of-night clear no longer wipes the sparks. They fade out, and only the debris fragments (which never expire) are still dropped there.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome reproduced the freeze on Test 37 (182 particles, none moving). On Test 38 the count falls 195, 122, 57, 8, 3 and reaches zero 2.45 s into dawn, stays at zero through the tally, with no still particles at any sample and no page errors. Not looked at on a phone screen.
+  - **Also affects production:** the same bug exists in Alpha2.82 (index.html) on the Night 3 mothership. It is not fixed there. This needs your explicit approval before any production change.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 37 (unapproved, awaiting playtest)
 - **Request:** a slight natural swing while the claw is being lowered.
   - **Decision:** the ship's sideways glide over the cow now pushes the cable, plus a small natural sway. The swing is capped at about 6 degrees (0.1 rad) while lowering, fades out in the last 120 px, and the claw only grabs once it is lined up and settled. Measured in the test: 18 to 28 px of sideways swing while lowering, claw within 2 px of the cow at the grab.
