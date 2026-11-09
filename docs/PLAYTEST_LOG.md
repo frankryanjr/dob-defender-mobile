@@ -2,6 +2,13 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 39 (unapproved, awaiting playtest)
+- **Report:** the mothership in the claw fight should keep attempting to abduct until dawn comes or the ship is destroyed. (The last words of the message were garbled; this is my reading.)
+  - **Decision:** removed the 4-grab limit and the one-attempt-per-cow rule. After each grab (cow taken, claw destroyed, or cow dropped) the ship goes back to swaying and picks the next cow, preferring the one grabbed fewest times, then the nearest. Saved cows can be targeted again. The banner reads GRAB n. The ship leaves only when no live cow remains (ALL COWS TAKEN) or after 12 s if cows exist but none can be grabbed.
+  - **Open point:** there is no dawn timer during a boss fight. Dawn starts only once the boss is gone, so in practice the fight now ends when the ship is destroyed or all cows are taken. A fight time limit is possible if wanted.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome, claw shot every grab: 7 grabs, tries per cow 1,2,2,2, ship still attempting, then destroyed and dawn began. No shooting: 4 grabs, all four cows taken, ship left, dawn began. No page errors. Not looked at on a phone screen.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 38 (unapproved, awaiting playtest)
 - **Report:** when the mothership is destroyed, a few of its destruction particles freeze on screen and stay there through the dawn animation. They should fade away even while dawn is happening.
   - **Cause:** the night ends the moment the mothership is gone, so dawn starts while the explosion is still going. The explosion spawns its later bursts from the draw loop (on a wall-clock timer), so they appear after dawn has begun. Dawn mode never updated the particle list, so every one of them stayed where it was spawned. In the reproduction on Test 37, 182 particles stayed frozen through all of dawn and into the tally screen.
