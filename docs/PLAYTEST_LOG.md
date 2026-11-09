@@ -2,6 +2,14 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 36 (unapproved, awaiting playtest)
+- **Request:** use random pulls for all cows. Smooth sway and the mixed mode are dropped from the DEV panel (one start button again).
+  - **Decision:** the ship uses random pulls on every grab. The smooth-sway code is left in the file but is not used.
+- **Request:** the player should hit the claw, not the cable. Three hits on the claw destroy it. (The report said "theater"; read as "cable".)
+  - **Decision:** the hit area is a circle (radius 26 px) around the claw and the cow it holds. A shot across the cable no longer counts. Each hit shows 1/3, 2/3, then CLAW DESTROYED, and the claw arms get thinner (2.8, 2.1, 1.4 px). The cable stays a steady 3 px. The third hit destroys the claw: the broken claw falls away, the cow keeps part of the sideways motion and lands on screen.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome at 390×844 played the full Night 9 fight: a shot straight across the cable did not register, three shots on the claw destroyed it, the cow landed on screen (at the 24 px safe margin when released near the left edge), peak swing 0.5 rad, no page errors. Android feel is untested.
+  - **Result:** awaiting playtest. Please say whether the claw is easy enough to hit while it swings, and whether three hits feels right.
+
 ## 9 November 2026: Test 35 (unapproved, awaiting playtest)
 - **Design discussion (user):** the cable and cow should swing like a pendulum hung from the mothership. Moving the ship left and right makes the claw swing, which is harder to shoot and more realistic. A long cable gives a broad, slow swing. As it is reeled in the swing gets shorter and faster. When the cable is cut the cow keeps some of the motion and lands on screen. It must not drop straight down or be flung off screen.
   - **Decision:** build both ship movement styles and play them side by side.
