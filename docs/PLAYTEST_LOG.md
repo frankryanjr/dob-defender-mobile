@@ -2,6 +2,18 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 35 (unapproved, awaiting playtest)
+- **Design discussion (user):** the cable and cow should swing like a pendulum hung from the mothership. Moving the ship left and right makes the claw swing, which is harder to shoot and more realistic. A long cable gives a broad, slow swing. As it is reeled in the swing gets shorter and faster. When the cable is cut the cow keeps some of the motion and lands on screen. It must not drop straight down or be flung off screen.
+  - **Decision:** build both ship movement styles and play them side by side.
+  - **Physics:** cable length L, swing angle, ship sideways acceleration as the pivot push, reel-in speed in the equation. Gravity 1500 px/s², light damping, widest swing capped at 0.5 rad (about 29 degrees), the claw is kept on screen.
+  - **Swing modes (DEV panel buttons):** SMOOTH SWAY (steady side to side, timed near the pendulum's natural period), RANDOM PULLS (irregular left-right pulls), SMOOTH THEN PULLS (smooth on cows 1 and 2, pulls on cows 3 and 4).
+- **Request:** hitting the cable should make it thinner and thinner until it snaps.
+  - **Decision:** cable width is 3 px, then 2.2 px after hit 1, 1.4 px after hit 2. Hit 3 snaps it ("SNAP!"), the claw falls away and the cable whips back up.
+- **Request:** the cow's legs should move while it dangles and while it falls. Done. The cow also tilts with the cable.
+- **Release:** the cow keeps about half of the claw's sideways speed (capped), slows with air drag, and is pulled into the safe landing zone so it always lands on screen and clear of the dome gap.
+  - **Checks:** `node --check` passed on all 4 inline scripts. A standalone physics test matches the pendulum period 2π√(L/g) within 0.1% at 600, 300 and 100 px. A sideways push on the ship swings the claw the opposite way. Reeling in speeds the swing. The angle cap keeps the claw on screen. Headless Chrome at 390×844 played the full Night 9 fight in both modes: peak swing 0.5 rad, three cable hits thinned and snapped it, the saved cow landed on screen, no page errors. Android feel is untested.
+  - **Result:** awaiting playtest. Please say which mode feels best, how hard the swing is to shoot, and whether the swing size is right.
+
 ## 8 November 2026: Test 34 (unapproved, awaiting playtest)
 - **Report (on Test 33):** the cable and claw must not be yellow or flashing.
   - **Decision:** cable, ring, arms, hit pips and hit sparks are plain grey-white. The cable is a steady 3 px line.
