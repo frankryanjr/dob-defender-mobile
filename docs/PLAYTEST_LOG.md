@@ -2,6 +2,15 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 37 (unapproved, awaiting playtest)
+- **Request:** a slight natural swing while the claw is being lowered.
+  - **Decision:** the ship's sideways glide over the cow now pushes the cable, plus a small natural sway. The swing is capped at about 6 degrees (0.1 rad) while lowering, fades out in the last 120 px, and the claw only grabs once it is lined up and settled. Measured in the test: 18 to 28 px of sideways swing while lowering, claw within 2 px of the cow at the grab.
+- **Report:** when the laser hit the claw the beam kept travelling. It should be absorbed.
+  - **Cause:** a claw hit counted the hit but left the shot alive, so it carried on.
+  - **Decision:** a laser shot that hits the claw is removed on the spot (the same way the alien beam absorbs shots). It no longer carries on to the ship or elsewhere.
+  - **Checks:** `node --check` passed on all 4 inline scripts. A shot fired up at the claw was removed and counted one hit (0 shots left). Headless Chrome at 390×844 played the full Night 9 fight, three claw hits destroyed the claw, the cow landed on screen, no page errors. Android feel is untested.
+  - **Result:** awaiting playtest. Please say whether the lowering swing is the right amount.
+
 ## 9 November 2026: Test 36 (unapproved, awaiting playtest)
 - **Request:** use random pulls for all cows. Smooth sway and the mixed mode are dropped from the DEV panel (one start button again).
   - **Decision:** the ship uses random pulls on every grab. The smooth-sway code is left in the file but is not used.
