@@ -2,6 +2,12 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 9 November 2026: Test 40 (unapproved, awaiting playtest)
+- **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
+  - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome run: no page errors, bow up to 13 px in play, canvas crops show the strand lines, grey hub and the bow. Not looked at on a phone screen.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 39 (unapproved, awaiting playtest)
 - **Report:** the mothership in the claw fight should keep attempting to abduct until dawn comes or the ship is destroyed. (The last words of the message were garbled; this is my reading.)
   - **Decision:** removed the 4-grab limit and the one-attempt-per-cow rule. After each grab (cow taken, claw destroyed, or cow dropped) the ship goes back to swaying and picks the next cow, preferring the one grabbed fewest times, then the nearest. Saved cows can be targeted again. The banner reads GRAB n. The ship leaves only when no live cow remains (ALL COWS TAKEN) or after 12 s if cows exist but none can be grabbed.
