@@ -2,6 +2,14 @@
 
 Every player report that led to a change, the decision taken, and the result. Newest first. Record each report here before building the next candidate. Results marked "tested" come from the user's own play, on the device stated. Anything else is untested.
 
+## 10 November 2026: Test 41 (unapproved, awaiting playtest)
+- **Report:** the tether should swing a bit while the claw is lowered, as the same physics applies. Between claw drops the ship should dodge laser fire, moving left and right, and smoothly up and down, fluidly, but avoid going too low where it is easy to hit.
+  - **Decision (cable):** the cable bow is now also driven by the ship's sideways acceleration, plus a small living sway while lowering. It is drawing only; the claw is still the only hit area.
+  - **Decision (dodging):** in the pause between drops the ship moves by smooth velocity steering. It wanders on two blended sine paths. It predicts where each upward shot will cross its height and pushes away from it, and rises when a shot is close. Its height range is 26 px below normal to at most 48 px above, so it never dives. It heads back to its normal height over the last 0.6 s before a drop. It keeps its sideways speed into the drop instead of stopping, so there is no jump.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome, shots aimed at the ship's current position every 5th frame during the pause: Test 40 was hit by 16 of 31 shots (52%); Test 41 by 2 of 33 (6%). Ship never went more than 5 px below normal height. While lowering the cable bow reached 6.7 px. No page errors. A real player aims and leads shots, so the real hit rate will be higher. Not looked at on a phone screen.
+  - **Known:** one frame at the hand-off into the pause has a small vertical speed change (about 2 px).
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
