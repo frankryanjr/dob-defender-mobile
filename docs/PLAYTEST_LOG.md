@@ -17,6 +17,13 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Known:** grabbing is still an easy window to hit, because the ship has to hold still for 0.45 s. Winching may now be too hard to hit. Tell me if it should be eased.
   - **Result:** awaiting playtest.
 
+## 10 November 2026: Test 43 (unapproved, awaiting playtest)
+- **Report:** the mothership is dodging by going out of the frame of the playable area.
+  - **Cause:** in Test 42 the winching state had only a soft wall, and the dodge shove was stronger than it. In the test run the ship centre reached x = -241 and 631 on a 390 px wide screen.
+  - **Decision:** a new keep-in rule is applied in the pause, lowering, winching and reel-up states. The ship centre may not go further out than half the saucer width from the edge (69 to 321 px on a 390 px screen), and it eases back in at 160 px/s if it is outside. The one exception is while lowering, where it may go out only as far as needed to line up over a cow standing near the edge (51 to 339 px in the test run). It eases back in once it has the cow.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome with aimed shots: ship centre range by state, Test 42 then Test 43: pause -102..319 then 69..321; winching -240..631 then 51..335; reel-up -241..-103 then 69..321. Hit rate against aimed shots in Test 43: pause 16%, lowering 26%, grabbing 33%, winching 18% (Test 41 was 18%, 78%, 100%, 58%). Winching got easier to hit than in Test 42 (4%) because the ship has less room to dodge. No page errors. Not looked at on a phone screen.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
