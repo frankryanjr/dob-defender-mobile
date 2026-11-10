@@ -10,6 +10,13 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Known:** one frame at the hand-off into the pause has a small vertical speed change (about 2 px).
   - **Result:** awaiting playtest.
 
+## 10 November 2026: Test 42 (unapproved, awaiting playtest)
+- **Report:** the mothership should also dodge laser fire while it is preparing for and winching up the cow. This is boss fight 3, so it should feel more difficult to hit the ship.
+  - **Decision:** the dodge (steer away from shots heading for it, rise when one is close, never dive low) now runs in lowering, grabbing and winching as well as between drops, with a wider and stronger reaction in those parts (threat reach 1.7 times, push 2.4 times the screen width per second). While lowering, the sideways dodge eases off as the claw nears the cow, and fades fully if the claw has waited about a second at the bottom, so the ship can always line up and grab. The alignment tolerance grows the longer it waits. While winching, the random pulls get a shove away from incoming shots. Grabbing (0.45 s) only dodges vertically.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome, aimed shots every 6th frame with an unkillable test boss, hits per shot fired, Test 41 then Test 42: between drops 18% then 9%; lowering 78% then 36%; grabbing 100% then 83%; winching 58% then 2%. The ship still completed its grabs under fire (4 grabs, 3 cows taken in the run). Ship never went more than 5 px below normal height. No page errors. A real player leads shots, so real hit rates will be higher. Not looked at on a phone screen.
+  - **Known:** grabbing is still an easy window to hit, because the ship has to hold still for 0.45 s. Winching may now be too hard to hit. Tell me if it should be eased.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
