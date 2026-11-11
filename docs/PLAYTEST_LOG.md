@@ -38,6 +38,11 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Open point:** no rule for grabs 5 and later was given. Orbs are aimed at the dome like the Night 3 orbs, so the dome may now wear down quickly in a long claw fight.
   - **Result:** awaiting playtest.
 
+## 11 November 2026: Night 9 claw boss, player verdict
+- **Report:** "I am happy with night 9 boss fight." (after Test 46)
+  - **Decision:** no code change. Recorded as the player's verdict on the Night 9 claw fight. It is not approval to release to production.
+  - **Next:** the user decides what to build next (for example the Night 3 and 6 dawn particle fix, or a Night 9 time limit).
+
 ## 11 November 2026: Test 46 (unapproved, awaiting playtest)
 - **Report:** when the low laser warning and SHOOT THE ISS appeared, no ISS passed over to shoot.
   - **Cause:** the Night 3 mothership code sends the ISS once when the laser falls to 30%. The claw fight returns early from the boss update, before that code, so the claw fight never sent one even though the generic LASER LOW - SHOOT ISS warning still appeared.

@@ -1,6 +1,6 @@
 # Dob Defender — Current State
 
-**Updated:** 7 November 2026. This is the restart pointer for any new chat or AI. The full checkpoint history from October and early November is preserved in `docs/archive/CURRENT_STATE_2026-11-07.md`.
+**Updated:** 11 November 2026. This is the restart pointer for any new chat or AI. The full checkpoint history from October and early November is preserved in `docs/archive/CURRENT_STATE_2026-11-07.md`.
 
 ## Read these first, in this order
 1. `README.md`: project entry point and the mandatory blocker-recovery rule.
@@ -39,9 +39,18 @@
    - Confirm the GitHub Actions "pages build and deployment" run succeeded. Then check the live page. Do not claim success before both checks pass.
 6. **Ask for Android confirmation** after release. Syntax checks and headless tests are not device tests.
 
+## Night 9 claw boss: in development (not in production)
+- **Latest test build:** `tests/Dob_Defender_Alpha2.82_Claw_Boss_Test_46.html` (UNAPPROVED, on `main` and `dev`). Tests 33 to 46 are listed in `tests/index.html` and described in `docs/PLAYTEST_LOG.md`. Tests 42 and 43 (dodging in every phase) were rejected as too erratic; Test 44 reverted to Test 41's behaviour.
+- **What it does:** a claw on a swinging cable grabs cows. Hit the claw 3 times to destroy it. The ship dodges laser fire between drops, keeps trying until it is destroyed or no cow is left, fires 1, 2, 3 then 4 orbs on grabs 1 to 4 (and 4 after) while lowering and grabbing, and calls an ISS when the laser is low (Test 46 fix).
+- **Player status (11 November 2026):** the user said he is happy with the Night 9 boss fight (Test 46 build). This is not production approval.
+- **Not released:** production is still Alpha2.82. Release needs the user's explicit words (WORKFLOW section 4).
+- **Playtest results never reported:** Tests 28, 29, 31 and 32, and detailed results for 33 to 46.
+- **Known bug in production Alpha2.82:** after the Night 3 mothership is destroyed, a few explosion particles freeze on screen during the dawn animation. Fixed in the claw test builds (Test 38) but not in production. The user wants it fixed for Nights 3 and 6 too; needs approval before any production change.
+- **Not decided:** a time limit for the claw fight (nothing ends it except destroying the ship or losing all cows); what grabs 5 and later fire (currently 4 orbs).
+- **Build source:** the modular workspace and test scripts are in the assistant's session environment, not in this repo (see Open items).
+
 ## Open items
 - **Source is not in GitHub.** The game's build sources and test scripts are in the assistant's working environment, not in this repo. A new AI can edit the standalone HTML directly, but cannot regenerate it from source. **Decision needed:** should the source blocks and build script be committed to a `source/` folder on `dev`?
-- **`tests/index.html` still lists Test 26 as UNAPPROVED.** Update it when the next test is published.
 - **itch.io:** Alpha2.82 browser upload and public version verified on 7 November. Android gameplay still awaits user confirmation; older uploads remain separate downloads.
 - **Docs not yet updated for November work:** `PROJECT_HISTORY.md`, `DEVELOPMENT.md` and `HANDOVER.md` still stop in late October.
 - **Difficulty progression across nights** is not specified or verified. The user wants bosses to get harder as the game goes on.
