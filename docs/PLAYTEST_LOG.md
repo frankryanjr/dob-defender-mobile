@@ -38,6 +38,14 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Open point:** no rule for grabs 5 and later was given. Orbs are aimed at the dome like the Night 3 orbs, so the dome may now wear down quickly in a long claw fight.
   - **Result:** awaiting playtest.
 
+## 11 November 2026: Test 46 (unapproved, awaiting playtest)
+- **Report:** when the low laser warning and SHOOT THE ISS appeared, no ISS passed over to shoot.
+  - **Cause:** the Night 3 mothership code sends the ISS once when the laser falls to 30%. The claw fight returns early from the boss update, before that code, so the claw fight never sent one even though the generic LASER LOW - SHOOT ISS warning still appeared.
+  - **Decision:** a small ISS pass was added to the claw fight, copied from the Night 3 pass: when the laser is at 30% or below and no ISS is in the sky, one flies over and shooting it gives +40 laser. It can come again after 25 s if the laser is low again, because the claw fight can last much longer than Night 3. (Night 3 only sends one.)
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome in the claw fight with laser set to 25: Test 45 sent no ISS at all; Test 46 sent one, shooting it gave 25 to 65, and a second pass came after the 25 s wait when the laser was set low again. No page errors. Not looked at on a phone screen.
+  - **Open point:** the ISS flies at the same height as the mothership's normal position and it may overlap the ship briefly. Not checked visually.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
