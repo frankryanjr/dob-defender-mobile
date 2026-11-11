@@ -31,6 +31,13 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome run: no page errors, same hit rates against aimed shots as Test 41 (pause 21%, lowering 78%, grabbing 100%, winching 49%).
   - **Result:** awaiting playtest.
 
+## 11 November 2026: Test 45 (unapproved, awaiting playtest)
+- **Report:** while the mothership is lowering and grabbing (not winching) it should fire an orb for the first cow grab, 2 orbs for the second, 3 for the third and 4 for the fourth.
+  - **Decision:** the existing boss orb launcher (the one the Night 3 mothership uses; the claw fight never used it) fires during the lowering and grabbing states only. Orbs are spaced 0.4 s apart, the first 0.3 s after the claw starts to lower. The number is the grab attempt number, up to 4. Grabs 5 and later also fire 4, because no rule was given for them. A fight-wide cap of 14 orbs in the air still applies.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome, boss kept alive: orbs fired per grab were 1, 2, 3 and 4, all in the lowering state and none while winching. No page errors. In that run the night reached the tally screen (dome most likely destroyed by the orbs); this was not examined further.
+  - **Open point:** no rule for grabs 5 and later was given. Orbs are aimed at the dome like the Night 3 orbs, so the dome may now wear down quickly in a long claw fight.
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
