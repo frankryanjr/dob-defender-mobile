@@ -38,6 +38,11 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Open point:** no rule for grabs 5 and later was given. Orbs are aimed at the dome like the Night 3 orbs, so the dome may now wear down quickly in a long claw fight.
   - **Result:** awaiting playtest.
 
+## 11 November 2026: Test 46 approved and released as Alpha2.83
+- **Report:** "Push to prod", after "I am happy with night 9 boss fight".
+  - **Decision:** Test 46 archived byte for byte as `releases/Dob_Defender_Alpha2.82_Claw_Boss_Test_46.html` (blob `1d103f7e`), production derived as Alpha2.83 with label-only changes (blob `e66a8aa9`). Details in `docs/CHANGELOG.md`.
+  - **Next:** user to check the live page and Android; itch.io not updated.
+
 ## 11 November 2026: Night 9 claw boss, player verdict
 - **Report:** "I am happy with night 9 boss fight." (after Test 46)
   - **Decision:** no code change. Recorded as the player's verdict on the Night 9 claw fight. It is not approval to release to production.

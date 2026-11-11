@@ -1,3 +1,12 @@
+## Alpha2.83 production release — 11 November 2026
+
+- **Explicit user approval:** "Push to prod" (11 November 2026, after "I am happy with night 9 boss fight" on Test 46).
+- **Immutable exact approved test archive:** `releases/Dob_Defender_Alpha2.82_Claw_Boss_Test_46.html`, Git blob `1d103f7ee7f9bdb1e25a68fa265dc71853cb4b83`, 3,834,140 bytes. Byte-identical to `tests/Dob_Defender_Alpha2.82_Claw_Boss_Test_46.html`.
+- **Production:** `releases/Dob_Defender_Alpha2.83.html` and `main:index.html`, Git blob `e66a8aa9102294e0f9e26a64a31fda141b90eb60`, 3,834,119 bytes. Derived from the archive with only label substitutions (4 changes, 8 diff lines): the page title and `DD_GAME_VERSION` go from Alpha2.82 to Alpha2.83, one comment label changes the same way, and the ` Claw Boss Test 46` title suffix is removed. No gameplay change.
+- **Contents (approved Test 46):** the Night 9 claw boss. A claw on a swinging cable (pendulum physics) grabs cows. Hit the claw 3 times to destroy it and the laser is absorbed by the claw. The ship tries to take all cows and keeps trying until it is destroyed or no cow is left. It dodges laser fire between drops, fires 1, 2, 3 then 4 orbs on grabs 1 to 4 (4 after that) while lowering and grabbing, and the ISS flies over when the laser is low. The grey metal cable sways while lowering. Also fixed: explosion particles no longer freeze on screen during the dawn after a boss is destroyed (this fix applies to Nights 3, 6 and 9 in this release).
+- **Validation:** all four inline scripts pass `node --check`; headless Chromium at 390×844 loads Alpha2.83 with no page errors and the claw fight runs through sway, lower, grab, winch and done. The user played the test builds and said he is happy with the Night 9 fight. Console showed blocked external network loads in the sandbox only.
+- **Known limitations:** no time limit on the claw fight (it ends when the ship is destroyed or no cow is left); grabs 5 and later fire 4 orbs; Android playability of this build and the live Pages version are not independently checked from this session. itch.io is not updated by this release.
+
 ## Alpha2.82 production release — 7 November 2026
 
 - **Explicit user approval:** "Yes it works please push to prod" (7 November 2026, after Test 27 play-testing).

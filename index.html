@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.82</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Dob Defender Alpha2.83</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061225;color:#f1f7fc;font-family:system-ui,-apple-system,Arial,sans-serif}
 [hidden]{display:none!important}button{font-family:inherit;cursor:pointer}#game{position:relative;width:100vw;height:100dvh;overflow:hidden;touch-action:none;user-select:none}#sky{display:block;width:100%;height:100%;touch-action:none}
@@ -81,7 +81,7 @@
 <div id="resourceBars"><div><div class="resourceHeader"><span>LASER</span><span id="energyVal">100%</span></div><div class="meter"><div id="energyFill" class="fill" style="width:100%"></div></div></div><div><div class="resourceHeader"><span>DOME</span><span id="shieldVal">100%</span></div><div class="meter"><div id="shieldFill" class="fill" style="width:100%;background:#68cfe2"></div></div></div></div>
 <div id="notice" aria-live="polite"></div><div id="controls"><div id="track"><div id="line"></div><div id="knob"></div></div></div>
 <div id="quickTools"><button id="pauseBtn" class="quickBtn" type="button" aria-label="Pause game">Ⅱ</button><button id="devBtn" class="quickBtn" type="button">DEV</button></div>
-<div id="devPanel" hidden role="dialog" aria-modal="true" aria-label="Developer controls"><div id="devCard"><h2>DEV CONTROLS</h2><div id="skyDataStatus" style="font-size:11px;color:#b6cbd7;line-height:1.4">Star catalogue: checking…</div><label>Jump to night<input id="devNight" type="number" min="1" max="99" inputmode="numeric" value="1"></label><button id="devImportStars" type="button">IMPORT YALE STAR CATALOGUE (.JSON)</button><input id="starFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose Yale BSC5 catalogue"><label style="display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px"><input id="devForcePowerups" type="checkbox" style="width:18px;height:18px;flex:none"> ALWAYS HAVE POWER-UPS IN NIGHT</label><button id="devMusicToggle" type="button" aria-pressed="false">MUSIC: ON</button><button id="devJump" type="button">START SELECTED NIGHT</button><button id="devBossStart" type="button">START MOTHERSHIP BOSS (NIGHT 3)</button><button id="devAlienStart" type="button">START ALIEN BOSS (NIGHT 6)</button><button id="devRestartNight" type="button">RESTART CURRENT NIGHT</button><button id="devRestartGame" type="button">RESTART GAME</button><button id="devViewLeaderboard" type="button">VIEW LEADERBOARD</button><button id="devClose" type="button">CLOSE</button></div></div>
+<div id="devPanel" hidden role="dialog" aria-modal="true" aria-label="Developer controls"><div id="devCard"><h2>DEV CONTROLS</h2><div id="skyDataStatus" style="font-size:11px;color:#b6cbd7;line-height:1.4">Star catalogue: checking…</div><label>Jump to night<input id="devNight" type="number" min="1" max="99" inputmode="numeric" value="1"></label><button id="devImportStars" type="button">IMPORT YALE STAR CATALOGUE (.JSON)</button><input id="starFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose Yale BSC5 catalogue"><label style="display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px"><input id="devForcePowerups" type="checkbox" style="width:18px;height:18px;flex:none"> ALWAYS HAVE POWER-UPS IN NIGHT</label><button id="devMusicToggle" type="button" aria-pressed="false">MUSIC: ON</button><button id="devJump" type="button">START SELECTED NIGHT</button><button id="devBossStart" type="button">START MOTHERSHIP BOSS (NIGHT 3)</button><button id="devAlienStart" type="button">START ALIEN BOSS (NIGHT 6)</button><button id="devClawStart" type="button">START CLAW BOSS (NIGHT 9)</button><button id="devRestartNight" type="button">RESTART CURRENT NIGHT</button><button id="devRestartGame" type="button">RESTART GAME</button><button id="devViewLeaderboard" type="button">VIEW LEADERBOARD</button><button id="devClose" type="button">CLOSE</button></div></div>
 <div id="results" hidden style="display:none!important" role="status" aria-live="polite"><h2>NIGHT <span id="resultNight">1</span> DEFENDED!</h2><div class="stats"><div class="stat"><span class="stat-label">SCORE</span><b class="stat-value" id="resultScore">0</b></div><div class="stat"><span class="stat-label">DOME</span><b class="stat-value" id="resultDome">100%</b></div><div class="stat"><span class="stat-label">COWS</span><b class="stat-value" id="resultCow">0</b><span class="stat-foot">saved</span></div></div></div>
 <div id="overlay"><h1 id="heading">DOB DEFENDER</h1><p id="message">Protect your observatory from the Meteorites, Asteroids &amp; Comets
 
@@ -145,7 +145,7 @@ Don't shoot the planes</p><div id="finalResults" hidden role="status" aria-label
 <button type="button" id="ddChangeName" hidden>CHANGE NAME</button><button type="button" id="ddLeaderboardClose">BACK TO GAME</button>
 </section>
 <script>(()=>{'use strict';
-const DD_GAME_VERSION='Alpha2.82';
+const DD_GAME_VERSION='Alpha2.83';
 const $=id=>document.getElementById(id), root=$('game'),canvas=$('sky'),g=canvas.getContext('2d');
 const track=$('track'),knob=$('knob'),overlay=$('overlay'),popup=$('popup'),notice=$('notice'),results=$('results');
 
@@ -211,7 +211,7 @@ $('ddRegister').addEventListener('click',async()=>{
 $('ddRename').addEventListener('click',async()=>{
  try{const data=await ddCall('rename',{id:ddPlayer.id,secret:ddPlayer.secret,nickname:$('ddNewNickname').value.trim()});ddStore(data.player);ddOpen()}catch(e){ddSetMessage(e.message)}
 });
-// Alpha2.82 Test 1: show score delivery status on GAME OVER, including failures
+// Alpha2.83 Test 1: show score delivery status on GAME OVER, including failures
 // that were previously rendered only inside the hidden leaderboard panel.
 let ddLastScorePending=null;
 function ddScoreStatus(text,isFailure=false){
@@ -1287,7 +1287,8 @@ function hit(e,b){b.t=0;if(e.type==='miniufo'){
    Four scouts take the cows, with lifts spaced apart so they never overlap. */
 const BOSS_HP=40,BOSS_HIT_PTS=20,BOSS_KILL_PTS=500,BOSS_ORB_EVERY=3.2,BOSS_MAX_ORBS=14;
 let bossLiftCD=0,bossKilled=false;
-function bossNight(){return night===3||night===6}
+function bossNight(){return night===3||night===6||night===9}
+function clawNight(){return night===9}
 function alienNight(){return night===6}
 function bossPending(){return bossNight()&&!bossDone&&!boss&&mode==='night'}
 /* ---- Scouts: four small UFOs, same size as night UFOs. ---- */
@@ -1296,7 +1297,7 @@ function bossLaunchScout(i,delay){
  enemies.push({type:'miniufo',x:B.x+side*B.hull*.55,y:B.y+B.sx*6,vx:0,vy:0,r:17,hp:1,phase:rnd(0,TAU),mandatory:false,
   step:'roam',timer:delay,tx:rnd(40,W-40),ty:rnd(120,floor()-170),cow:null,beamT:0,delay:0,spd:rnd(110,210),spdMul:1,spdT:0});
 }
-function bossLaunchScouts(){const n=boss&&boss.alien?0:4;for(let i=0;i<n;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
+function bossLaunchScouts(){const n=boss&&(boss.alien||boss.claw)?0:4;for(let i=0;i<n;i++)bossLaunchScout(i,rnd(.8,3)+i*rnd(.5,1.5))}
 /* Keeps a scout moving while it waits, so it is never still unless it is abducting. */
 function wanderScout(e,dt){const dx=e.tx-e.x,dy=e.ty-e.y,L=Math.hypot(dx,dy)||1,m=Math.min(L,scoutSpeed(e,dt)*dt);e.x+=dx/L*m;e.y+=dy/L*m;e.timer-=dt;if(e.timer<=0||L<8)scoutRoamTarget(e)}
 /* Each scout has its own base speed, and its speed multiplier changes at random. */
@@ -1575,17 +1576,23 @@ function bossTransmit(lines){
 function bossIntro(){
  bossIntroStarted=true;
  for(const x of enemies)if(x.type==='iss'&&x.hp>0)x.hp=0; // never two ISS passes at once
- energy=100;if(shield>0)shield=100;ddEnergyFlash=.24;
+ energy=100;shield=100;/* the boss fight always starts with a full dome */ddEnergyFlash=.24;
  const d=Math.random()<.5?1:-1;
  enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false,bossPass:true,freeTopUp:true});
  bossTransmit(['INCOMING TRANSMISSION FROM ISS','Alien mother ship inbound. Replenishing laser power and shields... Good luck.']);
 }
+// Before a boss fight, keep the cows still on the board and walk in replacements from both sides until there are four.
+function bossRefillCows(){
+ cows=cows.filter(c=>!c.dead&&c.state!=='splat'&&c.nightOutcome!=='lost');
+ for(let i=0;cows.length<4;i++){const left=i%2===0,cow=makeCow(left?-25:W+25);cow.dir=left?1:-1;cow.entryTarget=cowSafeX(left?W*.24:W*.76);cows.push(cow)}
+}
 function bossSpawn(){
+ bossRefillCows();
  const hull=W/6; // 1950s saucer half-width, about one third of the sky width
  boss={state:'enter',t:0,x:W/2,y:-hull,y0:clamp(floor()*.27,108,175),hull,sx:hull/18,hp:BOSS_HP,maxHp:BOSS_HP,hits:0,hitFlash:0,sinceHit:0,healAcc:0,swPh:rnd(0,TAU),swSpd:.5,swTarget:.5,swT:rnd(1.5,3),
   orbT:3.5,orbs:0,descT:10,y0T:null,drift:rnd(0,TAU),dyingT:0};
  bossLiftCD=rnd(2,4);
- bossKilled=false;boss.alien=alienNight();alienClear();alienSpawnT=2;
+ bossKilled=false;boss.alien=alienNight();boss.claw=clawNight()?{s:'sway',t:0,cow:null,clawY:0,cut:false,baseX:0,hits:0,grip:0,tried:[],n:0,ph:0,L:0,th:0,w:0,vx:0,sp:0,pt:0,pv:0,bx:0,by:0,hold:0,deb:null,snapped:false}:null;alienClear();alienSpawnT=2;
  for(const e of enemies){if(e.type==='ufo'&&e.hp>0){rescue(e);e.hp=0}} // clear any UFO still abducting when the boss arrives
  ddEventSfx('Train_Complete',.32,3000);
 }
@@ -1638,9 +1645,251 @@ function bossBlastDraw(){
   for(const r of b.rings){const a=age-r.d;if(a<0)continue;const k=Math.min(1,a/.9),rad=r.max*(1-Math.pow(1-k,3));g.save();g.globalAlpha=(1-k)*.9;g.strokeStyle=r.c;g.lineWidth=r.w*(1-k*.6);g.beginPath();g.arc(b.x,b.y,rad,0,TAU);g.stroke();g.restore()}
  }
 }
+// Night 9 claw (Test 35): the mothership lowers a claw on a cable, grabs a cow and reels it up. Test 39: it keeps trying until it is destroyed or no cow is left.
+// The cable is a pendulum. Its pivot is the ship, so when the ship moves sideways the claw and cow swing.
+// Shorter cable = faster, narrower swing. Each cable hit thins it; the third hit snaps it and the claw falls away with the cow.
+const CLAW_SWAY_T=2.4,CLAW_SWAY_NEXT_T=1.6,CLAW_HUB=16; /* CLAW_HUB: gap from the hub ring down to the cow's centre */
+const CLAW_G=1500,CLAW_DAMP=.25,CLAW_REEL=70,CLAW_MIN_L=10,CLAW_SNAP_REEL=900;
+const CLAW_MAX_TH=.5; /* widest swing, about 29 degrees from straight down, so the cow never flies across the screen */
+let clawSwingMode='pull'; /* Test 36: random pulls for every cow. The smooth-sway code is kept but unused. */
+function clawModeFor(n){return 'pull'}
+function clawTop(B){return B.y+B.hull*.12}
+/* One frame of the swinging cable. a = sideways acceleration of the pivot (the ship), Ld = rate the cable length changes,
+   room = the most the claw may stray sideways from the ship, which keeps it on screen. */
+function clawPendStep(K,dt,a,Ld,room,maxTh){
+ const n=Math.max(1,Math.ceil(dt/.008)),h=dt/n,L=Math.max(CLAW_MIN_L,K.L);
+ for(let i=0;i<n;i++){
+  K.w+=(-(CLAW_G/L)*Math.sin(K.th)-(a/L)*Math.cos(K.th)-2*(Ld/L)*K.w-CLAW_DAMP*K.w)*h;
+  K.th+=K.w*h;
+ }
+ const lim=Math.min(maxTh||CLAW_MAX_TH,Math.asin(Math.min(.85,Math.max(.05,room/L))));
+ if(K.th>lim){K.th=lim;if(K.w>0)K.w*=-.3}else if(K.th<-lim){K.th=-lim;if(K.w<0)K.w*=-.3}
+}
+/* The ship's sideways motion while it reels a cow up. Returns the ship's sideways acceleration. */
+function clawShipDrive(B,K,dt){
+ const mode=clawModeFor(K.n),ease=Math.min(1,K.t/1.2),lo=W*.2,hi=W*.8;
+ let vt;
+ if(mode==='smooth'){const Om=Math.PI*2/3;K.sp+=dt*Om;vt=Math.cos(K.sp)*W*.16*Om*ease}
+ else{K.pt-=dt;if(K.pt<=0){K.pt=rnd(.7,1.5);K.pv=(B.x<W*.3?1:B.x>W*.7?-1:(Math.random()<.5?-1:1))*rnd(.6,1)*W*.38}vt=K.pv*ease}
+ vt+=(clamp(B.x,lo,hi)-B.x)*3; /* soft walls keep the ship's hull on screen */
+ const nv=K.vx+(vt-K.vx)*Math.min(1,dt*(mode==='smooth'?20:4)),a=(nv-K.vx)/dt;
+ K.vx=nv;B.x+=nv*dt;return a;
+}
+function clawSync(B,K){K.bx=B.x+K.L*Math.sin(K.th);K.by=clawTop(B)+K.L*Math.cos(K.th);K.clawY=K.by}
+/* Where the claw is: the centre of the arms and the cow they hold, a little below the hub ring. */
+function clawCentre(K){return {x:K.bx+14*Math.sin(K.th),y:K.by+14*Math.cos(K.th)}}
+const CLAW_HIT_R=26;
+function clawShot(b){
+ const B=boss,K=B.claw;
+ if(!K||K.s!=='winch'||K.cut)return false;
+ const c=K.cow;if(!c||c.dead)return false;
+ if(b.clawHit)return false; // each shot counts once
+ const ce=clawCentre(K);
+ if(alienSegDist(ce.x,ce.y,b.px,b.py,b.x,b.y)<CLAW_HIT_R){
+  b.clawHit=true;b.t=0;/* absorbed: the beam stops at the claw */K.hits++;K.flash=.12;burst(ce.x,ce.y,'#dfe8f0',10);ddTestSfx('Dome_Damaged',.3);
+  floatText(K.hits<3?K.hits+'/3':'CLAW DESTROYED',ce.x,ce.y-34,'#dfe8f0');
+  if(K.hits>=3){K.cut=true;burst(ce.x,ce.y,'#dfe8f0',22)}
+  return true;
+ }
+ return false;
+}
+/* The claw is destroyed: the cow keeps part of the claw's sideways speed and falls in an arc, and the broken claw falls away. */
+function clawRelease(B,K,c){
+ const cs=Math.cos(K.th),sn=Math.sin(K.th);
+ const vbx=K.vx+K.L*cs*K.w-CLAW_REEL*sn,vby=-CLAW_REEL*cs-K.L*sn*K.w;
+ c.selected=false;c.carrier=null;c.clawHeld=false;
+ c.fallY=c.alienY;c.alienY=null;c.fallV=clamp(vby*.5,-120,120);c.fallVx=clamp(vbx*.55,-150,150);c.safeFall=true;c.state='fall';c.timer=0;
+ K.deb={x:K.bx,y:K.by,vx:vbx*.5,vy:clamp(vby*.5,-120,120),r:-K.th,t:0};
+ K.snapped=true;
+ ddTestSfx('Cow_Rescued',.5);changeScore(100,c.x,c.fallY,'COW SAVED');
+}
+/* Test 41: between drops the mothership tries not to be shot. It wanders smoothly in every direction, steers away from laser shots that are heading for it, rises when a shot is close, and never dives low. */
+function clawDodge(B,K,dt){
+ const hull=B.hull,xlo=hull+12,xhi=W-hull-12,dyMax=26,dyMin=-Math.max(0,Math.min(48,B.y0-hull*.95));
+ B.dy=B.dy||0;B.dvy=B.dvy||0;
+ /* the ship heads back to its working spot over the last 0.6 s so the next drop starts from the right place */
+ const nextT=K.n?CLAW_SWAY_NEXT_T:CLAW_SWAY_T,ret=Math.max(0,Math.min(1,(K.t-(nextT-.6))/.6));
+ let tx=W/2+Math.sin(K.ph)*W*.30+Math.sin(K.ph*1.9+1.3)*W*.07,ty=Math.sin(K.ph*1.4+.7)*20-6;
+ let push=0,rise=0;
+ for(const b of shots){
+  if(b.t<=0||b.vy>=-20)continue;
+  const tt=(B.y-b.y)/b.vy;if(tt<0||tt>1.1)continue;
+  const d=(b.x+b.vx*tt)-B.x,reach=hull*1.5+26;
+  if(Math.abs(d)<reach){const u=(1-Math.abs(d)/reach)*(1.25-tt);push+=(d>=0?-1:1)*u;rise=Math.max(rise,u)}
+ }
+ const walls=(clamp(B.x,xlo,xhi)-B.x)*3;
+ let vt=(tx-B.x)*1.5+push*W*1.7+walls;
+ vt=clamp(vt,-W*1.1,W*1.1);
+ K.vx+=(vt-K.vx)*Math.min(1,dt*(push?6:3));
+ B.x=clamp(B.x+K.vx*dt,xlo-6,xhi+6);
+ ty=(ty-rise*dyMax*1.9)*(1-ret); /* settle to dy 0 at the end */
+ ty=clamp(ty,dyMin+6,dyMax-6); /* aim inside the limits so the ship eases in instead of stopping dead */
+ const vyT=clamp((ty-B.dy)*2.4,-150,90);
+ B.dvy+=(vyT-B.dvy)*Math.min(1,dt*5);B.dy=clamp(B.dy+B.dvy*dt,dyMin,dyMax);
+}
+/* Test 46: the claw fight returned before the Night 3 ISS code ran, so the low laser warning appeared but no ISS ever came. Same pass as Night 3 (shoot it for +40 laser), and it can come again after 25 s if the laser runs low again, because this fight can last much longer. */
+function clawISS(B,dt){
+ B.issCool=Math.max(0,(B.issCool||0)-dt);
+ if(energy>30||B.issCool>0||enemies.some(x=>x.type==='iss'&&x.hp>0))return;
+ B.issCool=25;
+ const d=Math.random()<.5?1:-1;
+ enemies.push({type:'iss',x:d>0?-115:W+115,y:Math.max(83,Math.min(110,H*.145)),vx:d*47,vy:0,r:18,hp:1,phase:0,mandatory:false,dir:d,collected:false,bossPass:true});
+ floatText('SHOOT ISS FOR LASER ENERGY',W/2,H*.38,'#8ee2ee');
+}
+function clawUpdate(dt){
+ const B=boss,K=B.claw,top=clawTop(B);
+ K.t+=dt;K.ph+=dt*.9;if(K.flash>0)K.flash-=dt;
+ if(K.s!=='sway'){B.dy=(B.dy||0)*Math.exp(-4*dt);B.dvy=0} /* back to the working height before and during a drop */
+ K.sa=0;
+ if((K.s==='lower'||K.s==='grab')&&K.orbFired<K.orbNeed){
+  /* orbs are fired only while the claw is going down and grabbing, never while winching */
+  K.ot-=dt;
+  if(K.ot<=0){
+   if(enemies.reduce((n,e)=>n+(e.bossOrb&&e.hp>0?1:0),0)<BOSS_MAX_ORBS)bossLaunchOrb();
+   K.orbFired++;K.ot=K.s==='grab'?.1:.4;
+  }
+ }
+ if(K.deb){const d=K.deb;d.t+=dt;d.vy+=700*dt;d.x+=d.vx*dt;d.y+=d.vy*dt;d.r+=dt*(d.vx>=0?2.2:-2.2);if(d.t>1.6||d.y>H+40)K.deb=null}
+ if(K.s==='sway'){
+  clawDodge(B,K,dt);
+  if(K.t>=(K.n?CLAW_SWAY_NEXT_T:CLAW_SWAY_T)){
+   /* Test 39: the ship keeps trying until it is destroyed or no cow is left. Saved cows are fair game again. */
+   const live=cows.filter(c=>!c.dead&&c.state!=='splat'&&c.nightOutcome!=='lost');
+   if(!live.length){B.state='leave';floatText('ALL COWS TAKEN - MOTHERSHIP LEAVING',W/2,H*.38,'#ffb86b');return}
+   const cand=live.filter(c=>c.state==='stand'||c.state==='sleep'||c.state==='settle'||c.state==='walk'||c.state==='graze');
+   if(!cand.length){if(K.t>=12){B.state='leave';floatText('NOTHING LEFT TO GRAB - CLAW LEAVING',W/2,H*.38,'#ffb86b')}return} /* a cow is still falling or landing: wait for it */
+   /* spread the attempts: the cow grabbed fewest times goes first, then the nearest */
+   cand.sort((a,b)=>((a.clawTries||0)-(b.clawTries||0))||(Math.abs(a.x-B.x)-Math.abs(b.x-B.x)));
+   K.cow=cand[0];K.cow.clawTries=(K.cow.clawTries||0)+1;K.n++;K.s='lower';K.t=0;K.L=0;K.th=0;K.w=0;K.cut=false;K.orbNeed=Math.min(4,K.n);K.orbFired=0;K.ot=.3; /* Test 45: grab 1 fires 1 orb, grab 2 fires 2, grab 3 fires 3, grab 4 and later fire 4 */K.snapped=false;K.hits=0;K.grip=0;
+   clawSync(B,K);
+   floatText('GRAB '+K.n,W/2,H*.38,'#ff929b');
+  }
+  return;
+ }
+ const c=K.cow;
+ if(K.s==='lower'){
+  if(!c||c.dead||c.state==='splat'){K.s='done';K.t=0;return}
+  /* The ship glides over the cow with smoothed speed. Its sideways push, plus a small natural sway, swings the cable a little. */
+  const vt=(c.x-B.x)*2.2,nv=K.vx+(vt-K.vx)*Math.min(1,dt*5),a=dt>0?(nv-K.vx)/dt:0;K.vx=nv;K.sa=a;B.x+=nv*dt;
+  K.L+=210*dt;
+  const target=cowScreenY(c)-CLAW_HUB,L2=target-top;
+  if(K.L<L2){
+   clawPendStep(K,dt,a+Math.sin(K.t*2.3)*70*Math.min(1,K.t),210,Math.max(8,Math.min(B.x-20,W-20-B.x)),.1); /* slight: at most about 6 degrees while lowering */
+   if(L2-K.L<120){const d=Math.exp(-6*dt);K.th*=d;K.w*=d} /* the sway dies away as the claw reaches the cow */
+  }
+  if(K.L>=L2){
+   K.L=L2;{const d=Math.exp(-8*dt);K.th*=d;K.w*=d}
+   if(Math.abs(B.x-c.x)<2&&Math.abs(K.L*Math.sin(K.th))<3){ /* aligned and settled: freeze the cow under the hub and close the arms around it */
+    c.state='lift';c.lift=0;c.carrier=null;c.clawHeld=true;c.timer=0;c.selected=false;c.tilt=0;
+    K.hold=top+K.L;K.s='grab';K.t=0;K.grip=0;ddEventSfx('Meteor_New',.25,160);
+    c.alienY=K.hold+CLAW_HUB;
+   }
+  }
+  clawSync(B,K);return;
+ }
+ if(K.s==='grab'){
+  if(!c||c.dead){K.s='done';K.t=0;return}
+  K.grip=Math.min(1,K.t/.45);
+  K.L=K.hold-top;clawSync(B,K);
+  c.alienY=K.by+CLAW_HUB;
+  if(K.grip>=1){c.x=B.x;K.s='winch';K.t=0;K.vx=0;K.sp=0;K.pt=0;K.pv=0}
+  return;
+ }
+ if(K.s==='winch'){
+  if(!c||c.dead){K.s='done';K.t=0;return}
+  K.grip=1;
+  const Ld=-CLAW_REEL;K.L+=Ld*dt;
+  const a=dt>0?clawShipDrive(B,K,dt):0;K.sa=a;
+  clawPendStep(K,dt,a,Ld,Math.max(8,Math.min(B.x-20,W-20-B.x)));
+  clawSync(B,K);
+  c.x=K.bx+CLAW_HUB*Math.sin(K.th);c.alienY=K.by+CLAW_HUB*Math.cos(K.th);c.tilt=-K.th*.8;
+  if(K.cut){clawRelease(B,K,c);K.s='done';K.t=0;return}
+  if(K.L<=CLAW_MIN_L){
+   c.selected=false;c.alienY=null;c.clawHeld=false;c.nightOutcome='lost';totalCowDeaths++;c.dead=true;
+   floatText('COW TAKEN',c.x,H*.45,'#ff929b');
+   K.s='done';K.t=0;return;
+  }
+  return;
+ }
+ if(K.s==='done'){
+  K.vx*=Math.exp(-4*dt);B.x+=K.vx*dt; /* the ship eases to a stop */
+  K.th*=Math.exp(-5*dt);K.w*=Math.exp(-5*dt);
+  K.grip=Math.max(0,K.grip-dt*3.5); /* arms swing open after the cow is taken */
+  K.L=Math.max(0,K.L-(K.snapped?CLAW_SNAP_REEL:420)*dt); /* a snapped cable whips back fast; otherwise reel the claw up under the ship */
+  clawSync(B,K);
+  if(K.t>=.8&&K.L<=1){
+   K.s='sway';K.t=0;K.cow=null;K.cut=false;K.hits=0;K.grip=0; /* the next grab (or the leave, if no cow is left) is decided in the sway state */
+  }
+ }
+}
+/* Hub ring plus two curved arms, drawn at (x,cy). grip 0 = wide open arch, grip 1 = wrapped round the cow's body. */
+function clawArms(K,x,cy,cableCol){
+ const gp=K.grip||0,L=(a,b)=>a+(b-a)*gp;
+ g.strokeStyle='#c9d3dc';g.lineWidth=[2.8,2.1,1.4][Math.min(2,K.hits|0)]; /* damage: the arms get thinner with each hit */g.lineCap='round';
+ for(const s of [-1,1]){
+  g.beginPath();g.moveTo(x+s*3,cy+3);
+  g.quadraticCurveTo(x+s*L(20,27),cy+L(2,14),x+s*L(25,4),cy+L(17,30));
+  g.stroke();
+ }
+ g.strokeStyle=cableCol;g.lineWidth=2.4;g.fillStyle='#8a96a3'; /* Test 40: solid metal grey hub */
+ g.beginPath();g.arc(x,cy,4.4,0,TAU);g.fill();g.stroke();
+ g.fillStyle='#5d6874';g.beginPath();g.arc(x,cy,1.4,0,TAU);g.fill();
+}
+/* Second pass, drawn after the cows, so the closed arms are seen wrapping in front of the cow. */
+function clawDrawFront(B){
+ const K=B.claw;if(!K||K.s==='sway'||B.state==='leave'||K.snapped||!(K.grip>.05))return;
+ g.save();g.translate(K.bx,K.by);g.rotate(-K.th);clawArms(K,0,0,K.flash>0?'#ffffff':'#c9d3dc');g.restore();
+}
+function clawDebrisDraw(B,K){
+ const d=K.deb;if(!d||B.state==='leave')return;
+ g.save();g.globalAlpha=Math.max(0,1-d.t/1.6);g.translate(d.x,d.y);g.rotate(d.r);clawArms({grip:0},0,0,'#c9d3dc');g.restore();
+}
+/* Test 40: metal cable. Grey twisted-strand lines, and a small visual-only bow. A flexible cable lags behind the swing, so at the top of each swing (where the claw slows and turns) the middle bows outward a little, then springs back. The hit area is still the claw only. */
+function clawCableDraw(K,px,py){
+ const now=performance.now()/1000;let dt=K.cbT===undefined?0:Math.min(.05,now-K.cbT);K.cbT=now;
+ if(K.cbW===undefined||dt<=0){K.cbW=K.w||0;K.cbB=0;K.cbV=0}
+ else{
+  const acc=((K.w||0)-K.cbW)/dt;K.cbW=K.w||0;
+  const L=Math.hypot(K.bx-px,K.by-py);
+  let drive=Math.max(-900,Math.min(900,-acc))*L*.0045; /* outward when the swing turns round */
+  drive+=-Math.max(-1500,Math.min(1500,K.sa||0))*.006; /* the ship's own sideways push drags the top of the cable along first */
+  if(K.s==='lower')drive+=Math.sin(now*3.1)*L*.012*Math.min(1,K.t); /* a little living sway while it is let down */
+  K.cbV+=((drive-K.cbB)*90-K.cbV*7)*dt;K.cbB+=K.cbV*dt;
+  const mx=Math.min(16,L*.07);if(K.cbB>mx)K.cbB=mx;else if(K.cbB<-mx)K.cbB=-mx;
+ }
+ const dx=K.bx-px,dy=K.by-py,len=Math.hypot(dx,dy)||1,nx=dy/len,ny=-dx/len,bow=K.cbB||0;
+ const cx=(px+K.bx)/2+nx*bow*2,cy=(py+K.by)/2+ny*bow*2;
+ g.lineCap='round';g.strokeStyle='#c9d3dc';g.lineWidth=3.2;
+ g.beginPath();g.moveTo(px,py);g.quadraticCurveTo(cx,cy,K.bx,K.by);g.stroke();
+ g.strokeStyle='#7d8996';g.lineWidth=.9;
+ g.beginPath();
+ const n=Math.max(4,Math.floor(len/5));
+ for(let i=1;i<n;i++){
+  const t=i/n,u=1-t,X=u*u*px+2*u*t*cx+t*t*K.bx,Y=u*u*py+2*u*t*cy+t*t*K.by;
+  const tx=2*u*(cx-px)+2*t*(K.bx-cx),ty=2*u*(cy-py)+2*t*(K.by-cy),tl=Math.hypot(tx,ty)||1;
+  const ax=tx/tl,ay=ty/tl,bx=-ay,by=ax; /* along, across */
+  g.moveTo(X-bx*1.5-ax*1.4,Y-by*1.5-ay*1.4);g.lineTo(X+bx*1.5+ax*1.4,Y+by*1.5+ay*1.4);
+ }
+ g.stroke();
+ g.strokeStyle='#9aa6b2';g.lineWidth=.8;
+ g.beginPath();g.moveTo(px,py);g.quadraticCurveTo(cx,cy,K.bx,K.by);g.stroke();
+}
+function clawDraw(B){
+ const K=B.claw;if(!K)return;
+ clawDebrisDraw(B,K);
+ if(K.s==='sway'||B.state==='leave')return; /* nothing is lowered once the ship is leaving */
+ const px=B.x,py=clawTop(B);
+ g.save();
+ /* single cable in plain grey, steady width. The claw is what gets shot. */
+ clawCableDraw(K,px,py);
+ if(K.s==='winch'&&!K.cut){for(let i=0;i<3;i++){g.fillStyle=i<K.hits?'#eef3f8':'rgba(255,255,255,.25)';g.beginPath();g.arc(px+9,py+14+i*7,2.2,0,TAU);g.fill()}}
+ if(!K.snapped){g.translate(K.bx,K.by);g.rotate(-K.th);clawArms(K,0,0,'#c9d3dc')}
+ g.restore();
+}
 function bossUpdate(dt){
  const B=boss;B.t+=dt;B.hitFlash=Math.max(0,B.hitFlash-dt);
  if(B.state==='dying'){
+  if(B.claw){const hc=B.claw.cow;if(hc&&hc.clawHeld&&!hc.dead){hc.selected=false;hc.alienY=null;hc.carrier=null;hc.clawHeld=false;dropCow(hc,{x:hc.x},true);B.claw.cow=null}} /* a held cow is let go when the ship is destroyed */
   B.dyingT+=dt;if(Math.random()<dt*34)burst(B.x+rnd(-B.hull,B.hull),B.y+rnd(-B.hull*.4,B.hull*.4),Math.random()<.5?'#ffb86b':'#a7ff77',10);
   if(B.dyingT>=1.8){bossBlastStart(B.x,B.y,B.hull);boss=null;bossDone=true}
   return;
@@ -1649,12 +1898,13 @@ function bossUpdate(dt){
  B.swSpd+=(B.swTarget-B.swSpd)*Math.min(1,dt*1.2);B.swPh+=dt*B.swSpd;
  {const amp=Math.max(0,W/2-18-B.hull*1.05),sinX=W/2+Math.sin(B.swPh)*amp;
   if(B.collectX!=null){const tx=clamp(B.collectX,W/2-amp,W/2+amp);B.x+=(tx-B.x)*Math.min(1,dt*4)} // glide over to the cow
-  else B.x+=(sinX-B.x)*Math.min(1,dt*2)}
+  else if(!B.claw)B.x+=(sinX-B.x)*Math.min(1,dt*2)} /* Test 33: the claw logic owns the ship's x during the fight, so the claw can line up over the cow */
  if(B.state==='leave'){bossScoutsUpdate(dt);if(B.alien)alienUpdate(dt);B.y-=dt*140;if(B.y<-B.hull*2.5&&!enemies.some(e=>e.type==='miniufo'&&e.hp>0)&&!aliens.length){boss=null;bossDone=true}return}
- if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText('THE ALIENS ARE TAKING THE COWS',W/2,H*.38,'#ff929b');if(B.alien)B.tipAt=B.t+3.5}}
- else B.y=B.y0+Math.sin(B.t*1.3)*5;
+ if(B.state==='enter'){const k=Math.min(1,B.t/2.6),e=1-Math.pow(1-k,3);B.y=-B.hull+(B.y0+B.hull)*e;if(k>=1){B.state='fight';bossLaunchScouts();floatText(B.claw?'A CLAW IS TAKING THE COWS':'THE ALIENS ARE TAKING THE COWS',W/2,H*.38,'#ff929b');if(B.alien)B.tipAt=B.t+3.5}}
+ else B.y=B.y0+Math.sin(B.t*1.3)*5+(B.claw?(B.dy||0):0);
 bossScoutsUpdate(dt);
  if(B.alien)alienUpdate(dt);
+ if(B.state==='fight'&&B.claw){clawUpdate(dt);clawISS(B,dt);for(const b of shots){if(b.t<=0)continue;if(clawShot(b))continue;bossShot(b);if(!boss||boss.state==='dying')break}return}
  if(B.state==='fight'){
   if(B.tipAt!=null&&B.t>=B.tipAt){B.tipAt=null;activeWarnings.push({text:'SHOOT THE TRACTOR BEAMS - NOT THE COWS!',x:W/2,y:H*.38+26,color:'#8ee2ee',t:5})}
   // Warning when laser drops to 30%: the game's warning sound on entering the low band, and a banner while it stays low.
@@ -1681,7 +1931,7 @@ bossScoutsUpdate(dt);
   const orbsInAir=enemies.reduce((n,e)=>n+(e.bossOrb&&e.hp>0?1:0),0);
   if(B.orbT<=0&&orbsInAir<(low?BOSS_MAX_ORBS+4:BOSS_MAX_ORBS)){bossLaunchOrb();B.orbT=(low?2.1:BOSS_ORB_EVERY)*rnd(.6,1.4)-(low?0:Math.min(2,B.hits*.35))}
  }
- for(const b of shots){if(b.t<=0)continue;if(B.alien&&alienBeamShot(b))continue;bossShot(b);if(!boss||boss.state==='dying')break}
+ for(const b of shots){if(b.t<=0)continue;if(B.alien&&alienBeamShot(b))continue;if(B.claw&&clawShot(b))continue;bossShot(b);if(!boss||boss.state==='dying')break}
 }
 // Stage palette shared by the mothership rim lights and its orbs.
 function bossStage(){
@@ -1697,6 +1947,7 @@ function drawBossOrb(e){
 }
 function bossDraw(){
  alienDrawAll();
+ if(boss&&boss.claw)clawDraw(boss);
  const B=boss,h=B.hull,dying=B.state==='dying',pulse=.5+.5*Math.sin(drawTime*3);
  const jx=dying?Math.sin(drawTime*70)*2:0,jy=dying?Math.cos(drawTime*53)*1.5:0;
  const cx=B.x+jx,cy=B.y+jy;
@@ -1847,7 +2098,7 @@ function ddStartTally(d){
 }
 
 
-function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:bossKilled,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles.length=0;enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
+function finishNight(){if(mode!=='night')return;ddSetUfoHum(false);const accuracy=nightShots?Math.round(nightHits/nightShots*100):0;const counted=cows.filter(c=>c.nightOutcome!=='lost'&&!c.dead&&c.state!=='splat').length;nightCows=counted;nightCowDeaths=4-counted;const d={night,base:score-bossPts,boss:bossDone?bossPts:null,defeated:bossKilled,energy:Math.floor(energy),dome:Math.floor(shield),saved:nightCows,lost:nightCowDeaths,survival:0,perfect:0,precise:0};ddGroundShake=0;ddDomeShake=0;ddDomeShakeStrength=0;/* Clear all transient night visuals before dawn, when night physics stops updating. */shots.length=0;particles=particles.filter(p=>p.kind!=='frag');/* sparks keep fading in dawn */enemies.length=0;junkAfterglows.length=0;laserSightTime=0;flash=0;domeFlash=0;ddEnergyFlash=0;ddShieldFlash=0;mode='dawn';ddPlayThreeNoteMorningChime();phaseTime=0;results.hidden=true;wakeCowsForDawn();window.ddPendingTally=d}
 function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
  // While dawn brightens, cows that survived remain awake and stroll around.
  // Keep the central telescope exclusion zone and the same existing cow artwork.
@@ -1865,7 +2116,7 @@ function updateCow(c,dt){if(!c.selected)c.phase+=dt*3;
   if(c.x>=maxX){c.x=maxX;c.dir=-1}
   return;
  }
-if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallY>=floor()-9){if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;/* a downed dome stays down after a save */if(shield>0)shield=Math.min(100,shield+10);changeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
+if(c.state==='panic'){c.x+=c.dir*165*dt;if(c.x<-34||c.x>W+34){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true;}return}if(c.state==='enter'){c.x+=c.dir*24*dt;if((c.dir>0&&c.x>=c.entryTarget)||(c.dir<0&&c.x<=c.entryTarget)){c.x=cowSafeX(c.entryTarget);c.state='walk';c.timer=rnd(.5,2)}return}if(c.state==='fall'){c.fallV+=400*dt;c.fallY+=c.fallV*dt;if(c.fallVx||c.tilt){c.x+=(c.fallVx||0)*dt;c.fallVx=(c.fallVx||0)*Math.exp(-1.1*dt);c.tilt=(c.tilt||0)*Math.exp(-3*dt);const sx=cowSafeX(c.x);if(sx!==c.x)c.x+=clamp(sx-c.x,-150*dt,150*dt)}if(c.fallY>=floor()-9){c.x=cowSafeX(c.x);c.fallVx=0;c.tilt=0;if(c.safeFall){c.fallY=floor()-9;c.safeFall=false;if(c.panicOnLand){c.panicOnLand=false;c.state='panic';c.dir=c.x<W/2?-1:1}else{c.state='stand';c.timer=rnd(3,5);totalCows++;/* a downed dome stays down after a save */if(shield>0)shield=Math.min(100,shield+10);changeScore(50,c.x,floor()-95,'COW SAVED');hud();}}else splatCow(c)}return}if(c.selected&&c.state!=='lift'){return}if(c.state==='lift'){return}if(c.state==='splat'){c.timer-=dt;return}c.timer-=dt;if(c.state==='walk'||c.state==='leave'){c.x=cowSafeX(c.x+c.dir*(c.state==='leave'?17:8)*dt);if(c.state==='walk'&&(c.x<=24||c.x>=W-24||(c.dir>0&&c.x<=W/2&&c.x>=W/2-cowClearance()-1.5)||(c.dir<0&&c.x>=W/2&&c.x<=W/2+cowClearance()+1.5)))c.dir*=-1;if(c.timer<0&&c.state==='walk'){c.state=Math.random()<.6?'graze':'settle';c.timer=rnd(3,7)}if(c.state==='leave'&&(c.x<=24||c.x>=W-24)){if(c.nightOutcome!=='lost'){c.nightOutcome='lost';totalCowDeaths++}c.dead=true}}
  else if(c.state==='settle'){if(c.timer<=0){c.state='sleep';c.timer=rnd(5,12)}}
  else if(c.state==='graze'||c.state==='stand'){if(c.timer<=0){c.state='settle';c.timer=rnd(1.5,3)}}else if(c.state==='sleep'){/* Remain settled until abduction or dawn. */}}
 function updateUfo(e,dt){e.phase+=dt*3;if(!e.abduct){e.x+=e.vx*dt;return}let cow=e.cow;if(!cow||cow.dead){e.step='pass';e.abduct=false;if(activeUfo===e)activeUfo=null;return}
@@ -1918,7 +2169,7 @@ if(across>=.81){
  for(let c of cows)updateCow(c,dt);
  for(let p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=105*dt;p.t-=dt}
  for(let w of activeWarnings){w.t-=dt;w.y-=17*dt}
- for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity,bestPri=9;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter')continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1),pri=c.state==='lift'?0:1;if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<(c.state==='lift'?18:13)&&(pri<bestPri||(pri===bestPri&&u<best))){candidate={cow:c};best=u;bestPri=pri}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
+ for(let b of shots){if(b.t<=0)continue;let dx=b.x-b.px,dy=b.y-b.py,L=Math.max(.001,dx*dx+dy*dy),candidate=null,best=Infinity,bestPri=9;for(let c of cows){if(c.dead||c.state==='splat'||c.state==='fall'||c.state==='enter'||c.clawHeld)continue;let cy=cowScreenY(c),u=clamp(((c.x-b.px)*dx+(cy-b.py)*dy)/L,0,1),pri=c.state==='lift'?0:1;if(Math.hypot(c.x-b.px-dx*u,cy-b.py-dy*u)<(c.state==='lift'?18:13)&&(pri<bestPri||(pri===bestPri&&u<best))){candidate={cow:c};best=u;bestPri=pri}}for(let e of enemies){if(e.hp<=0||(e.type==='iss'&&e.collected))continue;let u=clamp(((e.x-b.px)*dx+(e.y-b.py)*dy)/L,0,1);if(Math.hypot(e.x-b.px-dx*u,e.y-b.py-dy*u)<e.r+5&&u<best){candidate={enemy:e};best=u}}if(candidate){if(candidate.cow){b.t=0;splatCow(candidate.cow);for(const carrier of activeAbductors().filter(e=>e.cow===candidate.cow)){carrier.cow=null;carrier.abduct=false;carrier.step='pass';carrier.vx=(carrier.dir||1)*90;if(activeUfo===carrier)activeUfo=null}}else hit(candidate.enemy,b)}}
  for(let e of enemies){if(e.hp<=0)continue;if(e.mandatory){if(shield>0&&e.x>=domeGeom().left&&e.x<=domeGeom().right&&e.y+e.r>=domeY(e.x)){impact(e,false)}else if(shield<=0&&telescopeStrike(e)){destroyScope(e);return}else if(cowStrike(e)){impact(e,true)}else if(e.y+e.r>=nearHorizonY(e.x)){impact(e,true)}}else if(e.type==='ufo'&&!e.abduct&&(e.x<-60||e.x>W+60))e.hp=0;else if(['sat','iss','aircraft','comet'].includes(e.type)&&!e.mandatory){if(e.x>0&&e.x<W)e.entered=true;if(e.entered&&(e.x<-70||e.x>W+70))e.hp=0}}
  if(mode!=='night')return;
  shots=shots.filter(b=>b.t>0&&b.x>-50&&b.x<W+50&&b.y>-50&&b.y<H+40);
@@ -1930,7 +2181,14 @@ if(across>=.81){
  // A night ends only when all preplanned events have fired and active special events complete.
  if(spawnCursor>=events.length&&pendingMandatory===0&&activeAbductors().length===0&&plannedReturn===null&&!enemies.some(e=>e.type==='sat'||e.type==='iss'||e.type==='aircraft'||(e.type==='comet'&&!e.mandatory)||(e.type==='ufo'&&e.hp>0))){if(bossPending()){if(!bossIntroStarted)bossIntro();else bossSpawn()}else if(!boss)finishNight()}
 }
-function update(dt){drawTime+=dt;if(ddDomeRetract>0)ddDomeRetract=Math.min(1.2,ddDomeRetract+dt);if(mode==='dawn'){for(const w of activeWarnings){w.t-=dt;w.y-=17*dt}activeWarnings=activeWarnings.filter(w=>w.t>0)}if(mode==='dusk'){phaseTime+=dt;const ddCount=3-Math.min(3,Math.floor(phaseTime));if(ddCount>=0&&ddCount!==ddDuskLastCount){ddDuskLastCount=ddCount;ddCountdownBeep(ddCount)}angle+=(wanted-angle)*Math.min(1,dt*12);if(phaseTime>=4){mode='night';phaseTime=0;hud()}}else if(mode==='night')updateNight(dt);else if(mode==='destroyed')updateDestroyed(dt);else if(mode==='dawn'){phaseTime+=dt;for(const c of cows)updateCow(c,dt);cows=cows.filter(c=>!c.dead&&(c.state!=='splat'||c.timer>0));results.hidden=true;if(phaseTime>=7){results.hidden=true;const tally=window.ddPendingTally;window.ddPendingTally=null;mode='tally';activeWarnings=[];if(tally)ddStartTally(tally)}}}
+/* Test 38: fading particles are updated outside the night too. The mothership blast spawns its later bursts from the draw loop,
+   which can be after dawn has begun, and dawn used to leave them frozen on screen. */
+function stepFadingParticles(dt){
+ if(!particles.length)return;
+ for(const p of particles){if(p.kind==='frag')continue;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=105*dt;p.t-=dt}
+ particles=particles.filter(p=>p.kind==='frag'||p.t>0);
+}
+function update(dt){drawTime+=dt;if(mode!=='night'&&mode!=='destroyed')stepFadingParticles(dt);if(ddDomeRetract>0)ddDomeRetract=Math.min(1.2,ddDomeRetract+dt);if(mode==='dawn'){for(const w of activeWarnings){w.t-=dt;w.y-=17*dt}activeWarnings=activeWarnings.filter(w=>w.t>0)}if(mode==='dusk'){phaseTime+=dt;const ddCount=3-Math.min(3,Math.floor(phaseTime));if(ddCount>=0&&ddCount!==ddDuskLastCount){ddDuskLastCount=ddCount;ddCountdownBeep(ddCount)}angle+=(wanted-angle)*Math.min(1,dt*12);if(phaseTime>=4){mode='night';phaseTime=0;hud()}}else if(mode==='night')updateNight(dt);else if(mode==='destroyed')updateDestroyed(dt);else if(mode==='dawn'){phaseTime+=dt;for(const c of cows)updateCow(c,dt);cows=cows.filter(c=>!c.dead&&(c.state!=='splat'||c.timer>0));results.hidden=true;if(phaseTime>=7){results.hidden=true;const tally=window.ddPendingTally;window.ddPendingTally=null;mode='tally';activeWarnings=[];if(tally)ddStartTally(tally)}}}
 function poly(r,shape){g.beginPath();for(let i=0;i<9;i++){let a=i*TAU/9,v=r*shape[i];if(i)g.lineTo(Math.cos(a)*v,Math.sin(a)*v);else g.moveTo(Math.cos(a)*v,Math.sin(a)*v)}g.closePath()}
 function drawEnemy(e){g.save();g.translate(e.x,e.y);if(e.bossOrb){drawBossOrb(e);g.restore();return}if(e.type==='miniufo'){drawMiniUfo(e);g.restore();return}if(e.type==='rocketJunk'){
   // Short, soft atmospheric wake; older portions fade and spread.
@@ -2111,11 +2369,12 @@ function drawCow(c){
  let y=cowScreenY(c);
  g.save();
  g.translate(c.x,y);
+ if(c.tilt&&(c.state==='lift'||c.state==='fall'))g.rotate(c.tilt);
  if(c.state==='walk'||c.state==='leave'||c.state==='enter'||c.state==='panic')g.scale(c.dir,1);
  const sleeping=(c.state==='sleep'||c.state==='settle');
  const running=c.state==='panic'&&!c.selected;
  const walking=!c.selected&&(c.state==='walk'||c.state==='leave'||c.state==='enter');
- const legSwing=(c.state==='lift'||c.state==='fall')?Math.sin(drawTime*17)*5:(running?Math.sin(drawTime*18+c.phase)*4.8:(walking?Math.sin(drawTime*8+c.phase)*2.2:0));
+ const legSwing=(c.state==='lift'||c.state==='fall')?(c.clawHeld||c.state==='fall'?Math.sin(drawTime*19+c.phase)*8:Math.sin(drawTime*17)*5):(running?Math.sin(drawTime*18+c.phase)*4.8:(walking?Math.sin(drawTime*8+c.phase)*2.2:0));
  const bodyH=sleeping?6.2:8.3;
  // legs
  if(!sleeping){
@@ -2199,7 +2458,7 @@ function draw(){g.save();if(mode==='night'&&ddGroundShake>0){const strength=3.5*
  g.fillStyle=day>.5?'#345a64':'#1e3440';g.beginPath();g.moveTo(0,floor());for(let x=0;x<=W+10;x+=10)g.lineTo(x,floor()-15+Math.sin(x*.05)*10);g.lineTo(W,H);g.lineTo(0,H);g.fill();g.fillStyle=day>.5?'#526b46':'#2a4537';g.fillRect(0,floor(),W,H-floor());
  for(let e of enemies)if(e.hp>0)drawEnemy(e);
  if(boss&&(mode==='night'||mode==='destroyed'))bossDraw();
- drawDome();bossBeamDraw();bossBlastDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
+ drawDome();bossBeamDraw();bossBlastDraw();bossLaserWarnDraw();if(!scopeBroken)telescope();for(let c of cows)if(!c.dead)drawCow(c);if(boss&&boss.claw)clawDrawFront(boss);if(laserSightTime>0&&!scopeBroken&&mode==='night'){const q=tip(),dx=Math.cos(angle),dy=Math.sin(angle),fade=Math.min(1,laserSightTime/4),retract=Math.min(1,laserSightTime/.45),distance=Math.max(W,H)*2*retract;g.save();g.globalAlpha=fade*(laserSightTime<2&&Math.sin(drawTime*39)> .64?.22:1);g.strokeStyle=ddEnergyColor();g.lineWidth=1;g.shadowColor=ddEnergyColor();g.shadowBlur=4;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+dx*distance,q.y+dy*distance);g.stroke();g.restore();}
  for(let b of shots){g.shadowColor=ddEnergyColor();g.shadowBlur=18;g.strokeStyle=ddEnergyColor();g.lineWidth=3;g.beginPath();g.moveTo(b.x,b.y);g.lineTo(b.x-b.vx*.065,b.y-b.vy*.065);g.stroke();g.shadowBlur=0}
  if(flash>0&&!scopeBroken){let q=tip();g.shadowColor=ddEnergyColor();g.shadowBlur=20;g.fillStyle='#dfffed';g.beginPath();g.arc(q.x,q.y,3,0,TAU);g.fill();g.shadowBlur=0}
  for(const a of junkAfterglows){
@@ -2245,6 +2504,7 @@ $('devForcePowerups').addEventListener('change',e=>{devForcePowerups=e.target.ch
 $('devJump').addEventListener('click',()=>{const requested=Number($('devNight').value);if(!Number.isInteger(requested)||requested<1||requested>99){$('devNight').focus();return;}night=requested;startNight();devWasPaused=false;paused=false;closeDev();});
 $('devBossStart').addEventListener('click',()=>{night=3;devBossOnly=true;startNight();devWasPaused=false;paused=false;closeDev();});
 $('devAlienStart').addEventListener('click',()=>{night=6;devBossOnly=true;startNight();devWasPaused=false;paused=false;closeDev();});
+$('devClawStart').addEventListener('click',()=>{clawSwingMode='pull';night=9;devBossOnly=true;startNight();devWasPaused=false;paused=false;closeDev();});
 $('devRestartNight').addEventListener('click',()=>{startNight();devWasPaused=false;paused=false;closeDev();});
 $('devRestartGame').addEventListener('click',()=>{resetGame();devWasPaused=false;paused=false;closeDev();});
 function loop(t){let dt=last?Math.min(.04,(t-last)/1000):.016;last=t;ddUpdateTestSoundState();if(!paused&&mode!=='tutorial'&&mode!=='title'&&mode!=='gameover')update(dt);draw();frame=requestAnimationFrame(loop)}
