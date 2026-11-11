@@ -24,6 +24,13 @@ Every player report that led to a change, the decision taken, and the result. Ne
   - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome with aimed shots: ship centre range by state, Test 42 then Test 43: pause -102..319 then 69..321; winching -240..631 then 51..335; reel-up -241..-103 then 69..321. Hit rate against aimed shots in Test 43: pause 16%, lowering 26%, grabbing 33%, winching 18% (Test 41 was 18%, 78%, 100%, 58%). Winching got easier to hit than in Test 42 (4%) because the ship has less room to dodge. No page errors. Not looked at on a phone screen.
   - **Result:** awaiting playtest.
 
+## 11 November 2026: Test 44 (unapproved, awaiting playtest)
+- **Report:** Tests 42 and 43 (dodging in lowering, grabbing and winching) were "too erratic". Requested: revert.
+  - **Decision:** Test 44 is the Test 41 game code again (verified identical apart from the title label). The ship dodges laser fire only between claw drops, the cable sways while lowering, the cable looks like grey metal strands, and the hub is grey. Tests 42 and 43 stay in `tests/` as a record.
+  - **Open point:** it was not stated whether "revert" meant going back to Test 41 or to a version with no dodging at all. I chose Test 41 because its dodging was not criticised. Test 40 is the version with no dodging.
+  - **Checks:** `node --check` passed on all 4 inline scripts. Headless Chrome run: no page errors, same hit rates against aimed shots as Test 41 (pause 21%, lowering 78%, grabbing 100%, winching 49%).
+  - **Result:** awaiting playtest.
+
 ## 9 November 2026: Test 40 (unapproved, awaiting playtest)
 - **Report:** make the tether grey lines for a metal rod or cable feel; make the circle part of the grabber grey; the cable swings rigidly, so there should be a little extra curve at the top of the swing.
   - **Decision:** the cable is drawn as light grey with diagonal dark-grey strand lines and a thin centre line. The hub is solid metal grey with a small darker centre. The cable bows by a spring that is driven by how fast the swing turns round, so the bow is biggest at the top of each swing, goes outward, and settles back. The bow is capped at 7% of the cable length or 16 px. It is drawing only: the cable is not shot, and the hit area is still the claw.
